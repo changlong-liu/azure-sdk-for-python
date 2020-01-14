@@ -1,0 +1,100 @@
+
+=====
+Other
+=====
+
+
+**************
+Other Packages
+**************
+
+
+------------
+azure-common
+------------
+
+**Published Versions**
+
+.. raw:: html
+
+    <embed>
+        <ul id="vazure-common"></ul>
+        <script type="text/javascript">
+            populateIndexList('#vazure-common', 'azure-common')
+        </script>
+    </embed>
+
+------------
+
+
+----------------------------------
+azure-eventhub-checkpointstoreblob
+----------------------------------
+
+**Published Versions**
+
+.. raw:: html
+
+    <embed>
+        <ul id="vazure-eventhub-checkpointstoreblob"></ul>
+        <script type="text/javascript">
+            populateIndexList('#vazure-eventhub-checkpointstoreblob', 'azure-eventhub-checkpointstoreblob')
+        </script>
+    </embed>
+
+------------
+
+
+----------------------
+azure-mgmt-databoxedge
+----------------------
+
+**Published Versions**
+
+.. raw:: html
+
+    <embed>
+        <ul id="vazure-mgmt-databoxedge"></ul>
+        <script type="text/javascript">
+            populateIndexList('#vazure-mgmt-databoxedge', 'azure-mgmt-databoxedge')
+        </script>
+    </embed>
+
+------------
+
+
+----------------------
+azure-mgmt-maintenance
+----------------------
+
+**Published Versions**
+
+.. raw:: html
+
+    <embed>
+        <ul id="vazure-mgmt-maintenance"></ul>
+        <script type="text/javascript">
+            populateIndexList('#vazure-mgmt-maintenance', 'azure-mgmt-maintenance')
+        </script>
+    </embed>
+
+------------
+
+
+--------------
+azure-template
+--------------
+
+**Published Versions**
+
+.. raw:: html
+
+    <embed>
+        <ul id="vazure-template"></ul>
+        <script type="text/javascript">
+            populateIndexList('#vazure-template', 'azure-template')
+        </script>
+    </embed>
+
+------------
+
