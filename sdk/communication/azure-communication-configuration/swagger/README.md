@@ -23,6 +23,8 @@ input-file: ./swagger.json
 output-folder: ../azure/communication/_generated
 namespace: azure.communication.configuration
 license-header: MICROSOFT_MIT_NO_VERSION
+payload-flattening-threshold: 3
+no-namespace-folders: true
 clear-output-folder: true
 python: true
 ```

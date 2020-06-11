@@ -24,6 +24,7 @@ class UserTokenOperations:
     :param config: Configuration of service client.
     :param serializer: An object model serializer.
     :param deserializer: An object model deserializer.
+    :ivar api_version: The API version to use for the request. Constant value: "2020-06-04-preview".
     """
 
     models = models
@@ -33,16 +34,15 @@ class UserTokenOperations:
         self._client = client
         self._serialize = serializer
         self._deserialize = deserializer
+        self.api_version = "2020-06-04-preview"
 
         self._config = config
 
-    async def issue(self, api_version, body, *, cls=None, **kwargs):
+    async def issue(self, identity, *, cls=None, **kwargs):
         """Generates a user token for a user identity.
 
-        :param api_version: 2020-06-04-preview
-        :type api_version: str
-        :param body:
-        :type body: ~azure.communication.configuration.models.TokenRequest
+        :param identity:
+        :type identity: str
         :param callable cls: A custom type or function that will be passed the
          direct response
         :return: TokenResponse or the result of cls(response)
@@ -51,12 +51,14 @@ class UserTokenOperations:
          :class:`HttpResponseError<azure.core.exceptions.HttpResponseError>`
         """
         error_map = kwargs.pop('error_map', None)
+        body = models.TokenRequest(identity=identity)
+
         # Construct URL
         url = self.issue.metadata['url']
 
         # Construct parameters
         query_parameters = {}
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+        query_parameters['api-version'] = self._serialize.query("self.api_version", self.api_version, 'str')
 
         # Construct headers
         header_parameters = {}

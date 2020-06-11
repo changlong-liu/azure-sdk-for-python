@@ -12,11 +12,13 @@ from io import open
 from setuptools import find_packages, setup
 
 # Change the PACKAGE_NAME only to change folder and different name
-PACKAGE_NAME = "azure-communication-configuration"
+PACKAGE_NAME = "azure-communication"
 PACKAGE_PPRINT_NAME = "Communication Service"
 
 # a-b-c => a/b/c
-package_folder_path = PACKAGE_NAME.replace('-', '/')
+package_folder_path = PACKAGE_NAME.replace('-', '/')+"/_generated"
+print(os.curdir)
+print(package_folder_path)
 # a-b-c => a.b.c
 namespace_name = PACKAGE_NAME.replace('-', '.')
 
@@ -74,6 +76,7 @@ setup(
     packages=find_packages(exclude=[
     ]),
     install_requires=[
+        'msrest>=0.5.0',
 
     ],
     extras_require={
