@@ -17,8 +17,8 @@ PACKAGE_PPRINT_NAME = "Communication Service"
 
 # a-b-c => a/b/c
 package_folder_path = PACKAGE_NAME.replace('-', '/')+"/_generated"
-print(os.curdir)
-print(package_folder_path)
+package_folder_path_r = PACKAGE_NAME.replace('-', '/')
+print("curr folder", package_folder_path)
 # a-b-c => a.b.c
 namespace_name = PACKAGE_NAME.replace('-', '.')
 
@@ -38,7 +38,8 @@ except ImportError:
     pass
 
 # Version extraction inspired from 'requests'
-with open(os.path.join(package_folder_path, 'version.py'), 'r') as fd:
+print(package_folder_path_r + '/_version.py')
+with open(package_folder_path_r + '/_version.py', 'r') as fd:
     version = re.search(r'^VERSION\s*=\s*[\'"]([^\'"]*)[\'"]',
                         fd.read(), re.MULTILINE).group(1)
 
