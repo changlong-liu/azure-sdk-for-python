@@ -3,7 +3,9 @@ from azure.communication import UserTokenOperations
 from msrest import Serializer, Deserializer
 from msrest.service_client import ServiceClient
 from azure.core.pipeline import policies
+from azure.core.pipeline.policies import AzureKeyCredentialPolicy
 from azure.core import PipelineClient
+from azure.core.credentials import AzureKeyCredential
 from ._shared.base_client import parse_connection_str, parse_query
 from ._generated import models
 from ._generated._configuration import UserTokenManagementServiceConfiguration
@@ -58,7 +60,8 @@ class UserTokenClient(UserTokenOperations):
             raise ValueError("You need to provide either a SAS token or an account shared key to authenticate.")
         
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        self.config = UserTokenManagementServiceConfiguration(credentials, logging_enable=True, **kwargs)
+        auth_policy = AzureKeyCredentialPolicy(AzureKeyCredential(credentials), "Authorization")
+        self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy ,logging_enable=True, **kwargs)
         self.api_version = '2020-06-04-preview'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
