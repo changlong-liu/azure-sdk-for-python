@@ -1,12 +1,9 @@
 from urllib.parse import urlparse
 from azure.communication import UserTokenOperations
 from msrest import Serializer, Deserializer
-from msrest.service_client import ServiceClient
-from azure.core.pipeline import policies
-from azure.core.pipeline.policies import AzureKeyCredentialPolicy
 from azure.core import PipelineClient
-from azure.core.credentials import AzureKeyCredential
 from ._shared.base_client import parse_connection_str, parse_query
+from ._shared.policy import HMACCredentialsPolicy
 from ._generated import models
 from ._generated._configuration import UserTokenManagementServiceConfiguration
 
@@ -18,7 +15,6 @@ class UserTokenClient(UserTokenOperations):
     @classmethod
     def from_connection_string(
             cls, conn_str,  # type: str
-            credentials=None,  # type: Optional[Any]
             **kwargs  # type: Any
         ):  # type: (...) -> UserTokenClient
         """Create UserTokenClient from a Connection String.
@@ -43,28 +39,29 @@ class UserTokenClient(UserTokenOperations):
                 :dedent: 8
                 :caption: Creating the UserTokenClient from a connection string.
         """
-        endpoint_url, credentials = parse_connection_str(conn_str)
+        host, access_key = parse_connection_str(conn_str)
 
-        return cls(endpoint_url, credentials, **kwargs)
+        return cls(host, access_key, **kwargs)
 
-    def __init__(self, endpoint_url, credentials, **kwargs):
+    def __init__(self, host, access_key, **kwargs):
         try:
-            if not endpoint_url.lower().startswith('http'):
-                endpoint_url = "https://" + endpoint_url
+            if not host.lower().startswith('http'):
+                host = "https://" + host
         except AttributeError:
             raise ValueError("Account URL must be a string.")
-        parsed_url = urlparse(endpoint_url.rstrip('/'))
+        parsed_url = urlparse(host.rstrip('/'))
 
         _, sas_token = parse_query(parsed_url.query)
-        if not sas_token and not credentials:
+        if not sas_token and not access_key:
             raise ValueError("You need to provide either a SAS token or an account shared key to authenticate.")
         
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
-        auth_policy = AzureKeyCredentialPolicy(AzureKeyCredential(credentials), "Authorization")
+        auth_policy = HMACCredentialsPolicy(host, access_key)
+
         self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy ,logging_enable=True, **kwargs)
         self.api_version = '2020-06-04-preview'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
-        self._client = PipelineClient(base_url=endpoint_url, config=self.config, verify=False, **kwargs) 
+        self._client = PipelineClient(base_url=host, config=self.config, verify=False, **kwargs) 
 
         super(UserTokenClient, self).__init__(self._client, self.config, self._serialize, self._deserialize)
