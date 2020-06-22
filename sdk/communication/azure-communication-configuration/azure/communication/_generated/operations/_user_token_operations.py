@@ -16,7 +16,7 @@ from .. import models
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from typing import Any, Callable, Dict, Generic, Optional, TypeVar
+    from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar
 
     T = TypeVar('T')
     ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
@@ -45,16 +45,19 @@ class UserTokenOperations(object):
 
     def issue(
         self,
-        identity,  # type: str
+        identity=None,  # type: Optional[str]
+        scopes=None,  # type: Optional[List[str]]
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.TokenResponse"
-        """Generates a user token for a user identity.
+        """Generates new user token for the user identity.
 
-        Generates a user token for a user identity.
+        Generates new user token for the user identity.
 
         :param identity:
         :type identity: str
+        :param scopes:
+        :type scopes: list[str]
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: TokenResponse, or the result of cls(response)
         :rtype: ~azure.communication.configuration.models.TokenResponse
@@ -64,7 +67,7 @@ class UserTokenOperations(object):
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
 
-        _body = models.TokenRequest(identity=identity)
+        _body = models.TokenRequest(identity=identity, scopes=scopes)
         api_version = "2020-06-04-preview"
         content_type = kwargs.pop("content_type", "application/json-patch+json")
 

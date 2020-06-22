@@ -12,24 +12,15 @@ import msrest.serialization
 class TokenRequest(msrest.serialization.Model):
     """TokenRequest.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :ivar scopes:
-    :vartype scopes: list[str]
-    :param identity: Required.
+    :param identity:
     :type identity: str
+    :param scopes:
+    :type scopes: list[str]
     """
 
-    _validation = {
-        'scopes': {'readonly': True},
-        'identity': {'required': True},
-    }
-
     _attribute_map = {
-        'scopes': {'key': 'Scopes', 'type': '[str]'},
-        'identity': {'key': 'Identity', 'type': 'str'},
+        'identity': {'key': 'identity', 'type': 'str'},
+        'scopes': {'key': 'scopes', 'type': '[str]'},
     }
 
     def __init__(
@@ -37,31 +28,23 @@ class TokenRequest(msrest.serialization.Model):
         **kwargs
     ):
         super(TokenRequest, self).__init__(**kwargs)
-        self.scopes = None
-        self.identity = kwargs['identity']
+        self.identity = kwargs.get('identity', None)
+        self.scopes = kwargs.get('scopes', None)
 
 
 class TokenResponse(msrest.serialization.Model):
     """TokenResponse.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar tag:
-    :vartype tag: str
-    :ivar token:
-    :vartype token: str
-    :ivar expires_in:
-    :vartype expires_in: int
+    :param acs_identity:
+    :type acs_identity: str
+    :param token:
+    :type token: str
+    :param expires_in:
+    :type expires_in: int
     """
 
-    _validation = {
-        'tag': {'readonly': True},
-        'token': {'readonly': True},
-        'expires_in': {'readonly': True},
-    }
-
     _attribute_map = {
-        'tag': {'key': 'tag', 'type': 'str'},
+        'acs_identity': {'key': 'acsIdentity', 'type': 'str'},
         'token': {'key': 'token', 'type': 'str'},
         'expires_in': {'key': 'expiresIn', 'type': 'int'},
     }
@@ -71,6 +54,6 @@ class TokenResponse(msrest.serialization.Model):
         **kwargs
     ):
         super(TokenResponse, self).__init__(**kwargs)
-        self.tag = None
-        self.token = None
-        self.expires_in = None
+        self.acs_identity = kwargs.get('acs_identity', None)
+        self.token = kwargs.get('token', None)
+        self.expires_in = kwargs.get('expires_in', None)

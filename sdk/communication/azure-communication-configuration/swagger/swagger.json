@@ -14,7 +14,7 @@
                 "tags": [
                     "Token"
                 ],
-                "summary": "Generates a user token for a user identity",
+                "summary": "Generates new user token for the user identity",
                 "operationId": "UserToken_Issue",
                 "consumes": [
                     "application/json-patch+json",
@@ -36,6 +36,7 @@
                     {
                         "in": "body",
                         "name": "body",
+                        "description": "Scopes and acs identity for which new user token should be generated",
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/TokenRequest"
@@ -56,39 +57,35 @@
     "definitions": {
         "TokenRequest": {
             "required": [
-                "Identity"
+                "Scopes"
             ],
             "type": "object",
             "properties": {
-                "Scopes": {
+                "identity": {
+                    "type": "string"
+                },
+                "scopes": {
                     "type": "array",
                     "items": {
                         "type": "string"
-                    },
-                    "readOnly": true
-                },
-                "Identity": {
-                    "type": "string"
+                }
                 }
             }
         },
         "TokenResponse": {
             "type": "object",
             "properties": {
-                "tag": {
-                    "type": "string",
-                    "readOnly": true
+                "acsIdentity": {
+                    "type": "string"
                 },
                 "token": {
-                    "type": "string",
-                    "readOnly": true
+                    "type": "string"
                 },
                 "expiresIn": {
                     "format": "int32",
-                    "type": "integer",
-                    "readOnly": true
+                    "type": "integer"
                 }
-            }
+             }
         }
     }
 }
