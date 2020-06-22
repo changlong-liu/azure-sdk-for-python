@@ -11,14 +11,12 @@ from azure.core.pipeline.policies import HTTPPolicy
 from .utils import get_current_utc_time
 
 class HMACCredentialsPolicy(HTTPPolicy):
-    """Implementation of request-oauthlib except and retry logic.
+    """Implementation of HMAC authentication policy. 
     """
 
     def __init__(self, host, access_key):
         super(HMACCredentialsPolicy, self).__init__()
-        self._host = host
-        if self._host.startswith("https://"):
-            self._host = self._host.replace("https://","")
+        self._host = self._sanitize_host(host)
         self._access_key = access_key
 
     def _compute_hmac(self, value: str):
@@ -74,6 +72,15 @@ class HMACCredentialsPolicy(HTTPPolicy):
         request.http_request.headers.update(signature_header)
 
         return request
+    
+    def _sanitize_host(self, host):
+        if host.startswith("https://"):
+            host = host.replace("https://","")
+
+        if host.startswith("http://"):
+            host = host.replace("http://","")
+
+        return host
 
     def send(self, request):
         self._signed_request(request)
