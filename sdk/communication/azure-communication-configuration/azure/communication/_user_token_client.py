@@ -21,12 +21,6 @@ class UserTokenClient(UserTokenOperations):
 
         :param str conn_str:
             A connection string to an Azure Communication Service resource.
-        :param credential:
-            The credentials with which to authenticate. This is optional if the
-            account URL already has a SAS token, or the connection string already has shared
-            access key values. The value can be a SAS token string, an account shared access
-            key, or an instance of a TokenCredentials class from azure.identity.
-            Credentials provided here will take precedence over those in the connection string.
         :returns: A UserTokenClient.
         :rtype: ~azure.communication.UserTokenClient
 
