@@ -4,6 +4,4 @@ package_name = "azure-communication-chat"
 package_pprint_name = "Azure Communication Chat Package"
 is_stable = false
 is_arm = false
-
-# Package owners should uncomment and set this doc id.
-# package_doc_id = "<your doc id>"
+package_doc_id = "communication"

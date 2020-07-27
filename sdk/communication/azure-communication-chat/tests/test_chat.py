@@ -2,7 +2,7 @@
 # Reference https://github.com/Azure/azure-sdk-for-python/wiki/Contributing-to-the-tests
 # Pytest should be leveraged to test your project.
 
-#from devtools_testutils import AzureMgmtTestCase
+from devtools_testutils import AzureMgmtTestCase
 from azure.communication.chat import template_main
 
 # this test case highlights that there are some additional Test capabilities present in devtools_testutils
