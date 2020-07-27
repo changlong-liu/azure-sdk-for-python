@@ -6,14 +6,8 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-try:
-    from ._models_py3 import TokenRequest
-    from ._models_py3 import TokenResponse
-except (SyntaxError, ImportError):
-    from ._models import TokenRequest  # type: ignore
-    from ._models import TokenResponse  # type: ignore
+from ._user_management_operations_async import UserManagementOperations
 
 __all__ = [
-    'TokenRequest',
-    'TokenResponse',
+    'UserManagementOperations',
 ]

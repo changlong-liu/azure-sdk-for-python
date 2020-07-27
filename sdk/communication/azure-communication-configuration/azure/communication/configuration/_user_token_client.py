@@ -1,5 +1,5 @@
 from urllib.parse import urlparse
-from azure.communication import UserTokenOperations
+from ._generated.operations._user_management_operations import UserManagementOperations
 from msrest import Serializer, Deserializer
 from azure.core import PipelineClient
 from ._shared.base_client import parse_connection_str, parse_query
@@ -8,7 +8,7 @@ from ._generated import models
 from ._generated._configuration import UserTokenManagementServiceConfiguration
 
 
-class UserTokenClient(UserTokenOperations):
+class UserTokenClient(UserManagementOperations):
     """User JWT Token client.
     """
     
@@ -37,7 +37,11 @@ class UserTokenClient(UserTokenOperations):
 
         return cls(host, access_key, **kwargs)
 
-    def __init__(self, host, access_key, **kwargs):
+    def __init__(
+        self, host, # type: str
+        access_key, # type: str
+        **kwargs # type: Any
+         ):
         try:
             if not host.lower().startswith('http'):
                 host = "https://" + host

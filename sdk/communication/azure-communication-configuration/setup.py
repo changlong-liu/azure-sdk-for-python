@@ -12,8 +12,8 @@ from io import open
 from setuptools import find_packages, setup
 
 # Change the PACKAGE_NAME only to change folder and different name
-PACKAGE_NAME = "azure-communication"
-PACKAGE_PPRINT_NAME = "Communication Service"
+PACKAGE_NAME = "azure-communication-configuration"
+PACKAGE_PPRINT_NAME = "Communication Configuration Service"
 
 # a-b-c => a/b/c
 package_folder_path = PACKAGE_NAME.replace('-', '/')+"/_generated"

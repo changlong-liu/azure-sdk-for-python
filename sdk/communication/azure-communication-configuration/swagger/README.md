@@ -14,13 +14,13 @@ npm install
 ### Generation
 ```ps
 cd <swagger-folder>
-autorest --use=C:/work/autorest.python --version=2.0.4280
+autorest ../README.md --use=C:/work/autorest.python --version=2.0.4280
 ```
 
 ### Settings
 ``` yaml
 input-file: ./swagger.json
-output-folder: ../azure/communication/_generated
+output-folder: ../azure/communication/configuration/_generated
 namespace: azure.communication.configuration
 license-header: MICROSOFT_MIT_NO_VERSION
 payload-flattening-threshold: 3

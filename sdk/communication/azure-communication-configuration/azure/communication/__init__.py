@@ -1,6 +1,1 @@
-from ._generated.operations import UserTokenOperations
-from ._user_token_client import UserTokenClient
-
-__all__ = [
-    'UserTokenClient',
-]
+__path__ = __import__('pkgutil').extend_path(__path__, __name__)

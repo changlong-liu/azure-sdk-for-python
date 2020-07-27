@@ -6,16 +6,193 @@
         "contact": {
             "email": "acsdevexdisc@microsoft.com"
         },
-        "version": "2020-06-04-preview"
+        "version": "2020-07-20-preview1"
     },
     "paths": {
+        "/identity": {
+            "post": {
+                "tags": [
+                    "Identity"
+                ],
+                "operationId": "UserManagement_Create",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "count",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int32",
+                        "default": 1
+                    },
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/BatchIdentityResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Identity"
+                ],
+                "summary": "Triggers revocation event for user and deletes all its data",
+                "operationId": "UserManagement_DeleteUser",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/AcsUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/identity/resource": {
+            "delete": {
+                "tags": [
+                    "Identity"
+                ],
+                "summary": "Triggers revocation event for all users of the resource and deletes data associated with each user",
+                "operationId": "UserManagement_DeleteAll",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ResourceRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/identity/revocation": {
+            "post": {
+                "tags": [
+                    "Revocation"
+                ],
+                "summary": "Generates a revocation event for the user",
+                "operationId": "UserManagement_RevokeToken",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UserRevocationEventRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
+        "/identity/revocation/resource": {
+            "post": {
+                "tags": [
+                    "Revocation"
+                ],
+                "summary": "Generates a revocation event for all the user of a resource",
+                "operationId": "UserManagement_RevokeAll",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ResourceRevocationEventRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    }
+                }
+            }
+        },
         "/identity/token": {
             "post": {
                 "tags": [
                     "Token"
                 ],
                 "summary": "Generates new user token for the user identity",
-                "operationId": "UserToken_Issue",
+                "operationId": "UserManagement_IssueToken",
                 "consumes": [
                     "application/json-patch+json",
                     "application/json",
@@ -29,7 +206,6 @@
                     {
                         "in": "query",
                         "name": "api-version",
-                        "description": "2020-06-04-preview",
                         "required": true,
                         "type": "string"
                     },
@@ -52,12 +228,126 @@
                     }
                 }
             }
+        },
+        "/identity/tokens": {
+            "post": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Generates new user tokens for the user identities",
+                "operationId": "UserManagement_IssueBatchToken",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Scopes and acs identites for which new user tokens should be generated",
+                        "required": true,
+                        "schema": {
+                            "description": "Scopes and acs identites for which new user tokens should be generated",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/BatchTokenRequest"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/BatchTokenResponse"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
+        "BatchIdentityResponse": {
+            "type": "object",
+            "properties": {
+                "identities": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "AcsUser": {
+            "required": [
+                "identity"
+            ],
+            "type": "object",
+            "properties": {
+                "identity": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResourceRequest": {
+            "required": [
+                "resourceId"
+            ],
+            "type": "object",
+            "properties": {
+                "resourceId": {
+                    "type": "string"
+                }
+            }
+        },
+        "UserRevocationEventRequest": {
+            "required": [
+                "identity",
+                "timestamp"
+            ],
+            "type": "object",
+            "properties": {
+                "timestamp": {
+                    "format": "int64",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "identity": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResourceRevocationEventRequest": {
+            "required": [
+                "resourceId",
+                "timestamp"
+            ],
+            "type": "object",
+            "properties": {
+                "timestamp": {
+                    "format": "int64",
+                    "minimum": 1,
+                    "type": "integer"
+                },
+                "resourceId": {
+                    "type": "string"
+                }
+            }
+        },
         "TokenRequest": {
             "required": [
-                "Scopes"
+                "scopes"
             ],
             "type": "object",
             "properties": {
@@ -68,14 +358,14 @@
                     "type": "array",
                     "items": {
                         "type": "string"
-                }
+                    }
                 }
             }
         },
         "TokenResponse": {
             "type": "object",
             "properties": {
-                "acsIdentity": {
+                "identity": {
                     "type": "string"
                 },
                 "token": {
@@ -85,7 +375,71 @@
                     "format": "int32",
                     "type": "integer"
                 }
-             }
+            }
+        },
+        "BatchTokenRequest": {
+            "required": [
+                "scopes"
+            ],
+            "type": "object",
+            "properties": {
+                "identity": {
+                    "type": "string"
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "BatchToken": {
+            "type": "object",
+            "properties": {
+                "acsToken": {
+                    "$ref": "#/definitions/TokenResponse"
+                },
+                "statusMessage": {
+                    "type": "string"
+                }
+            }
+        },
+        "BatchTokenResponse": {
+            "type": "object",
+            "properties": {
+                "tokens": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/BatchToken"
+                    }
+                }
+            }
         }
+    },
+    "securityDefinitions": {
+        "azure_auth": {
+            "type": "oauth2",
+            "flow": "implicit",
+            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+            "scopes": {
+                "user_impersonation": "impersonate your user account"
+            }
+        }
+    },
+    "x-ms-parameterized-host": {
+        "hostTemplate": "{endpoint}",
+        "useSchemePrefix": false,
+        "parameters": [
+            {
+                "name": "endpoint",
+                "description": "Auth and Identity endpoint",
+                "required": true,
+                "type": "string",
+                "in": "path",
+                "x-ms-skip-url-encoding": true,
+                "x-ms-parameter-location": "client"
+            }
+        ]
     }
 }
