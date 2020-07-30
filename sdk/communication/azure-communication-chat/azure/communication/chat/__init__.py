@@ -1,5 +1,5 @@
 from ._version import VERSION
-from .template_code import template_main
+from ._chat_client import ChatClient
 
-__all__ = ['template_main']
+__all__ = ['ChatClient']
 __version__ = VERSION

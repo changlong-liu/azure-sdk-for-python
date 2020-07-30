@@ -11,7 +11,7 @@ import re
 # up from python 2.7. Reference here: https://github.com/Azure/azure-sdk-for-python/wiki/Azure-packaging
 
 PACKAGE_NAME = "azure-communication-chat"
-PACKAGE_PPRINT_NAME = "Azure Communication Chat Package"
+PACKAGE_PPRINT_NAME = "Azure Communication Chat"
 
 # a-b-c => a/b/c
 package_folder_path = PACKAGE_NAME.replace('-', '/')
