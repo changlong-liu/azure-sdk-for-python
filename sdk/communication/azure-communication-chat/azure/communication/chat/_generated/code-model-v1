@@ -101,11 +101,11 @@
         "2020-07-20-preview1"
        ],
        "filename": [
-        "mem:///108?oai3.shaken.json"
+        "mem:///130?oai3.shaken.json"
        ],
        "name": "MemberRole",
        "originalLocations": [
-        "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/MemberRole"
+        "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/MemberRole"
        ]
       },
       "x-ms-enum": {
@@ -209,11 +209,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "ThreadMember",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ThreadMember"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ThreadMember"
      ]
     }
    },
@@ -386,11 +386,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "ReadReceipt",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ReadReceipt"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ReadReceipt"
      ]
     }
    },
@@ -488,11 +488,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "PostReadReceiptRequest",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/PostReadReceiptRequest"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/PostReadReceiptRequest"
      ]
     }
    },
@@ -561,11 +561,11 @@
         "2020-07-20-preview1"
        ],
        "filename": [
-        "mem:///108?oai3.shaken.json"
+        "mem:///130?oai3.shaken.json"
        ],
        "name": "MessagePriority",
        "originalLocations": [
-        "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/MessagePriority"
+        "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/MessagePriority"
        ]
       },
       "x-ms-enum": {
@@ -705,11 +705,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "CreateMessageRequest",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateMessageRequest"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateMessageRequest"
      ]
     }
    },
@@ -807,11 +807,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "CreateMessageResponse",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateMessageResponse"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateMessageResponse"
      ]
     }
    },
@@ -954,11 +954,11 @@
         "2020-07-20-preview1"
        ],
        "filename": [
-        "mem:///108?oai3.shaken.json"
+        "mem:///130?oai3.shaken.json"
        ],
        "name": "MessagePriority",
        "originalLocations": [
-        "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/MessagePriority"
+        "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/MessagePriority"
        ]
       },
       "x-ms-enum": {
@@ -1254,11 +1254,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "Message",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/Message"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/Message"
      ]
     }
    },
@@ -1394,11 +1394,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "ListMessagesResponse",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ListMessagesResponse"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ListMessagesResponse"
      ]
     }
    },
@@ -1459,11 +1459,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "UpdateMessageRequest",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/UpdateMessageRequest"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/UpdateMessageRequest"
      ]
     }
    },
@@ -1525,11 +1525,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "AddThreadMembersRequest",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/AddThreadMembersRequest"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/AddThreadMembersRequest"
      ]
     }
    },
@@ -1665,11 +1665,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "CreateThreadRequest",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateThreadRequest"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateThreadRequest"
      ]
     }
    },
@@ -1730,11 +1730,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "CreateThreadResponse",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateThreadResponse"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/CreateThreadResponse"
      ]
     }
    },
@@ -1907,11 +1907,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "ThreadInfo",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ThreadInfo"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ThreadInfo"
      ]
     }
    },
@@ -2047,11 +2047,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "ListThreadsResponse",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ListThreadsResponse"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/ListThreadsResponse"
      ]
     }
    },
@@ -2112,11 +2112,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "UpdateThreadRequest",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/UpdateThreadRequest"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/UpdateThreadRequest"
      ]
     }
    },
@@ -2363,11 +2363,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "Thread",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/Thread"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/schemas/Thread"
      ]
     }
    },
@@ -2408,11 +2408,11 @@
        "2020-07-20-preview1"
       ],
       "filename": [
-       "mem:///108?oai3.shaken.json"
+       "mem:///130?oai3.shaken.json"
       ],
       "name": "Endpoint",
       "originalLocations": [
-       "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/Endpoint"
+       "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/Endpoint"
       ]
      },
      "x-ms-parameter-location": "client",
@@ -2521,11 +2521,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1smftrk·chat-threads-threadid-readreceipts·get·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1smftrk·chat-threads-threadid-readreceipts·get·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1smftrk·chat-threads-threadid-readreceipts·get·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2573,11 +2573,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1lg6j0y·chat-threads-threadid-readreceipts·post·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1lg6j0y·chat-threads-threadid-readreceipts·post·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1lg6j0y·chat-threads-threadid-readreceipts·post·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2625,11 +2625,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·7j0cip·chat-threads-threadid-messages·post·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7j0cip·chat-threads-threadid-messages·post·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7j0cip·chat-threads-threadid-messages·post·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2677,11 +2677,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·kstq94·chat-threads-threadid-messages·get·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·kstq94·chat-threads-threadid-messages·get·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·kstq94·chat-threads-threadid-messages·get·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2729,11 +2729,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·onf2uu·chat-threads-threadid-messages·get·parameters·1",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·onf2uu·chat-threads-threadid-messages·get·parameters·1"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·onf2uu·chat-threads-threadid-messages·get·parameters·1"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2782,11 +2782,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·edddgh·chat-threads-threadid-messages·get·parameters·2",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·edddgh·chat-threads-threadid-messages·get·parameters·2"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·edddgh·chat-threads-threadid-messages·get·parameters·2"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2835,11 +2835,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·pcnrh9·chat-threads-threadid-messages·get·parameters·3",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·pcnrh9·chat-threads-threadid-messages·get·parameters·3"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·pcnrh9·chat-threads-threadid-messages·get·parameters·3"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2887,11 +2887,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·vqnytf·chat-threads-threadid-messages-messageid·get·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·vqnytf·chat-threads-threadid-messages-messageid·get·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·vqnytf·chat-threads-threadid-messages-messageid·get·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2939,11 +2939,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1ti4urn·chat-threads-threadid-messages-messageid·get·parameters·1",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ti4urn·chat-threads-threadid-messages-messageid·get·parameters·1"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ti4urn·chat-threads-threadid-messages-messageid·get·parameters·1"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -2991,11 +2991,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1gajtvo·chat-threads-threadid-messages-messageid·patch·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1gajtvo·chat-threads-threadid-messages-messageid·patch·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1gajtvo·chat-threads-threadid-messages-messageid·patch·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3043,11 +3043,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·bt1q8g·chat-threads-threadid-messages-messageid·patch·parameters·1",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·bt1q8g·chat-threads-threadid-messages-messageid·patch·parameters·1"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·bt1q8g·chat-threads-threadid-messages-messageid·patch·parameters·1"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3095,11 +3095,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·nmjaov·chat-threads-threadid-messages-messageid·delete·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·nmjaov·chat-threads-threadid-messages-messageid·delete·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·nmjaov·chat-threads-threadid-messages-messageid·delete·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3147,11 +3147,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·wbjckh·chat-threads-threadid-messages-messageid·delete·parameters·1",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·wbjckh·chat-threads-threadid-messages-messageid·delete·parameters·1"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·wbjckh·chat-threads-threadid-messages-messageid·delete·parameters·1"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3199,11 +3199,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·dg4ti0·chat-threads-threadid-typing·post·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·dg4ti0·chat-threads-threadid-typing·post·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·dg4ti0·chat-threads-threadid-typing·post·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3251,11 +3251,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1u62e0u·chat-threads-threadid-members·get·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1u62e0u·chat-threads-threadid-members·get·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1u62e0u·chat-threads-threadid-members·get·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3303,11 +3303,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·19j8s6s·chat-threads-threadid-members·post·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·19j8s6s·chat-threads-threadid-members·post·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·19j8s6s·chat-threads-threadid-members·post·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3355,11 +3355,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1g6oxfx·chat-threads-threadid-members-memberid·delete·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1g6oxfx·chat-threads-threadid-members-memberid·delete·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1g6oxfx·chat-threads-threadid-members-memberid·delete·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3407,11 +3407,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1f46a5j·chat-threads-threadid-members-memberid·delete·parameters·1",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1f46a5j·chat-threads-threadid-members-memberid·delete·parameters·1"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1f46a5j·chat-threads-threadid-members-memberid·delete·parameters·1"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3459,11 +3459,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·s1cciw·chat-threads·get·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·s1cciw·chat-threads·get·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·s1cciw·chat-threads·get·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3512,11 +3512,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·3939n7·chat-threads·get·parameters·1",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·3939n7·chat-threads·get·parameters·1"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·3939n7·chat-threads·get·parameters·1"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3565,11 +3565,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1wdqsm4·chat-threads·get·parameters·2",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1wdqsm4·chat-threads·get·parameters·2"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1wdqsm4·chat-threads·get·parameters·2"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3617,11 +3617,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·tg1331·chat-threads-threadid·patch·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·tg1331·chat-threads-threadid·patch·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·tg1331·chat-threads-threadid·patch·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3669,11 +3669,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·1ntl9q8·chat-threads-threadid·get·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ntl9q8·chat-threads-threadid·get·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ntl9q8·chat-threads-threadid·get·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3721,11 +3721,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "paths·7s5jaw·chat-threads-threadid·delete·parameters·0",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7s5jaw·chat-threads-threadid·delete·parameters·0"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7s5jaw·chat-threads-threadid·delete·parameters·0"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3773,11 +3773,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "ApiVersionParameter",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/ApiVersionParameter"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/ApiVersionParameter"
      ]
     },
     "x-ms-parameter-location": "method"
@@ -3825,11 +3825,11 @@
       "2020-07-20-preview1"
      ],
      "filename": [
-      "mem:///108?oai3.shaken.json"
+      "mem:///130?oai3.shaken.json"
      ],
      "name": "CorrelationVectorParameter",
      "originalLocations": [
-      "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+      "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
      ]
     },
     "x-ms-parameter-location": "method",
@@ -3889,11 +3889,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1smftrk·chat-threads-threadid-readreceipts·get·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1smftrk·chat-threads-threadid-readreceipts·get·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1smftrk·chat-threads-threadid-readreceipts·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -3941,11 +3941,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -4043,11 +4043,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1esdlop·chat-threads-threadid-readreceipts·get·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1esdlop·chat-threads-threadid-readreceipts·get·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1esdlop·chat-threads-threadid-readreceipts·get·responses·200"
          ]
         }
        },
@@ -4090,7 +4090,33 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Get thread read receipts": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+        },
+        "responses": {
+         "200": {
+          "body": [
+           {
+            "userId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344",
+            "messageId": "1591137790240",
+            "clientMessageId": "18446744073709551615",
+            "readTimestamp": "1593141462160"
+           },
+           {
+            "userId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223343",
+            "messageId": "1591768249318",
+            "clientMessageId": "18446744073709550615",
+            "readTimestamp": "1593141462060"
+           }
+          ]
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -4121,11 +4147,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1lg6j0y·chat-threads-threadid-readreceipts·post·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1lg6j0y·chat-threads-threadid-readreceipts·post·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1lg6j0y·chat-threads-threadid-readreceipts·post·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -4173,11 +4199,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -4258,11 +4284,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·7l2r17·chat-threads-threadid-readreceipts·post·requestbody",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·7l2r17·chat-threads-threadid-readreceipts·post·requestbody"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·7l2r17·chat-threads-threadid-readreceipts·post·requestbody"
          ]
         },
         "x-ms-requestBody-name": "body"
@@ -4304,11 +4330,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1cy7gwc·chat-threads-threadid-readreceipts·post·responses·201",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1cy7gwc·chat-threads-threadid-readreceipts·post·responses·201"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1cy7gwc·chat-threads-threadid-readreceipts·post·responses·201"
          ]
         }
        },
@@ -4349,7 +4375,22 @@
         }
        }
       ],
-      "x-ms-requestBody-index": "3"
+      "x-ms-requestBody-index": "3",
+      "x-ms-examples": {
+       "Post read receipt": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+         "body": {
+          "messageId": "1591137790240",
+          "clientMessageId": "18446744073709551615"
+         }
+        },
+        "responses": {
+         "201": {}
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -4380,11 +4421,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·7j0cip·chat-threads-threadid-messages·post·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7j0cip·chat-threads-threadid-messages·post·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7j0cip·chat-threads-threadid-messages·post·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -4432,11 +4473,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -4517,11 +4558,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·hgsrco·chat-threads-threadid-messages·post·requestbody",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·hgsrco·chat-threads-threadid-messages·post·requestbody"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·hgsrco·chat-threads-threadid-messages·post·requestbody"
          ]
         },
         "x-ms-requestBody-name": "body"
@@ -4566,11 +4607,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1lgdgi6·chat-threads-threadid-messages·post·responses·201",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1lgdgi6·chat-threads-threadid-messages·post·responses·201"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1lgdgi6·chat-threads-threadid-messages·post·responses·201"
          ]
         }
        },
@@ -4614,7 +4655,32 @@
         }
        }
       ],
-      "x-ms-requestBody-index": "3"
+      "x-ms-requestBody-index": "3",
+      "x-ms-examples": {
+       "Send Message": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+         "body": {
+          "clientMessageId": "18446744073709551615",
+          "priority": "Normal",
+          "content": "Let's head out for lunch in 15 minutes.",
+          "senderDisplayName": "Jane"
+         }
+        },
+        "responses": {
+         "201": {
+          "headers": {
+           "Location": "https://contoso.westus.communications.azure.com/chat/threads/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/messages/1593072104708"
+          },
+          "body": {
+           "id": "1593072104708",
+           "clientMessageId": "18446744073709551615"
+          }
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -4645,11 +4711,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·kstq94·chat-threads-threadid-messages·get·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·kstq94·chat-threads-threadid-messages·get·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·kstq94·chat-threads-threadid-messages·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -4697,11 +4763,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·onf2uu·chat-threads-threadid-messages·get·parameters·1",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·onf2uu·chat-threads-threadid-messages·get·parameters·1"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·onf2uu·chat-threads-threadid-messages·get·parameters·1"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -4750,11 +4816,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·edddgh·chat-threads-threadid-messages·get·parameters·2",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·edddgh·chat-threads-threadid-messages·get·parameters·2"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·edddgh·chat-threads-threadid-messages·get·parameters·2"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -4803,11 +4869,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·pcnrh9·chat-threads-threadid-messages·get·parameters·3",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·pcnrh9·chat-threads-threadid-messages·get·parameters·3"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·pcnrh9·chat-threads-threadid-messages·get·parameters·3"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -4855,11 +4921,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -4948,11 +5014,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·b211rb·chat-threads-threadid-messages·get·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·b211rb·chat-threads-threadid-messages·get·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·b211rb·chat-threads-threadid-messages·get·responses·200"
          ]
         }
        },
@@ -4995,7 +5061,144 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Get messages with pagination (Page Size)": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:453dafb77b26481ea2e73bcada0324af@thread.v2",
+         "pageSize": "5"
+        },
+        "responses": {
+         "200": {
+          "body": {
+           "messages": [
+            {
+             "id": "1593107077690",
+             "messageType": "Text",
+             "clientMessageId": "18446744073709551620",
+             "priority": "Normal",
+             "version": "1593107077683",
+             "content": "So where should we get lunch from today?",
+             "senderDisplayName": "Jane",
+             "originalArrivalTime": "2020-06-25T17:44:37.683Z",
+             "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+            },
+            {
+             "id": "1593107077683",
+             "messageType": "Text",
+             "clientMessageId": "18446744073709551615",
+             "priority": "Normal",
+             "version": "1593107077683",
+             "content": "Let's use this chat to decide what to get for lunch today.",
+             "senderDisplayName": "Jane",
+             "originalArrivalTime": "2020-06-25T17:44:37.683Z",
+             "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+            },
+            {
+             "id": "1593107046498",
+             "messageType": "Text",
+             "clientMessageId": "18446744073709551610",
+             "priority": "Normal",
+             "version": "1593107046498",
+             "content": "Good morning everyone!",
+             "senderDisplayName": "Jane",
+             "originalArrivalTime": "2020-06-25T17:44:06.498Z",
+             "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+            },
+            {
+             "id": "1593106976785",
+             "messageType": "ThreadActivity/TopicUpdate",
+             "priority": "Normal",
+             "version": "1593106976785",
+             "content": "<topicupdate><eventtime>1593106976785</eventtime><initiator>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</initiator><value>Lunch</value></topicupdate>",
+             "originalArrivalTime": "2020-06-25T17:42:56.785Z",
+             "from": "19:453dafb77b26481ea2e73bcada0324af@thread.v2"
+            },
+            {
+             "id": "1593106976753",
+             "messageType": "ThreadActivity/AddMember",
+             "priority": "Normal",
+             "version": "1593106976753",
+             "content": "<addmember><eventtime>1593106976753</eventtime><initiator>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</initiator><rosterVersion>1593106976566</rosterVersion><target>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41</target><detailedtargetinfo><id>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41</id></detailedtargetinfo><target>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</target><detailedtargetinfo><id>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</id></detailedtargetinfo><target>8:acs:29d8ac59-6011-44dc-87c0-1f9f93dbc713_2a711a-6c8ffcdc41</target><detailedtargetinfo><id>8:acs:29d8ac59-6011-44dc-87c0-1f9f93dbc713_2a711a-6c8ffcdc41</id></detailedtargetinfo><target>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc43</target><detailedtargetinfo><id>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc43</id></detailedtargetinfo></addmember>",
+             "originalArrivalTime": "2020-06-25T17:42:56.753Z",
+             "from": "19:453dafb77b26481ea2e73bcada0324af@thread.v2"
+            }
+           ],
+           "syncState": "https://contoso.westus.communications.azure.com/chat/threads/19:453dafb77b26481ea2e73bcada0324af@thread.v2/messages?syncState=3e4700000031393a756e6930315f7a626e68336e74326466756666657a6333736f7837646f67377766686b36793571653272776c6e66686c68647a69726968647071407468726561642e763201451fe6e77201000004357fea72010000&startTime=0&pageSize=5&api-version=2020-07-20-preview1",
+           "backwardLink": "https://contoso.westus.communications.azure.com/chat/threads/19:453dafb77b26481ea2e73bcada0324af@thread.v2/messages?syncState=3e4700000031393a756e6930315f7a626e68336e74326466756666657a6333736f7837646f67377766686b36793571653272776c6e66686c68647a69726968647071407468726561642e763201451fe6e77201000004357fea72010000&startTime=0&pageSize=5&api-version=2020-07-20-preview1"
+          }
+         }
+        }
+       },
+       "Get messages with pagination (Sync State Token)": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:453dafb77b26481ea2e73bcada0324af@thread.v2",
+         "syncState": "3e4700000031393 a756e6930315f7a626e68336e74326466756666657a6333736f7837646f67377766686b36793571653272776c6e66686c68647a69726968647071407468726561642e763201451fe6e77201000004357fea72010000"
+        },
+        "responses": {
+         "200": {
+          "body": {
+           "messages": [
+            {
+             "id": "1593107077690",
+             "messageType": "Text",
+             "clientMessageId": "18446744073709551620",
+             "priority": "Normal",
+             "version": "1593107077683",
+             "content": "So where should we get lunch from today?",
+             "senderDisplayName": "Jane",
+             "originalArrivalTime": "2020-06-25T17:44:37.683Z",
+             "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+            },
+            {
+             "id": "1593107077683",
+             "messageType": "Text",
+             "clientMessageId": "18446744073709551615",
+             "priority": "Normal",
+             "version": "1593107077683",
+             "content": "Let's use this chat to decide what to get for lunch today.",
+             "senderDisplayName": "Jane",
+             "originalArrivalTime": "2020-06-25T17:44:37.683Z",
+             "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+            },
+            {
+             "id": "1593107046498",
+             "messageType": "Text",
+             "clientMessageId": "18446744073709551610",
+             "priority": "Normal",
+             "version": "1593107046498",
+             "content": "Good morning everyone!",
+             "senderDisplayName": "Jane",
+             "originalArrivalTime": "2020-06-25T17:44:06.498Z",
+             "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+            },
+            {
+             "id": "1593106976785",
+             "messageType": "ThreadActivity/TopicUpdate",
+             "priority": "Normal",
+             "version": "1593106976785",
+             "content": "<topicupdate><eventtime>1593106976785</eventtime><initiator>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</initiator><value>Lunch</value></topicupdate>",
+             "originalArrivalTime": "2020-06-25T17:42:56.785Z",
+             "from": "19:453dafb77b26481ea2e73bcada0324af@thread.v2"
+            },
+            {
+             "id": "1593106976753",
+             "messageType": "ThreadActivity/AddMember",
+             "priority": "Normal",
+             "version": "1593106976753",
+             "content": "<addmember><eventtime>1593106976753</eventtime><initiator>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</initiator><rosterVersion>1593106976566</rosterVersion><target>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41</target><detailedtargetinfo><id>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41</id></detailedtargetinfo><target>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</target><detailedtargetinfo><id>8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090</id></detailedtargetinfo><target>8:acs:29d8ac59-6011-44dc-87c0-1f9f93dbc713_2a711a-6c8ffcdc41</target><detailedtargetinfo><id>8:acs:29d8ac59-6011-44dc-87c0-1f9f93dbc713_2a711a-6c8ffcdc41</id></detailedtargetinfo><target>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc43</target><detailedtargetinfo><id>8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc43</id></detailedtargetinfo></addmember>",
+             "originalArrivalTime": "2020-06-25T17:42:56.753Z",
+             "from": "19:453dafb77b26481ea2e73bcada0324af@thread.v2"
+            }
+           ],
+           "syncState": "https://contoso.westus.communications.azure.com/chat/threads/19:453dafb77b26481ea2e73bcada0324af@thread.v2/messages?syncState=3e4700000031393a756e6930315f7a626e68336e74326466756666657a6333736f7837646f67377766686b36793571653272776c6e66686c68647a69726968647071407468726561642e763201451fe6e77201000004357fea72010000&startTime=0&pageSize=5&api-version=2020-07-20-preview1"
+          }
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -5026,11 +5229,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·vqnytf·chat-threads-threadid-messages-messageid·get·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·vqnytf·chat-threads-threadid-messages-messageid·get·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·vqnytf·chat-threads-threadid-messages-messageid·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5078,11 +5281,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1ti4urn·chat-threads-threadid-messages-messageid·get·parameters·1",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ti4urn·chat-threads-threadid-messages-messageid·get·parameters·1"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ti4urn·chat-threads-threadid-messages-messageid·get·parameters·1"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5130,11 +5333,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -5223,11 +5426,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·10mxnm6·chat-threads-threadid-messages-messageid·get·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·10mxnm6·chat-threads-threadid-messages-messageid·get·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·10mxnm6·chat-threads-threadid-messages-messageid·get·responses·200"
          ]
         }
        },
@@ -5270,7 +5473,30 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Get Message": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+         "messageId": "1591768249318"
+        },
+        "responses": {
+         "200": {
+          "body": {
+           "id": "1591768249318",
+           "messageType": "Text",
+           "clientMessageId": "18446744073709551615",
+           "priority": "Normal",
+           "content": "Let's head out for lunch in 15 minutes.",
+           "senderDisplayName": "Jane",
+           "originalArrivalTime": "2020-06-10T05:50:49.318Z",
+           "from": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090"
+          }
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -5301,11 +5527,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1gajtvo·chat-threads-threadid-messages-messageid·patch·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1gajtvo·chat-threads-threadid-messages-messageid·patch·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1gajtvo·chat-threads-threadid-messages-messageid·patch·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5353,11 +5579,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·bt1q8g·chat-threads-threadid-messages-messageid·patch·parameters·1",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·bt1q8g·chat-threads-threadid-messages-messageid·patch·parameters·1"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·bt1q8g·chat-threads-threadid-messages-messageid·patch·parameters·1"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5405,11 +5631,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -5490,11 +5716,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·qu36ae·chat-threads-threadid-messages-messageid·patch·requestbody",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·qu36ae·chat-threads-threadid-messages-messageid·patch·requestbody"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·qu36ae·chat-threads-threadid-messages-messageid·patch·requestbody"
          ]
         },
         "x-ms-requestBody-name": "body"
@@ -5536,11 +5762,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·y3cev9·chat-threads-threadid-messages-messageid·patch·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·y3cev9·chat-threads-threadid-messages-messageid·patch·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·y3cev9·chat-threads-threadid-messages-messageid·patch·responses·200"
          ]
         }
        },
@@ -5581,7 +5807,22 @@
         }
        }
       ],
-      "x-ms-requestBody-index": "4"
+      "x-ms-requestBody-index": "4",
+      "x-ms-examples": {
+       "Update message content": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+         "messageId": "1591768249318",
+         "body": {
+          "content": "Updated message content"
+         }
+        },
+        "responses": {
+         "200": {}
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -5612,11 +5853,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·nmjaov·chat-threads-threadid-messages-messageid·delete·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·nmjaov·chat-threads-threadid-messages-messageid·delete·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·nmjaov·chat-threads-threadid-messages-messageid·delete·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5664,11 +5905,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·wbjckh·chat-threads-threadid-messages-messageid·delete·parameters·1",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·wbjckh·chat-threads-threadid-messages-messageid·delete·parameters·1"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·wbjckh·chat-threads-threadid-messages-messageid·delete·parameters·1"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5716,11 +5957,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -5806,11 +6047,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·15jiod·chat-threads-threadid-messages-messageid·delete·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·15jiod·chat-threads-threadid-messages-messageid·delete·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·15jiod·chat-threads-threadid-messages-messageid·delete·responses·200"
          ]
         }
        },
@@ -5881,11 +6122,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·dg4ti0·chat-threads-threadid-typing·post·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·dg4ti0·chat-threads-threadid-typing·post·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·dg4ti0·chat-threads-threadid-typing·post·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -5933,11 +6174,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -6023,11 +6264,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·aycdud·chat-threads-threadid-typing·post·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·aycdud·chat-threads-threadid-typing·post·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·aycdud·chat-threads-threadid-typing·post·responses·200"
          ]
         }
        },
@@ -6067,7 +6308,19 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Post typing event to a thread": {
+        "parameters": {
+         "x-skypetoken": "token",
+         "api-version": "2020-07-20-preview1",
+         "threadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+        },
+        "responses": {
+         "200": {}
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -6098,11 +6351,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1u62e0u·chat-threads-threadid-members·get·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1u62e0u·chat-threads-threadid-members·get·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1u62e0u·chat-threads-threadid-members·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -6150,11 +6403,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -6252,11 +6505,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·efqiqm·chat-threads-threadid-members·get·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·efqiqm·chat-threads-threadid-members·get·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·efqiqm·chat-threads-threadid-members·get·responses·200"
          ]
         }
        },
@@ -6299,7 +6552,33 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Get thread members": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:f2167429acf6482880c6b7790a9086c1@thread.v2"
+        },
+        "responses": {
+         "200": {
+          "body": [
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41",
+            "displayName": "Jane",
+            "memberRole": "Admin",
+            "shareHistoryTime": "0"
+           },
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090",
+            "displayName": "Alex",
+            "memberRole": "Admin",
+            "shareHistoryTime": "0"
+           }
+          ]
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -6330,11 +6609,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·19j8s6s·chat-threads-threadid-members·post·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·19j8s6s·chat-threads-threadid-members·post·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·19j8s6s·chat-threads-threadid-members·post·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -6382,11 +6661,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -6467,11 +6746,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·ijm64d·chat-threads-threadid-members·post·requestbody",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·ijm64d·chat-threads-threadid-members·post·requestbody"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·ijm64d·chat-threads-threadid-members·post·requestbody"
          ]
         },
         "x-ms-requestBody-name": "body"
@@ -6513,11 +6792,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·ukncdg·chat-threads-threadid-members·post·responses·201",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·ukncdg·chat-threads-threadid-members·post·responses·201"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·ukncdg·chat-threads-threadid-members·post·responses·201"
          ]
         }
        },
@@ -6558,7 +6837,40 @@
         }
        }
       ],
-      "x-ms-requestBody-index": "3"
+      "x-ms-requestBody-index": "3",
+      "x-ms-examples": {
+       "Add thread members": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:f2167429acf6482880c6b7790a9086c1@thread.v2",
+         "body": {
+          "members": [
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090",
+            "displayName": "Alex",
+            "memberRole": "Admin",
+            "shareHistoryTime": "0"
+           },
+           {
+            "id": "8:acs:29d8ac59-6011-44dc-87c0-1f9f93dbc713_2a711a-6c8ffcdc43",
+            "displayName": "Peter",
+            "memberRole": "Admin",
+            "shareHistoryTime": "0"
+           },
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc44",
+            "displayName": "Rama",
+            "memberRole": "User",
+            "shareHistoryTime": "0"
+           }
+          ]
+         }
+        },
+        "responses": {
+         "201": {}
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -6589,11 +6901,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1g6oxfx·chat-threads-threadid-members-memberid·delete·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1g6oxfx·chat-threads-threadid-members-memberid·delete·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1g6oxfx·chat-threads-threadid-members-memberid·delete·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -6641,11 +6953,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1f46a5j·chat-threads-threadid-members-memberid·delete·parameters·1",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1f46a5j·chat-threads-threadid-members-memberid·delete·parameters·1"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1f46a5j·chat-threads-threadid-members-memberid·delete·parameters·1"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -6693,11 +7005,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -6783,11 +7095,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·8hfh89·chat-threads-threadid-members-memberid·delete·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·8hfh89·chat-threads-threadid-members-memberid·delete·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·8hfh89·chat-threads-threadid-members-memberid·delete·responses·200"
          ]
         }
        },
@@ -6802,11 +7114,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·7fwjm6·chat-threads-threadid-members-memberid·delete·responses·404",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·7fwjm6·chat-threads-threadid-members-memberid·delete·responses·404"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·7fwjm6·chat-threads-threadid-members-memberid·delete·responses·404"
          ]
         }
        },
@@ -6877,11 +7189,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -6962,11 +7274,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·13vhy4k·chat-threads·post·requestbody",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·13vhy4k·chat-threads·post·requestbody"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·13vhy4k·chat-threads·post·requestbody"
          ]
         },
         "x-ms-requestBody-name": "body"
@@ -7011,11 +7323,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·13nt5bu·chat-threads·post·responses·201",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·13nt5bu·chat-threads·post·responses·201"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·13nt5bu·chat-threads·post·responses·201"
          ]
         }
        },
@@ -7059,7 +7371,76 @@
         }
        }
       ],
-      "x-ms-requestBody-index": "2"
+      "x-ms-requestBody-index": "2",
+      "x-ms-examples": {
+       "Group Chat": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "body": {
+          "topic": "Lunch",
+          "isStickyThread": false,
+          "members": [
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41",
+            "displayName": "Jane",
+            "memberRole": "Admin"
+           },
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090",
+            "displayName": "Alex",
+            "memberRole": "User"
+           },
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc43",
+            "displayName": "Bob",
+            "memberRole": "User"
+           }
+          ]
+         }
+        },
+        "responses": {
+         "201": {
+          "headers": {
+           "Location": "https://contoso.westus.communications.azure.com/chat/threads/19%3Auni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+          },
+          "body": {
+           "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+          }
+         }
+        }
+       },
+       "1 on 1 Chat": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "body": {
+          "topic": "Lunch",
+          "isStickyThread": true,
+          "members": [
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41",
+            "displayName": "Jane",
+            "memberRole": "User"
+           },
+           {
+            "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090",
+            "displayName": "Alex",
+            "memberRole": "User"
+           }
+          ]
+         }
+        },
+        "responses": {
+         "201": {
+          "headers": {
+           "Location": "https://contoso.westus.communications.azure.com/chat/threads/19%3Auni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+          },
+          "body": {
+           "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+          }
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -7090,11 +7471,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·s1cciw·chat-threads·get·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·s1cciw·chat-threads·get·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·s1cciw·chat-threads·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -7143,11 +7524,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·3939n7·chat-threads·get·parameters·1",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·3939n7·chat-threads·get·parameters·1"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·3939n7·chat-threads·get·parameters·1"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -7196,11 +7577,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1wdqsm4·chat-threads·get·parameters·2",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1wdqsm4·chat-threads·get·parameters·2"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1wdqsm4·chat-threads·get·parameters·2"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -7248,11 +7629,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -7341,11 +7722,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·ttj1ke·chat-threads·get·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·ttj1ke·chat-threads·get·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·ttj1ke·chat-threads·get·responses·200"
          ]
         }
        },
@@ -7388,7 +7769,101 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Get threads with pagination (Page Size)": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "pageSize": "5"
+        },
+        "responses": {
+         "200": {
+          "body": {
+           "threads": [
+            {
+             "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2",
+             "topic": "Chat with Samantha",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:a0dfe5fc10e04a7f8d8a64d455f4196d@thread.v2",
+             "topic": "Presentation Brainstorming",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:uni01_n242d2bzammtwxiib7pbjtozeevjqzavzn654ku3dajocexfo2na@thread.v2",
+             "topic": "Chat with Alex",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:0062022a28be4e0983734f7e45cd8566@thread.v2",
+             "topic": "Lunch",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpe@thread.v2",
+             "topic": "Chat with Bob",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            }
+           ],
+           "syncState": "https://contoso.westus.communications.azure.com/chat/threads?syncState=W3sic3RhcnQiOiIyMDIwLTA2LTIzVDIzOjMyOjQ3LjMwNSswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDY6NTY6MjMuNjk2KzAwOjAwIn0seyJzdGFydCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAiLCJlbmQiOiIxOTcwLTAxLTAxVDAwOjAwOjAwKzAwOjAwIn1d&api-version=2020-07-20-preview1",
+           "backwardLink": "https://contoso.westus.communications.azure.com/chat/threads?syncState=W3sic3RhcnQiOiIyMDIwLTA2LTIzVDIzOjMyOjQ3LjMwNSswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDY6NTY6MjMuNjk2KzAwOjAwIn0seyJzdGFydCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAiLCJlbmQiOiIxOTcwLTAxLTAxVDAwOjAwOjAwKzAwOjAwIn1d&api-version=2020-07-20-preview1"
+          }
+         }
+        }
+       },
+       "Get threads with pagination (Sync State Token)": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "syncState": "W3sic3RhcnQiOiIyMDIwLTA2LTIzVDIzOjMyOjQ3LjMwNSswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDY6NTY6MjMuNjk2KzAwOjAwIn0seyJzdGFydCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAiLCJlbmQiOiIxOTcwLTAxLTAxVDAwOjAwOjAwKzAwOjAwIn1d"
+        },
+        "responses": {
+         "200": {
+          "body": {
+           "threads": [
+            {
+             "id": "19:9483cd784bc545a386ffc80fdf240d26@thread.v2",
+             "topic": "Lounge",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:b4906f456162482ca20d822bdf3efa89@thread.v2",
+             "topic": "General",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:8e74c8bdb6894d168464f5137232c1ed@thread.v2",
+             "topic": "All Hands",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:edaf61c12f08499f88d951660d441f01@thread.v2",
+             "topic": "Farewell Planning",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            },
+            {
+             "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2",
+             "topic": "Chat with Peter",
+             "isDeleted": false,
+             "lastMessageReceivedTime": "2020-06-06T05:55:41.646Z"
+            }
+           ],
+           "syncState": "https://contoso.westus.communications.azure.com/chat/threads?syncState=W3sic3RhcnQiOiIyMDIwLTA2LTI1VDA3OjM2OjQwLjAyNyswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDc6Mzc6MTIuMzI5KzAwOjAwIn0seyJzdGFydCI6IjIwMjAtMDYtMjNUMjM6MzI6NDcuMzA1KzAwOjAwIiwiZW5kIjoiMjAyMC0wNi0yNVQwNjo1NjoyMy42OTYrMDA6MDAifSx7InN0YXJ0IjoiMTk3MC0wMS0wMVQwMDowMDowMCswMDowMCIsImVuZCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAifV0%3D&api-version=2020-07-20-preview1",
+           "backwardLink": "https://contoso.westus.communications.azure.com/chat/threads?syncState=W3sic3RhcnQiOiIyMDIwLTA2LTI1VDA3OjM2OjQwLjAyNyswMDowMCIsImVuZCI6IjIwMjAtMDYtMjVUMDc6Mzc6MTIuMzI5KzAwOjAwIn0seyJzdGFydCI6IjIwMjAtMDYtMjNUMjM6MzI6NDcuMzA1KzAwOjAwIiwiZW5kIjoiMjAyMC0wNi0yNVQwNjo1NjoyMy42OTYrMDA6MDAifSx7InN0YXJ0IjoiMTk3MC0wMS0wMVQwMDowMDowMCswMDowMCIsImVuZCI6IjE5NzAtMDEtMDFUMDA6MDA6MDArMDA6MDAifV0%3D&api-version=2020-07-20-preview1"
+          }
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -7419,11 +7894,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·tg1331·chat-threads-threadid·patch·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·tg1331·chat-threads-threadid·patch·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·tg1331·chat-threads-threadid·patch·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -7471,11 +7946,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -7556,11 +8031,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1xirq2h·chat-threads-threadid·patch·requestbody",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·1xirq2h·chat-threads-threadid·patch·requestbody"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/requestBodies/paths·1xirq2h·chat-threads-threadid·patch·requestbody"
          ]
         },
         "x-ms-requestBody-name": "body"
@@ -7602,11 +8077,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1kzoc6o·chat-threads-threadid·patch·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1kzoc6o·chat-threads-threadid·patch·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1kzoc6o·chat-threads-threadid·patch·responses·200"
          ]
         }
        },
@@ -7647,7 +8122,21 @@
         }
        }
       ],
-      "x-ms-requestBody-index": "3"
+      "x-ms-requestBody-index": "3",
+      "x-ms-examples": {
+       "Update Thread Topic": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2",
+         "body": {
+          "topic": "Updated Thread Topic"
+         }
+        },
+        "responses": {
+         "200": {}
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -7678,11 +8167,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1ntl9q8·chat-threads-threadid·get·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ntl9q8·chat-threads-threadid·get·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·1ntl9q8·chat-threads-threadid·get·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -7730,11 +8219,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -7823,11 +8312,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1dshg7o·chat-threads-threadid·get·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1dshg7o·chat-threads-threadid·get·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1dshg7o·chat-threads-threadid·get·responses·200"
          ]
         }
        },
@@ -7870,7 +8359,38 @@
          }
         }
        }
-      ]
+      ],
+      "x-ms-examples": {
+       "Get Thread": {
+        "parameters": {
+         "api-version": "2020-07-20-preview1",
+         "threadId": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+        },
+        "responses": {
+         "200": {
+          "body": {
+           "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2",
+           "topic": "Lunch",
+           "createdAt": "1591759344245",
+           "createdBy": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090",
+           "isStickyThread": true,
+           "members": [
+            {
+             "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_2a711a-6c8ffcdc41",
+             "memberRole": "Admin",
+             "shareHistoryTime": "0"
+            },
+            {
+             "id": "8:acs:16c4f448-db02-1234-62da-108a6b26c747_db0104-0800d69090",
+             "memberRole": "User",
+             "shareHistoryTime": "0"
+            }
+           ]
+          }
+         }
+        }
+       }
+      }
      },
      "deprecated": false,
      "hidden": false
@@ -7901,11 +8421,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·7s5jaw·chat-threads-threadid·delete·parameters·0",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7s5jaw·chat-threads-threadid·delete·parameters·0"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/paths·7s5jaw·chat-threads-threadid·delete·parameters·0"
          ]
         },
         "x-ms-parameter-location": "method"
@@ -7953,11 +8473,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "CorrelationVectorParameter",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/parameters/CorrelationVectorParameter"
          ]
         },
         "x-ms-parameter-location": "method",
@@ -8043,11 +8563,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1ecuq6c·chat-threads-threadid·delete·responses·200",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1ecuq6c·chat-threads-threadid·delete·responses·200"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1ecuq6c·chat-threads-threadid·delete·responses·200"
          ]
         }
        },
@@ -8062,11 +8582,11 @@
           "2020-07-20-preview1"
          ],
          "filename": [
-          "mem:///108?oai3.shaken.json"
+          "mem:///130?oai3.shaken.json"
          ],
          "name": "paths·1x793bj·chat-threads-threadid·delete·responses·404",
          "originalLocations": [
-          "file:///C:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1x793bj·chat-threads-threadid·delete·responses·404"
+          "file:///c:/Users/fanche/git/azure-sdk-for-python-pr/sdk/communication/azure-communication-chat/swagger/swagger.json#/components/responses/paths·1x793bj·chat-threads-threadid·delete·responses·404"
          ]
         }
        },

@@ -125,22 +125,17 @@ class AzureCommunicationChatService(SDKClient):
     list_read_receipts.metadata = {'url': '/chat/threads/{threadId}/readreceipts'}
 
     def send_read_receipt(
-            self, thread_id, client_message_id, message_id, correlation_vector=None, custom_headers=None, raw=False, **operation_config):
+            self, thread_id, correlation_vector=None, body=None, custom_headers=None, raw=False, **operation_config):
         """Posts a read receipt event to a thread, on behalf of a user.
 
         :param thread_id: Id of the thread.
         :type thread_id: str
-        :param client_message_id: The client message Id specified when the
-         message was sent.
-         This Id is a client-specific Id in a numeric unsigned Int64 format. It
-         can be used for client deduping, among other client usages.
-        :type client_message_id: str
-        :param message_id: Id of the latest message read by current user.
-        :type message_id: str
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned in
          the response header "MS-CV".
         :type correlation_vector: str
+        :param body: Request payload for sending a read receipt.
+        :type body: ~azure.communication.chat.models.PostReadReceiptRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -151,10 +146,6 @@ class AzureCommunicationChatService(SDKClient):
         :raises:
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
-        body = None
-        if client_message_id is not None or message_id is not None:
-            body = models.PostReadReceiptRequest(client_message_id=client_message_id, message_id=message_id)
-
         api_version = "2020-07-20-preview1"
 
         # Construct URL
@@ -408,19 +399,19 @@ class AzureCommunicationChatService(SDKClient):
     get_message.metadata = {'url': '/chat/threads/{threadId}/messages/{messageId}'}
 
     def update_message(
-            self, thread_id, message_id, content, correlation_vector=None, custom_headers=None, raw=False, **operation_config):
+            self, thread_id, message_id, correlation_vector=None, body=None, custom_headers=None, raw=False, **operation_config):
         """Updates a message.
 
         :param thread_id: The thread id to which the message was sent.
         :type thread_id: str
         :param message_id: The message id.
         :type message_id: str
-        :param content: Chat message content.
-        :type content: str
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned in
          the response header "MS-CV".
         :type correlation_vector: str
+        :param body: Details of the request to update the message.
+        :type body: ~azure.communication.chat.models.UpdateMessageRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -431,10 +422,6 @@ class AzureCommunicationChatService(SDKClient):
         :raises:
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
-        body = None
-        if content is not None:
-            body = models.UpdateMessageRequest(content=content)
-
         api_version = "2020-07-20-preview1"
 
         # Construct URL
@@ -648,18 +635,18 @@ class AzureCommunicationChatService(SDKClient):
     list_thread_members.metadata = {'url': '/chat/threads/{threadId}/members'}
 
     def add_thread_members(
-            self, thread_id, members, correlation_vector=None, custom_headers=None, raw=False, **operation_config):
+            self, thread_id, correlation_vector=None, body=None, custom_headers=None, raw=False, **operation_config):
         """Adds thread members to a thread. If members already exist, no change
         occurs.
 
         :param thread_id: Id of the thread to add members to.
         :type thread_id: str
-        :param members: Members to add to a thread.
-        :type members: list[~azure.communication.chat.models.ThreadMember]
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned in
          the response header "MS-CV".
         :type correlation_vector: str
+        :param body: Thread members to be added to the thread.
+        :type body: ~azure.communication.chat.models.AddThreadMembersRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -670,10 +657,6 @@ class AzureCommunicationChatService(SDKClient):
         :raises:
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
-        body = None
-        if members is not None:
-            body = models.AddThreadMembersRequest(members=members)
-
         api_version = "2020-07-20-preview1"
 
         # Construct URL
@@ -771,22 +754,15 @@ class AzureCommunicationChatService(SDKClient):
     remove_thread_member.metadata = {'url': '/chat/threads/{threadId}/members/{memberId}'}
 
     def create_thread(
-            self, topic, members, correlation_vector=None, is_sticky_thread=None, custom_headers=None, raw=False, **operation_config):
+            self, correlation_vector=None, body=None, custom_headers=None, raw=False, **operation_config):
         """Creates a chat thread.
 
-        :param topic: The thread topic.
-        :type topic: str
-        :param members: Members to be added to the thread.
-        :type members: list[~azure.communication.chat.models.ThreadMember]
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned in
          the response header "MS-CV".
         :type correlation_vector: str
-        :param is_sticky_thread: Flag if a thread is sticky - sticky thread
-         has an immutable member list, members cannot be added or removed.
-         Sticky threads are only supported for 1-1 chat, i.e. with only two
-         members.
-        :type is_sticky_thread: bool
+        :param body: Request payload for creating a chat thread.
+        :type body: ~azure.communication.chat.models.CreateThreadRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -798,10 +774,6 @@ class AzureCommunicationChatService(SDKClient):
         :raises:
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
-        body = None
-        if topic is not None or is_sticky_thread is not None or members is not None:
-            body = models.CreateThreadRequest(topic=topic, is_sticky_thread=is_sticky_thread, members=members)
-
         api_version = "2020-07-20-preview1"
 
         # Construct URL
@@ -923,17 +895,17 @@ class AzureCommunicationChatService(SDKClient):
     list_threads.metadata = {'url': '/chat/threads'}
 
     def update_thread(
-            self, thread_id, topic, correlation_vector=None, custom_headers=None, raw=False, **operation_config):
+            self, thread_id, correlation_vector=None, body=None, custom_headers=None, raw=False, **operation_config):
         """Updates a thread's properties.
 
         :param thread_id: The id of the thread to update.
         :type thread_id: str
-        :param topic: Thread topic.
-        :type topic: str
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned in
          the response header "MS-CV".
         :type correlation_vector: str
+        :param body: Request payload for updating a chat thread.
+        :type body: ~azure.communication.chat.models.UpdateThreadRequest
         :param dict custom_headers: headers that will be added to the request
         :param bool raw: returns the direct response alongside the
          deserialized response
@@ -944,10 +916,6 @@ class AzureCommunicationChatService(SDKClient):
         :raises:
          :class:`HttpOperationError<msrest.exceptions.HttpOperationError>`
         """
-        body = None
-        if topic is not None:
-            body = models.UpdateThreadRequest(topic=topic)
-
         api_version = "2020-07-20-preview1"
 
         # Construct URL
