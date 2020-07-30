@@ -1,3 +1,9 @@
+# coding=utf-8
+# ------------------------------------
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+# ------------------------------------
+
 from urllib.parse import urlparse
 from ._generated.operations._user_management_operations import UserManagementOperations
 from msrest import Serializer, Deserializer
@@ -9,7 +15,7 @@ from ._generated._configuration import UserTokenManagementServiceConfiguration
 
 
 class UserTokenClient(UserManagementOperations):
-    """User JWT Token client.
+    """Azure Communication Services User JWT Token client.
     """
     
     @classmethod
