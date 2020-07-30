@@ -63,7 +63,7 @@ class UserTokenClient(UserManagementOperations):
         auth_policy = HMACCredentialsPolicy(host, access_key)
 
         self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy ,logging_enable=True, **kwargs)
-        self.api_version = '2020-06-04-preview'
+        self.api_version = '2020-07-20-preview1'
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._client = PipelineClient(base_url=host, config=self.config, verify=False, **kwargs) 
