@@ -21,18 +21,16 @@ class UserTokenManagementService(object):
 
     :ivar user_management: UserManagementOperations operations
     :vartype user_management: azure.communication.configuration.aio.operations_async.UserManagementOperations
-    :param endpoint: Auth and Identity endpoint.
-    :type endpoint: str
+    :param str base_url: Service URL
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no Retry-After header is present.
     """
 
     def __init__(
         self,
-        endpoint: str,
         **kwargs: Any
     ) -> None:
-        base_url = '{endpoint}'
-        self._config = UserTokenManagementServiceConfiguration(endpoint, **kwargs)
+        base_url = 'None'
+        self._config = UserTokenManagementServiceConfiguration(**kwargs)
         self._client = AsyncPipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

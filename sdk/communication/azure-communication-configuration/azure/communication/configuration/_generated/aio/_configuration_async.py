@@ -19,21 +19,15 @@ class UserTokenManagementServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param endpoint: Auth and Identity endpoint.
-    :type endpoint: str
     """
 
     def __init__(
         self,
-        endpoint: str,
         **kwargs: Any
     ) -> None:
-        if endpoint is None:
-            raise ValueError("Parameter 'endpoint' must not be None.")
         super(UserTokenManagementServiceConfiguration, self).__init__(**kwargs)
 
-        self.endpoint = endpoint
-        self.api_version = "2020-07-20-preview1"
+        self.api_version = "2020-06-04-preview"
         kwargs.setdefault('sdk_moniker', 'usertokenmanagementservice/{}'.format(VERSION))
         self._configure(**kwargs)
 
