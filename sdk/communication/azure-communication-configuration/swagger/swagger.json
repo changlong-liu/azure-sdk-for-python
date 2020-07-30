@@ -6,7 +6,7 @@
         "contact": {
             "email": "acsdevexdisc@microsoft.com"
         },
-        "version": "2020-06-04-preview"
+        "version": "2020-07-20-preview1"
     },
     "paths": {
         "/identity/token": {

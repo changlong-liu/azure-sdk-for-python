@@ -32,7 +32,7 @@ class UserTokenManagementServiceConfiguration(Configuration):
         # type: (...) -> None
         super(UserTokenManagementServiceConfiguration, self).__init__(**kwargs)
 
-        self.api_version = "2020-06-04-preview"
+        self.api_version = "2020-07-20-preview1"
         kwargs.setdefault('sdk_moniker', 'usertokenmanagementservice/{}'.format(VERSION))
         self._configure(**kwargs)
 

@@ -63,7 +63,7 @@ class UserManagementOperations:
         error_map.update(kwargs.pop('error_map', {}))
 
         _body = models.TokenRequest(identity=identity, scopes=scopes)
-        api_version = "2020-06-04-preview"
+        api_version = "2020-07-20-preview1"
         content_type = kwargs.pop("content_type", "application/json-patch+json")
 
         # Construct URL
