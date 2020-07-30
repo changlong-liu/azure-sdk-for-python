@@ -1,23 +1,15 @@
+# coding=utf-8
+# ------------------------------------
+# Copyright (c) Microsoft Corporation.
+# Licensed under the MIT License.
+# ------------------------------------
+
 from ._generated.models import (
-    BatchIdentityResponse,
-    BatchToken,
-    BatchTokenRequest,
-    BatchTokenResponse,
-    ResourceRequest, 
-    ResourceRevocationEventRequest,
     TokenRequest,
     TokenResponse,
-    UserRevocationEventRequest
 )
 
 __all__ = [
-    'BatchToken',
-    'BatchIdentityResponse',
-    'BatchTokenRequest',
-    'BatchTokenResponse',
-    'ResourceRequest', 
-    'ResourceRevocationEventRequest',
     'TokenRequest',
     'TokenResponse',
-    'UserRevocationEventRequest'
 ]
