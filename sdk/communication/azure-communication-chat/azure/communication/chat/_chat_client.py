@@ -81,3 +81,18 @@ class ChatClient(object):
             raise ValueError("CreateThreadRequest cannot be None.")
 
         return self._client.create_thread(correlation_vector, body, **kwargs)
+
+    def close(self):
+        # type: () -> None
+        """Close the :class:`~azure.communication.chat.ChatClient` session.
+        """
+        return self._client.close()
+
+    def __enter__(self):
+        # type: () -> ChatClient
+        self._client.__enter__()  # pylint:disable=no-member
+        return self
+
+    def __exit__(self, *args):
+        # type: (*Any) -> None
+        self._client.__exit__(*args)  # pylint:disable=no-member
