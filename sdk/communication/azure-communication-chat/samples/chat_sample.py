@@ -17,39 +17,45 @@ USAGE:
     chat_sample.py
 """
 
-from azure.communication.chat._generated import models
+
 import os
+from azure.core.credentials import AzureKeyCredential
 #import sys
 #sys.path.append("..")
 
 
 class ChatSamples(object):
-
-    url = os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
-    if not url:
+    endpoint = os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
+    if not endpoint:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_ENDPOINT env before run this sample.")
     skype_token = os.environ.get("SKYPE_TOKEN", None)
     if not skype_token:
         raise ValueError("Set SKYPE_TOKEN env before run this sample.")
 
     def create_client(self):
-        skypetoken = "[skypetoken]"
-        host = "https://acs-chat-e2e.eastus.dev.communications.azure.net"
         from azure.communication.chat._chat_client import ChatClient
-        chat_client = ChatClient(host, skypetoken)
+
+        cred = AzureKeyCredential(self.skype_token)
+        chat_client = ChatClient(cred, self.endpoint)
 
     def create_thread(self):
         from azure.communication.chat._chat_client import ChatClient
-        chat_client = ChatClient(self.url, self.skype_token)
-        topic = "test topic"
-        is_sticky_thread = False
-        member = models.ThreadMember(
-            id='8:spool:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
-            display_name='name',
-            member_role='Admin',
-            share_history_time='0')
-        members = [member]
-        thread = chat_client.create_thread(topic, members, is_sticky_thread)
+        from azure.communication.chat._generated import models
+        
+        cred = AzureKeyCredential(self.skype_token)
+        chat_client = ChatClient(cred, self.endpoint)
+
+        body = models.CreateThreadRequest(
+            topic="test topic",
+            members=[models.ThreadMember(
+                id='8:spool:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
+                display_name='name',
+                member_role='Admin',
+                share_history_time='0'
+            )],
+            is_sticky_thread=False
+        )
+        thread = chat_client.create_thread(body)
         print("thread created, id: " + thread.id)
 
 if __name__ == '__main__':

@@ -6,11 +6,8 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from ._azure_communication_chat_service import AzureCommunicationChatService
-__all__ = ['AzureCommunicationChatService']
+from ._azure_communication_chat_service_operations import AzureCommunicationChatServiceOperationsMixin
 
-try:
-    from ._patch import patch_sdk  # type: ignore
-    patch_sdk()
-except ImportError:
-    pass
+__all__ = [
+    'AzureCommunicationChatServiceOperationsMixin',
+]
