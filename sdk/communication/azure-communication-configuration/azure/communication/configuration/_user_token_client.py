@@ -5,16 +5,15 @@
 # ------------------------------------
 
 from urllib.parse import urlparse
-from ._generated.operations._user_management_operations import UserManagementOperations
-from msrest import Serializer, Deserializer
+from ._generated import UserTokenManagementService
+from ._generated.operations import UserManagementOperations
 from azure.core import PipelineClient
 from ._shared.base_client import parse_connection_str, parse_query
 from ._shared.policy import HMACCredentialsPolicy
-from ._generated import models
 from ._generated._configuration import UserTokenManagementServiceConfiguration
 
 
-class UserTokenClient(UserManagementOperations):
+class UserTokenClient(UserTokenManagementService):
     """Azure Communication Services User JWT Token client.
     """
     
@@ -59,13 +58,12 @@ class UserTokenClient(UserManagementOperations):
         if not sas_token and not access_key:
             raise ValueError("You need to provide either a SAS token or an account shared key to authenticate.")
         
-        client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+        super(UserTokenClient, self).__init__(**kwargs)
+
+        self.api_version = '2020-07-20-preview1'
         auth_policy = HMACCredentialsPolicy(host, access_key)
 
         self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy ,logging_enable=True, **kwargs)
-        self.api_version = '2020-07-20-preview1'
-        self._serialize = Serializer(client_models)
-        self._deserialize = Deserializer(client_models)
-        self._client = PipelineClient(base_url=host, config=self.config, verify=False, **kwargs) 
-
-        super(UserTokenClient, self).__init__(self._client, self.config, self._serialize, self._deserialize)
+        self._client = PipelineClient(base_url=host, config=self.config, verify=False, **kwargs)
+        self.user_management = UserManagementOperations(
+            self._client, self._config, self._serialize, self._deserialize)

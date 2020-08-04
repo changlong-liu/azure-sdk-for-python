@@ -25,11 +25,11 @@ sys.path.append("..")
 class UserTokenSamples(object):
 
     def auth_connection_string(self):
-        connection_string = "[CONNECTION-STRING]"
+        connection_string = "endpoint=https://tufarhad-r.eastus.dev.communications.azure.net/;accesskey=eLMSrNfwXbl6ewOO5/+Dn2Nbs1hzYLYFUE/uq/RJZlb8b0iKNW4nimlVnITlWIcDq4Juu0P1JKWyL+3NN0TQfA=="
         from azure.communication.configuration._user_token_client import UserTokenClient
 
         user_token_client = UserTokenClient.from_connection_string(connection_string)
-        tokenresponse = user_token_client.issue_token(scopes=["chat"])
+        tokenresponse = user_token_client.user_management.issue_token(scopes=["chat"])
         print(tokenresponse)
         # [END auth_from_connection_string]
 
