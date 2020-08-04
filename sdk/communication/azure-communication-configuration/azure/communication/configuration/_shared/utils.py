@@ -35,34 +35,37 @@ def prep_if_none_match(etag, match_condition):
     return None
 
 def get_endpoint_from_connection_string(connection_string):
-    endpoint, _, _ = parse_connection_string(connection_string)
+    endpoint, _, _ = parse_connection_str(connection_string)
     return endpoint
 
 
-def parse_connection_string(connection_string):
-    # connection_string looks like Endpoint=https://xxxxx;Id=xxxxx;Secret=xxxx
-    segments = connection_string.split(";")
-    if len(segments) != 3:
-        raise ValueError("Invalid connection string.")
+from typing import (  # pylint: disable=unused-import
+    cast,
+    Tuple,
+)
 
-    endpoint = ""
-    id_ = ""
-    secret = ""
-    for segment in segments:
-        segment = segment.strip()
-        if segment.startswith("Endpoint"):
-            endpoint = str(segment[17:])
-        elif segment.startswith("Id"):
-            id_ = str(segment[3:])
-        elif segment.startswith("Secret"):
-            secret = str(segment[7:])
-        else:
-            raise ValueError("Invalid connection string.")
-
-    if not endpoint or not id_ or not secret:
-        raise ValueError("Invalid connection string.")
-
-    return endpoint, id_, secret
+def parse_connection_str(conn_str):
+    # type: (str) -> Tuple[str, str, str, str]
+    endpoint = None
+    shared_access_key = None
+    for element in conn_str.split(";"):
+        key, _, value = element.partition("=")
+        if key.lower() == "endpoint":
+            endpoint = value.rstrip("/")
+        elif key.lower() == "accesskey":
+            shared_access_key = value
+    if not all([endpoint, shared_access_key]):
+        raise ValueError(
+            "Invalid connection string. Should be in the format: "
+            "endpoint=sb://<FQDN>/;accesskey=<KeyValue>"
+        )
+    left_slash_pos = cast(str, endpoint).find("//")
+    if left_slash_pos != -1:
+        host = cast(str, endpoint)[left_slash_pos + 2:]
+    else:
+        host = str(endpoint)
+    
+    return host, str(shared_access_key)
 
 
 def get_current_utc_time():
