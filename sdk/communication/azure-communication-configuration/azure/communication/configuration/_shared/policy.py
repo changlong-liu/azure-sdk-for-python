@@ -7,10 +7,10 @@
 import hashlib
 import base64
 import hmac
-from azure.core.pipeline.policies import HTTPPolicy
+from azure.core.pipeline.policies import SansIOHTTPPolicy
 from .utils import get_current_utc_time
 
-class HMACCredentialsPolicy(HTTPPolicy):
+class HMACCredentialsPolicy(SansIOHTTPPolicy):
     """Implementation of HMAC authentication policy. 
     """
 
@@ -82,6 +82,5 @@ class HMACCredentialsPolicy(HTTPPolicy):
 
         return host
 
-    def send(self, request):
+    def on_request(self, request):
         self._signed_request(request)
-        return self.next.send(request)
