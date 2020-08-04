@@ -29,7 +29,7 @@ class UserTokenSamples(object):
         from azure.communication.configuration._user_token_client import UserTokenClient
 
         user_token_client = UserTokenClient.from_connection_string(connection_string)
-        tokenresponse = user_token_client.issue_token(scopes=["chat"])
+        tokenresponse = user_token_client.user_management.issue_token(scopes=["chat"])
         print(tokenresponse)
         # [END auth_from_connection_string]
 
