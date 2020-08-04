@@ -4,11 +4,10 @@
 # Licensed under the MIT License.
 # ------------------------------------
 
-from urllib.parse import urlparse
+from azure.core import PipelineClient
 from ._generated import UserTokenManagementService
 from ._generated.operations import UserManagementOperations
-from azure.core import PipelineClient
-from ._shared.base_client import parse_connection_str, parse_query
+from ._shared.utils import parse_connection_str
 from ._shared.policy import HMACCredentialsPolicy
 from ._generated._configuration import UserTokenManagementServiceConfiguration
 
@@ -52,10 +51,8 @@ class UserTokenClient(UserTokenManagementService):
                 host = "https://" + host
         except AttributeError:
             raise ValueError("Account URL must be a string.")
-        parsed_url = urlparse(host.rstrip('/'))
 
-        _, sas_token = parse_query(parsed_url.query)
-        if not sas_token and not access_key:
+        if not access_key:
             raise ValueError("You need to provide either a SAS token or an account shared key to authenticate.")
         
         super(UserTokenClient, self).__init__(**kwargs)
