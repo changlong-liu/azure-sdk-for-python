@@ -10,7 +10,7 @@ from ._user_token_management_service import UserTokenManagementService
 __all__ = ['UserTokenManagementService']
 
 try:
-    from ._patch import patch_sdk  # type: ignore
+    from ._patch import patch_sdk
     patch_sdk()
 except ImportError:
     pass
