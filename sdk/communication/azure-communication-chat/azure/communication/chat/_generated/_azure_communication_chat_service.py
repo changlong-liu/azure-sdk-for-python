@@ -15,8 +15,6 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any
 
-    from azure.core.credentials import TokenCredential
-
 from ._configuration import AzureCommunicationChatServiceConfiguration
 from .operations import AzureCommunicationChatServiceOperationsMixin
 from . import models
@@ -25,8 +23,6 @@ from . import models
 class AzureCommunicationChatService(AzureCommunicationChatServiceOperationsMixin):
     """Azure Communication Chat Service.
 
-    :param credential: Credential needed for the client to connect to Azure.
-    :type credential: ~azure.core.credentials.TokenCredential
     :param endpoint: The endpoint of the Azure Communication resource.
     :type endpoint: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no Retry-After header is present.
@@ -34,13 +30,12 @@ class AzureCommunicationChatService(AzureCommunicationChatServiceOperationsMixin
 
     def __init__(
         self,
-        credential,  # type: "TokenCredential"
         endpoint,  # type: str
         **kwargs  # type: Any
     ):
         # type: (...) -> None
         base_url = '{endpoint}'
-        self._config = AzureCommunicationChatServiceConfiguration(credential, endpoint, **kwargs)
+        self._config = AzureCommunicationChatServiceConfiguration(endpoint, **kwargs)
         self._client = PipelineClient(base_url=base_url, config=self._config, **kwargs)
 
         client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}

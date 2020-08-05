@@ -5,12 +5,13 @@
 # --------------------------------------------------------------------------
 
 import six
-from urllib.parse import urlparse
-from azure.core.tracing.decorator import distributed_trace
 
-from ._generated import models
-from ._generated import AzureCommunicationChatService
-from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
+from urllib.parse import urlparse
+from azure.core.tracing.decorator_async import distributed_trace_async
+
+from .._generated import models
+from .._generated.aio import AzureCommunicationChatService
+from .._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
 POLLING_INTERVAL = 5
 
@@ -60,8 +61,8 @@ class ChatClient(object):
             **kwargs
         )
 
-    @distributed_trace
-    def create_thread(
+    @distributed_trace_async
+    async def create_thread(
         self,
         body,  # type: "models.CreateThreadRequest"
         correlation_vector=None,  # type: Optional[str]
@@ -87,19 +88,19 @@ class ChatClient(object):
         if not body:
             raise ValueError("CreateThreadRequest cannot be None.")
 
-        return self._client.create_thread(correlation_vector, body, **kwargs)
+        return await self._client.create_thread(correlation_vector, body, **kwargs)
 
-    def close(self):
+    async def close(self):
         # type: () -> None
-        """Close the :class:`~azure.communication.chat.ChatClient` session.
+        """Close the :class:`~azure.communication.chat.aio.ChatClient` session.
         """
-        return self._client.close()
+        return await self._client.close()
 
-    def __enter__(self):
+    async def __aenter__(self):
         # type: () -> ChatClient
-        self._client.__enter__()  # pylint:disable=no-member
+        await self._client.__aenter__()  # pylint:disable=no-member
         return self
 
-    def __exit__(self, *args):
+    async def __aexit__(self, *args):
         # type: (*Any) -> None
-        self._client.__exit__(*args)  # pylint:disable=no-member
+        await self._client.__aexit__(*args)  # pylint:disable=no-member

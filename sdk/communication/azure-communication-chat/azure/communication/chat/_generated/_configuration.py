@@ -15,8 +15,6 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any
 
-    from azure.core.credentials import TokenCredential
-
 VERSION = "unknown"
 
 class AzureCommunicationChatServiceConfiguration(Configuration):
@@ -25,26 +23,20 @@ class AzureCommunicationChatServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
-    :param credential: Credential needed for the client to connect to Azure.
-    :type credential: ~azure.core.credentials.TokenCredential
     :param endpoint: The endpoint of the Azure Communication resource.
     :type endpoint: str
     """
 
     def __init__(
         self,
-        credential,  # type: "TokenCredential"
         endpoint,  # type: str
         **kwargs  # type: Any
     ):
         # type: (...) -> None
-        if credential is None:
-            raise ValueError("Parameter 'credential' must not be None.")
         if endpoint is None:
             raise ValueError("Parameter 'endpoint' must not be None.")
         super(AzureCommunicationChatServiceConfiguration, self).__init__(**kwargs)
 
-        self.credential = credential
         self.endpoint = endpoint
         self.api_version = "2020-07-20-preview1"
         kwargs.setdefault('sdk_moniker', 'azurecommunicationchatservice/{}'.format(VERSION))
@@ -64,5 +56,3 @@ class AzureCommunicationChatServiceConfiguration(Configuration):
         self.custom_hook_policy = kwargs.get('custom_hook_policy') or policies.CustomHookPolicy(**kwargs)
         self.redirect_policy = kwargs.get('redirect_policy') or policies.RedirectPolicy(**kwargs)
         self.authentication_policy = kwargs.get('authentication_policy')
-        if self.credential and not self.authentication_policy:
-            self.authentication_policy = policies.AzureKeyCredentialPolicy(self.credential, **kwargs)

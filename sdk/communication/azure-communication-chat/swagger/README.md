@@ -25,6 +25,5 @@ clear-output-folder: true
 python: true
 v3: true
 no-async: false
-credential-default-policy-type: AzureKeyCredentialPolicy
-add-credential: true
+add-credential: false
 ```
