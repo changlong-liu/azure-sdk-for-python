@@ -12,7 +12,7 @@ from ._shared.policy import HMACCredentialsPolicy
 from ._generated._configuration import UserTokenManagementServiceConfiguration
 
 
-class UserTokenClient(UserTokenManagementService):
+class UserManagementClient(UserTokenManagementService):
     """Azure Communication Services User JWT Token client.
     """
     
@@ -55,7 +55,7 @@ class UserTokenClient(UserTokenManagementService):
         if not access_key:
             raise ValueError("You need to provide either a SAS token or an account shared key to authenticate.")
         
-        super(UserTokenClient, self).__init__(**kwargs)
+        super(UserManagementClient, self).__init__(**kwargs)
 
         self.api_version = '2020-07-20-preview1'
         auth_policy = HMACCredentialsPolicy(host, access_key)
