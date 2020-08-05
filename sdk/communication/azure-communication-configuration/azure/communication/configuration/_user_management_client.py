@@ -13,7 +13,7 @@ from ._generated._configuration import UserTokenManagementServiceConfiguration
 
 
 class UserManagementClient(UserTokenManagementService):
-    """Azure Communication Services User JWT Token client.
+    """Azure Communication Services User Management client.
     """
     
     @classmethod
