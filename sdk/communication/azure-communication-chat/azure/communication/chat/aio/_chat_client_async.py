@@ -9,6 +9,7 @@ import six
 from urllib.parse import urlparse
 from azure.core.tracing.decorator_async import distributed_trace_async
 
+from .._chat_client import ChatClient as ChatClientBase
 from .._generated import models
 from .._generated.aio import AzureCommunicationChatService
 from .._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
@@ -16,7 +17,7 @@ from .._common import CommunicationUserCredential, CommunicationUserCredentialPo
 POLLING_INTERVAL = 5
 
 
-class ChatClient(object):
+class ChatClient(ChatClientBase):
     """A client to interact with the AzureCommunicationService Chat gateway.
 
     This client provides operations to create a chat thread, delete a thread,
@@ -36,59 +37,14 @@ class ChatClient(object):
             endpoint,  # type: str
             **kwargs  # type: Any
     ):
-        if not token:
-            raise ValueError("token can not be None or empty")
-        if not isinstance(token, six.string_types):
-            raise TypeError("token must be a string.")
-        self._credential = CommunicationUserCredential(token)
-
-        try:
-            if not endpoint.lower().startswith('http'):
-                endpoint = "https://" + endpoint
-        except AttributeError:
-            raise ValueError("Host URL must be a string")
-
-        parsed_url = urlparse(endpoint.rstrip('/'))
-        if not parsed_url.netloc:
-            raise ValueError("Invalid URL: {}".format(endpoint))
-
-        polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
+        super(ChatClient, self).__init__(token, endpoint, **kwargs)
 
         self._client = AzureCommunicationChatService(
             endpoint,
-            polling_interval=polling_interval,
+            polling_interval=self._polling_interval,
             authentication_policy=CommunicationUserCredentialPolicy(self._credential),
             **kwargs
         )
-
-    @distributed_trace_async
-    async def create_thread(
-        self,
-        body,  # type: "models.CreateThreadRequest"
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: **Any -> Dict[str, str]
-    ):
-        # type: (...) -> "models.CreateThreadResponse"
-        """Creates a chat thread.
-
-        Creates a chat thread.
-
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
-        :param body: Request payload for creating a chat thread.
-        :type body: ~azure.communication.chat.models.CreateThreadRequest
-        :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CreateThreadResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateThreadResponse
-        :raises: ~azure.core.exceptions.HttpResponseError
-
-        """
-        # type: (request, models.CreateThreadRequest)
-        if not body:
-            raise ValueError("CreateThreadRequest cannot be None.")
-
-        return await self._client.create_thread(correlation_vector, body, **kwargs)
 
     async def close(self):
         # type: () -> None

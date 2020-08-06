@@ -18,20 +18,16 @@ Install the Azure Communication Service SDK
 pip install azure-communication-chat
 ```
 
-## Set Azure Communication Resource endpoint after it is created
-```python
-endpoint = "https://<Azure-Communication-Resource-Name>.communications.azure.com"
-```
-
-## Request an [User Access Token](https://review.docs.microsoft.com/en-us/azure/project-spool/concepts/user-access-tokens?branch=pr-en-us-104477&tabs=c-sharp%2Cjavascript-simple-token-init%2Ccsharp-shared-credential)
-```python
-token = "<your token string>"
-```
+## Usre Access Tokens
+User access tokens enable you to build client applications that directly authenticate to Azure Communication Services. You generate these tokens on your server, pass them back to a client device, and then use them to initialize the Communication Services SDKs. Lear how to generate user access tokens from [User Access Tokens](https://github.com/Azure/communication-preview/blob/master/docs/user-access-tokens.md).
 
 ## Create the chat client
 
 ```python
 from azure.communication.chat import ChatClient
+# Your unique Azure Communication service endpoint
+endpoint = "https://<RESOURCE_NAME>.communcationservices.azure.com"
+token = "<User Acess Tokens>"
 chat_client = ChatClient(token, endpoint)
 ```
 

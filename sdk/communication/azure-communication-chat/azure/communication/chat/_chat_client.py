@@ -39,7 +39,6 @@ class ChatClient(object):
             raise ValueError("token can not be None or empty")
         if not isinstance(token, six.string_types):
             raise TypeError("token must be a string.")
-        self._credential = CommunicationUserCredential(token)
 
         try:
             if not endpoint.lower().startswith('http'):
@@ -51,11 +50,12 @@ class ChatClient(object):
         if not parsed_url.netloc:
             raise ValueError("Invalid URL: {}".format(endpoint))
 
-        polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
+        self._credential = CommunicationUserCredential(token)
+        self._polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
 
         self._client = AzureCommunicationChatService(
             endpoint,
-            polling_interval=polling_interval,
+            polling_interval=self._polling_interval,
             authentication_policy=CommunicationUserCredentialPolicy(self._credential),
             **kwargs
         )
