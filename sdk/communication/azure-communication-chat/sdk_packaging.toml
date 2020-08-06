@@ -1,7 +1,9 @@
 [packaging]
 auto_update = false
 package_name = "azure-communication-chat"
-package_pprint_name = "Azure Communication Chat"
+package_pprint_name = "Communication Chat"
+package_doc_id = ""
 is_stable = false
 is_arm = false
-package_doc_id = "communication"
+need_msrestazure = false
+need_azurecore = true
