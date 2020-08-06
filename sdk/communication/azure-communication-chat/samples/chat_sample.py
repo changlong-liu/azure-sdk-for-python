@@ -1,4 +1,3 @@
-# coding: utf-8
 
 # -------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -18,6 +17,7 @@ USAGE:
 """
 
 
+import jwt
 import os
 
 
@@ -30,17 +30,18 @@ class ChatSamples(object):
         raise ValueError("Set SKYPE_TOKEN env before run this sample.")
 
     def create_thread(self):
-        from azure.communication.chat._chat_client import ChatClient
-        from azure.communication.chat._generated import models
+        from azure.communication.chat import ChatClient
+        from azure.communication.chat.models import CreateThreadRequest, ThreadMember
+        from azure.core.exceptions import HttpResponseError
         
         chat_client = ChatClient(self.skype_token, self.endpoint)
 
         # the user who makes the request must be in the member list of the CreateThreadRequest
         user_id = "8:" + jwt.decode(self.skype_token, verify=False)['skypeid']
 
-        body = models.CreateThreadRequest(
+        body = CreateThreadRequest(
             topic="test topic",
-            members=[models.ThreadMember(
+            members=[ThreadMember(
                 id=user_id,
                 display_name='name',
                 member_role='Admin',
@@ -48,8 +49,15 @@ class ChatSamples(object):
             )],
             is_sticky_thread=False
         )
-        thread = chat_client.create_thread(body)
-        print("thread created, id: " + thread.id)
+
+        create_thread_response = None
+        try:
+            create_thread_response = chat_client.create_thread(body)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("thread created, id: " + create_thread_response.id)
 
 if __name__ == '__main__':
     sample = ChatSamples()

@@ -32,19 +32,20 @@ class ChatSamplesAsync(object):
         raise ValueError("Set SKYPE_TOKEN env before run this sample.")
 
     async def create_thread_async(self):
-        from azure.communication.chat.aio._chat_client_async import ChatClient
-        from azure.communication.chat._generated import models
+        from azure.communication.chat.aio import ChatClient
+        from azure.communication.chat.models import CreateThreadRequest, ThreadMember
         
         chat_client = ChatClient(self.skype_token, self.endpoint)
         
         # the user who makes the request must be in the member list of the CreateThreadRequest
         user_id = "8:" + jwt.decode(self.skype_token, verify=False)['skypeid']
 
+        create_thread_response = None
         async with chat_client:
             try:
-                body = models.CreateThreadRequest(
+                body = CreateThreadRequest(
                     topic="test topic",
-                    members=[models.ThreadMember(
+                    members=[ThreadMember(
                         id=user_id,
                         display_name='name',
                         member_role='Admin',
@@ -52,10 +53,13 @@ class ChatSamplesAsync(object):
                     )],
                     is_sticky_thread=False
                 )
-                thread = await chat_client.create_thread(body)
-                print("thread created, id: " + thread.id)
-            finally:
+                create_thread_response = await chat_client.create_thread(body)
+
+            except HttpResponseError as e:
+                print(e)
                 return
+
+        print("thread created, id: " + create_thread_response.id)
 
 async def main():
     sample = ChatSamplesAsync()
