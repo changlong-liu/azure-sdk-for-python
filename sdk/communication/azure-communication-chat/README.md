@@ -88,7 +88,7 @@ The following sections provide several code snippets covering some of the most c
 - [Thread Operations](#thread-operations)
 - [Message Operations](#message-operations)
 - [Thread Member Operations](#thread-member-operations)
-- [Events Operations](#event-operations)
+- [Events Operations](#events-operations)
 
 ## Thread Operations
 
