@@ -12,29 +12,46 @@ from .._shared.policy import HMACCredentialsPolicy
 from .._user_management_client import UserManagementClient as UserManagementClientBase
 
 class UserManagementClient(UserTokenManagementService, UserManagementClientBase):
-    """Azure Communication Services User Management client.
+    """Azure Communication Services(ACS) User Management client.
+
+    :param str host:
+        The host url for ACS resource.
+    :param credential:
+        The credentials with which to authenticate. The value is an account
+        shared access key
+    :keyword str api_version:
+        The ACS API version to use for requests.
+
+    .. admonition:: Example:
+
+        .. literalinclude:: ../samples/configuration_sample_usertoken_issue.py
+            :language: python
+            :dedent: 8
+            :caption: Creating the BlobClient from a URL to a public blob (no auth needed).
     """
-    
     def __init__(
-        self, host, # type: str
-        access_key, # type: str
-        **kwargs # type: Any
-         ):
+            self, host, # type: str
+            credential, # type: str
+            **kwargs # type: Any
+        ):
+        # type: (...) -> None
         try:
             if not host.lower().startswith('http'):
                 host = "https://" + host
         except AttributeError:
             raise ValueError("Account URL must be a string.")
 
-        if not access_key:
-            raise ValueError("You need to provide either a SAS token or an account shared key to authenticate.")
-        
+        if not credential:
+            raise ValueError("You need to an account shared key to authenticate.")
+
         super(UserManagementClient, self).__init__(**kwargs)
 
         self.api_version = '2020-07-20-preview1'
-        auth_policy = HMACCredentialsPolicy(host, access_key)
+        auth_policy = HMACCredentialsPolicy(host, credential)
 
-        self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy ,logging_enable=True, **kwargs)
-        self._client = AsyncPipelineClient(base_url=host, config=self.config, verify=False, **kwargs)
+        self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy,\
+            logging_enable=True, **kwargs)
+        self._client = AsyncPipelineClient(base_url=host,\
+            config=self.config, verify=False, **kwargs)
         self.user_management = UserManagementOperations(
             self._client, self._config, self._serialize, self._deserialize)

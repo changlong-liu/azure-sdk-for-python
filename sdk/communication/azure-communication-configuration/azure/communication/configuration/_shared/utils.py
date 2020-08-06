@@ -4,6 +4,10 @@
 # license information.
 # -------------------------------------------------------------------------
 
+from typing import (  # pylint: disable=unused-import
+    cast,
+    Tuple,
+)
 from datetime import datetime
 from azure.core import MatchConditions
 
@@ -34,16 +38,6 @@ def prep_if_none_match(etag, match_condition):
         return "*"
     return None
 
-def get_endpoint_from_connection_string(connection_string):
-    endpoint, _, _ = parse_connection_str(connection_string)
-    return endpoint
-
-
-from typing import (  # pylint: disable=unused-import
-    cast,
-    Tuple,
-)
-
 def parse_connection_str(conn_str):
     # type: (str) -> Tuple[str, str, str, str]
     endpoint = None
@@ -64,7 +58,7 @@ def parse_connection_str(conn_str):
         host = cast(str, endpoint)[left_slash_pos + 2:]
     else:
         host = str(endpoint)
-    
+
     return host, str(shared_access_key)
 
 

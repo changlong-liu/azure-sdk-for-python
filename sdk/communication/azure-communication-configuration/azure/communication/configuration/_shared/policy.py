@@ -11,7 +11,7 @@ from azure.core.pipeline.policies import SansIOHTTPPolicy
 from .utils import get_current_utc_time
 
 class HMACCredentialsPolicy(SansIOHTTPPolicy):
-    """Implementation of HMAC authentication policy. 
+    """Implementation of HMAC authentication policy.
     """
 
     def __init__(self, host, access_key):
@@ -63,22 +63,20 @@ class HMACCredentialsPolicy(SansIOHTTPPolicy):
             "Date": utc_now,
             "x-ms-content-sha256": content_hash,
             "x-ms-return-client-request-id": "true",
-            "Authorization": "HMAC-SHA256 SignedHeaders="
-            + signed_headers
-            + "&Signature="
-            + signature,
+            "Authorization": "HMAC-SHA256 SignedHeaders=" +\
+                signed_headers + "&Signature=" + signature,
         }
 
         request.http_request.headers.update(signature_header)
 
         return request
-    
+
     def _sanitize_host(self, host):
         if host.startswith("https://"):
-            host = host.replace("https://","")
+            host = host.replace("https://", "")
 
         if host.startswith("http://"):
-            host = host.replace("http://","")
+            host = host.replace("http://", "")
 
         return host
 
