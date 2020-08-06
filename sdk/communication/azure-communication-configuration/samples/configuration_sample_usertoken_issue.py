@@ -11,10 +11,7 @@ FILE: configuration_sample_usertoken_issue.py
 DESCRIPTION:
     These samples demonstrate user token management operations.
     
-    ///authenticating a client via a connection string,
-    shared access key, or by generating a sas token with which the returned signature
-    can be used with the credential parameter of any BlobServiceClient,
-    ContainerClient, BlobClient.///
+    ///authenticating a client via a connection string
 USAGE:
     python configuration_sample_usertoken_issue.py
 """
