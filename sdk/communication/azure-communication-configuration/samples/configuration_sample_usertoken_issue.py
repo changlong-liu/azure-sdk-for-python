@@ -26,9 +26,9 @@ class UserTokenSamples(object):
 
     def auth_connection_string(self):
         connection_string = "[CONNECTION-STRING]"
-        from azure.communication.configuration._user_token_client import UserTokenClient
+        from azure.communication.configuration._user_management_client import UserManagementClient
 
-        user_token_client = UserTokenClient.from_connection_string(connection_string)
+        user_token_client = UserManagementClient.from_connection_string(connection_string)
         tokenresponse = user_token_client.user_management.issue_token(scopes=["chat"])
         print(tokenresponse)
         # [END auth_from_connection_string]
