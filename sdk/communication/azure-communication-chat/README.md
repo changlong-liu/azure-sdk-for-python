@@ -40,10 +40,10 @@ Once you initialized a `ChatClient` class, you can do the following chat operati
 ## Create, get, update, and delete threads
 
 ```Python
-create_thread(request, correlation_vector=None, **kwargs)
-get_thread
-update_thread
-delete_thread
+create_thread(create_thread_request, correlation_vector=None, **kwargs)
+get_thread(thread_id, correlation_vector=None, **kwargs)
+update_thread(thread_id, update_thread_request, correlation_vector=None, **kwargs)
+delete_thread(thread_id, correlation_vector=None, **kwargs)
 ```
 
 ## Send, get, update, and delete messages
@@ -101,7 +101,7 @@ Use the `create_thread` method to create a chat thread.
 
 ```Python
 from azure.communication.chat.models import CreateThreadRequest, ThreadMember
-body = CreateThreadRequest(
+create_thread_request = CreateThreadRequest(
             topic="test topic",
             members=[ThreadMember(
                 id=<8:user_id, you can get an example from User Access Token's payload 'skypeid' >,
@@ -111,8 +111,8 @@ body = CreateThreadRequest(
             )],
             is_sticky_thread=False
  )
-create_thread_response = chat_client.create_thread(body)
-thread_id = create_thread_response.id;
+create_thread_response = chat_client.create_thread(create_thread_request)
+thread_id = create_thread_response.id
 ```
 
 ### Get a thread
@@ -121,7 +121,7 @@ The `get_thread` method retrieves a thread from the service.
 `thread_id` is the unique ID of the thread.
 
 ```Python
-
+thread = chat_client.get_thread(thread_id)
 ```
 
 ### Update a thread
@@ -133,7 +133,8 @@ Use `update_thread` method to update a thread's properties
 - Use `topic` to give thread a new topic;
 
 ```python
-
+update_thread_request = UpdateThreadRequest(topic="updated topic")
+chat_client.update_thread(thread_id, update_thread_request)
 ```
 
 ### Delete a thread
@@ -142,7 +143,7 @@ Use `delete_thread` method to delete a thread
 `thread_id` is the unique ID of the thread.
 
 ```Python
-
+chat_client.delete_thread(thread_id)
 ```
 
 ## Message Operations
