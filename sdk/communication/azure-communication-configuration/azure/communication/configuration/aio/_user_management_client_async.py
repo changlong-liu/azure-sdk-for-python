@@ -19,8 +19,6 @@ class UserManagementClient(UserTokenManagementService, UserManagementClientBase)
     :param credential:
         The credentials with which to authenticate. The value is an account
         shared access key
-    :keyword str api_version:
-        The ACS API version to use for requests.
 
     .. admonition:: Example:
 
@@ -32,6 +30,7 @@ class UserManagementClient(UserTokenManagementService, UserManagementClientBase)
     def __init__(
             self, host, # type: str
             credential, # type: str
+            logging_enable=False, # type: bool
             **kwargs # type: Any
         ):
         # type: (...) -> None
@@ -50,7 +49,7 @@ class UserManagementClient(UserTokenManagementService, UserManagementClientBase)
         auth_policy = HMACCredentialsPolicy(host, credential)
 
         self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy,\
-            logging_enable=True, **kwargs)
+            logging_enable=logging_enable, **kwargs)
         self._client = AsyncPipelineClient(base_url=host,\
             config=self.config, verify=False, **kwargs)
         self.user_management = UserManagementOperations(
