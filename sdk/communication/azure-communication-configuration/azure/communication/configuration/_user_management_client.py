@@ -52,7 +52,7 @@ class UserManagementClient(UserTokenManagementService):
 
         self._config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy,\
             logging_enable=logging_enable, **kwargs)
-        self._client = PipelineClient(base_url=host, config=self._config, verify=False, **kwargs)
+        self._client = PipelineClient(base_url=host, config=self._config, **kwargs)
         self.user_management = UserManagementOperations(
             self._client, self._config, self._serialize, self._deserialize)
 

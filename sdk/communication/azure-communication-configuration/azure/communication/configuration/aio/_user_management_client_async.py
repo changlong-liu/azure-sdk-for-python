@@ -51,6 +51,6 @@ class UserManagementClient(UserTokenManagementService, UserManagementClientBase)
         self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy,\
             logging_enable=logging_enable, **kwargs)
         self._client = AsyncPipelineClient(base_url=host,\
-            config=self.config, verify=False, **kwargs)
+            config=self.config, **kwargs)
         self.user_management = UserManagementOperations(
             self._client, self._config, self._serialize, self._deserialize)
