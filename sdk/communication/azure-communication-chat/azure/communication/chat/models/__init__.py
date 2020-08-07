@@ -7,9 +7,11 @@
 from .._generated.models import (
     CreateThreadRequest,
     ThreadMember,
+    UpdateThreadRequest,
 )
 
 __all__ = [
     'CreateThreadRequest',
     'ThreadMember',
+    'UpdateThreadRequest',
 ]

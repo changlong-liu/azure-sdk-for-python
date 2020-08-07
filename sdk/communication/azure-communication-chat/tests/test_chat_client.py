@@ -27,7 +27,7 @@ class TestChatClient(unittest.TestCase):
             return mock_response(status_code=201, json_payload={"id": expected_thread_id})
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
-        body = CreateThreadRequest(
+        create_thread_request = CreateThreadRequest(
                 topic="test topic",
                 members=[ThreadMember(
                     id='8:spool:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
@@ -38,7 +38,7 @@ class TestChatClient(unittest.TestCase):
                 is_sticky_thread=False
             )
         try:
-            create_thread_response = chat_client.create_thread(body)
+            create_thread_response = chat_client.create_thread(create_thread_request)
         except:
             raised = True
 
@@ -54,7 +54,7 @@ class TestChatClient(unittest.TestCase):
             return mock_response(status_code=400, json_payload={"msg": "some error"})
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
-        body = CreateThreadRequest(
+        create_thread_request = CreateThreadRequest(
                 topic="test topic",
                 members=[ThreadMember(
                     id='8:spool:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
@@ -65,7 +65,38 @@ class TestChatClient(unittest.TestCase):
                 is_sticky_thread=False
             )
         
-        self.assertRaises(HttpResponseError, chat_client.create_thread, body=body)
+        self.assertRaises(HttpResponseError, chat_client.create_thread, create_thread_request=create_thread_request)
+
+    def test_update_thread(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=200)
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        update_thread_request = UpdateThreadRequest(topic="update topic")
+        try:
+            chat_client.update_thread(thread_id, update_thread_request)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+
+    def test_delete_thread(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=200)
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        try:
+            chat_client.delete_thread(thread_id)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
 
 if __name__ == '__main__':
     unittest.main()

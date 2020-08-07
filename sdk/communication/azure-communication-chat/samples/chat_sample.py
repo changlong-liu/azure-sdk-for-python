@@ -29,6 +29,8 @@ class ChatSamples(object):
     if not skype_token:
         raise ValueError("Set SKYPE_TOKEN env before run this sample.")
 
+    _thread_id = None
+
     def create_thread(self):
         from azure.communication.chat import ChatClient
         from azure.communication.chat.models import CreateThreadRequest, ThreadMember
@@ -57,8 +59,59 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("thread created, id: " + create_thread_response.id)
+        self._thread_id = create_thread_response.id
+        print("thread created, id: " + self._thread_id)
+
+    def get_thread(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        thread = None
+        try:
+            thread = chat_client.get_thread(self._thread_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("get_thread succeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
+
+    def update_thread(self):
+        from azure.communication.chat import ChatClient
+        from azure.communication.chat.models import UpdateThreadRequest
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        thread = None
+        try:
+            update_thread_request = UpdateThreadRequest(topic="update topic")
+            chat_client.update_thread(self._thread_id, update_thread_request)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("update_thread succeded")
+
+    def delete_thread(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        thread = None
+        try:
+            chat_client.delete_thread(self._thread_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("delete_thread succeded")
 
 if __name__ == '__main__':
     sample = ChatSamples()
     sample.create_thread()
+    sample.get_thread()
+    sample.update_thread()
+    sample.delete_thread()

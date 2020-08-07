@@ -4,15 +4,9 @@
 # license information.
 # --------------------------------------------------------------------------
 
-import six
-
-from urllib.parse import urlparse
-from azure.core.tracing.decorator_async import distributed_trace_async
-
 from .._chat_client import ChatClient as ChatClientBase
-from .._generated import models
 from .._generated.aio import AzureCommunicationChatService
-from .._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
+from .._common import CommunicationUserCredentialPolicy
 
 POLLING_INTERVAL = 5
 

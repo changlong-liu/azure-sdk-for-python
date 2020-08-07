@@ -81,5 +81,44 @@ class TestChatClientAsync(unittest.TestCase):
 
         self.loop.run_until_complete(go())
 
+    def test_update_thread_async(self):
+        async def go():
+            raised = False
+            thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+
+            async def mock_send(*_, **__):
+                return mock_response(status_code=200)
+            chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+            update_thread_request = UpdateThreadRequest(topic="updated topic")
+
+            try:
+                await chat_client.update_thread(thread_id, update_thread_request)
+            except:
+                raised = True
+            self.assertFalse(raised, 'Expected is no excpetion raised')
+
+        self.loop.run_until_complete(go())
+
+    def test_delete_thread_async(self):
+        async def go():
+            raised = False
+            thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+
+            async def mock_send(*_, **__):
+                return mock_response(status_code=200)
+            chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+            try:
+                await chat_client.delete_thread(thread_id)
+            except:
+                raised = True
+            self.assertFalse(raised, 'Expected is no excpetion raised')
+
+        self.loop.run_until_complete(go())
+
+    def tearDown(self):
+        self.loop.close()
+
 if __name__ == '__main__':
-    aiounittest.main()
+    unittest.main()

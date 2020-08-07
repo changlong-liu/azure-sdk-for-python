@@ -63,7 +63,7 @@ class ChatClient(object):
     @distributed_trace
     def create_thread(
         self,
-        body,  # type: "models.CreateThreadRequest"
+        create_thread_request,  # type: "models.CreateThreadRequest"
         correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: **Any -> Dict[str, str]
     ):
@@ -75,19 +75,104 @@ class ChatClient(object):
         :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
          correlation vector would be returned in the response header "MS-CV".
         :type correlation_vector: str
-        :param body: Request payload for creating a chat thread.
-        :type body: ~azure.communication.chat.models.CreateThreadRequest
+        :param create_thread_request: Request payload for creating a chat thread.
+        :type create_thread_request: ~azure.communication.chat.models.CreateThreadRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateThreadResponse, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.CreateThreadResponse
         :raises: ~azure.core.exceptions.HttpResponseError
 
         """
-        # type: (request, models.CreateThreadRequest)
-        if not body:
-            raise ValueError("CreateThreadRequest cannot be None.")
+        if not create_thread_request:
+            raise ValueError("create_thread_request cannot be None.")
 
-        return self._client.create_thread(correlation_vector, body, **kwargs)
+        return self._client.create_thread(correlation_vector, create_thread_request, **kwargs)
+
+    @distributed_trace
+    def get_thread(
+        self,
+        thread_id,  # type: str
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
+    ):
+        """Gets a chat thread.
+
+        Gets a chat thread.
+
+        :param thread_id: Thread id to get.
+        :type thread_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: Thread, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.Thread
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        # type: (...) -> "models.Thread"
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+
+        return self._client.get_thread(thread_id, correlation_vector, **kwargs)
+
+    @distributed_trace
+    def update_thread(
+        self,
+        thread_id,  # type: str
+        update_thread_request,  # type: models.UpdateThreadRequest
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
+    ):
+        # type: (...) -> None
+        """Updates a thread's properties.
+
+        Updates a thread's properties.
+
+        :param thread_id: The id of the thread to update.
+        :type thread_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :param update_thread_request: Request payload for updating a chat thread.
+        :type update_thread_request: ~azure.communication.chat.models.UpdateThreadRequest
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+        if not update_thread_request:
+            raise ValueError("update_thread_request cannot be None")
+
+        return self._client.update_thread(thread_id, correlation_vector, update_thread_request, **kwargs)
+
+    @distributed_trace
+    def delete_thread(
+        self,
+        thread_id,  # type: str
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
+    ):
+        # type: (...) -> None
+        """Deletes a thread.
+
+        Deletes a thread.
+
+        :param thread_id: Thread id to delete.
+        :type thread_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+
+        return self._client.delete_thread(thread_id, correlation_vector, **kwargs)
 
     def close(self):
         # type: () -> None
