@@ -16,7 +16,13 @@ class HMACCredentialsPolicy(SansIOHTTPPolicy):
 
     def __init__(self, host, access_key):
         super(HMACCredentialsPolicy, self).__init__()
-        self._host = self._sanitize_host(host)
+
+        if host.startswith("https://"):
+            self._host = host.replace("https://", "")
+
+        if host.startswith("http://"):
+            self._host = host.replace("http://", "")
+
         self._access_key = access_key
 
     def _compute_hmac(self, value: str):
@@ -70,15 +76,6 @@ class HMACCredentialsPolicy(SansIOHTTPPolicy):
         request.http_request.headers.update(signature_header)
 
         return request
-
-    def _sanitize_host(self, host):
-        if host.startswith("https://"):
-            host = host.replace("https://", "")
-
-        if host.startswith("http://"):
-            host = host.replace("http://", "")
-
-        return host
 
     def on_request(self, request):
         self._signed_request(request)
