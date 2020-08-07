@@ -56,7 +56,6 @@ class UserManagementClient(UserTokenManagementService):
         self.user_management = UserManagementOperations(
             self._client, self._config, self._serialize, self._deserialize)
 
-
     @classmethod
     def from_connection_string(
             cls, conn_str,  # type: str
