@@ -5,13 +5,25 @@
 # --------------------------------------------------------------------------
 
 from .._generated.models import (
+    CreateMessageRequest,
+    CreateMessageResponse,
     CreateThreadRequest,
+    ListMessagesResponse,
+    Message,
     ThreadMember,
+    UpdateMessageRequest,
     UpdateThreadRequest,
+    MessagePriority,
 )
 
 __all__ = [
+    'CreateMessageRequest',
+    'CreateMessageResponse',
     'CreateThreadRequest',
+    'ListMessagesResponse',
+    'Message',
     'ThreadMember',
+    'UpdateMessageRequest',
     'UpdateThreadRequest',
+    'MessagePriority',
 ]

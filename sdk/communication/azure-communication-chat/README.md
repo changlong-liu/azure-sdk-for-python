@@ -49,11 +49,11 @@ delete_thread(thread_id, correlation_vector=None, **kwargs)
 ## Send, get, update, and delete messages
 
 ```Python
-sendMessage
-getMessage
-getMessages
-updateMessage
-deleteMessage
+send_message(thread_id, create_message_request, correlation_vector=None, **kwargs)
+get_message(thread_id, message_id, correlation_vector=None, **kwargs)
+list_messages(thread_id, page_size=None, start_time=None, sync_state=None, correlation_vector=None, **kwargs)
+update_message(thread_id, message_id, update_message_request, correlation_vector=None, **kwargs)
+delete_message(thread_id, message_id, correlation_vector=None, **kwargs)
 ```
 
 ## Get, add, and remove members
@@ -133,6 +133,7 @@ Use `update_thread` method to update a thread's properties
 - Use `topic` to give thread a new topic;
 
 ```python
+from azure.communication.chat.models import UpdateThreadRequest
 update_thread_request = UpdateThreadRequest(topic="updated topic")
 chat_client.update_thread(thread_id, update_thread_request)
 ```
@@ -158,10 +159,17 @@ Use `send_message` method to sends a message to a thread identified by threadId.
 - Use `sender_display_name` to specify the display name of the sender;
 - Use `client_message_id` to add a client-specific Id in a numeric unsigned Int64 format, which can be used for client deduping.
 
-`MessageResponse` is the response returned from sending a message, it contains an id, which is the unique ID of the message, and a clientMessageId.
+`CreateMessageResponse` is the response returned from sending a message, it contains an id, which is the unique ID of the message, and a clientMessageId.
 
 ```Python
-
+from azure.communication.chat.models import CreateMessageRequest, MessagePriority
+create_message_request = CreateMessageRequest(
+    client_message_id='1581637626706',
+    priority=MessagePriority.NORMAL,
+    content='hello world',
+    sender_display_name='sender name',
+)
+create_message_response = chat_client.send_message(thread_id, create_message_request)
 ```
 
 ### Get a message
@@ -170,17 +178,20 @@ The `get_message` method retrieves a message from the service.
 `thread_id` is the unique ID of the thread.
 `message_id` is the unique ID of the message.
 
+`Message` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.models.Message
 ```python
-
+message = chat_client.get_message(thread_id, message_id)
 ```
 
 ### Get messages
 
-The `get_,essages` method retrieves messages from the service.
+The `list_messages` method retrieves messages from the service.
 `thread_id` is the unique ID of the thread.
 
+`ListMessagesResponse` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.models.ListMessagesResponse
 ```Python
-
+list_messages_response = chat_client.list_messages(thread_id)
+print(list_messages_response.messages)
 ```
 
 ### Update a message
@@ -191,10 +202,11 @@ Use `update_message` to update a message identified by threadId and messageId.
 `UpdateMessageRequest` is used to describe the request of a message update, an example is shown in the code snippet below.
 
 - Use `content` to provide a new chat message content;
-- Use `messageType` to specify the message type, such as "Text" or "RichText" ;
 
 ```Python
-
+from azure.communication.chat.models import UpdateMessageRequest
+update_message_request = UpdateMessageRequest(content="updated message content")
+chat_client.update_message(thread_id, message_id, update_message_request)
 ```
 
 ### Delete a message
@@ -204,7 +216,7 @@ Use `delete_message` to delete a message.
 `message_Id` is the unique ID of the message.
 
 ```python
-
+chat_client.delete_message(thread_id, message_id)
 ```
 
 ## Thread Member Operations

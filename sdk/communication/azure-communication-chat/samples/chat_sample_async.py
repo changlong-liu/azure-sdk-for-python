@@ -32,13 +32,15 @@ class ChatSamplesAsync(object):
         raise ValueError("Set SKYPE_TOKEN env before run this sample.")
 
     _thread_id = None
+    _message_id = None
+    _client_message_id = None
 
     async def create_thread_async(self):
         from azure.communication.chat.aio import ChatClient
         from azure.communication.chat.models import CreateThreadRequest, ThreadMember
-        
+
         chat_client = ChatClient(self.skype_token, self.endpoint)
-        
+
         # the user who makes the request must be in the member list of the CreateThreadRequest
         user_id = "8:" + jwt.decode(self.skype_token, verify=False)['skypeid']
 
@@ -112,11 +114,108 @@ class ChatSamplesAsync(object):
 
         print("delete_thread succeded")
 
+    async def send_message_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.communication.chat.models import CreateMessageRequest, MessagePriority
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+        create_message_response = None
+
+        async with chat_client:
+            try:
+                create_message_request = CreateMessageRequest(
+                    client_message_id='1581637626706',
+                    priority=MessagePriority.NORMAL,
+                    content='hello world',
+                    sender_display_name='sender name',
+                )
+                create_message_response = await chat_client.send_message(
+                    self._thread_id,
+                    create_message_request)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        self._message_id = create_message_response.id
+        self._client_message_id = create_message_response.client_message_id
+        print("send_message succeded, message id:", self._message_id)
+
+    async def get_message_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+        message = None
+
+        async with chat_client:
+            try:
+                message = await chat_client.get_message(self._thread_id, self._message_id)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("get_message succeded, message id:", message.id)
+
+    async def list_messages_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+        list_messages_response = None
+
+        async with chat_client:
+            try:
+                list_messages_response = await chat_client.list_messages(self._thread_id)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("list_messages succeded, messages count:",
+            len([elem for elem in list_messages_response.messages if elem.message_type == 'Text']))
+
+    async def update_message_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.communication.chat.models import UpdateMessageRequest
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        async with chat_client:
+            try:
+                update_message_request = UpdateMessageRequest(content="updated message content")
+                await chat_client.update_message(self._thread_id, self._message_id, update_message_request)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("update_message succeded")
+
+    async def delete_message_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        async with chat_client:
+            try:
+                await chat_client.delete_message(self._thread_id, self._message_id)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("delete_message succeded")
+
 async def main():
     sample = ChatSamplesAsync()
     await sample.create_thread_async()
     await sample.get_thread_async()
     await sample.update_thread_async()
+    await sample.send_message_async()
+    await sample.get_message_async()
+    await sample.list_messages_async()
+    await sample.update_message_async()
+    await sample.delete_message_async()
     await sample.delete_thread_async()
 
 if __name__ == '__main__':

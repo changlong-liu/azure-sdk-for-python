@@ -26,7 +26,7 @@ class ChatClient(ChatClientBase):
     """
 
     def __init__(
-            self, 
+            self,
             token,  # type: str
             endpoint,  # type: str
             **kwargs  # type: Any

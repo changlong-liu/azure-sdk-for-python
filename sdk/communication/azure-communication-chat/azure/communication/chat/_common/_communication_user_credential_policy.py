@@ -7,6 +7,9 @@ import six
 
 from azure.core.pipeline.policies import SansIOHTTPPolicy
 
+HEADER_NAME = "Authorization"
+
+
 class CommunicationUserCredentialPolicy(SansIOHTTPPolicy):
     """Adds a key header for the provided credential.
 
@@ -19,4 +22,4 @@ class CommunicationUserCredentialPolicy(SansIOHTTPPolicy):
         self._credential = credential
 
     def on_request(self, request):
-        request.http_request.headers["Authorization"] = self._credential.token
+        request.http_request.headers[HEADER_NAME] = self._credential.token
