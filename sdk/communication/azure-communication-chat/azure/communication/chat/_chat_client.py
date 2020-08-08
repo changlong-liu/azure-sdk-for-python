@@ -21,8 +21,9 @@ class ChatClient(object):
     get thread by id, get threads, add member to thread, remove member from
     thread, send message, delete message, update message.
 
-    :param str token:
-        A token to authorize chat client requests
+    :param str credential:
+        The credentials with which to authenticate. The value is an User
+        Access Token
     :param str endpoint:
         The endpoint of the Azure Communication resource.
     :keyword int polling_interval:
@@ -30,7 +31,7 @@ class ChatClient(object):
         Retry-After header is present.
     """
     def __init__(
-            self, token, # type: str
+            self, credential, # type: str
             endpoint, # type: str
             **kwargs # type: Any
         ):
@@ -50,7 +51,7 @@ class ChatClient(object):
         if not parsed_url.netloc:
             raise ValueError("Invalid URL: {}".format(endpoint))
 
-        self._credential = CommunicationUserCredential(token)
+        self._credential = CommunicationUserCredential(credential)
         self._polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
 
         self._client = AzureCommunicationChatService(
@@ -140,7 +141,11 @@ class ChatClient(object):
         if not update_thread_request:
             raise ValueError("update_thread_request cannot be None")
 
-        return self._client.update_thread(thread_id, correlation_vector, update_thread_request, **kwargs)
+        return self._client.update_thread(
+            thread_id=thread_id,
+            correlation_vector=correlation_vector,
+            update_thread_request=update_thread_request,
+            **kwargs)
 
     @distributed_trace
     def delete_thread(
@@ -311,7 +316,12 @@ class ChatClient(object):
         if not update_message_request:
             raise ValueError("update_message_request cannot be None.")
 
-        return self._client.update_message(thread_id, message_id, correlation_vector, update_message_request, **kwargs)
+        return self._client.update_message(
+            thread_id=thread_id,
+            message_id=message_id,
+            correlation_vector=correlation_vector,
+            body=update_message_request,
+            **kwargs)
 
     def delete_message(
         self,
@@ -342,7 +352,11 @@ class ChatClient(object):
         if not message_id:
             raise ValueError("message_id cannnot be None.")
 
-        return self._client.delete_message(thread_id, message_id, correlation_vector, **kwargs)
+        return self._client.delete_message(
+            thread_id=thread_id,
+            message_id=message_id,
+            correlation_vector=correlation_vector,
+            **kwargs)
 
     def list_members(
         self,
@@ -399,7 +413,11 @@ class ChatClient(object):
         if not add_thread_members_request:
             raise ValueError("add_thread_members_request cannnot be None.")
 
-        return self._client.add_thread_members(thread_id, correlation_vector, add_thread_members_request, **kwargs)
+        return self._client.add_thread_members(
+            thread_id=thread_id,
+            correlation_vector=correlation_vector,
+            body=add_thread_members_request,
+            **kwargs)
 
     def remove_member(
         self,
@@ -430,12 +448,14 @@ class ChatClient(object):
         if not member_id:
             raise ValueError("member_id cannnot be None.")
 
-        return self._client.remove_thread_member(thread_id, member_id, correlation_vector, **kwargs)
+        return self._client.remove_thread_member(
+            thread_id=thread_id,
+            member_id=member_id,
+            correlation_vector=correlation_vector,
+            **kwargs)
 
     def close(self):
         # type: () -> None
-        """Close the :class:`~azure.communication.chat.ChatClient` session.
-        """
         return self._client.close()
 
     def __enter__(self):
