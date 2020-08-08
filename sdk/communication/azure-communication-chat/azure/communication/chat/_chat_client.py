@@ -8,11 +8,11 @@ from urllib.parse import urlparse
 import six
 from azure.core.tracing.decorator import distributed_trace
 
+from ._generated import models # pylint: disable=unused-import
 from ._generated import AzureCommunicationChatService
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
 POLLING_INTERVAL = 5
-
 
 class ChatClient(object):
     """A client to interact with the AzureCommunicationService Chat gateway.
@@ -31,9 +31,9 @@ class ChatClient(object):
         Retry-After header is present.
     """
     def __init__(
-            self, credential, # type: str
-            endpoint, # type: str
-            **kwargs # type: Any
+            self, credential,  # type: str
+            endpoint,  # type: str
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         if not credential:

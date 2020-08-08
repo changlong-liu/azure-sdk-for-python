@@ -8,8 +8,6 @@ from .._chat_client import ChatClient as ChatClientBase
 from .._generated.aio import AzureCommunicationChatService
 from .._common import CommunicationUserCredentialPolicy
 
-POLLING_INTERVAL = 5
-
 
 class ChatClient(ChatClientBase):
     """A client to interact with the AzureCommunicationService Chat gateway.
