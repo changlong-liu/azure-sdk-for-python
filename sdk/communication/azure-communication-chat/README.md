@@ -1,4 +1,4 @@
-# Azure Communication Service SDK for Python
+# Azure Communication Service client library for Python
 
 This package contains a Python SDK for Azure Communication Services for Chat.
 Read more about Azure Communication Services [here](https://review.docs.microsoft.com/en-us/azure/project-spool/overview?branch=pr-en-us-104477)
