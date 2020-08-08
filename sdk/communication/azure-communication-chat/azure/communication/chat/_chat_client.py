@@ -35,6 +35,7 @@ class ChatClient(object):
             endpoint,  # type: str
             **kwargs  # type: Any
     ):
+        # type: (...) -> None
         if not token:
             raise ValueError("token can not be None or empty")
         if not isinstance(token, six.string_types):
