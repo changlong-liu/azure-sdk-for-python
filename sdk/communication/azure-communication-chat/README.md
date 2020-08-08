@@ -19,7 +19,7 @@ pip install azure-communication-chat
 ```
 
 ## Usre Access Tokens
-User access tokens enable you to build client applications that directly authenticate to Azure Communication Services. You generate these tokens on your server, pass them back to a client device, and then use them to initialize the Communication Services SDKs. Lear how to generate user access tokens from [User Access Tokens](https://github.com/Azure/communication-preview/blob/master/docs/user-access-tokens.md).
+User access tokens enable you to build client applications that directly authenticate to Azure Communication Services. You generate these tokens on your server, pass them back to a client device, and then use them to initialize the Communication Services SDKs. Lear how to generate user access tokens from [User Access Tokens].
 
 ## Create the chat client
 
