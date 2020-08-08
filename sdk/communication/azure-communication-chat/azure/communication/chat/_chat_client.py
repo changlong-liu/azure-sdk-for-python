@@ -21,20 +21,20 @@ class ChatClient(object):
     get thread by id, get threads, add member to thread, remove member from
     thread, send message, delete message, update message.
 
-    :param token: A token to authorize chat client requests
-    :type token: str
-    :param endpoint: The endpoint of the Azure Communication resource.
-    :type endpoint: str
-    :keyword int polling_interval: Default waiting time between two polls for
-     LRO operations if no Retry-After header is present.
+    :param str token:
+        A token to authorize chat client requests
+    :param str endpoint:
+        The endpoint of the Azure Communication resource.
+    :keyword int polling_interval:
+        Default waiting time between two polls for LRO operations if no
+        Retry-After header is present.
     """
     def __init__(
-            self,
-            token,
-            endpoint,
-            **kwargs
+            self, token, # type: str
+            endpoint, # type: str
+            **kwargs # type: Any
         ):
-        # type: (stri, str, Any) -> None
+        # type: (...) -> None
         if not token:
             raise ValueError("token can not be None or empty")
         if not isinstance(token, six.string_types):
@@ -62,14 +62,11 @@ class ChatClient(object):
 
     @distributed_trace
     def create_thread(
-        self,
-        create_thread_request,
-        correlation_vector=None,
-        **kwargs
+        self, create_thread_request, # type: models.CreateThreadRequest
+        correlation_vector=None, # type: Optional[str]
+        **kwargs # type: Any
     ):
         """Creates a chat thread.
-
-        Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
         :type create_thread_request: ~azure.communication.chat.models.CreateThreadRequest
