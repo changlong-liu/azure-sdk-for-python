@@ -5,6 +5,7 @@
 # --------------------------------------------------------------------------
 
 from .._generated.models import (
+    AddThreadMembersRequest,
     CreateMessageRequest,
     CreateMessageResponse,
     CreateThreadRequest,
@@ -17,6 +18,7 @@ from .._generated.models import (
 )
 
 __all__ = [
+    'AddThreadMembersRequest',
     'CreateMessageRequest',
     'CreateMessageResponse',
     'CreateThreadRequest',

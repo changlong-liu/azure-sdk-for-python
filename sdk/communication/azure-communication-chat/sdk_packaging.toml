@@ -5,5 +5,3 @@ package_pprint_name = "Communication Chat"
 package_doc_id = ""
 is_stable = false
 is_arm = false
-need_msrestazure = false
-need_azurecore = true

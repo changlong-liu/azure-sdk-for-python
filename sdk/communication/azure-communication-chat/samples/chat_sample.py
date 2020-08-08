@@ -30,7 +30,9 @@ class ChatSamples(object):
         raise ValueError("Set SKYPE_TOKEN env before run this sample.")
 
     _thread_id = None
+    _thread_creator = None
     _message_id = None
+    _client_message_id = None
 
     def create_thread(self):
         from azure.communication.chat import ChatClient
@@ -41,6 +43,7 @@ class ChatSamples(object):
 
         # the user who makes the request must be in the member list of the CreateThreadRequest
         user_id = "8:" + jwt.decode(self.skype_token, verify=False)['skypeid']
+        self._thread_creator = user_id
 
         body = CreateThreadRequest(
             topic="test topic",
@@ -131,6 +134,7 @@ class ChatSamples(object):
             return
 
         self._message_id = create_message_response.id
+        self._client_message_id = create_message_response.client_message_id
         print("send_message succeded, message id:", self._message_id)
 
     def get_message(self):
@@ -194,6 +198,68 @@ class ChatSamples(object):
 
         print("delete_message succeded")
 
+    def list_members(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        members = []
+        try:
+            members = chat_client.list_members(self._thread_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("list_members succeded, members: ")
+        for member in members:
+            print(member)
+
+    def add_members(self):
+        from azure.communication.chat import ChatClient
+        from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        # the new member must has the same resource id as the thread creator
+        new_member_id = \
+            self._thread_creator[:self._thread_creator.rfind("_")] + "_" \
+            + "123456-0000123456"
+        new_member = ThreadMember(
+                id=new_member_id,
+                display_name='name',
+                member_role='Admin',
+                share_history_time='0')
+        add_thread_members_request = AddThreadMembersRequest(members=[new_member])
+
+        try:
+            chat_client.add_members(self._thread_id, add_thread_members_request)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("add_members succeded")
+
+    def remove_member(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        # this member was added when calling add_members()
+        added_member_id = \
+            self._thread_creator[:self._thread_creator.rfind("_")] + "_" \
+            + "123456-0000123456"
+
+        try:
+            chat_client.remove_member(self._thread_id, added_member_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("remove_member succeded")
+
 if __name__ == '__main__':
     sample = ChatSamples()
     sample.create_thread()
@@ -204,4 +270,7 @@ if __name__ == '__main__':
     sample.list_messages()
     sample.update_message()
     sample.delete_message()
+    sample.list_members()
+    sample.add_members()
+    sample.remove_member()
     sample.delete_thread()

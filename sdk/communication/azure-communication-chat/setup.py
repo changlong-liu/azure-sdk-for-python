@@ -26,16 +26,13 @@ if not version:
     raise RuntimeError('Cannot find version information')
 
 with open('README.md', encoding='utf-8') as f:
-    readme = f.read()
-
-with open('CHANGELOG.md', encoding='utf-8') as f:
-    changelog = f.read()
+    long_description = f.read()
 
 setup(
     name=PACKAGE_NAME,
     version=version,
     description='Microsoft Azure {} Client Library for Python'.format(PACKAGE_PPRINT_NAME),
-    long_description=readme + '\n\n' + changelog,
+    long_description=long_description
     long_description_content_type='text/markdown',
     license='MIT License',
     author='Microsoft Corporation',
@@ -59,7 +56,6 @@ setup(
         'tests',
         # Exclude packages that will be covered by PEP420 or nspkg
         'azure',
-        'azure.communication'
     ]),
     install_requires=[
         'azure-core<2.0.0,>=1.6.0',

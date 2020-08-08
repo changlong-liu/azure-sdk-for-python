@@ -59,9 +59,9 @@ delete_message(thread_id, message_id, correlation_vector=None, **kwargs)
 ## Get, add, and remove members
 
 ```Python
-get_members
-add_members
-remove_member
+list_members(thread_id, correlation_vector=None, **kwargs)
+add_members(thread_id, add_thread_members_request, correlation_vector=None, **kwargs)
+remove_member(thread_id, member_id,  correlation_vector=None, **kwargs)
 ```
 
 ## Send typing notification
@@ -104,7 +104,7 @@ from azure.communication.chat.models import CreateThreadRequest, ThreadMember
 create_thread_request = CreateThreadRequest(
             topic="test topic",
             members=[ThreadMember(
-                id=<8:user_id, you can get an example from User Access Token's payload 'skypeid' >,
+                id='<user id>',
                 display_name='name',
                 member_role='Admin',
                 share_history_time='0'
@@ -223,11 +223,12 @@ chat_client.delete_message(thread_id, message_id)
 
 ### Get thread members
 
-Use `get_members` to retrieve the members of the thread identified by threadId.
+Use `list_members` to retrieve the members of the thread identified by threadId.
 `thread_id` is the unique ID of the thread.
 
+`[ThreadMember]` is the response returned from listing members
 ```python
-
+members = chat_client.list_members(thread_id)
 ```
 
 ### Add thread members
@@ -239,7 +240,14 @@ Use `add_members` method to add thread members to the thread identified by threa
 - Use `members` to list the thread members to be added to the thread;
 
 ```Python
-
+from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
+member = ThreadMember(
+    id='<user id>',
+    display_name='name',
+    member_role='Admin',
+    share_history_time='0')
+add_thread_members_request = AddThreadMembersRequest(members=[member])
+chat_client.add_members(self._thread_id, add_thread_members_request)
 ```
 
 ### Remove thread member
@@ -249,7 +257,7 @@ Use `remove_member` method to remove thread member from the thread identified by
 `member_id` is the ID of the member to be removed from the thread.
 
 ```python
-
+chat_client.remove_member(thread_id, member_id)
 ```
 
 ## Events Operations

@@ -189,5 +189,61 @@ class TestChatClient(unittest.TestCase):
 
         self.assertFalse(raised, 'Expected is no excpetion raised')
 
+    def test_list_members(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        member_id="8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=200, json_payload=[{"id": member_id}])
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        try:
+            members = chat_client.list_members(thread_id)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+        assert len(members) == 1
+        assert members[0].id == member_id
+
+    def test_add_members(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        new_member_id="8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=201)
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        new_member = ThreadMember(
+                id=new_member_id,
+                display_name='name',
+                member_role='Admin',
+                share_history_time='0')
+        add_thread_members_request = AddThreadMembersRequest(members=[new_member])
+        try:
+            chat_client.add_members(thread_id, add_thread_members_request)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+
+    def test_remove_member(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        member_id="8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=200)
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        try:
+            chat_client.remove_member(thread_id, member_id)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+
 if __name__ == '__main__':
     unittest.main()

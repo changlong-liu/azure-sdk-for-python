@@ -4,11 +4,10 @@
 # license information.
 # --------------------------------------------------------------------------
 
-import six
 from urllib.parse import urlparse
+import six
 from azure.core.tracing.decorator import distributed_trace
 
-from ._generated import models
 from ._generated import AzureCommunicationChatService
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
@@ -26,11 +25,12 @@ class ChatClient(object):
     :type token: str
     :param endpoint: The endpoint of the Azure Communication resource.
     :type endpoint: str
-    :keyword int polling_interval: Default waiting time between two polls for LRO operations if no Retry-After header is present.
+    :keyword int polling_interval: Default waiting time between two polls for
+     LRO operations if no Retry-After header is present.
     """
 
     def __init__(
-            self, 
+            self,
             token,  # type: str
             endpoint,  # type: str
             **kwargs  # type: Any
@@ -347,6 +347,94 @@ class ChatClient(object):
             raise ValueError("message_id cannnot be None.")
 
         return self._client.delete_message(thread_id, message_id, correlation_vector, **kwargs)
+
+    def list_members(
+        self,
+        thread_id,  # type: str
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
+    ):
+        # type: (...) -> List["models.ThreadMember"]
+        """Gets the members of a thread.
+
+        Gets the members of a thread.
+
+        :param thread_id: Thread id to get members for.
+        :type thread_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: list of ThreadMember, or the result of cls(response)
+        :rtype: list[~azure.communication.chat.models.ThreadMember]
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+
+        return self._client.list_thread_members(thread_id, correlation_vector, **kwargs)
+
+    def add_members(
+        self,
+        thread_id,  # type: str
+        add_thread_members_request,  # type: models.AddThreadMembersRequest
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
+    ):
+        # type: (...) -> None
+        """Adds thread members to a thread. If members already exist, no change occurs.
+
+        Adds thread members to a thread. If members already exist, no change occurs.
+
+        :param thread_id: Id of the thread to add members to.
+        :type thread_id: str
+        :param body: Thread members to be added to the thread.
+        :type body: ~azure.communication.chat.models.AddThreadMembersRequest
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+        if not add_thread_members_request:
+            raise ValueError("add_thread_members_request cannnot be None.")
+
+        return self._client.add_thread_members(thread_id, correlation_vector, add_thread_members_request, **kwargs)
+
+    def remove_member(
+        self,
+        thread_id,  # type: str
+        member_id,  # type: str
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
+    ):
+        # type: (...) -> None
+        """Remove a member from a thread.
+
+        Remove a member from a thread.
+
+        :param thread_id: Thread id to remove the member from.
+        :type thread_id: str
+        :param member_id: Id of the thread member to remove from the thread.
+        :type member_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+        if not member_id:
+            raise ValueError("member_id cannnot be None.")
+
+        return self._client.remove_thread_member(thread_id, member_id, correlation_vector, **kwargs)
 
     def close(self):
         # type: () -> None

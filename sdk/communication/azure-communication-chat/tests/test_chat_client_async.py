@@ -206,6 +206,72 @@ class TestChatClientAsync(unittest.TestCase):
 
         self.loop.run_until_complete(go())
 
+    def test_list_members_async(self):
+        async def go():
+            thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+            member_id="8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041"
+            raised = False
+
+            async def mock_send(*_, **__):
+                return mock_response(status_code=200, json_payload=[{"id": member_id}])
+            chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+            members = []
+            try:
+                members = await chat_client.list_members(thread_id)
+            except:
+                raised = True
+
+            self.assertFalse(raised, 'Expected is no excpetion raised')
+            assert len(members) == 1
+            assert members[0].id == member_id
+
+        self.loop.run_until_complete(go())
+
+    def test_add_members_async(self):
+        async def go():
+            thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+            new_member_id="8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041"
+            raised = False
+
+            async def mock_send(*_, **__):
+                return mock_response(status_code=201)
+            chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+            new_member = ThreadMember(
+                id=new_member_id,
+                display_name='name',
+                member_role='Admin',
+                share_history_time='0')
+            add_thread_members_request = AddThreadMembersRequest(members=[new_member])
+            try:
+                await chat_client.add_members(thread_id, add_thread_members_request)
+            except:
+                raised = True
+
+            self.assertFalse(raised, 'Expected is no excpetion raised')
+
+        self.loop.run_until_complete(go())
+
+    def test_remove_member_async(self):
+        async def go():
+            thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+            member_id="8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041"
+            raised = False
+
+            async def mock_send(*_, **__):
+                return mock_response(status_code=200)
+            chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+            try:
+                await chat_client.remove_member(thread_id, member_id)
+            except:
+                raised = True
+
+            self.assertFalse(raised, 'Expected is no excpetion raised')
+
+        self.loop.run_until_complete(go())
+
     def tearDown(self):
         self.loop.close()
 
