@@ -28,14 +28,13 @@ class ChatClient(object):
     :keyword int polling_interval: Default waiting time between two polls for
      LRO operations if no Retry-After header is present.
     """
-
     def __init__(
             self,
-            token,  # type: str
-            endpoint,  # type: str
-            **kwargs  # type: Any
-    ):
-        # type: (...) -> None
+            token,
+            endpoint,
+            **kwargs
+        ):
+        # type: (stri, str, Any) -> None
         if not token:
             raise ValueError("token can not be None or empty")
         if not isinstance(token, six.string_types):
@@ -64,11 +63,10 @@ class ChatClient(object):
     @distributed_trace
     def create_thread(
         self,
-        create_thread_request,  # type: "models.CreateThreadRequest"
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: **Any -> Dict[str, str]
+        create_thread_request,
+        correlation_vector=None,
+        **kwargs
     ):
-        # type: (...) -> "models.CreateThreadResponse"
         """Creates a chat thread.
 
         Creates a chat thread.
