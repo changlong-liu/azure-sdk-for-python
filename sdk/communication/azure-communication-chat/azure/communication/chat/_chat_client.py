@@ -34,12 +34,12 @@ class ChatClient(object):
             self, credential, # type: str
             endpoint, # type: str
             **kwargs # type: Any
-        ):
+    ):
         # type: (...) -> None
-        if not token:
-            raise ValueError("token can not be None or empty")
-        if not isinstance(token, six.string_types):
-            raise TypeError("token must be a string.")
+        if not credential:
+            raise ValueError("credential can not be None or empty")
+        if not isinstance(credential, six.string_types):
+            raise TypeError("credential must be a string.")
 
         try:
             if not endpoint.lower().startswith('http'):
@@ -122,8 +122,6 @@ class ChatClient(object):
         # type: (...) -> None
         """Updates a thread's properties.
 
-        Updates a thread's properties.
-
         :param thread_id: The id of the thread to update.
         :type thread_id: str
         :param update_thread_request: Request payload for updating a chat thread.
@@ -144,7 +142,7 @@ class ChatClient(object):
         return self._client.update_thread(
             thread_id=thread_id,
             correlation_vector=correlation_vector,
-            update_thread_request=update_thread_request,
+            body=update_thread_request,
             **kwargs)
 
     @distributed_trace
@@ -185,8 +183,6 @@ class ChatClient(object):
         # type: (...) -> "models.CreateMessageResponse"
         """Sends a message to a thread.
 
-        Sends a message to a thread.
-
         :param thread_id: The thread id to send the message to.
         :type thread_id: str
         :param create_message_request: Details of the message to create.
@@ -204,7 +200,11 @@ class ChatClient(object):
         if not create_message_request:
             raise ValueError("create_message_request cannot be None.")
 
-        return self._client.send_message(thread_id, correlation_vector, create_message_request, **kwargs)
+        return self._client.send_message(
+            thread_id=thread_id,
+            correlation_vector=correlation_vector,
+            body=create_message_request,
+            **kwargs)
 
     @distributed_trace
     def get_message(

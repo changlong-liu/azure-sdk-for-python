@@ -18,21 +18,22 @@ class ChatClient(ChatClientBase):
     get thread by id, get threads, add member to thread, remove member from
     thread, send message, delete message, update message.
 
-    :param token: A token to authorize chat client requests
-    :type token: str
-    :param endpoint: The endpoint of the Azure Communication resource.
-    :type endpoint: str
-    :keyword int polling_interval: Default waiting time between two polls for
-     LRO operations if no Retry-After header is present.
+    :param str credential:
+        The credentials with which to authenticate. The value is an User
+        Access Token
+    :param str endpoint:
+        The endpoint of the Azure Communication resource.
+    :keyword int polling_interval:
+        Default waiting time between two polls for LRO operations if no
+        Retry-After header is present.
     """
-
     def __init__(
-            self,
-            token,  # type: str
+            self, credential,  # type: str
             endpoint,  # type: str
             **kwargs  # type: Any
     ):
-        super(ChatClient, self).__init__(token, endpoint, **kwargs)
+        # type: (...) -> None
+        super(ChatClient, self).__init__(credential, endpoint, **kwargs)
 
         self._client = AzureCommunicationChatService(
             endpoint,
@@ -40,12 +41,6 @@ class ChatClient(ChatClientBase):
             authentication_policy=CommunicationUserCredentialPolicy(self._credential),
             **kwargs
         )
-
-    async def close(self):
-        # type: () -> None
-        """Close the :class:`~azure.communication.chat.aio.ChatClient` session.
-        """
-        return await self._client.close()
 
     async def __aenter__(self):
         # type: () -> ChatClient
