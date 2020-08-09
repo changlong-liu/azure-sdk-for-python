@@ -9,6 +9,10 @@ try:
 except ImportError:
     from urlparse import urlparse # type: ignore
 
+from typing import ( # pylint: disable=unused-import
+    Any,
+    List,
+)
 import six
 from azure.core.tracing.decorator import distributed_trace
 
