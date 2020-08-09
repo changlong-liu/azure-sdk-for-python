@@ -187,7 +187,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> "models.CreateMessageResponse"
+        # type: (...) -> models.CreateMessageResponse
         """Sends a message to a thread.
 
         :param thread_id: The thread id to send the message to.
@@ -222,7 +222,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> "models.Message"
+        # type: (...) -> models.Message
         """Gets a message by id.
 
         Gets a message by id.
@@ -258,7 +258,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> "models.ListMessagesResponse"
+        # type: (...) -> models.ListMessagesResponse
         """Gets a list of messages from a thread.
 
         Gets a list of messages from a thread.
@@ -389,7 +389,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> List[models.ThreadMember]
+        # type: (...) -> [models.ThreadMember]
         """Gets the members of a thread.
 
         :param thread_id: Thread id to get members for.
@@ -400,7 +400,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ThreadMember, or the result of cls(response)
-        :rtype: list[models.ThreadMember]
+        :rtype: [models.ThreadMember]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
