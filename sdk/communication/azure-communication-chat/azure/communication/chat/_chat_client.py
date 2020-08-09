@@ -35,11 +35,11 @@ class ChatClient(object):
         Retry-After header is present.
     """
     def __init__(
-            self, credential,  # type: str
-            endpoint,  # type: str
-            **kwargs  # type: Any
-    ):
-        # type: (...) -> None
+            self,
+            credential: str,
+            endpoint: str,
+            **kwargs: Any
+    ) -> None:
         if not credential:
             raise ValueError("credential can not be None or empty")
         if not isinstance(credential, six.string_types):
