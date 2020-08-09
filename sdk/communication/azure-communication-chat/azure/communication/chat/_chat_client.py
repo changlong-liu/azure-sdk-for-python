@@ -9,10 +9,6 @@ try:
 except ImportError:
     from urlparse import urlparse # type: ignore
 
-from typing import ( # pylint: disable=unused-import
-    Any,
-    List,
-)
 import six
 from azure.core.tracing.decorator import distributed_trace
 
@@ -40,10 +36,11 @@ class ChatClient(object):
     """
     def __init__(
             self,
-            credential: str,
-            endpoint: str,
-            **kwargs: Any
-    ) -> None:
+            credential,  # type: str
+            endpoint,  # type: str
+            **kwargs  # type: Any
+    ):
+        # type: (...) -> None
         if not credential:
             raise ValueError("credential can not be None or empty")
         if not isinstance(credential, six.string_types):
