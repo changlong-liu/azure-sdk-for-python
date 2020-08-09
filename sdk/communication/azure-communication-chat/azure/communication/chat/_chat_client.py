@@ -63,10 +63,11 @@ class ChatClient(object):
 
     @distributed_trace
     def create_thread(
-        self, create_thread_request, # type: models.CreateThreadRequest
-        correlation_vector=None, # type: Optional[str]
-        **kwargs # type: Any
+        self, create_thread_request,  # type: models.CreateThreadRequest
+        correlation_vector=None,  # type: Optional[str]
+        **kwargs  # type: Any
     ):
+        # type: (...) -> models.CreateThreadResponse
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
