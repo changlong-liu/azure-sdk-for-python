@@ -421,8 +421,8 @@ class ChatClient(object):
 
         :param thread_id: Id of the thread to add members to.
         :type thread_id: str
-        :param body: Thread members to be added to the thread.
-        :type body: models.AddThreadMembersRequest
+        :param add_thread_members_request: Thread members to be added to the thread.
+        :type add_thread_members_request: models.AddThreadMembersRequest
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned
          in the response header "MS-CV".
