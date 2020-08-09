@@ -92,12 +92,11 @@ class ChatClient(object):
 
     @distributed_trace
     def get_thread(
-            self,
-            thread_id,  # type: str
+            self, thread_id,  # type: str
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        ## type: (...) -> models.Thread
+        # type: (...) -> models.Thread
         """Gets a chat thread.
 
         :param thread_id: Thread id to get.
