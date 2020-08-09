@@ -3,7 +3,12 @@
 # Licensed under the MIT License. See License.txt in the project root for
 # license information.
 # --------------------------------------------------------------------------
-from urllib.parse import urlparse
+
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse # type: ignore
+
 import six
 from azure.core.tracing.decorator import distributed_trace
 
@@ -92,9 +97,8 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
+        ## type: (...) -> models.Thread
         """Gets a chat thread.
-
-        Gets a chat thread.
 
         :param thread_id: Thread id to get.
         :type thread_id: str
