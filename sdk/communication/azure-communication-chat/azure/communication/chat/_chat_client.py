@@ -130,8 +130,9 @@ class ChatClient(object):
         :type thread_id: str
         :param update_thread_request: Request payload for updating a chat thread.
         :type update_thread_request: ~azure.communication.chat.models.UpdateThreadRequest
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -163,8 +164,9 @@ class ChatClient(object):
 
         :param thread_id: Thread id to delete.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -191,8 +193,9 @@ class ChatClient(object):
         :type thread_id: str
         :param create_message_request: Details of the message to create.
         :type create_message_request: ~azure.communication.chat.models.CreateMessageRequest
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateMessageResponse, or the result of cls(response)
@@ -227,8 +230,9 @@ class ChatClient(object):
         :type thread_id: str
         :param message_id: The message id.
         :type message_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Message, or the result of cls(response)
@@ -240,15 +244,16 @@ class ChatClient(object):
         if not message_id:
             raise ValueError("message_id cannot be None.")
 
-        return self._client.get_message(thread_id, message_id, correlation_vector=correlation_vector, **kwargs)
+        return self._client.get_message(
+            thread_id,
+            message_id,
+            correlation_vector=correlation_vector,
+            **kwargs)
 
     @distributed_trace
     def list_messages(
             self,
             thread_id,  # type: str
-            page_size=None,  # type: Optional[int]
-            start_time=None,  # type: Optional[int]
-            sync_state=None,  # type: Optional[str]
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
@@ -267,9 +272,15 @@ class ChatClient(object):
         :param sync_state: The continuation token that previous request obtained. This is used for
          paging.
         :type sync_state: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
+        :keyword int page_size: The number of messages being requested.
+        :keyword long start_time: The start time where the range query. This is represented
+         by number of seconds since epoch time.
+        :keyword str sync_state: The continuation token that previous request obtained. This is
+         used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListMessagesResponse, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ListMessagesResponse
@@ -277,6 +288,10 @@ class ChatClient(object):
         """
         if not thread_id:
             raise ValueError("thread_id cannot be None.")
+
+        page_size = kwargs.pop("page_size", None)
+        start_time = kwargs.pop("start_time", None)
+        sync_state = kwargs.pop("sync_state", None)
 
         return self._client.list_messages(
             thread_id,
@@ -286,6 +301,7 @@ class ChatClient(object):
             correlation_vector=correlation_vector,
             **kwargs)
 
+    @distributed_trace
     def update_message(
             self,
             thread_id,  # type: str
@@ -305,8 +321,9 @@ class ChatClient(object):
         :type message_id: str
         :param update_message_request: Details of the request to update the message.
         :type update_message_request: ~azure.communication.chat.models.UpdateMessageRequest
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -327,6 +344,7 @@ class ChatClient(object):
             body=update_message_request,
             **kwargs)
 
+    @distributed_trace
     def delete_message(
             self,
             thread_id,  # type: str
@@ -343,8 +361,9 @@ class ChatClient(object):
         :type thread_id: str
         :param message_id: The message id.
         :type message_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -362,6 +381,7 @@ class ChatClient(object):
             correlation_vector=correlation_vector,
             **kwargs)
 
+    @distributed_trace
     def list_members(
             self,
             thread_id,  # type: str
@@ -371,12 +391,11 @@ class ChatClient(object):
         # type: (...) -> List["models.ThreadMember"]
         """Gets the members of a thread.
 
-        Gets the members of a thread.
-
         :param thread_id: Thread id to get members for.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ThreadMember, or the result of cls(response)
@@ -388,6 +407,7 @@ class ChatClient(object):
 
         return self._client.list_thread_members(thread_id, correlation_vector, **kwargs)
 
+    @distributed_trace
     def add_members(
             self,
             thread_id,  # type: str
@@ -398,14 +418,13 @@ class ChatClient(object):
         # type: (...) -> None
         """Adds thread members to a thread. If members already exist, no change occurs.
 
-        Adds thread members to a thread. If members already exist, no change occurs.
-
         :param thread_id: Id of the thread to add members to.
         :type thread_id: str
         :param body: Thread members to be added to the thread.
         :type body: ~azure.communication.chat.models.AddThreadMembersRequest
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
@@ -423,6 +442,7 @@ class ChatClient(object):
             body=add_thread_members_request,
             **kwargs)
 
+    @distributed_trace
     def remove_member(
             self,
             thread_id,  # type: str
@@ -439,8 +459,9 @@ class ChatClient(object):
         :type thread_id: str
         :param member_id: Id of the thread member to remove from the thread.
         :type member_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
