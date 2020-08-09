@@ -76,14 +76,14 @@ class ChatClient(object):
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
-        :type create_thread_request: ~azure.communication.chat.models.CreateThreadRequest
+        :type create_thread_request: models.CreateThreadRequest
         :param correlation_vector: Correlation vector, if a value is not
             provided a randomly generated correlation vector would be returned
             in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateThreadResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateThreadResponse
+        :rtype: models.CreateThreadResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not create_thread_request:
