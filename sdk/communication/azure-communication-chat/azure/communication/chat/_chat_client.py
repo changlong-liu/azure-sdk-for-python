@@ -3,7 +3,6 @@
 # Licensed under the MIT License. See License.txt in the project root for
 # license information.
 # --------------------------------------------------------------------------
-
 from urllib.parse import urlparse
 import six
 from azure.core.tracing.decorator import distributed_trace
@@ -63,17 +62,18 @@ class ChatClient(object):
 
     @distributed_trace
     def create_thread(
-        self, create_thread_request,  # type: models.CreateThreadRequest
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self, create_thread_request,  # type: models.CreateThreadRequest
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> models.CreateThreadResponse
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
         :type create_thread_request: ~azure.communication.chat.models.CreateThreadRequest
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+            provided a randomly generated correlation vector would be returned
+            in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateThreadResponse, or the result of cls(response)
@@ -87,10 +87,10 @@ class ChatClient(object):
 
     @distributed_trace
     def get_thread(
-        self,
-        thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         """Gets a chat thread.
 
@@ -98,15 +98,15 @@ class ChatClient(object):
 
         :param thread_id: Thread id to get.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
+        :param correlation_vector: Correlation vector, if a value is not
+         provided a randomly generated correlation vector would be returned
+         in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Thread, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.Thread
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
-        # type: (...) -> "models.Thread"
         if not thread_id:
             raise ValueError("thread_id cannot be None.")
 
@@ -114,11 +114,11 @@ class ChatClient(object):
 
     @distributed_trace
     def update_thread(
-        self,
-        thread_id,  # type: str
-        update_thread_request,  # type: models.UpdateThreadRequest
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            update_thread_request,  # type: models.UpdateThreadRequest
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Updates a thread's properties.
@@ -148,10 +148,10 @@ class ChatClient(object):
 
     @distributed_trace
     def delete_thread(
-        self,
-        thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Deletes a thread.
@@ -175,11 +175,11 @@ class ChatClient(object):
 
     @distributed_trace
     def send_message(
-        self,
-        thread_id,  # type: str
-        create_message_request,  # type: models.CreateMessageRequest
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            create_message_request,  # type: models.CreateMessageRequest
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> "models.CreateMessageResponse"
         """Sends a message to a thread.
@@ -209,11 +209,11 @@ class ChatClient(object):
 
     @distributed_trace
     def get_message(
-        self,
-        thread_id,  # type: str
-        message_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            message_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> "models.Message"
         """Gets a message by id.
@@ -241,13 +241,13 @@ class ChatClient(object):
 
     @distributed_trace
     def list_messages(
-        self,
-        thread_id,  # type: str
-        page_size=None,  # type: Optional[int]
-        start_time=None,  # type: Optional[int]
-        sync_state=None,  # type: Optional[str]
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            page_size=None,  # type: Optional[int]
+            start_time=None,  # type: Optional[int]
+            sync_state=None,  # type: Optional[str]
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> "models.ListMessagesResponse"
         """Gets a list of messages from a thread.
@@ -284,12 +284,12 @@ class ChatClient(object):
             **kwargs)
 
     def update_message(
-        self,
-        thread_id,  # type: str
-        message_id,  # type: str
-        update_message_request,  # type: models.UpdateMessageRequest
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            message_id,  # type: str
+            update_message_request,  # type: models.UpdateMessageRequest
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Updates a message.
@@ -325,11 +325,11 @@ class ChatClient(object):
             **kwargs)
 
     def delete_message(
-        self,
-        thread_id,  # type: str
-        message_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            message_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Deletes a message.
@@ -360,10 +360,10 @@ class ChatClient(object):
             **kwargs)
 
     def list_members(
-        self,
-        thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> List["models.ThreadMember"]
         """Gets the members of a thread.
@@ -386,11 +386,11 @@ class ChatClient(object):
         return self._client.list_thread_members(thread_id, correlation_vector, **kwargs)
 
     def add_members(
-        self,
-        thread_id,  # type: str
-        add_thread_members_request,  # type: models.AddThreadMembersRequest
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            add_thread_members_request,  # type: models.AddThreadMembersRequest
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Adds thread members to a thread. If members already exist, no change occurs.
@@ -421,11 +421,11 @@ class ChatClient(object):
             **kwargs)
 
     def remove_member(
-        self,
-        thread_id,  # type: str
-        member_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        **kwargs  # type: Any
+            self,
+            thread_id,  # type: str
+            member_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Remove a member from a thread.
