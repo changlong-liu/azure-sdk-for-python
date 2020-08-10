@@ -77,7 +77,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> "CreateThreadResponse"
+        # type: (...) -> ~azure.communication.chat.CreateThreadResponse
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
@@ -102,7 +102,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> Thread
+        # type: (...) -> ~azure.communication.chat.Thread
         """Gets a chat thread.
 
         :param thread_id: Thread id to get.
@@ -113,7 +113,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Thread, or the result of cls(response)
-        :rtype: Thread
+        :rtype: ~azure.communication.chat.Thread
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
