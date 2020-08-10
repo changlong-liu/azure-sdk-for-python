@@ -4,4 +4,4 @@
 # ------------------------------------
 from ._chat_client_async import ChatClient
 
-__all__ = ("ChatClient")
+__all__ = ["ChatClient"]
