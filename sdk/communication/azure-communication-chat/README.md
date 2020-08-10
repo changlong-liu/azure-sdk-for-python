@@ -102,7 +102,7 @@ Use the `create_thread` method to create a chat thread.
 `CreateThreadResponse` is the response returned from creating a thread, it contains an `id` which is the unique ID of the thread.
 
 ```Python
-from azure.communication.chat.models import CreateThreadRequest, ThreadMember
+from azure.communication.chat import CreateThreadRequest, ThreadMember
 create_thread_request = CreateThreadRequest(
             topic="test topic",
             members=[ThreadMember(
@@ -135,7 +135,7 @@ Use `update_thread` method to update a thread's properties
 - Use `topic` to give thread a new topic;
 
 ```python
-from azure.communication.chat.models import UpdateThreadRequest
+from azure.communication.chat import UpdateThreadRequest
 update_thread_request = UpdateThreadRequest(topic="updated topic")
 chat_client.update_thread(thread_id, update_thread_request)
 ```
@@ -164,7 +164,7 @@ Use `send_message` method to sends a message to a thread identified by threadId.
 `CreateMessageResponse` is the response returned from sending a message, it contains an id, which is the unique ID of the message, and a clientMessageId.
 
 ```Python
-from azure.communication.chat.models import CreateMessageRequest, MessagePriority
+from azure.communication.chat import CreateMessageRequest, MessagePriority
 create_message_request = CreateMessageRequest(
     client_message_id='1581637626706',
     priority=MessagePriority.NORMAL,
@@ -180,7 +180,7 @@ The `get_message` method retrieves a message from the service.
 `thread_id` is the unique ID of the thread.
 `message_id` is the unique ID of the message.
 
-`Message` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.models.Message
+`Message` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.Message
 ```python
 message = chat_client.get_message(thread_id, message_id)
 ```
@@ -190,7 +190,7 @@ message = chat_client.get_message(thread_id, message_id)
 The `list_messages` method retrieves messages from the service.
 `thread_id` is the unique ID of the thread.
 
-`ListMessagesResponse` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.models.ListMessagesResponse
+`ListMessagesResponse` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.ListMessagesResponse
 ```Python
 list_messages_response = chat_client.list_messages(thread_id)
 print(list_messages_response.messages)
@@ -206,7 +206,7 @@ Use `update_message` to update a message identified by threadId and messageId.
 - Use `content` to provide a new chat message content;
 
 ```Python
-from azure.communication.chat.models import UpdateMessageRequest
+from azure.communication.chat import UpdateMessageRequest
 update_message_request = UpdateMessageRequest(content="updated message content")
 chat_client.update_message(thread_id, message_id, update_message_request)
 ```
@@ -242,7 +242,7 @@ Use `add_members` method to add thread members to the thread identified by threa
 - Use `members` to list the thread members to be added to the thread;
 
 ```Python
-from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
+from azure.communication.chat import AddThreadMembersRequest, ThreadMember
 member = ThreadMember(
     id='<user id>',
     display_name='name',
