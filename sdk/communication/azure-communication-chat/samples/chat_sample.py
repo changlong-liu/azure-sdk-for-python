@@ -36,7 +36,7 @@ class ChatSamples(object):
 
     def create_thread(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import CreateThreadRequest, ThreadMember
+        from azure.communication.chat import CreateThreadRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -83,7 +83,7 @@ class ChatSamples(object):
 
     def update_thread(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import UpdateThreadRequest
+        from azure.communication.chat import UpdateThreadRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -115,7 +115,7 @@ class ChatSamples(object):
 
     def send_message(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import CreateMessageRequest, MessagePriority
+        from azure.communication.chat import CreateMessageRequest, MessagePriority
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -170,7 +170,7 @@ class ChatSamples(object):
 
     def update_message(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import UpdateMessageRequest
+        from azure.communication.chat import UpdateMessageRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -186,7 +186,7 @@ class ChatSamples(object):
 
     def send_read_receipt(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import PostReadReceiptRequest
+        from azure.communication.chat import PostReadReceiptRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -253,7 +253,7 @@ class ChatSamples(object):
 
     def add_members(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
+        from azure.communication.chat import AddThreadMembersRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)

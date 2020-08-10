@@ -1,6 +1,37 @@
 from ._version import VERSION
 from ._chat_client import ChatClient
-from . import models
+from ._generated.models import (
+    AddThreadMembersRequest,
+    CreateMessageRequest,
+    CreateMessageResponse,
+    CreateThreadRequest,
+    CreateThreadResponse,
+    ListMessagesResponse,
+    Message,
+    PostReadReceiptRequest,
+    ReadReceipt,
+    Thread,
+    ThreadMember,
+    UpdateMessageRequest,
+    UpdateThreadRequest,
+    MessagePriority,
+)
 
-__all__ = ['ChatClient', 'models']
+__all__ = [
+    'ChatClient',
+    'AddThreadMembersRequest',
+    'CreateMessageRequest',
+    'CreateMessageResponse',
+    'CreateThreadRequest',
+    'CreateThreadResponse',
+    'ListMessagesResponse',
+    'Message',
+    'PostReadReceiptRequest',
+    'ReadReceipt',
+    'Thread',
+    'ThreadMember',
+    'UpdateMessageRequest',
+    'UpdateThreadRequest',
+    'MessagePriority',
+]
 __version__ = VERSION

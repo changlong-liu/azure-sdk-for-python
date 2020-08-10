@@ -13,7 +13,6 @@ except ImportError:
 import six
 from azure.core.tracing.decorator import distributed_trace
 
-from . import models # pylint: disable=unused-import
 from ._generated import AzureCommunicationChatService
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
@@ -74,22 +73,22 @@ class ChatClient(object):
 
     @distributed_trace
     def create_thread(
-            self, create_thread_request,  # type: models.CreateThreadRequest
+            self, create_thread_request,  # type: CreateThreadRequest
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> "models.CreateThreadResponse"
+        # type: (...) -> "CreateThreadResponse"
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
-        :type create_thread_request: ~azure.communication.chat.models.CreateThreadRequest
+        :type create_thread_request: ~azure.communication.chat.CreateThreadRequest
         :param correlation_vector: Correlation vector, if a value is not
             provided a randomly generated correlation vector would be returned
             in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateThreadResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateThreadResponse
+        :rtype: ~azure.communication.chat.CreateThreadResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not create_thread_request:
@@ -103,7 +102,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> models.Thread
+        # type: (...) -> Thread
         """Gets a chat thread.
 
         :param thread_id: Thread id to get.
@@ -114,7 +113,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Thread, or the result of cls(response)
-        :rtype: models.Thread
+        :rtype: Thread
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -126,7 +125,7 @@ class ChatClient(object):
     def update_thread(
             self,
             thread_id,  # type: str
-            update_thread_request,  # type: models.UpdateThreadRequest
+            update_thread_request,  # type: UpdateThreadRequest
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
@@ -136,7 +135,7 @@ class ChatClient(object):
         :param thread_id: The id of the thread to update.
         :type thread_id: str
         :param update_thread_request: Request payload for updating a chat thread.
-        :type update_thread_request: ~azure.communication.chat.models.UpdateThreadRequest
+        :type update_thread_request: ~azure.communication.chat.UpdateThreadRequest
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned
          in the response header "MS-CV".
@@ -187,24 +186,24 @@ class ChatClient(object):
     def send_message(
             self,
             thread_id,  # type: str
-            create_message_request,  # type: models.CreateMessageRequest
+            create_message_request,  # type: CreateMessageRequest
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> ~azure.communication.chat.models.CreateMessageResponse
+        # type: (...) -> ~azure.communication.chat.CreateMessageResponse
         """Sends a message to a thread.
 
         :param thread_id: The thread id to send the message to.
         :type thread_id: str
         :param create_message_request: Details of the message to create.
-        :type create_message_request: ~azure.communication.chat.models.CreateMessageRequest
+        :type create_message_request: ~azure.communication.chat.CreateMessageRequest
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned
          in the response header "MS-CV".
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateMessageResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateMessageResponse
+        :rtype: ~azure.communication.chat.CreateMessageResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -226,7 +225,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> ~azure.communication.chat.models.Message
+        # type: (...) -> ~azure.communication.chat.Message
         """Gets a message by id.
 
         :param thread_id: The thread id to which the message was sent.
@@ -239,7 +238,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Message, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.Message
+        :rtype: ~azure.communication.chat.Message
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -260,7 +259,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> ~azure.communication.chat.models.ListMessagesResponse
+        # type: (...) -> ~azure.communication.chat.ListMessagesResponse
         """Gets a list of messages from a thread.
 
         :param thread_id: The thread id of the message.
@@ -284,7 +283,7 @@ class ChatClient(object):
          used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListMessagesResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListMessagesResponse
+        :rtype: ~azure.communication.chat.ListMessagesResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -307,7 +306,7 @@ class ChatClient(object):
             self,
             thread_id,  # type: str
             message_id,  # type: str
-            update_message_request,  # type: models.UpdateMessageRequest
+            update_message_request,  # type: UpdateMessageRequest
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
@@ -319,7 +318,7 @@ class ChatClient(object):
         :param message_id: The message id.
         :type message_id: str
         :param update_message_request: Details of the request to update the message.
-        :type update_message_request: ~azure.communication.chat.models.UpdateMessageRequest
+        :type update_message_request: ~azure.communication.chat.UpdateMessageRequest
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned
          in the response header "MS-CV".
@@ -385,7 +384,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> List["~azure.communication.chat.models.ThreadMember"]
+        # type: (...) -> List["~azure.communication.chat.ThreadMember"]
         """Gets the members of a thread.
 
         :param thread_id: Thread id to get members for.
@@ -396,7 +395,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ThreadMember]
+        :rtype: list[~azure.communication.chat.ThreadMember]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -408,7 +407,7 @@ class ChatClient(object):
     def add_members(
             self,
             thread_id,  # type: str
-            add_thread_members_request,  # type: models.AddThreadMembersRequest
+            add_thread_members_request,  # type: AddThreadMembersRequest
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
@@ -418,7 +417,7 @@ class ChatClient(object):
         :param thread_id: Id of the thread to add members to.
         :type thread_id: str
         :param add_thread_members_request: Thread members to be added to the thread.
-        :type add_thread_members_request: ~azure.communication.chat.models.AddThreadMembersRequest
+        :type add_thread_members_request: ~azure.communication.chat.AddThreadMembersRequest
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned
          in the response header "MS-CV".
@@ -503,7 +502,7 @@ class ChatClient(object):
     def send_read_receipt(
             self,
             thread_id,  # type: str
-            post_read_receipt_request,  # type: models.PostReadReceiptRequest
+            post_read_receipt_request,  # type: PostReadReceiptRequest
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
@@ -513,7 +512,7 @@ class ChatClient(object):
         :param thread_id: Id of the thread.
         :type thread_id: str
         :param post_read_receipt_request: Request payload for sending a read receipt.
-        :type post_read_receipt_request: ~azure.communication.chat.models.PostReadReceiptRequest
+        :type post_read_receipt_request: ~azure.communication.chat.PostReadReceiptRequest
         :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
          correlation vector would be returned in the response header "MS-CV".
         :type correlation_vector: str
@@ -540,7 +539,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> List["~azure.communication.chat.models.ReadReceipt"]
+        # type: (...) -> List["~azure.communication.chat.ReadReceipt"]
         """Gets read receipts for a thread.
 
         :param thread_id: Thread id to get the read receipts for.
@@ -550,7 +549,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ReadReceipt]
+        :rtype: list[~azure.communication.chat.ReadReceipt]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:

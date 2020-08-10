@@ -38,7 +38,8 @@ class ChatSamplesAsync(object):
 
     async def create_thread_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import CreateThreadRequest, ThreadMember
+        from azure.communication.chat import CreateThreadRequest, ThreadMember
+        from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
 
@@ -86,7 +87,7 @@ class ChatSamplesAsync(object):
 
     async def update_thread_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import UpdateThreadRequest
+        from azure.communication.chat import UpdateThreadRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -118,7 +119,7 @@ class ChatSamplesAsync(object):
 
     async def send_message_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import CreateMessageRequest, MessagePriority
+        from azure.communication.chat import CreateMessageRequest, MessagePriority
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -178,7 +179,7 @@ class ChatSamplesAsync(object):
 
     async def update_message_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import UpdateMessageRequest
+        from azure.communication.chat import UpdateMessageRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -195,7 +196,7 @@ class ChatSamplesAsync(object):
 
     async def send_read_receipt_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import PostReadReceiptRequest
+        from azure.communication.chat import PostReadReceiptRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -266,7 +267,7 @@ class ChatSamplesAsync(object):
 
     async def add_members_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
+        from azure.communication.chat import AddThreadMembersRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -293,7 +294,7 @@ class ChatSamplesAsync(object):
 
     async def remove_member_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
+        from azure.communication.chat import AddThreadMembersRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
