@@ -3,6 +3,7 @@
 # Licensed under the MIT License. See License.txt in the project root for
 # license information.
 # --------------------------------------------------------------------------
+from typing import TYPE_CHECKING
 
 try:
     from urllib.parse import urlparse
@@ -15,6 +16,10 @@ from azure.core.tracing.decorator import distributed_trace
 from ._generated import models # pylint: disable=unused-import
 from ._generated import AzureCommunicationChatService
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
+
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar
 
 POLLING_INTERVAL = 5
 
@@ -356,8 +361,6 @@ class ChatClient(object):
         # type: (...) -> None
         """Deletes a message.
 
-        Deletes a message.
-
         :param thread_id: The thread id to which the message was sent.
         :type thread_id: str
         :param message_id: The message id.
@@ -454,8 +457,6 @@ class ChatClient(object):
         # type: (...) -> None
         """Remove a member from a thread.
 
-        Remove a member from a thread.
-
         :param thread_id: Thread id to remove the member from.
         :type thread_id: str
         :param member_id: Id of the thread member to remove from the thread.
@@ -479,6 +480,90 @@ class ChatClient(object):
             member_id=member_id,
             correlation_vector=correlation_vector,
             **kwargs)
+
+    @distributed_trace
+    def send_typing_notification(
+            self,
+            thread_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
+    ):
+        # type: (...) -> None
+        """Posts a typing event to a thread, on behalf of a user.
+
+        :param thread_id: Id of the thread.
+        :type thread_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+
+        return self._client.notify_user_typing(thread_id, correlation_vector, **kwargs)
+
+    @distributed_trace
+    def send_read_receipt(
+            self,
+            thread_id,  # type: str
+            post_read_receipt_request,  # type: models.PostReadReceiptRequest
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
+    ):
+        # type: (...) -> None
+        """Posts a read receipt event to a thread, on behalf of a user.
+
+        :param thread_id: Id of the thread.
+        :type thread_id: str
+        :param post_read_receipt_request: Request payload for sending a read receipt.
+        :type post_read_receipt_request: models.PostReadReceiptRequest
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: None, or the result of cls(response)
+        :rtype: None
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+        if not post_read_receipt_request:
+            raise ValueError("post_read_receipt_request cannnot be None.")
+
+        return self._client.send_read_receipt(
+            thread_id,
+            correlation_vector=correlation_vector,
+            body=post_read_receipt_request,
+            **kwargs)
+
+    @distributed_trace
+    def list_read_receipts(
+            self,
+            thread_id,  # type: str
+            correlation_vector=None,  # type: Optional[str]
+            **kwargs  # type: Any
+    ):
+        # type: (...) -> List["models.ReadReceipt"]
+        """Gets read receipts for a thread.
+
+        :param thread_id: Thread id to get the read receipts for.
+        :type thread_id: str
+        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
+         correlation vector would be returned in the response header "MS-CV".
+        :type correlation_vector: str
+        :keyword callable cls: A custom type or function that will be passed the direct response
+        :return: list of ReadReceipt, or the result of cls(response)
+        :rtype: list[models.ReadReceipt]
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+
+        return self._client.list_read_receipts(thread_id, correlation_vector, **kwargs)
 
     def close(self):
         # type: () -> None

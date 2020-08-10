@@ -193,6 +193,44 @@ class ChatSamplesAsync(object):
 
         print("update_message succeded")
 
+    async def send_read_receipt_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.communication.chat.models import PostReadReceiptRequest
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        async with chat_client:
+            try:
+                post_read_receipt_request = PostReadReceiptRequest(
+                    client_message_id=self._client_message_id,
+                    message_id=self._message_id
+                    )
+                await chat_client.send_read_receipt(self._thread_id, post_read_receipt_request)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("send_read_receipt succeded")
+
+    async def list_read_receipts_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        read_receipts = []
+        async with chat_client:
+            try:
+                read_receipts = await chat_client.list_read_receipts(self._thread_id)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("list_read_receipts succeded, receipts:")
+        for read_receipt in read_receipts:
+            print(read_receipt)
+
     async def delete_message_async(self):
         from azure.communication.chat.aio import ChatClient
         from azure.core.exceptions import HttpResponseError
@@ -274,6 +312,21 @@ class ChatSamplesAsync(object):
 
         print("remove_member_async succeded")
 
+    async def send_typing_notification_async(self):
+        from azure.communication.chat.aio import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.skype_token, self.endpoint)
+
+        async with chat_client:
+            try:
+                await chat_client.send_typing_notification(self._thread_id)
+            except HttpResponseError as e:
+                print(e)
+                return
+
+        print("send_typing_notification succeded")
+
 async def main():
     sample = ChatSamplesAsync()
     await sample.create_thread_async()
@@ -283,10 +336,13 @@ async def main():
     await sample.get_message_async()
     await sample.list_messages_async()
     await sample.update_message_async()
+    await sample.send_read_receipt_async()
+    await sample.list_read_receipts_async()
     await sample.delete_message_async()
     await sample.list_members_async()
     await sample.add_members_async()
     await sample.remove_member_async()
+    await sample.send_typing_notification_async()
     await sample.delete_thread_async()
 
 if __name__ == '__main__':

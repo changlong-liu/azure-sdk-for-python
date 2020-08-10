@@ -267,27 +267,52 @@ chat_client.remove_member(thread_id, member_id)
 ### Send typing notification
 
 Use `send_typing_notification` method to post a typing notification event to a thread, on behalf of a user.
+`thread_id` is the unique ID of the thread.
 
 ```Python
-
+chat_client.send_typing_notification(thread_id)
 ```
 
 ### Send read receipt
 
 Use `send_read_receipt` method to post a read receipt event to a thread, on behalf of a user.
 `thread_id` is the unique ID of the thread.
+`PostReadReceiptRequest` is used to describe the request of read receipt addition, an example is shown in the code snippet below.
+
+- Use `client_message_id` to provide the client message Id specified when the message was sent;
+- Use `message_id` to provide the latest message read by current user;
 
 ```python
-
+post_read_receipt_request = PostReadReceiptRequest(
+    client_message_id='1581637626706',
+    message_id='1597085124964'
+)
+chat_client.send_read_receipt(thread_id, post_read_receipt_request)
 ```
 
 ### Get read receipts
 
-`get_read_receipts` method retreives read receipts for a thread.
+`list_read_receipts` method retreives read receipts for a thread.
 `thread_id` is the unique ID of the thread.
 
+`[ReadReceipt]` is the response returned from listing read receipts
 ```python
+read_receipts = chat_client.list_read_receipts(thread_id)
+```
 
+## Sample Code
+These are code samples that show common scenario operations with the Azure Communication Chat client library.
+The async versions of the samples (the python sample files appended with `_async`) show asynchronous operations,
+and require Python 3.5 or later.
+Before run the sample code, refer to [Prerequisites](#Prerequisites) to create a resource and get an User Access Token,
+and set them into Environment Variables
+```bash
+set AZURE_COMMUNICATION_SERVICE_ENDPOINT="https://<RESOURCE_NAME>.communcationservices.azure.com"
+set TOKEN="<user access token>"
+```
+```python
+python samples\chat_sample.py
+python samples\chat_sample_async.py
 ```
 
 # Troubleshooting

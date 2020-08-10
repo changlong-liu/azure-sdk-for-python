@@ -25,9 +25,9 @@ class ChatSamples(object):
     endpoint = os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
     if not endpoint:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_ENDPOINT env before run this sample.")
-    skype_token = os.environ.get("SKYPE_TOKEN", None)
-    if not skype_token:
-        raise ValueError("Set SKYPE_TOKEN env before run this sample.")
+    token = os.environ.get("TOKEN", None)
+    if not token:
+        raise ValueError("Set TOKEN env before run this sample.")
 
     _thread_id = None
     _thread_creator = None
@@ -39,10 +39,10 @@ class ChatSamples(object):
         from azure.communication.chat.models import CreateThreadRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         # the user who makes the request must be in the member list of the CreateThreadRequest
-        user_id = "8:" + jwt.decode(self.skype_token, verify=False)['skypeid']
+        user_id = "8:" + jwt.decode(self.token, verify=False)['skypeid']
         self._thread_creator = user_id
 
         body = CreateThreadRequest(
@@ -70,7 +70,7 @@ class ChatSamples(object):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         thread = None
         try:
@@ -86,7 +86,7 @@ class ChatSamples(object):
         from azure.communication.chat.models import UpdateThreadRequest
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         thread = None
         try:
@@ -102,7 +102,7 @@ class ChatSamples(object):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         thread = None
         try:
@@ -118,7 +118,7 @@ class ChatSamples(object):
         from azure.communication.chat.models import CreateMessageRequest, MessagePriority
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         thread = None
         try:
@@ -141,7 +141,7 @@ class ChatSamples(object):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         message = None
         try:
@@ -150,13 +150,13 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("get_message succeded, message id:", message.id)
+        print("get_message succeded, message id:", message.id, "client message id:" + message.client_message_id)
 
     def list_messages(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         list_messages_response = None
         try:
@@ -173,7 +173,7 @@ class ChatSamples(object):
         from azure.communication.chat.models import UpdateMessageRequest
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         try:
             update_message_request = UpdateMessageRequest(content="updated message content")
@@ -184,11 +184,47 @@ class ChatSamples(object):
 
         print("update_message succeded")
 
+    def send_read_receipt(self):
+        from azure.communication.chat import ChatClient
+        from azure.communication.chat.models import PostReadReceiptRequest
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.token, self.endpoint)
+
+        try:
+            post_read_receipt_request = PostReadReceiptRequest(
+                client_message_id=self._client_message_id,
+                message_id=self._message_id
+                )
+            chat_client.send_read_receipt(self._thread_id, post_read_receipt_request)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("send_read_receipt succeded")
+
+    def list_read_receipts(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.token, self.endpoint)
+
+        read_receipts = []
+        try:
+            read_receipts = chat_client.list_read_receipts(self._thread_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("list_read_receipts succeded, receipts:")
+        for read_receipt in read_receipts:
+            print(read_receipt)
+
     def delete_message(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         try:
             chat_client.delete_message(self._thread_id, self._message_id)
@@ -202,7 +238,7 @@ class ChatSamples(object):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         members = []
         try:
@@ -220,7 +256,7 @@ class ChatSamples(object):
         from azure.communication.chat.models import AddThreadMembersRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         # the new member must has the same resource id as the thread creator
         new_member_id = \
@@ -245,7 +281,7 @@ class ChatSamples(object):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
-        chat_client = ChatClient(self.skype_token, self.endpoint)
+        chat_client = ChatClient(self.token, self.endpoint)
 
         # this member was added when calling add_members()
         added_member_id = \
@@ -260,6 +296,20 @@ class ChatSamples(object):
 
         print("remove_member succeded")
 
+    def send_typing_notification(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.token, self.endpoint)
+
+        try:
+            chat_client.send_typing_notification(self._thread_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("send_typing_notification succeded")
+
 if __name__ == '__main__':
     sample = ChatSamples()
     sample.create_thread()
@@ -269,8 +319,11 @@ if __name__ == '__main__':
     sample.get_message()
     sample.list_messages()
     sample.update_message()
+    sample.send_read_receipt()
+    sample.list_read_receipts()
     sample.delete_message()
     sample.list_members()
     sample.add_members()
     sample.remove_member()
+    sample.send_typing_notification()
     sample.delete_thread()

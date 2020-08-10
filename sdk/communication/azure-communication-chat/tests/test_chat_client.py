@@ -245,5 +245,41 @@ class TestChatClient(unittest.TestCase):
 
         self.assertFalse(raised, 'Expected is no excpetion raised')
 
+    def test_send_typing_notification(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=200)
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        try:
+            chat_client.send_typing_notification(thread_id)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+
+    def test_send_read_receipt(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        client_message_id='1581637626706'
+        message_id='1596823919339'
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=201)
+        chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        try:
+            post_read_receipt_request = PostReadReceiptRequest(
+                client_message_id=client_message_id,
+                message_id=message_id
+                )
+            chat_client.send_read_receipt(thread_id, post_read_receipt_request)
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+
 if __name__ == '__main__':
     unittest.main()
