@@ -13,7 +13,7 @@ except ImportError:
 import six
 from azure.core.tracing.decorator import distributed_trace
 
-from ._generated import models # pylint: disable=unused-import
+#from ._generated import models # pylint: disable=unused-import
 from ._generated import AzureCommunicationChatService
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
@@ -22,6 +22,7 @@ if TYPE_CHECKING:
     from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar
 
 POLLING_INTERVAL = 5
+
 
 class ChatClient(object):
     """A client to interact with the AzureCommunicationService Chat gateway.
@@ -190,7 +191,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> models.CreateMessageResponse
+        # type: (...) -> ~azure.communication.chat.models.CreateMessageResponse
         """Sends a message to a thread.
 
         :param thread_id: The thread id to send the message to.
@@ -203,7 +204,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateMessageResponse, or the result of cls(response)
-        :rtype: models.CreateMessageResponse
+        :rtype: ~azure.communication.chat.models.CreateMessageResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -225,7 +226,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> models.Message
+        # type: (...) -> ~azure.communication.chat.models.Message
         """Gets a message by id.
 
         :param thread_id: The thread id to which the message was sent.
@@ -238,7 +239,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Message, or the result of cls(response)
-        :rtype: models.Message
+        :rtype: ~azure.communication.chat.models.Message
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -259,7 +260,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> models.ListMessagesResponse
+        # type: (...) -> ~azure.communication.chat.models.ListMessagesResponse
         """Gets a list of messages from a thread.
 
         :param thread_id: The thread id of the message.
@@ -283,7 +284,7 @@ class ChatClient(object):
          used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListMessagesResponse, or the result of cls(response)
-        :rtype: models.ListMessagesResponse
+        :rtype: ~azure.communication.chat.models.ListMessagesResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -384,7 +385,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> [models.ThreadMember]
+        # type: (...) -> List["~azure.communication.chat.models.ThreadMember"]
         """Gets the members of a thread.
 
         :param thread_id: Thread id to get members for.
@@ -395,7 +396,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ThreadMember, or the result of cls(response)
-        :rtype: [models.ThreadMember]
+        :rtype: list[~azure.communication.chat.models.ThreadMember]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
