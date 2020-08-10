@@ -65,7 +65,7 @@ setup(
         "azure-core<2.0.0,>=1.2.2",
     ],
     extras_require={
-        ":python_version<'3.0'": ['azure-nspkg'],
+        ":python_version<'3.0'": ['azure-nspkg', 'azure-communication'],
     },
     project_urls={
         'Bug Reports': 'https://github.com/Azure/azure-sdk-for-python/issues',
