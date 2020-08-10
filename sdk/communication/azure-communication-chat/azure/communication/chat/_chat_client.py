@@ -13,7 +13,7 @@ except ImportError:
 import six
 from azure.core.tracing.decorator import distributed_trace
 
-#from ._generated import models # pylint: disable=unused-import
+from . import models # pylint: disable=unused-import
 from ._generated import AzureCommunicationChatService
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
@@ -78,7 +78,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> models.CreateThreadResponse
+        # type: (...) -> "models.CreateThreadResponse"
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
@@ -89,7 +89,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: CreateThreadResponse, or the result of cls(response)
-        :rtype: models.CreateThreadResponse
+        :rtype: ~azure.communication.chat.models.CreateThreadResponse
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not create_thread_request:
@@ -540,7 +540,7 @@ class ChatClient(object):
             correlation_vector=None,  # type: Optional[str]
             **kwargs  # type: Any
     ):
-        # type: (...) -> List["models.ReadReceipt"]
+        # type: (...) -> List["~azure.communication.chat.models.ReadReceipt"]
         """Gets read receipts for a thread.
 
         :param thread_id: Thread id to get the read receipts for.
