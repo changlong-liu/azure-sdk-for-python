@@ -81,7 +81,7 @@ class ChatClient(object):
         """Creates a chat thread.
 
         :param create_thread_request: Request payload for creating a chat thread.
-        :type create_thread_request: models.CreateThreadRequest
+        :type create_thread_request: ~azure.communication.chat.models.CreateThreadRequest
         :param correlation_vector: Correlation vector, if a value is not
             provided a randomly generated correlation vector would be returned
             in the response header "MS-CV".
@@ -166,8 +166,6 @@ class ChatClient(object):
         # type: (...) -> None
         """Deletes a thread.
 
-        Deletes a thread.
-
         :param thread_id: Thread id to delete.
         :type thread_id: str
         :param correlation_vector: Correlation vector, if a value is not
@@ -230,8 +228,6 @@ class ChatClient(object):
         # type: (...) -> models.Message
         """Gets a message by id.
 
-        Gets a message by id.
-
         :param thread_id: The thread id to which the message was sent.
         :type thread_id: str
         :param message_id: The message id.
@@ -265,8 +261,6 @@ class ChatClient(object):
     ):
         # type: (...) -> models.ListMessagesResponse
         """Gets a list of messages from a thread.
-
-        Gets a list of messages from a thread.
 
         :param thread_id: The thread id of the message.
         :type thread_id: str
@@ -318,8 +312,6 @@ class ChatClient(object):
     ):
         # type: (...) -> None
         """Updates a message.
-
-        Updates a message.
 
         :param thread_id: The thread id to which the message was sent.
         :type thread_id: str
@@ -425,7 +417,7 @@ class ChatClient(object):
         :param thread_id: Id of the thread to add members to.
         :type thread_id: str
         :param add_thread_members_request: Thread members to be added to the thread.
-        :type add_thread_members_request: models.AddThreadMembersRequest
+        :type add_thread_members_request: ~azure.communication.chat.models.AddThreadMembersRequest
         :param correlation_vector: Correlation vector, if a value is not
          provided a randomly generated correlation vector would be returned
          in the response header "MS-CV".
@@ -520,7 +512,7 @@ class ChatClient(object):
         :param thread_id: Id of the thread.
         :type thread_id: str
         :param post_read_receipt_request: Request payload for sending a read receipt.
-        :type post_read_receipt_request: models.PostReadReceiptRequest
+        :type post_read_receipt_request: ~azure.communication.chat.models.PostReadReceiptRequest
         :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
          correlation vector would be returned in the response header "MS-CV".
         :type correlation_vector: str
@@ -557,7 +549,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[models.ReadReceipt]
+        :rtype: list[~azure.communication.chat.models.ReadReceipt]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
