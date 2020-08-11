@@ -58,7 +58,8 @@ setup(
     packages=find_packages(exclude=[
         'tests',
         # Exclude packages that will be covered by PEP420 or nspkg
-        'azure'
+        'azure',
+        'azure.communication'
     ]),
     install_requires=[
         "msrest>=0.5.0",
