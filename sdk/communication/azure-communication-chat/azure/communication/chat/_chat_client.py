@@ -395,7 +395,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.ThreadMember]
+        :rtype: List["~azure.communication.chat.ThreadMember"]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
@@ -549,7 +549,7 @@ class ChatClient(object):
         :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.ReadReceipt]
+        :rtype: List["~azure.communication.chat.ReadReceipt"]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not thread_id:
