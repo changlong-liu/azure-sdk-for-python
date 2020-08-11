@@ -31,7 +31,6 @@ class UserManagementClient(UserTokenManagementService):
     def __init__(
             self, host, # type: str
             credential, # type: str
-            logging_enable=False, # type: bool
             **kwargs # type: Any
         ):
         # type: (...) -> None
@@ -50,8 +49,8 @@ class UserManagementClient(UserTokenManagementService):
         self.api_version = '2020-07-20-preview1'
         auth_policy = HMACCredentialsPolicy(host, credential)
 
-        self._config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy,\
-            logging_enable=logging_enable, **kwargs)
+        self._config = UserTokenManagementServiceConfiguration(\
+            authentication_policy=auth_policy, **kwargs)
         self._client = PipelineClient(base_url=host, config=self._config, **kwargs)
         self.user_management = UserManagementOperations(
             self._client, self._config, self._serialize, self._deserialize)

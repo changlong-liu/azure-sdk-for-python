@@ -30,7 +30,6 @@ class UserManagementClient(UserTokenManagementService, UserManagementClientBase)
     def __init__(
             self, host, # type: str
             credential, # type: str
-            logging_enable=False, # type: bool
             **kwargs # type: Any
         ):
         # type: (...) -> None
@@ -48,8 +47,8 @@ class UserManagementClient(UserTokenManagementService, UserManagementClientBase)
         self.api_version = '2020-07-20-preview1'
         auth_policy = HMACCredentialsPolicy(host, credential)
 
-        self.config = UserTokenManagementServiceConfiguration(authentication_policy=auth_policy,\
-            logging_enable=logging_enable, **kwargs)
+        self.config = UserTokenManagementServiceConfiguration(\
+            authentication_policy=auth_policy, **kwargs)
         self._client = AsyncPipelineClient(base_url=host,\
             config=self.config, **kwargs)
         self.user_management = UserManagementOperations(
