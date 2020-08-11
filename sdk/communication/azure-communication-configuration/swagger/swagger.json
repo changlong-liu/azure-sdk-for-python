@@ -1,0 +1,90 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "User Token Management Service",
+        "description": "Azure Communication Services User Token Management Service",
+        "contact": {
+            "email": "acsdevexdisc@microsoft.com"
+        },
+        "version": "2020-07-20-preview1"
+    },
+    "paths": {
+        "/identity/token": {
+            "post": {
+                "tags": [
+                    "Token"
+                ],
+                "summary": "Generates new user token for the user identity",
+                "operationId": "UserManagement_IssueToken",
+                "consumes": [
+                    "application/json-patch+json",
+                    "application/json",
+                    "text/json",
+                    "application/*+json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "api-version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Scopes and acs identity for which new user token should be generated",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TokenRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/TokenResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "TokenRequest": {
+            "required": [
+                "scopes"
+            ],
+            "type": "object",
+            "properties": {
+                "identity": {
+                    "type": "string"
+                },
+                "scopes": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                }
+                }
+            }
+        },
+        "TokenResponse": {
+            "type": "object",
+            "properties": {
+                "identity": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "expiresIn": {
+                    "format": "int32",
+                    "type": "integer"
+                }
+             }
+        }
+    }
+}

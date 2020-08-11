@@ -29,3 +29,5 @@ extends:
   parameters:
     ServiceDirectory: communication
     Artifacts:
+    - name: azure-communication-configuration
+      safeName: azurecommunicationconfiguration
