@@ -18,7 +18,8 @@ setup(
     author_email='azurepysdk@microsoft.com',
     url='https://github.com/Azure/azure-sdk-for-python/',
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 3 - Alpha',
+
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
