@@ -56,6 +56,7 @@ setup(
         'tests',
         # Exclude packages that will be covered by PEP420 or nspkg
         'azure',
+        'azure.communication'
     ]),
     install_requires=[
         'azure-core<2.0.0,>=1.2.2',
@@ -63,7 +64,7 @@ setup(
         'six>=1.6'
     ],
     extras_require={
-        ":python_version<'3.0'": ['azure-nspkg'],
+        ":python_version<'3.0'": ['azure-communication-nspkg'],
         ":python_version<'3.5'": ["typing"]
     }
 )
