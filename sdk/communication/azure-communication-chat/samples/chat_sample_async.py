@@ -11,7 +11,7 @@ FILE: chat_sample.py
 DESCRIPTION:
     These samples demonstrate chat operations.
 
-    ///use ChatClient to perform a chatting sencario, like
+    ///use ChatClient to perform a chatting scenario, like
     create thread, send message, add members, etc///
 USAGE:
     chat_sample.py
@@ -27,9 +27,9 @@ class ChatSamplesAsync(object):
     endpoint = os.environ.get("AZURE_COMMUNICATION_SERVICE_ENDPOINT", None)
     if not endpoint:
         raise ValueError("Set AZURE_COMMUNICATION_SERVICE_ENDPOINT env before run this sample.")
-    skype_token = os.environ.get("SKYPE_TOKEN", None)
+    skype_token = os.environ.get("TOKEN", None)
     if not skype_token:
-        raise ValueError("Set SKYPE_TOKEN env before run this sample.")
+        raise ValueError("Set TOKEN env before run this sample.")
 
     _thread_id = None
     _thread_creator = None
@@ -60,7 +60,7 @@ class ChatSamplesAsync(object):
                     )],
                     is_sticky_thread=False
                 )
-                create_thread_response = await chat_client.create_thread(body)
+                create_thread_response = await chat_client.create_chat_thread(body)
 
             except HttpResponseError as e:
                 print(e)
@@ -83,7 +83,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("get_thread succeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
+        print("get_thread succeeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
 
     async def update_thread_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -100,7 +100,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("update_thread succeded")
+        print("update_thread succeeded")
 
     async def delete_thread_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -115,7 +115,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("delete_thread succeded")
+        print("delete_thread succeeded")
 
     async def send_message_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -142,7 +142,7 @@ class ChatSamplesAsync(object):
 
         self._message_id = create_message_response.id
         self._client_message_id = create_message_response.client_message_id
-        print("send_message succeded, message id:", self._message_id)
+        print("send_message succeeded, message id:", self._message_id)
 
     async def get_message_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -158,7 +158,9 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("get_message succeded, message id:", message.id)
+        print("get_message succeeded, message id:", message.id, \
+            "client message id:", message.client_message_id, \
+            "content: ", message.content)
 
     async def list_messages_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -174,7 +176,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("list_messages succeded, messages count:",
+        print("list_messages succeeded, messages count:",
             len([elem for elem in list_messages_response.messages if elem.message_type == 'Text']))
 
     async def update_message_async(self):
@@ -192,7 +194,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("update_message succeded")
+        print("update_message succeeded")
 
     async def send_read_receipt_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -212,7 +214,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("send_read_receipt succeded")
+        print("send_read_receipt succeeded")
 
     async def list_read_receipts_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -228,7 +230,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("list_read_receipts succeded, receipts:")
+        print("list_read_receipts succeeded, receipts:")
         for read_receipt in read_receipts:
             print(read_receipt)
 
@@ -245,7 +247,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("delete_message succeded")
+        print("delete_message succeeded")
 
     async def list_members_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -261,13 +263,13 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("list_members succeded, members:")
+        print("list_members succeeded, members:")
         for member in members:
             print(member)
 
     async def add_members_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import AddThreadMembersRequest, ThreadMember
+        from azure.communication.chat import ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -281,20 +283,19 @@ class ChatSamplesAsync(object):
                 display_name='name',
                 member_role='Admin',
                 share_history_time='0')
-        add_thread_members_request = AddThreadMembersRequest(members=[new_member])
+        members = [new_member]
 
         async with chat_client:
             try:
-                await chat_client.add_members(self._thread_id, add_thread_members_request)
+                await chat_client.add_members(self._thread_id, members)
             except HttpResponseError as e:
                 print(e)
                 return
 
-        print("add_members succeded")
+        print("add_members succeeded")
 
     async def remove_member_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import AddThreadMembersRequest, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -311,7 +312,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("remove_member_async succeded")
+        print("remove_member_async succeeded")
 
     async def send_typing_notification_async(self):
         from azure.communication.chat.aio import ChatClient
@@ -326,7 +327,7 @@ class ChatSamplesAsync(object):
                 print(e)
                 return
 
-        print("send_typing_notification succeded")
+        print("send_typing_notification succeeded")
 
 async def main():
     sample = ChatSamplesAsync()

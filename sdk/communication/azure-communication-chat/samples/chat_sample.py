@@ -10,7 +10,7 @@ FILE: chat_sample.py
 DESCRIPTION:
     These samples demonstrate chat operations.
 
-    ///use ChatClient to perform a chatting sencario, like
+    ///use ChatClient to perform a chatting scenario, like
     create thread, send message, add members, etc///
 USAGE:
     chat_sample.py
@@ -79,7 +79,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("get_thread succeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
+        print("get_thread succeeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
 
     def update_thread(self):
         from azure.communication.chat import ChatClient
@@ -96,7 +96,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("update_thread succeded")
+        print("update_thread succeeded")
 
     def delete_thread(self):
         from azure.communication.chat import ChatClient
@@ -111,7 +111,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("delete_thread succeded")
+        print("delete_thread succeeded")
 
     def send_message(self):
         from azure.communication.chat import ChatClient
@@ -135,7 +135,7 @@ class ChatSamples(object):
 
         self._message_id = create_message_response.id
         self._client_message_id = create_message_response.client_message_id
-        print("send_message succeded, message id:", self._message_id)
+        print("send_message succeeded, message id:", self._message_id)
 
     def get_message(self):
         from azure.communication.chat import ChatClient
@@ -150,7 +150,9 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("get_message succeded, message id:", message.id, "client message id:" + message.client_message_id)
+        print("get_message succeeded, message id:", message.id, \
+            "client message id:", message.client_message_id, \
+            "content: ", message.content)
 
     def list_messages(self):
         from azure.communication.chat import ChatClient
@@ -165,7 +167,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("list_messages succeded, messages count:",
+        print("list_messages succeeded, messages count:",
             len([elem for elem in list_messages_response.messages if elem.message_type == 'Text']))
 
     def update_message(self):
@@ -176,13 +178,13 @@ class ChatSamples(object):
         chat_client = ChatClient(self.token, self.endpoint)
 
         try:
-            update_message_request = UpdateMessageRequest(content="updated message content")
+            update_message_request = UpdateMessageRequest(content="updated content")
             chat_client.update_message(self._thread_id, self._message_id, update_message_request)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("update_message succeded")
+        print("update_message succeeded")
 
     def send_read_receipt(self):
         from azure.communication.chat import ChatClient
@@ -201,7 +203,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("send_read_receipt succeded")
+        print("send_read_receipt succeeded")
 
     def list_read_receipts(self):
         from azure.communication.chat import ChatClient
@@ -216,7 +218,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("list_read_receipts succeded, receipts:")
+        print("list_read_receipts succeeded, receipts:")
         for read_receipt in read_receipts:
             print(read_receipt)
 
@@ -232,7 +234,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("delete_message succeded")
+        print("delete_message succeeded")
 
     def list_members(self):
         from azure.communication.chat import ChatClient
@@ -247,7 +249,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("list_members succeded, members: ")
+        print("list_members succeeded, members: ")
         for member in members:
             print(member)
 
@@ -274,7 +276,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("add_members succeded")
+        print("add_members succeeded")
 
     def remove_member(self):
         from azure.communication.chat import ChatClient
@@ -293,7 +295,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("remove_member succeded")
+        print("remove_member succeeded")
 
     def send_typing_notification(self):
         from azure.communication.chat import ChatClient
@@ -307,7 +309,7 @@ class ChatSamples(object):
             print(e)
             return
 
-        print("send_typing_notification succeded")
+        print("send_typing_notification succeeded")
 
 if __name__ == '__main__':
     sample = ChatSamples()
