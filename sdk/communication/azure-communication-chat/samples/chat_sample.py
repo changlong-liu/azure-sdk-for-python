@@ -58,7 +58,7 @@ class ChatSamples(object):
 
         create_thread_response = None
         try:
-            create_thread_response = chat_client.create_thread(body)
+            create_thread_response = chat_client.create_chat_thread(body)
         except HttpResponseError as e:
             print(e)
             return
@@ -252,8 +252,7 @@ class ChatSamples(object):
             print(member)
 
     def add_members(self):
-        from azure.communication.chat import ChatClient
-        from azure.communication.chat import AddThreadMembersRequest, ThreadMember
+        from azure.communication.chat import ChatClient, ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -267,10 +266,10 @@ class ChatSamples(object):
                 display_name='name',
                 member_role='Admin',
                 share_history_time='0')
-        add_thread_members_request = AddThreadMembersRequest(members=[new_member])
+        thread_members = [new_member]
 
         try:
-            chat_client.add_members(self._thread_id, add_thread_members_request)
+            chat_client.add_members(self._thread_id, thread_members)
         except HttpResponseError as e:
             print(e)
             return

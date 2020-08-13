@@ -38,7 +38,7 @@ class TestChatClient(unittest.TestCase):
                 is_sticky_thread=False
             )
         try:
-            create_thread_response = chat_client.create_thread(create_thread_request)
+            create_thread_response = chat_client.create_chat_thread(create_thread_request)
         except:
             raised = True
 
@@ -61,7 +61,7 @@ class TestChatClient(unittest.TestCase):
                 is_sticky_thread=False
             )
 
-        self.assertRaises(HttpResponseError, chat_client.create_thread, create_thread_request=create_thread_request)
+        self.assertRaises(HttpResponseError, chat_client.create_chat_thread, create_thread_request=create_thread_request)
 
     def test_update_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
@@ -84,7 +84,7 @@ class TestChatClient(unittest.TestCase):
         raised = False
 
         def mock_send(*_, **__):
-            return mock_response(status_code=200)
+            return mock_response(status_code=204)
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
         try:
@@ -221,9 +221,10 @@ class TestChatClient(unittest.TestCase):
                 display_name='name',
                 member_role='Admin',
                 share_history_time='0')
-        add_thread_members_request = AddThreadMembersRequest(members=[new_member])
+        members = [new_member]
+
         try:
-            chat_client.add_members(thread_id, add_thread_members_request)
+            chat_client.add_members(thread_id, members)
         except:
             raised = True
 

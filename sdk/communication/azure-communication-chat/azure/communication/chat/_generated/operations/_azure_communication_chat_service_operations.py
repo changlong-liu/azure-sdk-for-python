@@ -26,7 +26,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def list_read_receipts(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> List["models.ReadReceipt"]
@@ -36,9 +35,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Thread id to get the read receipts for.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
         :rtype: list[~azure.communication.chat.models.ReadReceipt]
@@ -47,7 +43,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[List["models.ReadReceipt"]]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.list_read_receipts.metadata['url']  # type: ignore
@@ -63,8 +59,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Accept'] = 'application/json'
 
         request = self._client.get(url, query_parameters, header_parameters)
@@ -86,8 +80,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def send_read_receipt(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        body=None,  # type: Optional["models.PostReadReceiptRequest"]
+        body,  # type: "models.PostReadReceiptRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -97,9 +90,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Id of the thread.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :param body: Request payload for sending a read receipt.
         :type body: ~azure.communication.chat.models.PostReadReceiptRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -110,7 +100,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -127,15 +117,10 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        if body is not None:
-            body_content = self._serialize.body(body, 'PostReadReceiptRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(body, 'PostReadReceiptRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -154,8 +139,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def send_message(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        body=None,  # type: Optional["models.CreateMessageRequest"]
+        body,  # type: "models.CreateMessageRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.CreateMessageResponse"
@@ -165,9 +149,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: The thread id to send the message to.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :param body: Details of the message to create.
         :type body: ~azure.communication.chat.models.CreateMessageRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -178,7 +159,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateMessageResponse"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -195,16 +176,11 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
         header_parameters['Accept'] = 'application/json'
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        if body is not None:
-            body_content = self._serialize.body(body, 'CreateMessageRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(body, 'CreateMessageRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -229,7 +205,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         page_size=None,  # type: Optional[int]
         start_time=None,  # type: Optional[int]
         sync_state=None,  # type: Optional[str]
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.ListMessagesResponse"
@@ -247,9 +222,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :param sync_state: The continuation token that previous request obtained. This is used for
          paging.
         :type sync_state: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListMessagesResponse, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ListMessagesResponse
@@ -258,7 +230,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType["models.ListMessagesResponse"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.list_messages.metadata['url']  # type: ignore
@@ -280,8 +252,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Accept'] = 'application/json'
 
         request = self._client.get(url, query_parameters, header_parameters)
@@ -304,7 +274,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         self,
         thread_id,  # type: str
         message_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.Message"
@@ -316,9 +285,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :type thread_id: str
         :param message_id: The message id.
         :type message_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Message, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.Message
@@ -327,7 +293,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Message"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.get_message.metadata['url']  # type: ignore
@@ -344,8 +310,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Accept'] = 'application/json'
 
         request = self._client.get(url, query_parameters, header_parameters)
@@ -368,8 +332,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         self,
         thread_id,  # type: str
         message_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        body=None,  # type: Optional["models.UpdateMessageRequest"]
+        body,  # type: "models.UpdateMessageRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -381,9 +344,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :type thread_id: str
         :param message_id: The message id.
         :type message_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :param body: Details of the request to update the message.
         :type body: ~azure.communication.chat.models.UpdateMessageRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -394,7 +354,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -412,15 +372,10 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        if body is not None:
-            body_content = self._serialize.body(body, 'UpdateMessageRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(body, 'UpdateMessageRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.patch(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -440,7 +395,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         self,
         thread_id,  # type: str
         message_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -452,9 +406,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :type thread_id: str
         :param message_id: The message id.
         :type message_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -463,7 +414,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.delete_message.metadata['url']  # type: ignore
@@ -480,8 +431,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
 
         request = self._client.delete(url, query_parameters, header_parameters)
         pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
@@ -499,7 +448,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def notify_user_typing(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -509,9 +457,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Id of the thread.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -520,7 +465,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.notify_user_typing.metadata['url']  # type: ignore
@@ -536,8 +481,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
 
         request = self._client.post(url, query_parameters, header_parameters)
         pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
@@ -555,7 +498,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def list_thread_members(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> List["models.ThreadMember"]
@@ -565,9 +507,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Thread id to get members for.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ThreadMember, or the result of cls(response)
         :rtype: list[~azure.communication.chat.models.ThreadMember]
@@ -576,7 +515,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[List["models.ThreadMember"]]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.list_thread_members.metadata['url']  # type: ignore
@@ -592,8 +531,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Accept'] = 'application/json'
 
         request = self._client.get(url, query_parameters, header_parameters)
@@ -615,8 +552,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def add_thread_members(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        body=None,  # type: Optional["models.AddThreadMembersRequest"]
+        body,  # type: "models.AddThreadMembersRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -626,9 +562,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Id of the thread to add members to.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :param body: Thread members to be added to the thread.
         :type body: ~azure.communication.chat.models.AddThreadMembersRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -639,7 +572,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -656,15 +589,10 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        if body is not None:
-            body_content = self._serialize.body(body, 'AddThreadMembersRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(body, 'AddThreadMembersRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -684,7 +612,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         self,
         thread_id,  # type: str
         member_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -696,9 +623,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :type thread_id: str
         :param member_id: Id of the thread member to remove from the thread.
         :type member_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -707,7 +631,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.remove_thread_member.metadata['url']  # type: ignore
@@ -724,14 +648,12 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
 
         request = self._client.delete(url, query_parameters, header_parameters)
         pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 404]:
+        if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
@@ -742,8 +664,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
     def create_thread(
         self,
-        correlation_vector=None,  # type: Optional[str]
-        body=None,  # type: Optional["models.CreateThreadRequest"]
+        body,  # type: "models.CreateThreadRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.CreateThreadResponse"
@@ -751,9 +672,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         Creates a chat thread.
 
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :param body: Request payload for creating a chat thread.
         :type body: ~azure.communication.chat.models.CreateThreadRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -764,7 +682,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateThreadResponse"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -780,16 +698,11 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
         header_parameters['Accept'] = 'application/json'
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        if body is not None:
-            body_content = self._serialize.body(body, 'CreateThreadRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(body, 'CreateThreadRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -813,7 +726,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         page_size=None,  # type: Optional[int]
         start_time=None,  # type: Optional[int]
         sync_state=None,  # type: Optional[str]
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.ListThreadsResponse"
@@ -829,9 +741,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :param sync_state: The continuation token that previous request obtained. This is used for
          paging.
         :type sync_state: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListThreadsResponse, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ListThreadsResponse
@@ -840,7 +749,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType["models.ListThreadsResponse"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.list_threads.metadata['url']  # type: ignore
@@ -861,8 +770,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Accept'] = 'application/json'
 
         request = self._client.get(url, query_parameters, header_parameters)
@@ -884,8 +791,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def update_thread(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
-        body=None,  # type: Optional["models.UpdateThreadRequest"]
+        body,  # type: "models.UpdateThreadRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -895,9 +801,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: The id of the thread to update.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :param body: Request payload for updating a chat thread.
         :type body: ~azure.communication.chat.models.UpdateThreadRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -908,7 +811,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
@@ -925,15 +828,10 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        if body is not None:
-            body_content = self._serialize.body(body, 'UpdateThreadRequest')
-        else:
-            body_content = None
+        body_content = self._serialize.body(body, 'UpdateThreadRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.patch(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -952,7 +850,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def get_thread(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> "models.Thread"
@@ -962,9 +859,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Thread id to get.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: Thread, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.Thread
@@ -973,7 +867,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType["models.Thread"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.get_thread.metadata['url']  # type: ignore
@@ -989,8 +883,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
         header_parameters['Accept'] = 'application/json'
 
         request = self._client.get(url, query_parameters, header_parameters)
@@ -1012,7 +904,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def delete_thread(
         self,
         thread_id,  # type: str
-        correlation_vector=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -1022,9 +913,6 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         :param thread_id: Thread id to delete.
         :type thread_id: str
-        :param correlation_vector: Correlation vector, if a value is not provided a randomly generated
-         correlation vector would be returned in the response header "MS-CV".
-        :type correlation_vector: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -1033,7 +921,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         cls = kwargs.pop('cls', None)  # type: ClsType[None]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
-        api_version = "2020-07-20-preview1"
+        api_version = "2020-09-21-preview2"
 
         # Construct URL
         url = self.delete_thread.metadata['url']  # type: ignore
@@ -1049,14 +937,12 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
         # Construct headers
         header_parameters = {}  # type: Dict[str, Any]
-        if correlation_vector is not None:
-            header_parameters['MS-CV'] = self._serialize.header("correlation_vector", correlation_vector, 'str')
 
         request = self._client.delete(url, query_parameters, header_parameters)
         pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 404]:
+        if response.status_code not in [204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 

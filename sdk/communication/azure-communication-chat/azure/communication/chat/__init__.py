@@ -1,7 +1,6 @@
 from ._version import VERSION
 from ._chat_client import ChatClient
 from ._generated.models import (
-    AddThreadMembersRequest,
     CreateMessageRequest,
     CreateMessageResponse,
     CreateThreadRequest,
@@ -19,7 +18,6 @@ from ._generated.models import (
 
 __all__ = [
     'ChatClient',
-    'AddThreadMembersRequest',
     'CreateMessageRequest',
     'CreateMessageResponse',
     'CreateThreadRequest',

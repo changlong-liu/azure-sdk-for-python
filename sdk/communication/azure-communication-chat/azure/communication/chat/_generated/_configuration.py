@@ -38,7 +38,7 @@ class AzureCommunicationChatServiceConfiguration(Configuration):
         super(AzureCommunicationChatServiceConfiguration, self).__init__(**kwargs)
 
         self.endpoint = endpoint
-        self.api_version = "2020-07-20-preview1"
+        self.api_version = "2020-09-21-preview2"
         kwargs.setdefault('sdk_moniker', 'azurecommunicationchatservice/{}'.format(VERSION))
         self._configure(**kwargs)
 

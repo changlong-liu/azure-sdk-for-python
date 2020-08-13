@@ -42,41 +42,41 @@ Once you initialized a `ChatClient` class, you can do the following chat operati
 ## Create, get, update, and delete threads
 
 ```Python
-create_thread(create_thread_request, correlation_vector=None, **kwargs)
-get_thread(thread_id, correlation_vector=None, **kwargs)
-update_thread(thread_id, update_thread_request, correlation_vector=None, **kwargs)
-delete_thread(thread_id, correlation_vector=None, **kwargs)
+create_chat_thread(create_thread_request, **kwargs)
+get_thread(thread_id, **kwargs)
+update_thread(thread_id, update_thread_request, **kwargs)
+delete_thread(thread_id, **kwargs)
 ```
 
 ## Send, get, update, and delete messages
 
 ```Python
-send_message(thread_id, create_message_request, correlation_vector=None, **kwargs)
-get_message(thread_id, message_id, correlation_vector=None, **kwargs)
-list_messages(thread_id, page_size=None, start_time=None, sync_state=None, correlation_vector=None, **kwargs)
-update_message(thread_id, message_id, update_message_request, correlation_vector=None, **kwargs)
-delete_message(thread_id, message_id, correlation_vector=None, **kwargs)
+send_message(thread_id, create_message_request, **kwargs)
+get_message(thread_id, message_id, **kwargs)
+list_messages(thread_id, page_size=None, start_time=None, sync_state=None, **kwargs)
+update_message(thread_id, message_id, update_message_request, **kwargs)
+delete_message(thread_id, message_id, **kwargs)
 ```
 
 ## Get, add, and remove members
 
 ```Python
-list_members(thread_id, correlation_vector=None, **kwargs)
-add_members(thread_id, add_thread_members_request, correlation_vector=None, **kwargs)
-remove_member(thread_id, member_id,  correlation_vector=None, **kwargs)
+list_members(thread_id, **kwargs)
+add_members(thread_id, add_thread_members_request, **kwargs)
+remove_member(thread_id, member_id, **kwargs)
 ```
 
 ## Send typing notification
 
 ```python
-send_typing_notification(thread_id, correlation_vector=None, **kwargs)
+send_typing_notification(thread_id, **kwargs)
 ```
 
 ## Send and get read receipt
 
 ```Python
-send_read_receipt(thread_id, post_read_receipt_request, correlation_vector=None, **kwargs)
-list_read_receipts(thread_id, correlation_vector=None, **kwargs)
+send_read_receipt(thread_id, post_read_receipt_request, **kwargs)
+list_read_receipts(thread_id, **kwargs)
 ```
 
 # Examples
@@ -113,7 +113,7 @@ create_thread_request = CreateThreadRequest(
             )],
             is_sticky_thread=False
  )
-create_thread_response = chat_client.create_thread(create_thread_request)
+create_thread_response = chat_client.create_chat_thread(create_thread_request)
 thread_id = create_thread_response.id
 ```
 
@@ -181,6 +181,7 @@ The `get_message` method retrieves a message from the service.
 `message_id` is the unique ID of the message.
 
 `Message` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.Message
+
 ```python
 message = chat_client.get_message(thread_id, message_id)
 ```
@@ -191,6 +192,7 @@ The `list_messages` method retrieves messages from the service.
 `thread_id` is the unique ID of the thread.
 
 `ListMessagesResponse` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.ListMessagesResponse
+
 ```Python
 list_messages_response = chat_client.list_messages(thread_id)
 print(list_messages_response.messages)
@@ -229,6 +231,7 @@ Use `list_members` to retrieve the members of the thread identified by threadId.
 `thread_id` is the unique ID of the thread.
 
 `[ThreadMember]` is the response returned from listing members
+
 ```python
 members = chat_client.list_members(thread_id)
 ```
@@ -242,14 +245,14 @@ Use `add_members` method to add thread members to the thread identified by threa
 - Use `members` to list the thread members to be added to the thread;
 
 ```Python
-from azure.communication.chat import AddThreadMembersRequest, ThreadMember
+from azure.communication.chat import ThreadMember
 member = ThreadMember(
     id='<user id>',
     display_name='name',
     member_role='Admin',
     share_history_time='0')
-add_thread_members_request = AddThreadMembersRequest(members=[member])
-chat_client.add_members(self._thread_id, add_thread_members_request)
+members = [member]
+chat_client.add_members(self._thread_id, members)
 ```
 
 ### Remove thread member

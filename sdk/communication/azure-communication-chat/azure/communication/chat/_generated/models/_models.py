@@ -533,15 +533,9 @@ class ThreadMember(msrest.serialization.Model):
 class UpdateMessageRequest(msrest.serialization.Model):
     """UpdateMessageRequest.
 
-    All required parameters must be populated in order to send to Azure.
-
-    :param content: Required. Chat message content.
+    :param content: Chat message content.
     :type content: str
     """
-
-    _validation = {
-        'content': {'required': True},
-    }
 
     _attribute_map = {
         'content': {'key': 'content', 'type': 'str'},
@@ -552,21 +546,15 @@ class UpdateMessageRequest(msrest.serialization.Model):
         **kwargs
     ):
         super(UpdateMessageRequest, self).__init__(**kwargs)
-        self.content = kwargs['content']
+        self.content = kwargs.get('content', None)
 
 
 class UpdateThreadRequest(msrest.serialization.Model):
     """UpdateThreadRequest.
 
-    All required parameters must be populated in order to send to Azure.
-
-    :param topic: Required. Thread topic.
+    :param topic: Thread topic.
     :type topic: str
     """
-
-    _validation = {
-        'topic': {'required': True},
-    }
 
     _attribute_map = {
         'topic': {'key': 'topic', 'type': 'str'},
@@ -577,4 +565,4 @@ class UpdateThreadRequest(msrest.serialization.Model):
         **kwargs
     ):
         super(UpdateThreadRequest, self).__init__(**kwargs)
-        self.topic = kwargs['topic']
+        self.topic = kwargs.get('topic', None)

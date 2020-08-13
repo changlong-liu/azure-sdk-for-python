@@ -6,7 +6,7 @@
     "contact": {
       "email": "acsdevexdisc@microsoft.com"
     },
-    "version": "2020-07-20-preview1"
+    "version": "2020-09-21-preview2"
   },
   "paths": {
     "/chat/threads/{threadId}/readreceipts": {
@@ -26,9 +26,6 @@
             "description": "Thread id to get the read receipts for.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/CorrelationVectorParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -69,15 +66,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "Request payload for sending a read receipt.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/PostReadReceiptRequest"
             }
@@ -117,15 +112,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "Details of the message to create.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CreateMessageRequest"
             }
@@ -183,9 +176,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -233,9 +223,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -278,15 +265,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "Details of the request to update the message.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateMessageRequest"
             }
@@ -325,15 +310,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Message is successfully updated."
+            "description": "Message is successfully deleted."
           }
         },
         "x-ms-examples": {
@@ -357,9 +339,6 @@
             "description": "Id of the thread.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/CorrelationVectorParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -394,9 +373,6 @@
             "description": "Thread id to get members for.",
             "required": true,
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/CorrelationVectorParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -437,15 +413,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "Thread members to be added to the thread.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/AddThreadMembersRequest"
             }
@@ -486,9 +460,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -497,7 +468,8 @@
             "description": "Request successful. The member has been removed from the thread."
           },
           "404": {
-            "description": "Request unsuccessful. The member to be removed doesn't exist in the thread, or the thread doesn't exist."
+            "description": "Request unsuccessful. The member to be removed doesn't exist in the thread, or the thread doesn't exist.",
+            "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
@@ -522,15 +494,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "Request payload for creating a chat thread.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/CreateThreadRequest"
             }
@@ -584,9 +554,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -627,15 +594,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "Request payload for updating a chat thread.",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateThreadRequest"
             }
@@ -670,9 +635,6 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -705,18 +667,12 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CorrelationVectorParameter"
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Request successful. The thread is deleted."
-          },
-          "404": {
-            "description": "Request unsuccessful. The thread to be removed doesn't exist."
+          "204": {
+            "description": "Request successful."
           }
         },
         "x-ms-examples": {
@@ -873,7 +829,7 @@
           "description": "The timestamp when the message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
-          "example": "2020-06-06T05:55:41.6460000+00:00"
+          "example": "2020-06-06T05:55:41.6460000Z"
         },
         "from": {
           "description": "The Id of the message sender.",
@@ -919,9 +875,6 @@
       }
     },
     "UpdateMessageRequest": {
-      "required": [
-        "content"
-      ],
       "type": "object",
       "properties": {
         "content": {
@@ -1047,7 +1000,7 @@
           "description": "The timestamp when the last message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
-          "example": "2020-06-06T05:55:41.6460000+00:00"
+          "example": "2020-06-06T05:55:41.6460000Z"
         }
       }
     },
@@ -1075,9 +1028,6 @@
       }
     },
     "UpdateThreadRequest": {
-      "required": [
-        "topic"
-      ],
       "type": "object",
       "properties": {
         "topic": {
@@ -1136,14 +1086,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "CorrelationVectorParameter": {
-      "in": "header",
-      "name": "MS-CV",
-      "description": "Correlation vector, if a value is not provided a randomly generated correlation vector would be returned in the response header \"MS-CV\".",
-      "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-client-name": "CorrelationVector"
     },
     "Endpoint": {
       "in": "path",
