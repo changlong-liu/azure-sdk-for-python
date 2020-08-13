@@ -21,6 +21,7 @@ pip install azure-communication-chat
 ```
 
 ## User Access Tokens
+
 User access tokens enable you to build client applications that directly authenticate to Azure Communication Services. You generate these tokens on your server, pass them back to a client device, and then use them to initialize the Communication Services SDKs. Lear how to generate user access tokens from [User Access Tokens].
 
 ## Create the chat client
@@ -299,20 +300,24 @@ chat_client.send_read_receipt(thread_id, post_read_receipt_request)
 `thread_id` is the unique ID of the thread.
 
 `[ReadReceipt]` is the response returned from listing read receipts
+
 ```python
 read_receipts = chat_client.list_read_receipts(thread_id)
 ```
 
 ## Sample Code
+
 These are code samples that show common scenario operations with the Azure Communication Chat client library.
 The async versions of the samples (the python sample files appended with `_async`) show asynchronous operations,
 and require Python 3.5 or later.
 Before run the sample code, refer to [Prerequisites](#Prerequisites) to create a resource and get an User Access Token,
 and set them into Environment Variables
+
 ```bash
 set AZURE_COMMUNICATION_SERVICE_ENDPOINT="https://<RESOURCE_NAME>.communcationservices.azure.com"
 set TOKEN="<user access token>"
 ```
+
 ```python
 python samples\chat_sample.py
 python samples\chat_sample_async.py

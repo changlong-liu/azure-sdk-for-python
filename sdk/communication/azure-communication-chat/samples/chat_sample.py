@@ -88,7 +88,6 @@ class ChatSamples(object):
 
         chat_client = ChatClient(self.token, self.endpoint)
 
-        thread = None
         try:
             update_thread_request = UpdateThreadRequest(topic="update topic")
             chat_client.update_thread(self._thread_id, update_thread_request)
