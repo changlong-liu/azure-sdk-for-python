@@ -61,8 +61,7 @@ setup(
     install_requires=[
         'azure-core<2.0.0,>=1.2.2',
         'msrest>=0.5.0',
-        'six>=1.6',
-        'PyJWT>=1.7'
+        'six>=1.6'
     ],
     extras_require={
         ":python_version<'3.0'": ['azure-communication-nspkg'],
