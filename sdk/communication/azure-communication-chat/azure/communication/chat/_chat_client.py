@@ -100,10 +100,10 @@ class ChatClient(object):
         """
         if not topic:
             raise ValueError("topic cannot be None.")
-        if not members:
+        if not thread_members:
             raise ValueError("List of ThreadMember cannot be None.")
 
-        create_thread_request = CreateThreadRequest(topic=topic, members=members)
+        create_thread_request = CreateThreadRequest(topic=topic, members=thread_members)
 
         return self._client.create_thread(create_thread_request, **kwargs)
 
