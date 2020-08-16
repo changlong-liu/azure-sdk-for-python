@@ -34,76 +34,6 @@ class AddThreadMembersRequest(msrest.serialization.Model):
         self.members = kwargs['members']
 
 
-class CreateMessageRequest(msrest.serialization.Model):
-    """CreateMessageRequest.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :param client_message_id: This Id is a client-specific Id in a numeric unsigned Int64 format.
-     It can be used for client deduping, among other client usages.
-    :type client_message_id: str
-    :param priority:  Possible values include: "Normal", "High".
-    :type priority: str or ~azure.communication.chat.models.MessagePriority
-    :param content: Required. Chat message content.
-    :type content: str
-    :param sender_display_name: The display name of the message sender. This property is used to
-     populate sender name for push notifications.
-    :type sender_display_name: str
-    """
-
-    _validation = {
-        'content': {'required': True},
-    }
-
-    _attribute_map = {
-        'client_message_id': {'key': 'clientMessageId', 'type': 'str'},
-        'priority': {'key': 'priority', 'type': 'str'},
-        'content': {'key': 'content', 'type': 'str'},
-        'sender_display_name': {'key': 'senderDisplayName', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        super(CreateMessageRequest, self).__init__(**kwargs)
-        self.client_message_id = kwargs.get('client_message_id', None)
-        self.priority = kwargs.get('priority', None)
-        self.content = kwargs['content']
-        self.sender_display_name = kwargs.get('sender_display_name', None)
-
-
-class CreateMessageResponse(msrest.serialization.Model):
-    """CreateMessageResponse.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: The Id of the message. This Id is server generated.
-    :vartype id: str
-    :ivar client_message_id: This Id is a client-specific Id in a numeric unsigned Int64 format. It
-     can be used for client deduping, among other client usages.
-    :vartype client_message_id: str
-    """
-
-    _validation = {
-        'id': {'readonly': True},
-        'client_message_id': {'readonly': True},
-    }
-
-    _attribute_map = {
-        'id': {'key': 'id', 'type': 'str'},
-        'client_message_id': {'key': 'clientMessageId', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        super(CreateMessageResponse, self).__init__(**kwargs)
-        self.id = None
-        self.client_message_id = None
-
-
 class CreateThreadRequest(msrest.serialization.Model):
     """CreateThreadRequest.
 
@@ -111,10 +41,6 @@ class CreateThreadRequest(msrest.serialization.Model):
 
     :param topic: Required. The thread topic.
     :type topic: str
-    :param is_sticky_thread: Flag if a thread is sticky - sticky thread has an immutable member
-     list, members cannot be added or removed.
-     Sticky threads are only supported for 1-1 chat, i.e. with only two members.
-    :type is_sticky_thread: bool
     :param members: Required. Members to be added to the thread.
     :type members: list[~azure.communication.chat.models.ThreadMember]
     """
@@ -126,7 +52,6 @@ class CreateThreadRequest(msrest.serialization.Model):
 
     _attribute_map = {
         'topic': {'key': 'topic', 'type': 'str'},
-        'is_sticky_thread': {'key': 'isStickyThread', 'type': 'bool'},
         'members': {'key': 'members', 'type': '[ThreadMember]'},
     }
 
@@ -136,12 +61,11 @@ class CreateThreadRequest(msrest.serialization.Model):
     ):
         super(CreateThreadRequest, self).__init__(**kwargs)
         self.topic = kwargs['topic']
-        self.is_sticky_thread = kwargs.get('is_sticky_thread', None)
         self.members = kwargs['members']
 
 
-class CreateThreadResponse(msrest.serialization.Model):
-    """CreateThreadResponse.
+class CreateThreadResult(msrest.serialization.Model):
+    """CreateThreadResult.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -161,12 +85,12 @@ class CreateThreadResponse(msrest.serialization.Model):
         self,
         **kwargs
     ):
-        super(CreateThreadResponse, self).__init__(**kwargs)
+        super(CreateThreadResult, self).__init__(**kwargs)
         self.id = None
 
 
-class ListMessagesResponse(msrest.serialization.Model):
-    """ListMessagesResponse.
+class ListMessagesResult(msrest.serialization.Model):
+    """ListMessagesResult.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -195,14 +119,14 @@ class ListMessagesResponse(msrest.serialization.Model):
         self,
         **kwargs
     ):
-        super(ListMessagesResponse, self).__init__(**kwargs)
+        super(ListMessagesResult, self).__init__(**kwargs)
         self.messages = None
         self.sync_state = None
         self.backward_link = None
 
 
-class ListThreadsResponse(msrest.serialization.Model):
-    """ListThreadsResponse.
+class ListThreadsResult(msrest.serialization.Model):
+    """ListThreadsResult.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
@@ -231,7 +155,7 @@ class ListThreadsResponse(msrest.serialization.Model):
         self,
         **kwargs
     ):
-        super(ListThreadsResponse, self).__init__(**kwargs)
+        super(ListThreadsResult, self).__init__(**kwargs)
         self.threads = None
         self.sync_state = None
         self.backward_link = None
@@ -255,10 +179,6 @@ class Message(msrest.serialization.Model):
         - ThreadActivity/AddMember
         - ThreadActivity/DeleteMember.
     :type message_type: str
-    :ivar client_message_id: The client message Id specified when the message was sent.
-     This Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client
-     deduping, among other client usages.
-    :vartype client_message_id: str
     :param priority:  Possible values include: "Normal", "High".
     :type priority: str or ~azure.communication.chat.models.MessagePriority
     :ivar version: Version of the message.
@@ -283,7 +203,6 @@ class Message(msrest.serialization.Model):
 
     _validation = {
         'id': {'readonly': True},
-        'client_message_id': {'readonly': True},
         'version': {'readonly': True},
         'original_arrival_time': {'readonly': True},
         'from_property': {'readonly': True},
@@ -292,7 +211,6 @@ class Message(msrest.serialization.Model):
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'message_type': {'key': 'messageType', 'type': 'str'},
-        'client_message_id': {'key': 'clientMessageId', 'type': 'str'},
         'priority': {'key': 'priority', 'type': 'str'},
         'version': {'key': 'version', 'type': 'str'},
         'content': {'key': 'content', 'type': 'str'},
@@ -310,7 +228,6 @@ class Message(msrest.serialization.Model):
         super(Message, self).__init__(**kwargs)
         self.id = None
         self.message_type = kwargs.get('message_type', None)
-        self.client_message_id = None
         self.priority = kwargs.get('priority', None)
         self.version = None
         self.content = kwargs.get('content', None)
@@ -326,21 +243,15 @@ class PostReadReceiptRequest(msrest.serialization.Model):
 
     All required parameters must be populated in order to send to Azure.
 
-    :param client_message_id: Required. The client message Id specified when the message was sent.
-     This Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client
-     deduping, among other client usages.
-    :type client_message_id: str
     :param message_id: Required. Id of the latest message read by current user.
     :type message_id: str
     """
 
     _validation = {
-        'client_message_id': {'required': True},
         'message_id': {'required': True},
     }
 
     _attribute_map = {
-        'client_message_id': {'key': 'clientMessageId', 'type': 'str'},
         'message_id': {'key': 'messageId', 'type': 'str'},
     }
 
@@ -349,7 +260,6 @@ class PostReadReceiptRequest(msrest.serialization.Model):
         **kwargs
     ):
         super(PostReadReceiptRequest, self).__init__(**kwargs)
-        self.client_message_id = kwargs['client_message_id']
         self.message_id = kwargs['message_id']
 
 
@@ -364,25 +274,18 @@ class ReadReceipt(msrest.serialization.Model):
     :vartype message_id: str
     :ivar read_timestamp: Read receipt timestamp.
     :vartype read_timestamp: long
-    :ivar client_message_id: Client message id specified in the
-     Microsoft.AzureCommunicationService.Gateway.Models.Client.CreateMessageRequest.
-     This Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client
-     deduping, among other client usages.
-    :vartype client_message_id: str
     """
 
     _validation = {
         'user_id': {'readonly': True},
         'message_id': {'readonly': True},
         'read_timestamp': {'readonly': True},
-        'client_message_id': {'readonly': True},
     }
 
     _attribute_map = {
         'user_id': {'key': 'userId', 'type': 'str'},
         'message_id': {'key': 'messageId', 'type': 'str'},
         'read_timestamp': {'key': 'readTimestamp', 'type': 'long'},
-        'client_message_id': {'key': 'clientMessageId', 'type': 'str'},
     }
 
     def __init__(
@@ -393,7 +296,65 @@ class ReadReceipt(msrest.serialization.Model):
         self.user_id = None
         self.message_id = None
         self.read_timestamp = None
-        self.client_message_id = None
+
+
+class SendMessageRequest(msrest.serialization.Model):
+    """SendMessageRequest.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :param priority:  Possible values include: "Normal", "High".
+    :type priority: str or ~azure.communication.chat.models.MessagePriority
+    :param content: Required. Chat message content.
+    :type content: str
+    :param sender_display_name: The display name of the message sender. This property is used to
+     populate sender name for push notifications.
+    :type sender_display_name: str
+    """
+
+    _validation = {
+        'content': {'required': True},
+    }
+
+    _attribute_map = {
+        'priority': {'key': 'priority', 'type': 'str'},
+        'content': {'key': 'content', 'type': 'str'},
+        'sender_display_name': {'key': 'senderDisplayName', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        super(SendMessageRequest, self).__init__(**kwargs)
+        self.priority = kwargs.get('priority', None)
+        self.content = kwargs['content']
+        self.sender_display_name = kwargs.get('sender_display_name', None)
+
+
+class SendMessageResult(msrest.serialization.Model):
+    """SendMessageResult.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: The Id of the message. This Id is server generated.
+    :vartype id: str
+    """
+
+    _validation = {
+        'id': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        super(SendMessageResult, self).__init__(**kwargs)
+        self.id = None
 
 
 class Thread(msrest.serialization.Model):
@@ -492,9 +453,6 @@ class ThreadMember(msrest.serialization.Model):
     :type id: str
     :param display_name: Display name for the thread member.
     :type display_name: str
-    :param member_role: Required. Role of the thread member. The valid value should be "User" or
-     "Admin". Possible values include: "Admin", "User".
-    :type member_role: str or ~azure.communication.chat.models.MemberRole
     :param share_history_time: Time from which the group chat history is shared with the member in
      EPOCH time (milliseconds).
     
@@ -509,13 +467,11 @@ class ThreadMember(msrest.serialization.Model):
 
     _validation = {
         'id': {'required': True},
-        'member_role': {'required': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'display_name': {'key': 'displayName', 'type': 'str'},
-        'member_role': {'key': 'memberRole', 'type': 'str'},
         'share_history_time': {'key': 'shareHistoryTime', 'type': 'str'},
     }
 
@@ -526,7 +482,6 @@ class ThreadMember(msrest.serialization.Model):
         super(ThreadMember, self).__init__(**kwargs)
         self.id = kwargs['id']
         self.display_name = kwargs.get('display_name', None)
-        self.member_role = kwargs['member_role']
         self.share_history_time = kwargs.get('share_history_time', None)
 
 

@@ -139,24 +139,24 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def send_message(
         self,
         thread_id,  # type: str
-        body,  # type: "models.CreateMessageRequest"
+        body,  # type: "models.SendMessageRequest"
         **kwargs  # type: Any
     ):
-        # type: (...) -> "models.CreateMessageResponse"
+        # type: (...) -> "models.SendMessageResult"
         """Sends a message to a thread.
 
         Sends a message to a thread.
 
         :param thread_id: The thread id to send the message to.
         :type thread_id: str
-        :param body: Details of the message to create.
-        :type body: ~azure.communication.chat.models.CreateMessageRequest
+        :param body: Details of the message to send.
+        :type body: ~azure.communication.chat.models.SendMessageRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CreateMessageResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateMessageResponse
+        :return: SendMessageResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.SendMessageResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateMessageResponse"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.SendMessageResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
@@ -180,7 +180,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         header_parameters['Accept'] = 'application/json'
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'CreateMessageRequest')
+        body_content = self._serialize.body(body, 'SendMessageRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -191,7 +191,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('CreateMessageResponse', pipeline_response)
+        deserialized = self._deserialize('SendMessageResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -207,7 +207,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         sync_state=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
-        # type: (...) -> "models.ListMessagesResponse"
+        # type: (...) -> "models.ListMessagesResult"
         """Gets a list of messages from a thread.
 
         Gets a list of messages from a thread.
@@ -223,11 +223,11 @@ class AzureCommunicationChatServiceOperationsMixin(object):
          paging.
         :type sync_state: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListMessagesResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListMessagesResponse
+        :return: ListMessagesResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.ListMessagesResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListMessagesResponse"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListMessagesResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
@@ -262,7 +262,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('ListMessagesResponse', pipeline_response)
+        deserialized = self._deserialize('ListMessagesResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -667,7 +667,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         body,  # type: "models.CreateThreadRequest"
         **kwargs  # type: Any
     ):
-        # type: (...) -> "models.CreateThreadResponse"
+        # type: (...) -> "models.CreateThreadResult"
         """Creates a chat thread.
 
         Creates a chat thread.
@@ -675,11 +675,11 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :param body: Request payload for creating a chat thread.
         :type body: ~azure.communication.chat.models.CreateThreadRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CreateThreadResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateThreadResponse
+        :return: CreateThreadResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.CreateThreadResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateThreadResponse"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateThreadResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
@@ -713,7 +713,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('CreateThreadResponse', pipeline_response)
+        deserialized = self._deserialize('CreateThreadResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
@@ -728,7 +728,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         sync_state=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
-        # type: (...) -> "models.ListThreadsResponse"
+        # type: (...) -> "models.ListThreadsResult"
         """Gets the list of chat threads of a user.
 
         Gets the list of chat threads of a user.
@@ -742,11 +742,11 @@ class AzureCommunicationChatServiceOperationsMixin(object):
          paging.
         :type sync_state: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListThreadsResponse, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListThreadsResponse
+        :return: ListThreadsResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.ListThreadsResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListThreadsResponse"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListThreadsResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
@@ -780,7 +780,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('ListThreadsResponse', pipeline_response)
+        deserialized = self._deserialize('ListThreadsResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})

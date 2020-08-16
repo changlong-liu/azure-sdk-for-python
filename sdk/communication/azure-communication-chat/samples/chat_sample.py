@@ -32,11 +32,10 @@ class ChatSamples(object):
     _thread_id = None
     _thread_creator = None
     _message_id = None
-    _client_message_id = None
 
-    def create_thread(self):
+    def create_chat_thread(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat import CreateThreadRequest, ThreadMember
+        from azure.communication.chat.models import ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -45,28 +44,24 @@ class ChatSamples(object):
         user_id = "8:" + jwt.decode(self.token, verify=False)['skypeid']
         self._thread_creator = user_id
 
-        body = CreateThreadRequest(
-            topic="test topic",
-            members=[ThreadMember(
-                id=user_id,
-                display_name='name',
-                member_role='Admin',
-                share_history_time='0'
-            )],
-            is_sticky_thread=False
-        )
+        topic="test topic"
+        members = [ThreadMember(
+            id=user_id,
+            display_name='name',
+            share_history_time='0'
+        )]
 
-        create_thread_response = None
+        create_thread_result = None
         try:
-            create_thread_response = chat_client.create_chat_thread(body)
+            create_thread_result = chat_client.create_chat_thread(topic, members)
         except HttpResponseError as e:
             print(e)
             return
 
-        self._thread_id = create_thread_response.id
+        self._thread_id = create_thread_result.id
         print("thread created, id: " + self._thread_id)
 
-    def get_thread(self):
+    def get_chat_thread(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
@@ -74,69 +69,81 @@ class ChatSamples(object):
 
         thread = None
         try:
-            thread = chat_client.get_thread(self._thread_id)
+            thread = chat_client.get_chat_thread(self._thread_id)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("get_thread succeeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
+        print("get_chat_thread succeeded, thread id: " + thread.id + ", thread topic: " + thread.topic)
 
-    def update_thread(self):
-        from azure.communication.chat import ChatClient
-        from azure.communication.chat import UpdateThreadRequest
-        from azure.core.exceptions import HttpResponseError
-
-        chat_client = ChatClient(self.token, self.endpoint)
-
-        try:
-            update_thread_request = UpdateThreadRequest(topic="update topic")
-            chat_client.update_thread(self._thread_id, update_thread_request)
-        except HttpResponseError as e:
-            print(e)
-            return
-
-        print("update_thread succeeded")
-
-    def delete_thread(self):
+    def list_chat_threads(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
 
-        thread = None
         try:
-            chat_client.delete_thread(self._thread_id)
+            list_threads_result = chat_client.list_chat_threads()
         except HttpResponseError as e:
             print(e)
             return
 
-        print("delete_thread succeeded")
+        print("list_chat_threads succeeded, count of chat threads: ", len(list_threads_result.threads))
 
-    def send_message(self):
+    def update_chat_thread(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat import CreateMessageRequest, MessagePriority
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
 
-        thread = None
         try:
-            create_message_request = CreateMessageRequest(
-                client_message_id='1581637626706',
-                priority=MessagePriority.NORMAL,
-                content='hello world',
-                sender_display_name='sender name',
-            )
-            create_message_response = chat_client.send_message(self._thread_id, create_message_request)
+            topic = "update topic"
+            chat_client.update_chat_thread(self._thread_id, topic)
         except HttpResponseError as e:
             print(e)
             return
 
-        self._message_id = create_message_response.id
-        self._client_message_id = create_message_response.client_message_id
-        print("send_message succeeded, message id:", self._message_id)
+        print("update_chat_thread succeeded")
 
-    def get_message(self):
+    def delete_chat_thread(self):
+        from azure.communication.chat import ChatClient
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.token, self.endpoint)
+
+        try:
+            chat_client.delete_chat_thread(self._thread_id)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        print("delete_chat_thread succeeded")
+
+    def send_chat_message(self):
+        from azure.communication.chat import ChatClient
+        from azure.communication.chat.models import MessagePriority
+        from azure.core.exceptions import HttpResponseError
+
+        chat_client = ChatClient(self.token, self.endpoint)
+
+        try:
+            priority = MessagePriority.NORMAL
+            content = 'hello world'
+            sender_display_name = 'sender name'
+
+            create_message_result = chat_client.send_chat_message(
+                self._thread_id,
+                content,
+                priority=priority,
+                sender_display_name=sender_display_name)
+        except HttpResponseError as e:
+            print(e)
+            return
+
+        self._message_id = create_message_result.id
+        print("send_chat_message succeeded, message id:", self._message_id)
+
+    def get_chat_message(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
@@ -144,16 +151,15 @@ class ChatSamples(object):
 
         message = None
         try:
-            message = chat_client.get_message(self._thread_id, self._message_id)
+            message = chat_client.get_chat_message(self._thread_id, self._message_id)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("get_message succeeded, message id:", message.id, \
-            "client message id:", message.client_message_id, \
+        print("get_chat_message succeeded, message id:", message.id, \
             "content: ", message.content)
 
-    def list_messages(self):
+    def list_chat_messages(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
@@ -161,43 +167,37 @@ class ChatSamples(object):
 
         list_messages_response = None
         try:
-            list_messages_response = chat_client.list_messages(self._thread_id)
+            list_messages_response = chat_client.list_chat_messages(self._thread_id)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("list_messages succeeded, messages count:",
+        print("list_chat_messages succeeded, messages count:",
             len([elem for elem in list_messages_response.messages if elem.message_type == 'Text']))
 
-    def update_message(self):
+    def update_chat_message(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat import UpdateMessageRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
 
         try:
-            update_message_request = UpdateMessageRequest(content="updated content")
-            chat_client.update_message(self._thread_id, self._message_id, update_message_request)
+            content = "updated content"
+            chat_client.update_chat_message(self._thread_id, self._message_id, content)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("update_message succeeded")
+        print("update_chat_message succeeded")
 
     def send_read_receipt(self):
         from azure.communication.chat import ChatClient
-        from azure.communication.chat import PostReadReceiptRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
 
         try:
-            post_read_receipt_request = PostReadReceiptRequest(
-                client_message_id=self._client_message_id,
-                message_id=self._message_id
-                )
-            chat_client.send_read_receipt(self._thread_id, post_read_receipt_request)
+            chat_client.send_read_receipt(self._thread_id, self._message_id)
         except HttpResponseError as e:
             print(e)
             return
@@ -221,21 +221,21 @@ class ChatSamples(object):
         for read_receipt in read_receipts:
             print(read_receipt)
 
-    def delete_message(self):
+    def delete_chat_message(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
 
         try:
-            chat_client.delete_message(self._thread_id, self._message_id)
+            chat_client.delete_chat_message(self._thread_id, self._message_id)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("delete_message succeeded")
+        print("delete_chat_message succeeded")
 
-    def list_members(self):
+    def list_chat_members(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
@@ -243,17 +243,18 @@ class ChatSamples(object):
 
         members = []
         try:
-            members = chat_client.list_members(self._thread_id)
+            members = chat_client.list_chat_members(self._thread_id)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("list_members succeeded, members: ")
+        print("list_chat_members succeeded, members: ")
         for member in members:
             print(member)
 
-    def add_members(self):
-        from azure.communication.chat import ChatClient, ThreadMember
+    def add_chat_members(self):
+        from azure.communication.chat import ChatClient
+        from azure.communication.chat.models import ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.token, self.endpoint)
@@ -265,19 +266,18 @@ class ChatSamples(object):
         new_member = ThreadMember(
                 id=new_member_id,
                 display_name='name',
-                member_role='Admin',
                 share_history_time='0')
         thread_members = [new_member]
 
         try:
-            chat_client.add_members(self._thread_id, thread_members)
+            chat_client.add_chat_members(self._thread_id, thread_members)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("add_members succeeded")
+        print("add_chat_members succeeded")
 
-    def remove_member(self):
+    def remove_chat_member(self):
         from azure.communication.chat import ChatClient
         from azure.core.exceptions import HttpResponseError
 
@@ -289,12 +289,12 @@ class ChatSamples(object):
             + "123456-0000123456"
 
         try:
-            chat_client.remove_member(self._thread_id, added_member_id)
+            chat_client.remove_chat_member(self._thread_id, added_member_id)
         except HttpResponseError as e:
             print(e)
             return
 
-        print("remove_member succeeded")
+        print("remove_chat_member succeeded")
 
     def send_typing_notification(self):
         from azure.communication.chat import ChatClient
@@ -312,18 +312,19 @@ class ChatSamples(object):
 
 if __name__ == '__main__':
     sample = ChatSamples()
-    sample.create_thread()
-    sample.get_thread()
-    sample.update_thread()
-    sample.send_message()
-    sample.get_message()
-    sample.list_messages()
-    sample.update_message()
+    sample.create_chat_thread()
+    sample.get_chat_thread()
+    sample.list_chat_threads()
+    sample.update_chat_thread()
+    sample.send_chat_message()
+    sample.get_chat_message()
+    sample.list_chat_messages()
+    sample.update_chat_message()
     sample.send_read_receipt()
     sample.list_read_receipts()
-    sample.delete_message()
-    sample.list_members()
-    sample.add_members()
-    sample.remove_member()
+    sample.delete_chat_message()
+    sample.add_chat_members()
+    sample.list_chat_members()
+    sample.remove_chat_member()
     sample.send_typing_notification()
-    sample.delete_thread()
+    sample.delete_chat_thread()

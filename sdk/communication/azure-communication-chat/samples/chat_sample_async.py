@@ -34,11 +34,10 @@ class ChatSamplesAsync(object):
     _thread_id = None
     _thread_creator = None
     _message_id = None
-    _client_message_id = None
 
     async def create_thread_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import CreateThreadRequest, ThreadMember
+        from azure.communication.chat.models import ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -50,17 +49,13 @@ class ChatSamplesAsync(object):
         create_thread_response = None
         async with chat_client:
             try:
-                body = CreateThreadRequest(
-                    topic="test topic",
-                    members=[ThreadMember(
-                        id=user_id,
-                        display_name='name',
-                        member_role='Admin',
-                        share_history_time='0'
-                    )],
-                    is_sticky_thread=False
-                )
-                create_thread_response = await chat_client.create_chat_thread(body)
+                topic="test topic",
+                members=[ThreadMember(
+                    id=user_id,
+                    display_name='name',
+                    share_history_time='0'
+                )]
+                create_thread_response = await chat_client.create_chat_thread(topic, members)
 
             except HttpResponseError as e:
                 print(e)
@@ -78,7 +73,7 @@ class ChatSamplesAsync(object):
         thread = None
         async with chat_client:
             try:
-                thread = await chat_client.get_thread(self._thread_id)
+                thread = await chat_client.get_chat_thread(self._thread_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -87,15 +82,14 @@ class ChatSamplesAsync(object):
 
     async def update_thread_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import UpdateThreadRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
 
         async with chat_client:
             try:
-                update_thread_request = UpdateThreadRequest(topic="update topic")
-                await chat_client.update_thread(self._thread_id, update_thread_request)
+                topic = "update topic"
+                await chat_client.update_chat_thread(self._thread_id, topic)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -110,7 +104,7 @@ class ChatSamplesAsync(object):
 
         async with chat_client:
             try:
-                await chat_client.delete_thread(self._thread_id)
+                await chat_client.delete_chat_thread(self._thread_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -119,7 +113,7 @@ class ChatSamplesAsync(object):
 
     async def send_message_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import CreateMessageRequest, MessagePriority
+        from azure.communication.chat.models import MessagePriority
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -127,21 +121,20 @@ class ChatSamplesAsync(object):
 
         async with chat_client:
             try:
-                create_message_request = CreateMessageRequest(
-                    client_message_id='1581637626706',
-                    priority=MessagePriority.NORMAL,
-                    content='hello world',
-                    sender_display_name='sender name',
-                )
-                create_message_response = await chat_client.send_message(
+                priority=MessagePriority.NORMAL
+                content='hello world'
+                sender_display_name='sender name'
+
+                create_message_response = await chat_client.send_chat_message(
                     self._thread_id,
-                    create_message_request)
+                    content,
+                    priority=priority,
+                    sender_display_name=sender_display_name)
             except HttpResponseError as e:
                 print(e)
                 return
 
         self._message_id = create_message_response.id
-        self._client_message_id = create_message_response.client_message_id
         print("send_message succeeded, message id:", self._message_id)
 
     async def get_message_async(self):
@@ -153,13 +146,12 @@ class ChatSamplesAsync(object):
 
         async with chat_client:
             try:
-                message = await chat_client.get_message(self._thread_id, self._message_id)
+                message = await chat_client.get_chat_message(self._thread_id, self._message_id)
             except HttpResponseError as e:
                 print(e)
                 return
 
         print("get_message succeeded, message id:", message.id, \
-            "client message id:", message.client_message_id, \
             "content: ", message.content)
 
     async def list_messages_async(self):
@@ -171,7 +163,7 @@ class ChatSamplesAsync(object):
 
         async with chat_client:
             try:
-                list_messages_response = await chat_client.list_messages(self._thread_id)
+                list_messages_response = await chat_client.list_chat_messages(self._thread_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -181,15 +173,14 @@ class ChatSamplesAsync(object):
 
     async def update_message_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import UpdateMessageRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
 
         async with chat_client:
             try:
-                update_message_request = UpdateMessageRequest(content="updated message content")
-                await chat_client.update_message(self._thread_id, self._message_id, update_message_request)
+                content = "updated message content"
+                await chat_client.update_chat_message(self._thread_id, self._message_id, content)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -198,18 +189,13 @@ class ChatSamplesAsync(object):
 
     async def send_read_receipt_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import PostReadReceiptRequest
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
 
         async with chat_client:
             try:
-                post_read_receipt_request = PostReadReceiptRequest(
-                    client_message_id=self._client_message_id,
-                    message_id=self._message_id
-                    )
-                await chat_client.send_read_receipt(self._thread_id, post_read_receipt_request)
+                await chat_client.send_read_receipt(self._thread_id, self._message_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -242,7 +228,7 @@ class ChatSamplesAsync(object):
 
         async with chat_client:
             try:
-                await chat_client.delete_message(self._thread_id, self._message_id)
+                await chat_client.delete_chat_message(self._thread_id, self._message_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -258,7 +244,7 @@ class ChatSamplesAsync(object):
         members = []
         async with chat_client:
             try:
-                members = await chat_client.list_members(self._thread_id)
+                members = await chat_client.list_chat_members(self._thread_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -269,7 +255,7 @@ class ChatSamplesAsync(object):
 
     async def add_members_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat import ThreadMember
+        from azure.communication.chat.models import ThreadMember
         from azure.core.exceptions import HttpResponseError
 
         chat_client = ChatClient(self.skype_token, self.endpoint)
@@ -281,13 +267,12 @@ class ChatSamplesAsync(object):
         new_member = ThreadMember(
                 id=new_member_id,
                 display_name='name',
-                member_role='Admin',
                 share_history_time='0')
         members = [new_member]
 
         async with chat_client:
             try:
-                await chat_client.add_members(self._thread_id, members)
+                await chat_client.add_chat_members(self._thread_id, members)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -307,7 +292,7 @@ class ChatSamplesAsync(object):
 
         async with chat_client:
             try:
-                await chat_client.remove_member(self._thread_id, added_member_id)
+                await chat_client.remove_chat_member(self._thread_id, added_member_id)
             except HttpResponseError as e:
                 print(e)
                 return
@@ -341,8 +326,8 @@ async def main():
     await sample.send_read_receipt_async()
     await sample.list_read_receipts_async()
     await sample.delete_message_async()
-    await sample.list_members_async()
     await sample.add_members_async()
+    await sample.list_members_async()
     await sample.remove_member_async()
     await sample.send_typing_notification_async()
     await sample.delete_thread_async()

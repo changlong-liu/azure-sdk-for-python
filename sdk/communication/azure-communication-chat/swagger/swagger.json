@@ -12,7 +12,7 @@
     "/chat/threads/{threadId}/readreceipts": {
       "get": {
         "tags": [
-          "Conversations"
+          "Threads"
         ],
         "summary": "Gets read receipts for a thread.",
         "operationId": "ListReadReceipts",
@@ -50,7 +50,7 @@
       },
       "post": {
         "tags": [
-          "Conversations"
+          "Threads"
         ],
         "summary": "Posts a read receipt event to a thread, on behalf of a user.",
         "operationId": "SendReadReceipt",
@@ -117,18 +117,18 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Details of the message to create.",
+            "description": "Details of the message to send.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateMessageRequest"
+              "$ref": "#/definitions/SendMessageRequest"
             }
           }
         ],
         "responses": {
           "201": {
-            "description": "Message created, the `Location` header contains the URL for the newly created message.",
+            "description": "Message sent, the `Location` header contains the URL for the newly sent message.",
             "schema": {
-              "$ref": "#/definitions/CreateMessageResponse"
+              "$ref": "#/definitions/SendMessageResult"
             }
           }
         },
@@ -183,7 +183,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ListMessagesResponse"
+              "$ref": "#/definitions/ListMessagesResult"
             }
           }
         },
@@ -510,7 +510,7 @@
           "201": {
             "description": "Thread created, the `Location` header contains the URL for the newly created thread.",
             "schema": {
-              "$ref": "#/definitions/CreateThreadResponse"
+              "$ref": "#/definitions/CreateThreadResult"
             }
           }
         },
@@ -561,7 +561,7 @@
           "200": {
             "description": "Request successful. The action returns a `GetThreadsResponse` resource.",
             "schema": {
-              "$ref": "#/definitions/ListThreadsResponse"
+              "$ref": "#/definitions/ListThreadsResult"
             }
           }
         },
@@ -704,27 +704,15 @@
           "description": "Read receipt timestamp.",
           "type": "integer",
           "readOnly": true
-        },
-        "clientMessageId": {
-          "description": "Client message id specified in the Microsoft.AzureCommunicationService.Gateway.Models.Client.CreateMessageRequest.\r\nThis Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client deduping, among other client usages.",
-          "type": "string",
-          "readOnly": true,
-          "example": "1591137790240"
         }
       }
     },
     "PostReadReceiptRequest": {
       "required": [
-        "clientMessageId",
         "messageId"
       ],
       "type": "object",
       "properties": {
-        "clientMessageId": {
-          "description": "The client message Id specified when the message was sent.\r\nThis Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client deduping, among other client usages.",
-          "type": "string",
-          "example": "18446744073709551615"
-        },
         "messageId": {
           "description": "Id of the latest message read by current user.",
           "type": "string",
@@ -743,17 +731,12 @@
         "modelAsString": true
       }
     },
-    "CreateMessageRequest": {
+    "SendMessageRequest": {
       "required": [
         "content"
       ],
       "type": "object",
       "properties": {
-        "clientMessageId": {
-          "description": "This Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client deduping, among other client usages.",
-          "type": "string",
-          "example": "18446744073709551615"
-        },
         "priority": {
           "$ref": "#/definitions/MessagePriority"
         },
@@ -769,7 +752,7 @@
         }
       }
     },
-    "CreateMessageResponse": {
+    "SendMessageResult": {
       "type": "object",
       "properties": {
         "id": {
@@ -777,12 +760,6 @@
           "type": "string",
           "readOnly": true,
           "example": "123456789"
-        },
-        "clientMessageId": {
-          "description": "This Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client deduping, among other client usages.",
-          "type": "string",
-          "readOnly": true,
-          "example": "18446744073709551615"
         }
       }
     },
@@ -799,12 +776,6 @@
           "description": "Type of the message.\r\n            \r\nPossible values:\r\n    - Text\r\n    - ThreadActivity/TopicUpdate\r\n    - ThreadActivity/AddMember\r\n    - ThreadActivity/DeleteMember",
           "type": "string",
           "example": "Text"
-        },
-        "clientMessageId": {
-          "description": "The client message Id specified when the message was sent.\r\nThis Id is a client-specific Id in a numeric unsigned Int64 format. It can be used for client deduping, among other client usages.",
-          "type": "string",
-          "readOnly": true,
-          "example": "18446744073709551615"
         },
         "priority": {
           "$ref": "#/definitions/MessagePriority"
@@ -851,7 +822,7 @@
         }
       }
     },
-    "ListMessagesResponse": {
+    "ListMessagesResult": {
       "type": "object",
       "properties": {
         "messages": {
@@ -884,23 +855,10 @@
         }
       }
     },
-    "MemberRole": {
-      "description": "Role of the thread member. The valid value should be \"User\" or \"Admin\".",
-      "enum": [
-        "Admin",
-        "User"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "MemberRole",
-        "modelAsString": true
-      }
-    },
     "ThreadMember": {
       "description": "A member of the thread.",
       "required": [
-        "id",
-        "memberRole"
+        "id"
       ],
       "type": "object",
       "properties": {
@@ -913,9 +871,6 @@
           "description": "Display name for the thread member.",
           "type": "string",
           "example": "Bob"
-        },
-        "memberRole": {
-          "$ref": "#/definitions/MemberRole"
         },
         "shareHistoryTime": {
           "description": "Time from which the group chat history is shared with the member in EPOCH time (milliseconds).\r\n            \r\nPossible values:\r\n - `0` which means share everything\r\n - `-1` which means share nothing\r\n - `1594691284031` which is epoch time equivalent to 7/14/2020 1:48:04 AM +00:00",
@@ -951,11 +906,6 @@
           "type": "string",
           "example": "Lunch Thread"
         },
-        "isStickyThread": {
-          "description": "Flag if a thread is sticky - sticky thread has an immutable member list, members cannot be added or removed.\r\nSticky threads are only supported for 1-1 chat, i.e. with only two members.",
-          "type": "boolean",
-          "example": false
-        },
         "members": {
           "description": "Members to be added to the thread.",
           "type": "array",
@@ -965,7 +915,7 @@
         }
       }
     },
-    "CreateThreadResponse": {
+    "CreateThreadResult": {
       "type": "object",
       "properties": {
         "id": {
@@ -1004,7 +954,7 @@
         }
       }
     },
-    "ListThreadsResponse": {
+    "ListThreadsResult": {
       "type": "object",
       "properties": {
         "threads": {

@@ -8,15 +8,15 @@
 
 try:
     from ._models_py3 import AddThreadMembersRequest
-    from ._models_py3 import CreateMessageRequest
-    from ._models_py3 import CreateMessageResponse
     from ._models_py3 import CreateThreadRequest
-    from ._models_py3 import CreateThreadResponse
-    from ._models_py3 import ListMessagesResponse
-    from ._models_py3 import ListThreadsResponse
+    from ._models_py3 import CreateThreadResult
+    from ._models_py3 import ListMessagesResult
+    from ._models_py3 import ListThreadsResult
     from ._models_py3 import Message
     from ._models_py3 import PostReadReceiptRequest
     from ._models_py3 import ReadReceipt
+    from ._models_py3 import SendMessageRequest
+    from ._models_py3 import SendMessageResult
     from ._models_py3 import Thread
     from ._models_py3 import ThreadInfo
     from ._models_py3 import ThreadMember
@@ -24,15 +24,15 @@ try:
     from ._models_py3 import UpdateThreadRequest
 except (SyntaxError, ImportError):
     from ._models import AddThreadMembersRequest  # type: ignore
-    from ._models import CreateMessageRequest  # type: ignore
-    from ._models import CreateMessageResponse  # type: ignore
     from ._models import CreateThreadRequest  # type: ignore
-    from ._models import CreateThreadResponse  # type: ignore
-    from ._models import ListMessagesResponse  # type: ignore
-    from ._models import ListThreadsResponse  # type: ignore
+    from ._models import CreateThreadResult  # type: ignore
+    from ._models import ListMessagesResult  # type: ignore
+    from ._models import ListThreadsResult  # type: ignore
     from ._models import Message  # type: ignore
     from ._models import PostReadReceiptRequest  # type: ignore
     from ._models import ReadReceipt  # type: ignore
+    from ._models import SendMessageRequest  # type: ignore
+    from ._models import SendMessageResult  # type: ignore
     from ._models import Thread  # type: ignore
     from ._models import ThreadInfo  # type: ignore
     from ._models import ThreadMember  # type: ignore
@@ -40,26 +40,24 @@ except (SyntaxError, ImportError):
     from ._models import UpdateThreadRequest  # type: ignore
 
 from ._azure_communication_chat_service_enums import (
-    MemberRole,
     MessagePriority,
 )
 
 __all__ = [
     'AddThreadMembersRequest',
-    'CreateMessageRequest',
-    'CreateMessageResponse',
     'CreateThreadRequest',
-    'CreateThreadResponse',
-    'ListMessagesResponse',
-    'ListThreadsResponse',
+    'CreateThreadResult',
+    'ListMessagesResult',
+    'ListThreadsResult',
     'Message',
     'PostReadReceiptRequest',
     'ReadReceipt',
+    'SendMessageRequest',
+    'SendMessageResult',
     'Thread',
     'ThreadInfo',
     'ThreadMember',
     'UpdateMessageRequest',
     'UpdateThreadRequest',
-    'MemberRole',
     'MessagePriority',
 ]

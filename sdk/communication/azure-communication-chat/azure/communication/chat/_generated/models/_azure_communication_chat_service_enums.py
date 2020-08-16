@@ -26,13 +26,6 @@ class _CaseInsensitiveEnumMeta(EnumMeta):
             raise AttributeError(name)
 
 
-class MemberRole(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
-    """Role of the thread member. The valid value should be "User" or "Admin".
-    """
-
-    ADMIN = "Admin"
-    USER = "User"
-
 class MessagePriority(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
 
     NORMAL = "Normal"
