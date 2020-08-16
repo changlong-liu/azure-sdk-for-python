@@ -47,13 +47,13 @@ class TestChatClient(unittest.TestCase):
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
         topic="test topic",
-        members=[ThreadMember(
+        thread_members=[ThreadMember(
             id='8:spool:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
             display_name='name',
             share_history_time='0'
         )]
 
-        self.assertRaises(HttpResponseError, chat_client.create_chat_thread, topic=topic, members=members)
+        self.assertRaises(HttpResponseError, chat_client.create_chat_thread, topic=topic, thread_members=thread_members)
 
     def test_update_chat_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"

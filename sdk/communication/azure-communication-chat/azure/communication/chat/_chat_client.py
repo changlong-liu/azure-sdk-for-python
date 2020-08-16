@@ -18,7 +18,6 @@ from ._generated.models import (
     AddThreadMembersRequest,
     CreateThreadRequest,
     SendMessageRequest,
-    MessagePriority,
     PostReadReceiptRequest,
     UpdateMessageRequest,
     UpdateThreadRequest
@@ -236,7 +235,7 @@ class ChatClient(object):
         priority = kwargs.pop("priority", None)
         sender_display_name = kwargs.pop("sender_display_name", None)
 
-        create_message_request=SendMessageRequest(
+        create_message_request = SendMessageRequest(
             content=content,
             priority=priority,
             sender_display_name=sender_display_name
