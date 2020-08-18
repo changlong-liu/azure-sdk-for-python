@@ -8,8 +8,6 @@ from .._chat_thread_client import ChatThreadClient as ChatThreadClientBase
 from .._generated.aio import AzureCommunicationChatService
 from .._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 
-POLLING_INTERVAL = 5
-
 
 class ChatThreadClient(ChatThreadClientBase):
     """A client to interact with the AzureCommunicationService Chat gateway.
@@ -24,9 +22,6 @@ class ChatThreadClient(ChatThreadClientBase):
         Access Token
     :param str endpoint:
         The endpoint of the Azure Communication resource.
-    :keyword int polling_interval:
-        Default waiting time between two polls for LRO operations if no
-        Retry-After header is present.
     """
     def __init__(
             self,
@@ -36,18 +31,15 @@ class ChatThreadClient(ChatThreadClientBase):
             **kwargs  # type: Any
     ):
         # type: (...) -> None
-        polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
         super(ChatThreadClient, self).__init__(
             thread_id,
             endpoint,
             credential,
-            polling_interval=polling_interval,
             **kwargs)
 
         self._client = AzureCommunicationChatService(
             endpoint,
             authentication_policy=CommunicationUserCredentialPolicy(CommunicationUserCredential(credential)),
-            polling_interval=polling_interval,
             **kwargs)
 
     async def __aenter__(self):

@@ -5,13 +5,12 @@
 # --------------------------------------------------------------------------
 
 from azure.core.tracing.decorator_async import distributed_trace_async
+from azure.core.tracing.decorator import distributed_trace
 from .._chat_client import ChatClient as ChatClientBase
 from .._generated.aio import AzureCommunicationChatService
 from .._generated.models import CreateChatThreadRequest
 from .._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 from ._chat_thread_client_async import ChatThreadClient
-
-POLLING_INTERVAL = 5
 
 
 class ChatClient(ChatClientBase):
@@ -26,9 +25,6 @@ class ChatClient(ChatClientBase):
     :param str credential:
         The credentials with which to authenticate. The value is an User
         Access Token
-    :keyword int polling_interval:
-        Default waiting time between two polls for LRO operations if no
-        Retry-After header is present.
     """
     def __init__(
             self, endpoint,  # type: str
@@ -36,18 +32,14 @@ class ChatClient(ChatClientBase):
             **kwargs  # type: Any
     ):
         # type: (...) -> None
-        polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
-
         super(ChatClient, self).__init__(
             endpoint,
             credential,
-            polling_interval=polling_interval,
             **kwargs)
 
         self._client = AzureCommunicationChatService(
             endpoint,
             authentication_policy=CommunicationUserCredentialPolicy(CommunicationUserCredential(self._credential)),
-            polling_interval=polling_interval,
             **kwargs)
 
     @distributed_trace_async
@@ -64,7 +56,7 @@ class ChatClient(ChatClientBase):
         :param thread_members: Required. Members to be added to the thread.
         :type thread_members: list[~azure.communication.chat.models.ThreadMember]
         :return: ChatThreadClient
-        :rtype: ~azure.communication.chat.ChatThreadClient
+        :rtype: ~azure.communication.chat.aio.ChatThreadClient
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
         """
         if not topic:
@@ -86,7 +78,32 @@ class ChatClient(ChatClientBase):
             thread_id=thread_id,
             endpoint=self._endpoint,
             credential=self._credential,
-            polling_interval=self._polling_interval
+            **kwargs
+        )
+
+    @distributed_trace
+    def get_chat_thread_client(
+        self, thread_id, # type: str
+        **kwargs  # type: Any
+    ):
+        # type: (...) -> ChatThreadClient
+        """
+        Get ChatThreadClient by providing a thread_id.
+
+        :param thread_id: Required. The thread id.
+        :type thread_id: str
+        :return: ChatThreadClient
+        :rtype: ~azure.communication.chat.aio.ChatThreadClient
+        :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+        """
+        if not thread_id:
+            raise ValueError("thread_id cannot be None.")
+
+        return ChatThreadClient(
+            thread_id=thread_id,
+            endpoint=self._endpoint,
+            credential=self._credential,
+            **kwargs
         )
 
     async def __aenter__(self):

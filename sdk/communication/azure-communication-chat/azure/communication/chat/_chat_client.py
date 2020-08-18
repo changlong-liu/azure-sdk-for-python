@@ -17,12 +17,12 @@ from ._chat_thread_client import ChatThreadClient
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 from ._generated import AzureCommunicationChatService
 from ._generated.models import CreateChatThreadRequest
+from ._utils import _to_utc_datetime
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
-
-POLLING_INTERVAL = 5
+    from datetime import datetime
 
 
 class ChatClient(object):
@@ -36,9 +36,6 @@ class ChatClient(object):
     :param str credential:
         The credentials with which to authenticate. The value is an User
         Access Token
-    :keyword int polling_interval:
-        Default waiting time between two polls for LRO operations if no
-        Retry-After header is present.
     """
     def __init__(
             self,
@@ -64,11 +61,9 @@ class ChatClient(object):
 
         self._endpoint = endpoint
         self._credential = credential
-        self._polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
 
         self._client = AzureCommunicationChatService(
             endpoint,
-            polling_interval=self._polling_interval,
             authentication_policy=CommunicationUserCredentialPolicy(CommunicationUserCredential(credential)),
             **kwargs
         )
@@ -95,7 +90,8 @@ class ChatClient(object):
             thread_id=thread_id,
             endpoint=self._endpoint,
             credential=self._credential,
-            polling_interval=self._polling_interval)
+            **kwargs
+        )
 
     @distributed_trace
     def create_thread(
@@ -133,7 +129,7 @@ class ChatClient(object):
             thread_id=thread_id,
             endpoint=self._endpoint,
             credential=self._credential,
-            polling_interval=self._polling_interval
+            **kwargs
         )
 
     @distributed_trace
@@ -165,8 +161,7 @@ class ChatClient(object):
         """Gets the list of chat threads of a user.
 
         :keyword int page_size: The number of threads being requested.
-        :keyword long start_time: The start time where the range query. This is represented by number of
-         seconds since epoch time.
+        :keyword ~datetime.datetime start_time: The start time(UTC) where the range query.
         :keyword str sync_state: The continuation token that previous request obtained. This is used for
          paging.
         :keyword callable cls: A custom type or function that will be passed the direct response

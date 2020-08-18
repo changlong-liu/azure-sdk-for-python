@@ -22,12 +22,12 @@ from ._generated.models import (
     UpdateChatMessageRequest,
     UpdateChatThreadRequest
 )
+from ._utils import _to_utc_datetime
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
-
-POLLING_INTERVAL = 5
+    from datetime import datetime
 
 
 class ChatThreadClient(object):
@@ -40,14 +40,11 @@ class ChatThreadClient(object):
 
     :param str thread_id:
         The unique thread id.
+    :param str endpoint:
+        The endpoint of the Azure Communication resource.
     :param str credential:
         The credentials with which to authenticate. The value is an User
         Access Token
-    :param str endpoint:
-        The endpoint of the Azure Communication resource.
-    :keyword int polling_interval:
-        Default waiting time between two polls for LRO operations if no
-        Retry-After header is present.
     """
     def __init__(
             self,
@@ -78,11 +75,9 @@ class ChatThreadClient(object):
         self._thread_id = thread_id
         self._endpoint = endpoint
         self._credential = credential
-        self._polling_interval = kwargs.pop("polling_interval", POLLING_INTERVAL)
 
         self._client = AzureCommunicationChatService(
             endpoint,
-            polling_interval=self._polling_interval,
             authentication_policy=CommunicationUserCredentialPolicy(CommunicationUserCredential(credential)),
             **kwargs
         )
@@ -179,7 +174,7 @@ class ChatThreadClient(object):
 
         :param content: Required. Chat message content.
         :type content: str
-        :keyword Union[str,ChatMessagePriorityDto] priority: Message priority.
+        :keyword ChatMessagePriorityDto priority: Message priority.
         :keyword str sender_display_name: The display name of the message sender. This property is used to
           populate sender name for push notifications.
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -236,8 +231,7 @@ class ChatThreadClient(object):
         """Gets a list of messages from a thread.
 
         :keyword int page_size: The number of messages being requested.
-        :keyword long start_time: The start time where the range query. This is represented
-         by number of seconds since epoch time.
+        :keyword ~datetime.datetime start_time: The start time(UTC) where the range query.
         :keyword str sync_state: The continuation token that previous request obtained. This is
          used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -380,7 +374,7 @@ class ChatThreadClient(object):
         return self._client.close()
 
     def __enter__(self):
-        # type: () -> ChatClient
+        # type: () -> ChatThreadClient
         self._client.__enter__()  # pylint:disable=no-member
         return self
 
