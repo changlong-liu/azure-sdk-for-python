@@ -117,11 +117,7 @@ class ChatClient(object):
 
         create_thread_request = CreateChatThreadRequest(topic=topic, members=thread_members)
 
-        create_chat_thread_result = None
-        try:
-            create_chat_thread_result = self._client.create_chat_thread(create_thread_request, **kwargs)
-        except:
-            raise
+        create_chat_thread_result = self._client.create_chat_thread(create_thread_request, **kwargs)
 
         thread_id = create_chat_thread_result.id
 
