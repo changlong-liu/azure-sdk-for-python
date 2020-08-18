@@ -42,7 +42,9 @@ a new chat thread with this token. It is because the initiator of the create req
 user_id = token_response.identity
 ```
 
-## Create the chat client
+## Create the Chat Client
+
+This will allow you to create, get, list or delete chat threads.
 
 ```python
 from azure.communication.chat import ChatClient
@@ -50,6 +52,21 @@ from azure.communication.chat import ChatClient
 endpoint = "https://<RESOURCE_NAME>.communcationservices.azure.com"
 token = "<User Access Tokens>"
 chat_client = ChatClient(token, endpoint)
+```
+
+## Create Chat Thread Client
+
+This will allow you to perform operations specific to a chat thread, like update
+the chat thread topic, send message, add members to chat thread, etc.
+
+```python
+chat_thread_client = chat_client.create_thread(topic, thread_members)
+```
+
+If you have created a chat thread before and you have its thread_id, you can create it by:
+
+```python
+chat_thread_client = chat_client.get_chat_thread_client(thread_id)
 ```
 
 # Key concepts
@@ -61,42 +78,49 @@ Once you initialized a `ChatClient` class, you can do the following chat operati
 ## Create, get, update, and delete threads
 
 ```Python
-create_chat_thread(topic, thread_members, **kwargs)
-get_chat_thread(thread_id, **kwargs)
-list_chat_threads(**kwargs)
-update_chat_thread(thread_id, topic, **kwargs)
-delete_chat_thread(thread_id, **kwargs)
+create_thread(topic, thread_members, **kwargs)
+get_thread(thread_id, **kwargs)
+list_threads(**kwargs)
+delete_thread(thread_id, **kwargs)
+```
+
+Once you initialized a `ChatThreadClient` class, you can do the following chat operations:
+
+## Update thread
+
+```python
+update_thread(topic, **kwargs)
 ```
 
 ## Send, get, update, and delete messages
 
 ```Python
-send_chat_message(thread_id, content, **kwargs)
-get_chat_message(thread_id, message_id, **kwargs)
-list_chat_messages(thread_id, **kwargs)
-update_chat_message(thread_id, message_id, content, **kwargs)
-delete_chat_message(thread_id, message_id, **kwargs)
+send_message(content, **kwargs)
+get_message(message_id, **kwargs)
+list_messages(**kwargs)
+update_message(message_id, content, **kwargs)
+delete_message(message_id, **kwargs)
 ```
 
 ## Get, add, and remove members
 
 ```Python
-list_chat_members(thread_id, **kwargs)
-add_chat_members(thread_id, thread_members, **kwargs)
-remove_chat_member(thread_id, member_id, **kwargs)
+list_members(**kwargs)
+add_members(thread_members, **kwargs)
+remove_member(member_id, **kwargs)
 ```
 
 ## Send typing notification
 
 ```python
-send_typing_notification(thread_id, **kwargs)
+send_typing_notification(**kwargs)
 ```
 
 ## Send and get read receipt
 
 ```Python
-send_read_receipt(thread_id, message_id, **kwargs)
-list_read_receipts(thread_id, **kwargs)
+send_read_receipt(message_id, **kwargs)
+list_read_receipts(**kwargs)
 ```
 
 # Examples
@@ -112,42 +136,42 @@ The following sections provide several code snippets covering some of the most c
 
 ### Create a thread
 
-Use the `create_chat_thread` method to create a chat thread.
+Use the `create_thread` method to create a chat thread client object.
 
 - Use `topic` to give a thread topic;
-- Use `thread_members` to list the `ThreadMember` to be added to the thread;
-- `id`, required, it is the id of the thread member in the formatm ``8:acs:ResourceId_AcsUserId``.
+- Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
+- `id`, required, it is the id of the thread member in the format ``8:acs:ResourceId_AcsUserId``. You must at least include the user with id is token_response.identity when you get User Access token by token_response.token, because the initiator of the create chat thread request must be in the chat thread member list.
 - `display_name`, optional, is the display name for the thread member.
 - `share_history_time`, optional, time from which the group chat history is shared with the member in EPOCH time (milliseconds).
 '0' means share everything, '-1' means share nothing
 
-`CreateThreadResult` is the result returned from creating a thread, it contains an `id` which is the unique ID of the thread.
+`ChatThreadClient` is the result returned from creating a thread, it contains an `id` which is the unique ID of the thread, and you can use it to perform other chat operations to this created chat thread
 
 ```Python
-from azure.communication.chat.models import ThreadMember
+from azure.communication.chat.models import ChatThreadMember
 topic="test topic",
-thread_members=[ThreadMember(
+thread_members=[ChatThreadMember(
     id='<user identity>',
     display_name='name',
     share_history_time='0'
 )],
 
-create_thread_result = chat_client.create_chat_thread(topic, thread_members)
-thread_id = create_thread_result.id
+chat_thread_client = chat_client.create_thread(topic, thread_members)
+thread_id = chat_thread_client.thread_id
 ```
 
 ### Get a thread
 
-The `get_chat_thread` method retrieves a thread from the service.
+The `get_thread` method retrieves a thread from the service.
 `thread_id` is the unique ID of the thread.
 
 ```Python
-thread = chat_client.get_chat_thread(thread_id)
+thread = chat_client.get_thread(thread_id)
 ```
 
 ### Update a thread
 
-Use `update_chat_thread` method to update a thread's properties
+Use `update_thread` method to update a thread's properties
 `thread_id` is the unique ID of the thread.
 `topic` is used to describe the change of the thread topic
 
@@ -155,132 +179,125 @@ Use `update_chat_thread` method to update a thread's properties
 
 ```python
 topic="new topic"
-chat_client.update_chat_thread(thread_id, topic)
+chat_thread_client.update_thread(topic=topic)
 ```
 
 ### Delete a thread
 
-Use `delete_chat_thread` method to delete a thread
+Use `delete_thread` method to delete a thread
 `thread_id` is the unique ID of the thread.
 
 ```Python
-chat_client.delete_chat_thread(thread_id)
+chat_client.delete_thread(thread_id)
 ```
 
 ## Message Operations
 
 ### Send a message
 
-Use `send_chat_message` method to sends a message to a thread identified by threadId.
+Use `send_message` method to sends a message to a thread identified by threadId.
 
 - Use `content` to provide the chat message content, it is required
 - Use `priority` to specify the message priority level, such as 'Normal' or 'High', if not speficied, 'Normal' will be set
 - Use `sender_display_name` to specify the display name of the sender, if not specified, empty name will be set
 
-`CreateMessageResult` is the response returned from sending a message, it contains an id, which is the unique ID of the message.
+`SendMessageResult` is the response returned from sending a message, it contains an id, which is the unique ID of the message.
 
 ```Python
-from azure.communication.chat.models import MessagePriority
+from azure.communication.chat.models import ChatMessagePriorityDto
 
 content='hello world'
-priority=MessagePriority.NORMAL
+priority=ChatMessagePriorityDto.NORMAL
 sender_display_name='sender name'
 
-create_message_result= chat_client.send_chat_message(thread_id, content, priority=priority, sender_display_name=sender_display_name)
+send_message_result = chat_thread_client.send_message(content, priority=priority, sender_display_name=sender_display_name)
 ```
 
 ### Get a message
 
-The `get_chat_message` method retrieves a message from the service.
-`thread_id` is the unique ID of the thread.
+The `get_message` method retrieves a message from the service.
 `message_id` is the unique ID of the message.
 
-`Message` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.models.Message
+`ChatMessage` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.models.Message
 
 ```python
-message = chat_client.get_chat_message(thread_id, message_id)
+chat_message = chat_thread_client.get_message(message_id)
 ```
 
 ### Get messages
 
-The `list_chat_messages` method retrieves messages from the service.
-`thread_id` is the unique ID of the thread.
+The `list_messages` method retrieves messages from the service.
 
-`ListMessagesResult` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.models.ListMessagesResult
+`ListChatMessagesResult` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.models.ListMessagesResult
 
 ```Python
-list_messages_result = chat_client.list_chat_messages(thread_id)
-print(list_messages_result.messages)
+list_chat_messages_result = chat_thread_client.list_messages()
+print(list_chat_messages_result.messages)
 ```
 
 ### Update a message
 
-Use `update_chat_message` to update a message identified by threadId and messageId.
-`thread_id` is the unique ID of the thread.
+Use `update_message` to update a message identified by threadId and messageId.
 `message_id` is the unique ID of the message.
-`conent` is the message content to be updated.
+`content` is the message content to be updated.
 
 - Use `content` to provide a new chat message content;
 
 ```Python
 content = "updated message content"
-chat_client.update_chat_message(thread_id, message_id, content)
+chat_thread_client.update_message(message_id, content=content)
 ```
 
 ### Delete a message
 
-Use `delete_chat_message` to delete a message.
-`thread_id` is the unique ID of the thread.
+Use `delete_message` to delete a message.
 `message_Id` is the unique ID of the message.
 
 ```python
-chat_client.delete_chat_message(thread_id, message_id)
+chat_thread_client.delete_message(message_id)
 ```
 
 ## Thread Member Operations
 
 ### Get thread members
 
-Use `list_chat_members` to retrieve the members of the thread identified by threadId.
-`thread_id` is the unique ID of the thread.
+Use `list_members` to retrieve the members of the thread identified by threadId.
 
-`[ThreadMember]` is the response returned from listing members
+`[ChatThreadMember]` is the response returned from listing members
 
 ```python
-members = chat_client.list_chat_members(thread_id)
+members = chat_thread_client.list_members()
 for member in members:
     print(member)
 ```
 
 ### Add thread members
 
-Use `add_chat_members` method to add thread members to the thread identified by threadId.
-`thread_id` is the unique ID of the thread.
+Use `add_members` method to add thread members to the thread identified by threadId.
 
-- Use `thread_members` to list the `ThreadMember` to be added to the thread;
+- Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
 - `id`, required, it is the id of the thread member in the formatm ``8:acs:ResourceId_AcsUserId``.
 - `display_name`, optional, is the display name for the thread member.
 - `share_history_time`, optional, time from which the group chat history is shared with the member in EPOCH time (milliseconds).
 '0' means share everything, '-1' means share nothing
 
 ```Python
-from azure.communication.chat.models import ThreadMember
-member = ThreadMember(
+from azure.communication.chat.models import ChatThreadMember
+member = ChatThreadMember(
     id='<user id>',
     display_name='name',
     share_history_time='0')
 thread_members = [member]
-chat_client.add_chat_members(self._thread_id, thread_members)
+chat_thread_client.add_members(thread_members)
 ```
 
 ### Remove thread member
 
-Use `remove_chat_member` method to remove thread member from the thread identified by threadId.
-`thread_id` is the unique ID of the thread.
+Use `remove_member` method to remove thread member from the thread identified by threadId.
 `member_id` is the ID of the member to be removed from the thread.
 
 ```python
-chat_client.remove_chatmember(thread_id, member_id)
+chat_thread_client.remove_member(member_id)
 ```
 
 ## Events Operations
@@ -288,31 +305,28 @@ chat_client.remove_chatmember(thread_id, member_id)
 ### Send typing notification
 
 Use `send_typing_notification` method to post a typing notification event to a thread, on behalf of a user.
-`thread_id` is the unique ID of the thread.
 
 ```Python
-chat_client.send_typing_notification(thread_id)
+chat_chat_client.send_typing_notification()
 ```
 
 ### Send read receipt
 
 Use `send_read_receipt` method to post a read receipt event to a thread, on behalf of a user.
-`thread_id` is the unique ID of the thread.
 
 ```python
 
-chat_client.send_read_receipt(thread_id, mesage_id)
+chat_thread_client.send_read_receipt(message_id)
 ```
 
 ### Get read receipts
 
-`list_read_receipts` method retreives read receipts for a thread.
-`thread_id` is the unique ID of the thread.
+`list_read_receipts` method retrieves read receipts for a thread.
 
 `[ReadReceipt]` is the response returned from listing read receipts
 
 ```python
-read_receipts = chat_client.list_read_receipts(thread_id)
+read_receipts = chat_thread_client.list_read_receipts()
 ```
 
 ## Sample Code
@@ -320,16 +334,14 @@ read_receipts = chat_client.list_read_receipts(thread_id)
 These are code samples that show common scenario operations with the Azure Communication Chat client library.
 The async versions of the samples (the python sample files appended with `_async`) show asynchronous operations,
 and require Python 3.5 or later.
-Before run the sample code, refer to [Prerequisites](#Prerequisites) to create a resource and get an User Access Token,
-and set them into Environment Variables
+Before run the sample code, refer to [Prerequisites](#Prerequisites) to create a resource, get an User Access Token, and its user identity
+then set them into Environment Variables
 
 ```bash
 set AZURE_COMMUNICATION_SERVICE_ENDPOINT="https://<RESOURCE_NAME>.communcationservices.azure.com"
-set TOKEN="<user access token>"
-```
+set TOKEN="<user access token, it is from token_response.token>"
+set USER_ID="<user identity, it is from token_response.identity>"
 
-```python
-pip install pyjwt
 python samples\chat_sample.py
 python samples\chat_sample_async.py
 ```

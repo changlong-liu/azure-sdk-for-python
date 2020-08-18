@@ -26,7 +26,9 @@ class _CaseInsensitiveEnumMeta(EnumMeta):
             raise AttributeError(name)
 
 
-class MessagePriority(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+class ChatMessagePriorityDto(with_metaclass(_CaseInsensitiveEnumMeta, str, Enum)):
+    """The chat message priority.
+    """
 
     NORMAL = "Normal"
     HIGH = "High"

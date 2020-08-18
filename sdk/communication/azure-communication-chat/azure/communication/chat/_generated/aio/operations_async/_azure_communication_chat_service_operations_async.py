@@ -19,17 +19,17 @@ ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T
 
 class AzureCommunicationChatServiceOperationsMixin:
 
-    async def list_read_receipts(
+    async def list_chat_read_receipts(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         **kwargs
     ) -> List["models.ReadReceipt"]:
         """Gets read receipts for a thread.
 
         Gets read receipts for a thread.
 
-        :param thread_id: Thread id to get the read receipts for.
-        :type thread_id: str
+        :param chat_thread_id: Thread id to get the read receipts for.
+        :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
         :rtype: list[~azure.communication.chat.models.ReadReceipt]
@@ -41,10 +41,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.list_read_receipts.metadata['url']  # type: ignore
+        url = self.list_chat_read_receipts.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -70,11 +70,11 @@ class AzureCommunicationChatServiceOperationsMixin:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    list_read_receipts.metadata = {'url': '/chat/threads/{threadId}/readreceipts'}  # type: ignore
+    list_chat_read_receipts.metadata = {'url': '/chat/threads/{chatThreadId}/readreceipts'}  # type: ignore
 
-    async def send_read_receipt(
+    async def send_chat_read_receipt(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         body: "models.PostReadReceiptRequest",
         **kwargs
     ) -> None:
@@ -82,8 +82,8 @@ class AzureCommunicationChatServiceOperationsMixin:
 
         Posts a read receipt event to a thread, on behalf of a user.
 
-        :param thread_id: Id of the thread.
-        :type thread_id: str
+        :param chat_thread_id: Id of the thread.
+        :type chat_thread_id: str
         :param body: Request payload for sending a read receipt.
         :type body: ~azure.communication.chat.models.PostReadReceiptRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -98,10 +98,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
-        url = self.send_read_receipt.metadata['url']  # type: ignore
+        url = self.send_chat_read_receipt.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -128,22 +128,22 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    send_read_receipt.metadata = {'url': '/chat/threads/{threadId}/readreceipts'}  # type: ignore
+    send_chat_read_receipt.metadata = {'url': '/chat/threads/{chatThreadId}/readreceipts'}  # type: ignore
 
-    async def send_message(
+    async def send_chat_message(
         self,
-        thread_id: str,
-        body: "models.SendMessageRequest",
+        chat_thread_id: str,
+        body: "models.SendChatMessageRequest",
         **kwargs
     ) -> "models.SendMessageResult":
         """Sends a message to a thread.
 
         Sends a message to a thread.
 
-        :param thread_id: The thread id to send the message to.
-        :type thread_id: str
+        :param chat_thread_id: The thread id to send the message to.
+        :type chat_thread_id: str
         :param body: Details of the message to send.
-        :type body: ~azure.communication.chat.models.SendMessageRequest
+        :type body: ~azure.communication.chat.models.SendChatMessageRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SendMessageResult, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.SendMessageResult
@@ -156,10 +156,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
-        url = self.send_message.metadata['url']  # type: ignore
+        url = self.send_chat_message.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -173,7 +173,7 @@ class AzureCommunicationChatServiceOperationsMixin:
         header_parameters['Accept'] = 'application/json'
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'SendMessageRequest')
+        body_content = self._serialize.body(body, 'SendChatMessageRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -190,22 +190,22 @@ class AzureCommunicationChatServiceOperationsMixin:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    send_message.metadata = {'url': '/chat/threads/{threadId}/messages'}  # type: ignore
+    send_chat_message.metadata = {'url': '/chat/threads/{chatThreadId}/messages'}  # type: ignore
 
-    async def list_messages(
+    async def list_chat_messages(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         page_size: Optional[int] = None,
         start_time: Optional[int] = None,
         sync_state: Optional[str] = None,
         **kwargs
-    ) -> "models.ListMessagesResult":
+    ) -> "models.ListChatMessagesResult":
         """Gets a list of messages from a thread.
 
         Gets a list of messages from a thread.
 
-        :param thread_id: The thread id of the message.
-        :type thread_id: str
+        :param chat_thread_id: The thread id of the message.
+        :type chat_thread_id: str
         :param page_size: The number of messages being requested.
         :type page_size: int
         :param start_time: The start time where the range query. This is represented by number of
@@ -215,20 +215,20 @@ class AzureCommunicationChatServiceOperationsMixin:
          paging.
         :type sync_state: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListMessagesResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListMessagesResult
+        :return: ListChatMessagesResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.ListChatMessagesResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListMessagesResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListChatMessagesResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.list_messages.metadata['url']  # type: ignore
+        url = self.list_chat_messages.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -254,44 +254,44 @@ class AzureCommunicationChatServiceOperationsMixin:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('ListMessagesResult', pipeline_response)
+        deserialized = self._deserialize('ListChatMessagesResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    list_messages.metadata = {'url': '/chat/threads/{threadId}/messages'}  # type: ignore
+    list_chat_messages.metadata = {'url': '/chat/threads/{chatThreadId}/messages'}  # type: ignore
 
-    async def get_message(
+    async def get_chat_message(
         self,
-        thread_id: str,
-        message_id: str,
+        chat_thread_id: str,
+        chat_message_id: str,
         **kwargs
-    ) -> "models.Message":
+    ) -> "models.ChatMessage":
         """Gets a message by id.
 
         Gets a message by id.
 
-        :param thread_id: The thread id to which the message was sent.
-        :type thread_id: str
-        :param message_id: The message id.
-        :type message_id: str
+        :param chat_thread_id: The thread id to which the message was sent.
+        :type chat_thread_id: str
+        :param chat_message_id: The message id.
+        :type chat_message_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Message, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.Message
+        :return: ChatMessage, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.ChatMessage
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.Message"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ChatMessage"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.get_message.metadata['url']  # type: ignore
+        url = self.get_chat_message.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
-            'messageId': self._serialize.url("message_id", message_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+            'chatMessageId': self._serialize.url("chat_message_id", chat_message_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -311,31 +311,31 @@ class AzureCommunicationChatServiceOperationsMixin:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('Message', pipeline_response)
+        deserialized = self._deserialize('ChatMessage', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    get_message.metadata = {'url': '/chat/threads/{threadId}/messages/{messageId}'}  # type: ignore
+    get_chat_message.metadata = {'url': '/chat/threads/{chatThreadId}/messages/{chatMessageId}'}  # type: ignore
 
-    async def update_message(
+    async def update_chat_message(
         self,
-        thread_id: str,
-        message_id: str,
-        body: "models.UpdateMessageRequest",
+        chat_thread_id: str,
+        chat_message_id: str,
+        body: "models.UpdateChatMessageRequest",
         **kwargs
     ) -> None:
         """Updates a message.
 
         Updates a message.
 
-        :param thread_id: The thread id to which the message was sent.
-        :type thread_id: str
-        :param message_id: The message id.
-        :type message_id: str
+        :param chat_thread_id: The thread id to which the message was sent.
+        :type chat_thread_id: str
+        :param chat_message_id: The message id.
+        :type chat_message_id: str
         :param body: Details of the request to update the message.
-        :type body: ~azure.communication.chat.models.UpdateMessageRequest
+        :type body: ~azure.communication.chat.models.UpdateChatMessageRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -348,11 +348,11 @@ class AzureCommunicationChatServiceOperationsMixin:
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
-        url = self.update_message.metadata['url']  # type: ignore
+        url = self.update_chat_message.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
-            'messageId': self._serialize.url("message_id", message_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+            'chatMessageId': self._serialize.url("chat_message_id", chat_message_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -365,7 +365,7 @@ class AzureCommunicationChatServiceOperationsMixin:
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'UpdateMessageRequest')
+        body_content = self._serialize.body(body, 'UpdateChatMessageRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.patch(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -379,22 +379,22 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    update_message.metadata = {'url': '/chat/threads/{threadId}/messages/{messageId}'}  # type: ignore
+    update_chat_message.metadata = {'url': '/chat/threads/{chatThreadId}/messages/{chatMessageId}'}  # type: ignore
 
-    async def delete_message(
+    async def delete_chat_message(
         self,
-        thread_id: str,
-        message_id: str,
+        chat_thread_id: str,
+        chat_message_id: str,
         **kwargs
     ) -> None:
         """Deletes a message.
 
         Deletes a message.
 
-        :param thread_id: The thread id to which the message was sent.
-        :type thread_id: str
-        :param message_id: The message id.
-        :type message_id: str
+        :param chat_thread_id: The thread id to which the message was sent.
+        :type chat_thread_id: str
+        :param chat_message_id: The message id.
+        :type chat_message_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -406,11 +406,11 @@ class AzureCommunicationChatServiceOperationsMixin:
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.delete_message.metadata['url']  # type: ignore
+        url = self.delete_chat_message.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
-            'messageId': self._serialize.url("message_id", message_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+            'chatMessageId': self._serialize.url("chat_message_id", chat_message_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -432,19 +432,19 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete_message.metadata = {'url': '/chat/threads/{threadId}/messages/{messageId}'}  # type: ignore
+    delete_chat_message.metadata = {'url': '/chat/threads/{chatThreadId}/messages/{chatMessageId}'}  # type: ignore
 
-    async def notify_user_typing(
+    async def send_typing_notification(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         **kwargs
     ) -> None:
         """Posts a typing event to a thread, on behalf of a user.
 
         Posts a typing event to a thread, on behalf of a user.
 
-        :param thread_id: Id of the thread.
-        :type thread_id: str
+        :param chat_thread_id: Id of the thread.
+        :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -456,10 +456,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.notify_user_typing.metadata['url']  # type: ignore
+        url = self.send_typing_notification.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -481,34 +481,34 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    notify_user_typing.metadata = {'url': '/chat/threads/{threadId}/typing'}  # type: ignore
+    send_typing_notification.metadata = {'url': '/chat/threads/{chatThreadId}/typing'}  # type: ignore
 
-    async def list_thread_members(
+    async def list_chat_thread_members(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         **kwargs
-    ) -> List["models.ThreadMember"]:
+    ) -> List["models.ChatThreadMember"]:
         """Gets the members of a thread.
 
         Gets the members of a thread.
 
-        :param thread_id: Thread id to get members for.
-        :type thread_id: str
+        :param chat_thread_id: Thread id to get members for.
+        :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ThreadMember]
+        :return: list of ChatThreadMember, or the result of cls(response)
+        :rtype: list[~azure.communication.chat.models.ChatThreadMember]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[List["models.ThreadMember"]]
+        cls = kwargs.pop('cls', None)  # type: ClsType[List["models.ChatThreadMember"]]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.list_thread_members.metadata['url']  # type: ignore
+        url = self.list_chat_thread_members.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -528,28 +528,28 @@ class AzureCommunicationChatServiceOperationsMixin:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('[ThreadMember]', pipeline_response)
+        deserialized = self._deserialize('[ChatThreadMember]', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    list_thread_members.metadata = {'url': '/chat/threads/{threadId}/members'}  # type: ignore
+    list_chat_thread_members.metadata = {'url': '/chat/threads/{chatThreadId}/members'}  # type: ignore
 
-    async def add_thread_members(
+    async def add_chat_thread_members(
         self,
-        thread_id: str,
-        body: "models.AddThreadMembersRequest",
+        chat_thread_id: str,
+        body: "models.AddChatThreadMembersRequest",
         **kwargs
     ) -> None:
         """Adds thread members to a thread. If members already exist, no change occurs.
 
         Adds thread members to a thread. If members already exist, no change occurs.
 
-        :param thread_id: Id of the thread to add members to.
-        :type thread_id: str
+        :param chat_thread_id: Id of the thread to add members to.
+        :type chat_thread_id: str
         :param body: Thread members to be added to the thread.
-        :type body: ~azure.communication.chat.models.AddThreadMembersRequest
+        :type body: ~azure.communication.chat.models.AddChatThreadMembersRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -562,10 +562,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
-        url = self.add_thread_members.metadata['url']  # type: ignore
+        url = self.add_chat_thread_members.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -578,7 +578,7 @@ class AzureCommunicationChatServiceOperationsMixin:
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'AddThreadMembersRequest')
+        body_content = self._serialize.body(body, 'AddChatThreadMembersRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -592,22 +592,22 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    add_thread_members.metadata = {'url': '/chat/threads/{threadId}/members'}  # type: ignore
+    add_chat_thread_members.metadata = {'url': '/chat/threads/{chatThreadId}/members'}  # type: ignore
 
-    async def remove_thread_member(
+    async def remove_chat_thread_member(
         self,
-        thread_id: str,
-        member_id: str,
+        chat_thread_id: str,
+        chat_member_id: str,
         **kwargs
     ) -> None:
         """Remove a member from a thread.
 
         Remove a member from a thread.
 
-        :param thread_id: Thread id to remove the member from.
-        :type thread_id: str
-        :param member_id: Id of the thread member to remove from the thread.
-        :type member_id: str
+        :param chat_thread_id: Thread id to remove the member from.
+        :type chat_thread_id: str
+        :param chat_member_id: Id of the thread member to remove from the thread.
+        :type chat_member_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -619,11 +619,11 @@ class AzureCommunicationChatServiceOperationsMixin:
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.remove_thread_member.metadata['url']  # type: ignore
+        url = self.remove_chat_thread_member.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
-            'memberId': self._serialize.url("member_id", member_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+            'chatMemberId': self._serialize.url("chat_member_id", chat_member_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -645,32 +645,32 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    remove_thread_member.metadata = {'url': '/chat/threads/{threadId}/members/{memberId}'}  # type: ignore
+    remove_chat_thread_member.metadata = {'url': '/chat/threads/{chatThreadId}/members/{chatMemberId}'}  # type: ignore
 
-    async def create_thread(
+    async def create_chat_thread(
         self,
-        body: "models.CreateThreadRequest",
+        body: "models.CreateChatThreadRequest",
         **kwargs
-    ) -> "models.CreateThreadResult":
+    ) -> "models.CreateChatThreadResult":
         """Creates a chat thread.
 
         Creates a chat thread.
 
         :param body: Request payload for creating a chat thread.
-        :type body: ~azure.communication.chat.models.CreateThreadRequest
+        :type body: ~azure.communication.chat.models.CreateChatThreadRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: CreateThreadResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.CreateThreadResult
+        :return: CreateChatThreadResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.CreateChatThreadResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateThreadResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.CreateChatThreadResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
-        url = self.create_thread.metadata['url']  # type: ignore
+        url = self.create_chat_thread.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
         }
@@ -686,7 +686,7 @@ class AzureCommunicationChatServiceOperationsMixin:
         header_parameters['Accept'] = 'application/json'
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'CreateThreadRequest')
+        body_content = self._serialize.body(body, 'CreateChatThreadRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -697,21 +697,21 @@ class AzureCommunicationChatServiceOperationsMixin:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('CreateThreadResult', pipeline_response)
+        deserialized = self._deserialize('CreateChatThreadResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    create_thread.metadata = {'url': '/chat/threads'}  # type: ignore
+    create_chat_thread.metadata = {'url': '/chat/threads'}  # type: ignore
 
-    async def list_threads(
+    async def list_chat_threads(
         self,
         page_size: Optional[int] = None,
         start_time: Optional[int] = None,
         sync_state: Optional[str] = None,
         **kwargs
-    ) -> "models.ListThreadsResult":
+    ) -> "models.ListChatThreadsResult":
         """Gets the list of chat threads of a user.
 
         Gets the list of chat threads of a user.
@@ -725,17 +725,17 @@ class AzureCommunicationChatServiceOperationsMixin:
          paging.
         :type sync_state: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListThreadsResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListThreadsResult
+        :return: ListChatThreadsResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.ListChatThreadsResult
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListThreadsResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListChatThreadsResult"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.list_threads.metadata['url']  # type: ignore
+        url = self.list_chat_threads.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
         }
@@ -763,28 +763,28 @@ class AzureCommunicationChatServiceOperationsMixin:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('ListThreadsResult', pipeline_response)
+        deserialized = self._deserialize('ListChatThreadsResult', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    list_threads.metadata = {'url': '/chat/threads'}  # type: ignore
+    list_chat_threads.metadata = {'url': '/chat/threads'}  # type: ignore
 
-    async def update_thread(
+    async def update_chat_thread(
         self,
-        thread_id: str,
-        body: "models.UpdateThreadRequest",
+        chat_thread_id: str,
+        body: "models.UpdateChatThreadRequest",
         **kwargs
     ) -> None:
         """Updates a thread's properties.
 
         Updates a thread's properties.
 
-        :param thread_id: The id of the thread to update.
-        :type thread_id: str
+        :param chat_thread_id: The id of the thread to update.
+        :type chat_thread_id: str
         :param body: Request payload for updating a chat thread.
-        :type body: ~azure.communication.chat.models.UpdateThreadRequest
+        :type body: ~azure.communication.chat.models.UpdateChatThreadRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -797,10 +797,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         content_type = kwargs.pop("content_type", "application/json")
 
         # Construct URL
-        url = self.update_thread.metadata['url']  # type: ignore
+        url = self.update_chat_thread.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -813,7 +813,7 @@ class AzureCommunicationChatServiceOperationsMixin:
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'UpdateThreadRequest')
+        body_content = self._serialize.body(body, 'UpdateChatThreadRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.patch(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -827,34 +827,34 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    update_thread.metadata = {'url': '/chat/threads/{threadId}'}  # type: ignore
+    update_chat_thread.metadata = {'url': '/chat/threads/{chatThreadId}'}  # type: ignore
 
-    async def get_thread(
+    async def get_chat_thread(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         **kwargs
-    ) -> "models.Thread":
+    ) -> "models.ChatThread":
         """Gets a chat thread.
 
         Gets a chat thread.
 
-        :param thread_id: Thread id to get.
-        :type thread_id: str
+        :param chat_thread_id: Thread id to get.
+        :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: Thread, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.Thread
+        :return: ChatThread, or the result of cls(response)
+        :rtype: ~azure.communication.chat.models.ChatThread
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.Thread"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ChatThread"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.get_thread.metadata['url']  # type: ignore
+        url = self.get_chat_thread.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -874,25 +874,25 @@ class AzureCommunicationChatServiceOperationsMixin:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response)
 
-        deserialized = self._deserialize('Thread', pipeline_response)
+        deserialized = self._deserialize('ChatThread', pipeline_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})
 
         return deserialized
-    get_thread.metadata = {'url': '/chat/threads/{threadId}'}  # type: ignore
+    get_chat_thread.metadata = {'url': '/chat/threads/{chatThreadId}'}  # type: ignore
 
-    async def delete_thread(
+    async def delete_chat_thread(
         self,
-        thread_id: str,
+        chat_thread_id: str,
         **kwargs
     ) -> None:
         """Deletes a thread.
 
         Deletes a thread.
 
-        :param thread_id: Thread id to delete.
-        :type thread_id: str
+        :param chat_thread_id: Thread id to delete.
+        :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -904,10 +904,10 @@ class AzureCommunicationChatServiceOperationsMixin:
         api_version = "2020-09-21-preview2"
 
         # Construct URL
-        url = self.delete_thread.metadata['url']  # type: ignore
+        url = self.delete_chat_thread.metadata['url']  # type: ignore
         path_format_arguments = {
             'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'threadId': self._serialize.url("thread_id", thread_id, 'str'),
+            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
         }
         url = self._client.format_url(url, **path_format_arguments)
 
@@ -929,4 +929,4 @@ class AzureCommunicationChatServiceOperationsMixin:
         if cls:
             return cls(pipeline_response, None, {})
 
-    delete_thread.metadata = {'url': '/chat/threads/{threadId}'}  # type: ignore
+    delete_chat_thread.metadata = {'url': '/chat/threads/{chatThreadId}'}  # type: ignore

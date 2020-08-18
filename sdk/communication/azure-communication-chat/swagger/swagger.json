@@ -9,20 +9,20 @@
     "version": "2020-09-21-preview2"
   },
   "paths": {
-    "/chat/threads/{threadId}/readreceipts": {
+    "/chat/threads/{chatThreadId}/readreceipts": {
       "get": {
         "tags": [
           "Threads"
         ],
         "summary": "Gets read receipts for a thread.",
-        "operationId": "ListReadReceipts",
+        "operationId": "ListChatReadReceipts",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Thread id to get the read receipts for.",
             "required": true,
             "type": "string"
@@ -44,7 +44,7 @@
         },
         "x-ms-examples": {
           "Get thread read receipts": {
-            "$ref": "./examples/Conversations_ListReadReceipts.json"
+            "$ref": "./examples/Conversations_ListChatReadReceipts.json"
           }
         }
       },
@@ -53,14 +53,14 @@
           "Threads"
         ],
         "summary": "Posts a read receipt event to a thread, on behalf of a user.",
-        "operationId": "SendReadReceipt",
+        "operationId": "SendChatReadReceipt",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Id of the thread.",
             "required": true,
             "type": "string"
@@ -85,18 +85,18 @@
         },
         "x-ms-examples": {
           "Post read receipt": {
-            "$ref": "./examples/Conversations_PostReadReceipt.json"
+            "$ref": "./examples/Conversations_SendChatReadReceipt.json"
           }
         }
       }
     },
-    "/chat/threads/{threadId}/messages": {
+    "/chat/threads/{chatThreadId}/messages": {
       "post": {
         "tags": [
           "Messages"
         ],
         "summary": "Sends a message to a thread.",
-        "operationId": "SendMessage",
+        "operationId": "SendChatMessage",
         "consumes": [
           "application/json"
         ],
@@ -106,7 +106,7 @@
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "The thread id to send the message to.",
             "required": true,
             "type": "string"
@@ -120,7 +120,7 @@
             "description": "Details of the message to send.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SendMessageRequest"
+              "$ref": "#/definitions/SendChatMessageRequest"
             }
           }
         ],
@@ -134,7 +134,7 @@
         },
         "x-ms-examples": {
           "Send Message": {
-            "$ref": "./examples/Messages_SendMessage.json"
+            "$ref": "./examples/Messages_SendChatMessage.json"
           }
         }
       },
@@ -143,14 +143,14 @@
           "Messages"
         ],
         "summary": "Gets a list of messages from a thread.",
-        "operationId": "ListMessages",
+        "operationId": "ListChatMessages",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "The thread id of the message.",
             "required": true,
             "type": "string"
@@ -183,41 +183,41 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ListMessagesResult"
+              "$ref": "#/definitions/ListChatMessagesResult"
             }
           }
         },
         "x-ms-examples": {
           "Get messages with pagination (Page Size)": {
-            "$ref": "./examples/Messages_ListMessagesWithPageSize.json"
+            "$ref": "./examples/Messages_ListChatMessagesWithPageSize.json"
           },
           "Get messages with pagination (Sync State Token)": {
-            "$ref": "./examples/Messages_ListMessagesWithSyncState.json"
+            "$ref": "./examples/Messages_ListChatMessagesWithSyncState.json"
           }
         }
       }
     },
-    "/chat/threads/{threadId}/messages/{messageId}": {
+    "/chat/threads/{chatThreadId}/messages/{chatMessageId}": {
       "get": {
         "tags": [
           "Messages"
         ],
         "summary": "Gets a message by id.",
-        "operationId": "GetMessage",
+        "operationId": "GetChatMessage",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "The thread id to which the message was sent.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "messageId",
+            "name": "chatMessageId",
             "description": "The message id.",
             "required": true,
             "type": "string"
@@ -230,13 +230,13 @@
           "200": {
             "description": "Request successful. The action returns a `Message` resource.",
             "schema": {
-              "$ref": "#/definitions/Message"
+              "$ref": "#/definitions/ChatMessage"
             }
           }
         },
         "x-ms-examples": {
           "Get Message": {
-            "$ref": "./examples/Messages_GetMessage.json"
+            "$ref": "./examples/Messages_GetChatMessage.json"
           }
         }
       },
@@ -245,21 +245,21 @@
           "Messages"
         ],
         "summary": "Updates a message.",
-        "operationId": "UpdateMessage",
+        "operationId": "UpdateChatMessage",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "The thread id to which the message was sent.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "messageId",
+            "name": "chatMessageId",
             "description": "The message id.",
             "required": true,
             "type": "string"
@@ -273,7 +273,7 @@
             "description": "Details of the request to update the message.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateMessageRequest"
+              "$ref": "#/definitions/UpdateChatMessageRequest"
             }
           }
         ],
@@ -284,7 +284,7 @@
         },
         "x-ms-examples": {
           "Update message content": {
-            "$ref": "./examples/Messages_UpdateMessage.json"
+            "$ref": "./examples/Messages_UpdateChatMessage.json"
           }
         }
       },
@@ -293,18 +293,18 @@
           "Messages"
         ],
         "summary": "Deletes a message.",
-        "operationId": "DeleteMessage",
+        "operationId": "DeleteChatMessage",
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "The thread id to which the message was sent.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "messageId",
+            "name": "chatMessageId",
             "description": "The message id.",
             "required": true,
             "type": "string"
@@ -320,22 +320,22 @@
         },
         "x-ms-examples": {
           "Delete message": {
-            "$ref": "./examples/Messages_DeleteMessage.json"
+            "$ref": "./examples/Messages_DeleteChatMessage.json"
           }
         }
       }
     },
-    "/chat/threads/{threadId}/typing": {
+    "/chat/threads/{chatThreadId}/typing": {
       "post": {
         "tags": [
           "Messages"
         ],
         "summary": "Posts a typing event to a thread, on behalf of a user.",
-        "operationId": "NotifyUserTyping",
+        "operationId": "SendTypingNotification",
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Id of the thread.",
             "required": true,
             "type": "string"
@@ -351,25 +351,25 @@
         },
         "x-ms-examples": {
           "Post typing event to a thread": {
-            "$ref": "./examples/Messages_PostTypingEvent.json"
+            "$ref": "./examples/Messages_SendTypingNotification.json"
           }
         }
       }
     },
-    "/chat/threads/{threadId}/members": {
+    "/chat/threads/{chatThreadId}/members": {
       "get": {
         "tags": [
           "ThreadMembers"
         ],
         "summary": "Gets the members of a thread.",
-        "operationId": "ListThreadMembers",
+        "operationId": "ListChatThreadMembers",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Thread id to get members for.",
             "required": true,
             "type": "string"
@@ -384,14 +384,14 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ThreadMember"
+                "$ref": "#/definitions/ChatThreadMember"
               }
             }
           }
         },
         "x-ms-examples": {
           "Get thread members": {
-            "$ref": "./examples/ThreadMembers_ListThreadMembers.json"
+            "$ref": "./examples/ThreadMembers_ListChatThreadMembers.json"
           }
         }
       },
@@ -400,14 +400,14 @@
           "ThreadMembers"
         ],
         "summary": "Adds thread members to a thread. If members already exist, no change occurs.",
-        "operationId": "AddThreadMembers",
+        "operationId": "AddChatThreadMembers",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Id of the thread to add members to.",
             "required": true,
             "type": "string"
@@ -421,7 +421,7 @@
             "description": "Thread members to be added to the thread.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddThreadMembersRequest"
+              "$ref": "#/definitions/AddChatThreadMembersRequest"
             }
           }
         ],
@@ -432,29 +432,29 @@
         },
         "x-ms-examples": {
           "Add thread members": {
-            "$ref": "./examples/ThreadMembers_AddThreadMembers.json"
+            "$ref": "./examples/ThreadMembers_AddChatThreadMembers.json"
           }
         }
       }
     },
-    "/chat/threads/{threadId}/members/{memberId}": {
+    "/chat/threads/{chatThreadId}/members/{chatMemberId}": {
       "delete": {
         "tags": [
           "ThreadMembers"
         ],
         "summary": "Remove a member from a thread.",
-        "operationId": "RemoveThreadMember",
+        "operationId": "RemoveChatThreadMember",
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Thread id to remove the member from.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
-            "name": "memberId",
+            "name": "chatMemberId",
             "description": "Id of the thread member to remove from the thread.",
             "required": true,
             "type": "string"
@@ -474,7 +474,7 @@
         },
         "x-ms-examples": {
           "Remove thread member": {
-            "$ref": "./examples/ThreadMembers_RemoveThreadMember.json"
+            "$ref": "./examples/ThreadMembers_RemoveChatThreadMember.json"
           }
         }
       }
@@ -485,7 +485,7 @@
           "Threads"
         ],
         "summary": "Creates a chat thread.",
-        "operationId": "CreateThread",
+        "operationId": "CreateChatThread",
         "consumes": [
           "application/json"
         ],
@@ -502,7 +502,7 @@
             "description": "Request payload for creating a chat thread.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CreateThreadRequest"
+              "$ref": "#/definitions/CreateChatThreadRequest"
             }
           }
         ],
@@ -510,16 +510,13 @@
           "201": {
             "description": "Thread created, the `Location` header contains the URL for the newly created thread.",
             "schema": {
-              "$ref": "#/definitions/CreateThreadResult"
+              "$ref": "#/definitions/CreateChatThreadResult"
             }
           }
         },
         "x-ms-examples": {
-          "Group Chat": {
-            "$ref": "./examples/Threads_CreateThread_Group.json"
-          },
-          "1 on 1 Chat": {
-            "$ref": "./examples/Threads_CreateThread_Sticky.json"
+          "Create chat thread": {
+            "$ref": "./examples/Threads_CreateChatThread.json"
           }
         }
       },
@@ -528,7 +525,7 @@
           "Threads"
         ],
         "summary": "Gets the list of chat threads of a user.",
-        "operationId": "ListThreads",
+        "operationId": "ListChatThreads",
         "produces": [
           "application/json"
         ],
@@ -561,34 +558,34 @@
           "200": {
             "description": "Request successful. The action returns a `GetThreadsResponse` resource.",
             "schema": {
-              "$ref": "#/definitions/ListThreadsResult"
+              "$ref": "#/definitions/ListChatThreadsResult"
             }
           }
         },
         "x-ms-examples": {
-          "Get threads with pagination (Page Size)": {
-            "$ref": "./examples/Threads_ListThreadsWithPageSize.json"
+          "Get chat threads with pagination (Page Size)": {
+            "$ref": "./examples/Threads_ListChatThreadsWithPageSize.json"
           },
-          "Get threads with pagination (Sync State Token)": {
-            "$ref": "./examples/Threads_ListThreadsWithSyncState.json"
+          "Get chat threads with pagination (Sync State Token)": {
+            "$ref": "./examples/Threads_ListChatThreadsWithSyncState.json"
           }
         }
       }
     },
-    "/chat/threads/{threadId}": {
+    "/chat/threads/{chatThreadId}": {
       "patch": {
         "tags": [
           "Threads"
         ],
         "summary": "Updates a thread's properties.",
-        "operationId": "UpdateThread",
+        "operationId": "UpdateChatThread",
         "consumes": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "The id of the thread to update.",
             "required": true,
             "type": "string"
@@ -602,7 +599,7 @@
             "description": "Request payload for updating a chat thread.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateThreadRequest"
+              "$ref": "#/definitions/UpdateChatThreadRequest"
             }
           }
         ],
@@ -612,8 +609,8 @@
           }
         },
         "x-ms-examples": {
-          "Update Thread Topic": {
-            "$ref": "./examples/Threads_UpdateThreadTopic.json"
+          "Update chat thread topic": {
+            "$ref": "./examples/Threads_UpdateChatThreadTopic.json"
           }
         }
       },
@@ -622,14 +619,14 @@
           "Threads"
         ],
         "summary": "Gets a chat thread.",
-        "operationId": "GetThread",
+        "operationId": "GetChatThread",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Thread id to get.",
             "required": true,
             "type": "string"
@@ -642,13 +639,13 @@
           "200": {
             "description": "Request successful. The action returns a `Thread` resource.",
             "schema": {
-              "$ref": "#/definitions/Thread"
+              "$ref": "#/definitions/ChatThread"
             }
           }
         },
         "x-ms-examples": {
-          "Get Thread": {
-            "$ref": "./examples/Threads_GetThread.json"
+          "Get chat thread": {
+            "$ref": "./examples/Threads_GetChatThread.json"
           }
         }
       },
@@ -657,11 +654,11 @@
           "Threads"
         ],
         "summary": "Deletes a thread.",
-        "operationId": "DeleteThread",
+        "operationId": "DeleteChatThread",
         "parameters": [
           {
             "in": "path",
-            "name": "threadId",
+            "name": "chatThreadId",
             "description": "Thread id to delete.",
             "required": true,
             "type": "string"
@@ -676,8 +673,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Thread": {
-            "$ref": "./examples/Threads_DeleteThread.json"
+          "Delete chat thread": {
+            "$ref": "./examples/Threads_DeleteChatThread.json"
           }
         }
       }
@@ -685,6 +682,7 @@
   },
   "definitions": {
     "ReadReceipt": {
+      "description": "A read receipt indicates the time a chat message was read by a recipient.",
       "type": "object",
       "properties": {
         "userId": {
@@ -693,8 +691,8 @@
           "readOnly": true,
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
         },
-        "messageId": {
-          "description": "Id for the message that has been read. This id is server generated.",
+        "chatMessageId": {
+          "description": "Id for the chat message that has been read. This id is server generated.",
           "type": "string",
           "readOnly": true,
           "example": "1591137790240"
@@ -708,37 +706,40 @@
       }
     },
     "PostReadReceiptRequest": {
+      "description": "Request payload for sending a read receipt.",
       "required": [
-        "messageId"
+        "chatMessageId"
       ],
       "type": "object",
       "properties": {
-        "messageId": {
-          "description": "Id of the latest message read by current user.",
+        "chatMessageId": {
+          "description": "Id of the latest chat message read by the user.",
           "type": "string",
           "example": "1592435762364"
         }
       }
     },
-    "MessagePriority": {
+    "ChatMessagePriority": {
+      "description": "The chat message priority.",
       "enum": [
         "Normal",
         "High"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "MessagePriority",
+        "name": "ChatMessagePriorityDto",
         "modelAsString": true
       }
     },
-    "SendMessageRequest": {
+    "SendChatMessageRequest": {
+      "description": "Details of the message to send.",
       "required": [
         "content"
       ],
       "type": "object",
       "properties": {
         "priority": {
-          "$ref": "#/definitions/MessagePriority"
+          "$ref": "#/definitions/ChatMessagePriority"
         },
         "content": {
           "description": "Chat message content.",
@@ -746,13 +747,14 @@
           "example": "Come one guys, lets go for lunch together."
         },
         "senderDisplayName": {
-          "description": "The display name of the message sender. This property is used to populate sender name for push notifications.",
+          "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
           "type": "string",
           "example": "Bob Admin"
         }
       }
     },
     "SendMessageResult": {
+      "description": "Result of the send message operation.",
       "type": "object",
       "properties": {
         "id": {
@@ -763,89 +765,90 @@
         }
       }
     },
-    "Message": {
+    "ChatMessage": {
       "type": "object",
       "properties": {
         "id": {
-          "description": "The id of the message. This id is server generated.",
+          "description": "The id of the chat message. This id is server generated.",
           "type": "string",
           "readOnly": true,
           "example": "123456789"
         },
-        "messageType": {
-          "description": "Type of the message.\r\n            \r\nPossible values:\r\n    - Text\r\n    - ThreadActivity/TopicUpdate\r\n    - ThreadActivity/AddMember\r\n    - ThreadActivity/DeleteMember",
+        "type": {
+          "description": "Type of the chat message.\r\n            \r\nPossible values:\r\n    - Text\r\n    - ThreadActivity/TopicUpdate\r\n    - ThreadActivity/AddMember\r\n    - ThreadActivity/DeleteMember",
           "type": "string",
           "example": "Text"
         },
         "priority": {
-          "$ref": "#/definitions/MessagePriority"
+          "$ref": "#/definitions/ChatMessagePriority"
         },
         "version": {
-          "description": "Version of the message.",
+          "description": "Version of the chat message.",
           "type": "string",
           "readOnly": true
         },
         "content": {
-          "description": "Content of the message.",
+          "description": "Content of the chat message.",
           "type": "string",
           "example": "Come one guys, lets go for lunch together."
         },
         "senderDisplayName": {
-          "description": "The display name of the message sender. This property is used to populate sender name for push notifications.",
+          "description": "The display name of the chat message sender. This property is used to populate sender name for push notifications.",
           "type": "string",
           "example": "Jane"
         },
         "originalArrivalTime": {
           "format": "date-time",
-          "description": "The timestamp when the message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "description": "The timestamp when the chat message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
           "example": "2020-06-06T05:55:41.6460000Z"
         },
         "from": {
-          "description": "The Id of the message sender.",
+          "description": "The Id of the chat message sender.",
           "type": "string",
           "readOnly": true,
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
         },
         "deleteTime": {
           "format": "int64",
-          "description": "The timestamp when the message was deleted in Unix time (epoch time) in milliseconds.",
+          "description": "The timestamp when the chat message was deleted in Unix time (epoch time) in milliseconds.",
           "type": "integer",
           "example": 1591142858100
         },
         "editTime": {
           "format": "int64",
-          "description": "The timestamp when the message was edited in Unix time (epoch time) in milliseconds.",
+          "description": "The timestamp when the chat message was edited in Unix time (epoch time) in milliseconds.",
           "type": "integer",
           "example": 1591142858100
         }
       }
     },
-    "ListMessagesResult": {
+    "ListChatMessagesResult": {
+      "description": "List of chat messages for a particular chat thread.",
       "type": "object",
       "properties": {
         "messages": {
-          "description": "List of messages.",
+          "description": "List of chat messages.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Message"
+            "$ref": "#/definitions/ChatMessage"
           },
           "readOnly": true
         },
         "syncState": {
-          "description": "Continuation link to get new and modified messages.",
+          "description": "Continuation link to get new and modified chat messages.",
           "type": "string",
           "readOnly": true
         },
         "backwardLink": {
-          "description": "If there are more messages that can be retrieved, the backward link will be populated.",
+          "description": "If there are more chat messages that can be retrieved, the backward link will be populated.",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "UpdateMessageRequest": {
+    "UpdateChatMessageRequest": {
       "type": "object",
       "properties": {
         "content": {
@@ -855,46 +858,48 @@
         }
       }
     },
-    "ThreadMember": {
-      "description": "A member of the thread.",
+    "ChatThreadMember": {
+      "description": "A member of the chat thread.",
       "required": [
         "id"
       ],
       "type": "object",
       "properties": {
         "id": {
-          "description": "The id of the thread member in the format `8:acs:ResourceId_AcsUserId`.",
+          "description": "The id of the chat thread member in the format `8:acs:ResourceId_AcsUserId`.",
           "type": "string",
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
         },
         "displayName": {
-          "description": "Display name for the thread member.",
+          "description": "Display name for the chat thread member.",
           "type": "string",
           "example": "Bob"
         },
         "shareHistoryTime": {
-          "description": "Time from which the group chat history is shared with the member in EPOCH time (milliseconds).\r\n            \r\nPossible values:\r\n - `0` which means share everything\r\n - `-1` which means share nothing\r\n - `1594691284031` which is epoch time equivalent to 7/14/2020 1:48:04 AM +00:00",
+          "description": "Time from which the chat history is shared with the member in EPOCH time (milliseconds).\r\n            \r\nPossible values:\r\n - `0` which means share everything\r\n - `-1` which means share nothing\r\n - `1594691284031` which is epoch time equivalent to 7/14/2020 1:48:04 AM +00:00",
           "type": "string",
           "example": "0"
         }
       }
     },
-    "AddThreadMembersRequest": {
+    "AddChatThreadMembersRequest": {
+      "description": "Thread members to be added to the thread.",
       "required": [
         "members"
       ],
       "type": "object",
       "properties": {
         "members": {
-          "description": "Members to add to a thread.",
+          "description": "Members to add to a chat thread.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ThreadMember"
+            "$ref": "#/definitions/ChatThreadMember"
           }
         }
       }
     },
-    "CreateThreadRequest": {
+    "CreateChatThreadRequest": {
+      "description": "Request payload for creating a chat thread.",
       "required": [
         "members",
         "topic"
@@ -902,46 +907,47 @@
       "type": "object",
       "properties": {
         "topic": {
-          "description": "The thread topic.",
+          "description": "The chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
         },
         "members": {
-          "description": "Members to be added to the thread.",
+          "description": "Members to be added to the chat thread.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ThreadMember"
+            "$ref": "#/definitions/ChatThreadMember"
           }
         }
       }
     },
-    "CreateThreadResult": {
+    "CreateChatThreadResult": {
+      "description": "Result for the create chat thread operation.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "Thread Id.",
+          "description": "Chat thread Id.",
           "type": "string",
           "readOnly": true,
           "example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
         }
       }
     },
-    "ThreadInfo": {
+    "ChatThreadInfo": {
       "type": "object",
       "properties": {
         "id": {
-          "description": "Thread id.",
+          "description": "Chat thread id.",
           "type": "string",
           "readOnly": true,
           "example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
         },
         "topic": {
-          "description": "Thread topic.",
+          "description": "Chat thread topic.",
           "type": "string",
-          "example": "Lunch Thread"
+          "example": "Lunch Chat thread"
         },
         "isDeleted": {
-          "description": "Flag if a thread is soft deleted.",
+          "description": "Flag if a chat thread is soft deleted.",
           "type": "boolean",
           "example": false
         },
@@ -954,75 +960,70 @@
         }
       }
     },
-    "ListThreadsResult": {
+    "ListChatThreadsResult": {
       "type": "object",
       "properties": {
         "threads": {
-          "description": "List of threads.",
+          "description": "List of chat threads.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ThreadInfo"
+            "$ref": "#/definitions/ChatThreadInfo"
           },
           "readOnly": true
         },
         "syncState": {
-          "description": "Continuation link to get new and modified threads.",
+          "description": "Continuation link to get new and modified chat threads.",
           "type": "string",
           "readOnly": true
         },
         "backwardLink": {
-          "description": "If there are more threads that can be retrieved, the backward link will be populated.",
+          "description": "If there are more chat threads that can be retrieved, the backward link will be populated.",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "UpdateThreadRequest": {
+    "UpdateChatThreadRequest": {
       "type": "object",
       "properties": {
         "topic": {
-          "description": "Thread topic.",
+          "description": "Chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
         }
       }
     },
-    "Thread": {
+    "ChatThread": {
       "type": "object",
       "properties": {
         "id": {
-          "description": "Thread id.",
+          "description": "Chat thread id.",
           "type": "string",
           "readOnly": true,
           "example": "19:uni01_uy5ucb66ugp3lrhe7pxso6xx4hsmm3dl6eyjfefv2n6x3rrurpea@thread.v2"
         },
         "topic": {
-          "description": "Thread topic.",
+          "description": "Chat thread topic.",
           "type": "string",
-          "example": "Lunch Thread"
+          "example": "Lunch Chat thread"
         },
         "createdAt": {
-          "description": "Thread creation time in Unix time (epoch time) in milliseconds.",
+          "description": "Chat thread creation time in Unix time (epoch time) in milliseconds.",
           "type": "string",
           "readOnly": true,
           "example": "1591142858245"
         },
         "createdBy": {
-          "description": "Id of the thread owner.",
+          "description": "Id of the chat thread owner.",
           "type": "string",
           "readOnly": true,
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
         },
-        "isStickyThread": {
-          "description": "Flag if a thread is sticky - sticky thread has an immutable member list, members cannot be added or removed.",
-          "type": "boolean",
-          "example": false
-        },
         "members": {
-          "description": "Thread members.",
+          "description": "Chat thread members.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ThreadMember"
+            "$ref": "#/definitions/ChatThreadMember"
           }
         }
       }

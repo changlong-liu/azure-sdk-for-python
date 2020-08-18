@@ -5,25 +5,25 @@
 # ------------------------------------
 
 from ._generated.models import (
-    CreateThreadResult,
-    ListMessagesResult,
-    ListThreadsResult,
-    Message,
-    MessagePriority,
+    CreateChatThreadResult,
+    ListChatMessagesResult,
+    ListChatThreadsResult,
+    ChatMessage,
+    ChatMessagePriorityDto,
     ReadReceipt,
     SendMessageResult,
-    Thread,
-    ThreadMember,
+    ChatThread,
+    ChatThreadMember,
 )
 
 __all__ = [
-    'CreateThreadResult',
-    'ListMessagesResult',
-    'ListThreadsResult',
-    'Message',
-    'MessagePriority',
+    'CreateChatThreadResult',
+    'ListChatMessagesResult',
+    'ListChatThreadsResult',
+    'ChatMessage',
+    'ChatMessagePriorityDto',
     'ReadReceipt',
     'SendMessageResult',
-    'Thread',
-    'ThreadMember',
+    'ChatThread',
+    'ChatThreadMember',
 ]
