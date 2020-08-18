@@ -32,9 +32,9 @@ class ChatThreadClient(ChatThreadClientBase):
     ):
         # type: (...) -> None
         super(ChatThreadClient, self).__init__(
-            thread_id,
-            endpoint,
-            credential,
+            thread_id=thread_id,
+            endpoint=endpoint,
+            credential=credential,
             **kwargs)
 
         self._client = AzureCommunicationChatService(

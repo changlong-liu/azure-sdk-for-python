@@ -22,7 +22,7 @@ from ._generated.models import (
     UpdateChatMessageRequest,
     UpdateChatThreadRequest
 )
-from ._utils import _to_utc_datetime
+from ._utils import _to_utc_datetime # pylint: disable=unused-import
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
@@ -84,6 +84,7 @@ class ChatThreadClient(object):
 
     @property
     def thread_id(self):
+        """Gets the thread id from the client. """
         return self._thread_id
 
     @distributed_trace

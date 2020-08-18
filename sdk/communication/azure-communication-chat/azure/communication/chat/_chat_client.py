@@ -17,7 +17,7 @@ from ._chat_thread_client import ChatThreadClient
 from ._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
 from ._generated import AzureCommunicationChatService
 from ._generated.models import CreateChatThreadRequest
-from ._utils import _to_utc_datetime
+from ._utils import _to_utc_datetime # pylint: disable=unused-import
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
