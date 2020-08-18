@@ -179,7 +179,7 @@ class ChatThreadClient(object):
 
         :param content: Required. Chat message content.
         :type content: str
-        :keyword Union[str,MessagePriority] priority: Message priority.
+        :keyword Union[str,ChatMessagePriorityDto] priority: Message priority.
         :keyword str sender_display_name: The display name of the message sender. This property is used to
           populate sender name for push notifications.
         :keyword callable cls: A custom type or function that will be passed the direct response

@@ -100,7 +100,7 @@ class ChatClient(object):
     @distributed_trace
     def create_thread(
             self, topic,  # type: str
-            thread_members,  # type: list[ThreadMember]
+            thread_members,  # type: list[ChatThreadMember]
             **kwargs  # type: Any
     ):
         # type: (...) -> ChatThreadClient
@@ -109,7 +109,7 @@ class ChatClient(object):
         :param topic: Required. The thread topic.
         :type topic: str
         :param thread_members: Required. Members to be added to the thread.
-        :type thread_members: list[~azure.communication.chat.models.ThreadMember]
+        :type thread_members: list[~azure.communication.chat.models.ChatThreadMember]
         :return: ChatThreadClient
         :rtype: ~azure.communication.chat.ChatThreadClient
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
