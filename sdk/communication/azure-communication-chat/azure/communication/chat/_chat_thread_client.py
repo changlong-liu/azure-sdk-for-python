@@ -84,7 +84,12 @@ class ChatThreadClient(object):
 
     @property
     def thread_id(self):
-        """Gets the thread id from the client. """
+        # type: () -> str
+        """
+        Gets the thread id from the client.
+
+        :rtype: str
+        """
         return self._thread_id
 
     @distributed_trace
