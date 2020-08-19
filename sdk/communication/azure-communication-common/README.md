@@ -2,7 +2,7 @@
 
 # Azure Communication Common Package client library for Python
 
-Azure Communication Common client package is intended contains common types that can be used by other Azure Communication client packages. 
+Azure Communication Common client package is intended to contain common types that can be used by other Azure Communication client packages. 
 
 # Getting started
 ### Prerequisites
