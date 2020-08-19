@@ -20,6 +20,11 @@ from .._generated.aio import AzureCommunicationChatService
 from .._generated.models import CreateChatThreadRequest
 from .._utils import _to_utc_datetime # pylint: disable=unused-import
 
+if TYPE_CHECKING:
+    # pylint: disable=unused-import,ungrouped-imports
+    from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
+    from datetime import datetime
+
 
 class ChatClient(object):
     """A client to interact with the AzureCommunicationService Chat gateway.
