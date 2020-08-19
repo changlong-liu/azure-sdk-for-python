@@ -35,8 +35,8 @@ token_response = user_token_client.user_management.issue_token(scopes=["chat"])
 token = token_response.token
 ```
 
-You may also want to set the user identity from token_response.token.identity because that user should be added as a member of list[ThreadMember] when you creating
-a new chat thread with this token. It is because the initiator of the create request must be in the list of the members of the chat thread.
+You may also want to set the user identity from token_response.token.identity because that user should be added as a member of new chat thread when you creating
+it with this token. It is because the initiator of the create request must be in the list of the members of the chat thread.
 
 ```python
 user_id = token_response.identity
@@ -56,14 +56,16 @@ chat_client = ChatClient(token, endpoint)
 
 ## Create Chat Thread Client
 
-This will allow you to perform operations specific to a chat thread, like update
+The ChatThreadClient will allow you to perform operations specific to a chat thread, like update
 the chat thread topic, send message, add members to chat thread, etc.
+
+You can get it by creating a new chat thread using ChatClient
 
 ```python
 chat_thread_client = chat_client.create_thread(topic, thread_members)
 ```
 
-If you have created a chat thread before and you have its thread_id, you can create it by:
+Alternatively, if you have created a chat thread before and you have its thread_id, you can create it by:
 
 ```python
 chat_thread_client = chat_client.get_chat_thread_client(thread_id)
@@ -145,7 +147,7 @@ Use the `create_thread` method to create a chat thread client object.
 - `share_history_time`, optional, time from which the group chat history is shared with the member in EPOCH time (milliseconds).
 '0' means share everything, '-1' means share nothing
 
-`ChatThreadClient` is the result returned from creating a thread, it contains an `id` which is the unique ID of the thread, and you can use it to perform other chat operations to this created chat thread
+`ChatThreadClient` is the result returned from creating a thread, you can use it to perform other chat operations to this chat thread
 
 ```Python
 from azure.communication.chat.models import ChatThreadMember
@@ -261,7 +263,7 @@ chat_thread_client.delete_message(message_id)
 
 ### Get thread members
 
-Use `list_members` to retrieve the members of the thread identified by threadId.
+Use `list_members` to retrieve the members of the thread.
 
 `[ChatThreadMember]` is the response returned from listing members
 
@@ -273,10 +275,10 @@ for member in members:
 
 ### Add thread members
 
-Use `add_members` method to add thread members to the thread identified by threadId.
+Use `add_members` method to add thread members to the thread.
 
 - Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
-- `id`, required, it is the id of the thread member in the formatm ``8:acs:ResourceId_AcsUserId``.
+- `id`, required, it is the id of the thread member in the format ``8:acs:ResourceId_AcsUserId``.
 - `display_name`, optional, is the display name for the thread member.
 - `share_history_time`, optional, time from which the group chat history is shared with the member in EPOCH time (milliseconds).
 '0' means share everything, '-1' means share nothing
@@ -315,7 +317,6 @@ chat_chat_client.send_typing_notification()
 Use `send_read_receipt` method to post a read receipt event to a thread, on behalf of a user.
 
 ```python
-
 chat_thread_client.send_read_receipt(message_id)
 ```
 
@@ -342,8 +343,10 @@ set AZURE_COMMUNICATION_SERVICE_ENDPOINT="https://<RESOURCE_NAME>.communcationse
 set TOKEN="<user access token, it is from token_response.token>"
 set USER_ID="<user identity, it is from token_response.identity>"
 
-python samples\chat_sample.py
-python samples\chat_sample_async.py
+python samples\chat_client_sample.py
+python samples\chat_client_sample_async.py
+python samples\chat_thread_client_sample.py
+python samples\chat_thread_client_sample_async.py
 ```
 
 # Troubleshooting
