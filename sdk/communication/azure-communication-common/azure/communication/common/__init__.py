@@ -1,1 +1,13 @@
-__path__ = __import__('pkgutil').extend_path(__path__, __name__)
+from .models import(
+    CommunicationIdentifier,
+    CommunicationUser,
+    PhoneNumber,
+    UnknownIdentifier
+)
+
+__all__ = [
+    'CommunicationIdentifier',
+    'CommunicationUser',
+    'PhoneNumber',
+    'UnknownIdentifier'
+]
