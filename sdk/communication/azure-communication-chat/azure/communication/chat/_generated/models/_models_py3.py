@@ -6,6 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+import datetime
 from typing import List, Optional, Union
 
 import msrest.serialization
@@ -59,7 +60,7 @@ class ChatMessage(msrest.serialization.Model):
         - ThreadActivity/DeleteMember.
     :type type: str
     :param priority: The chat message priority. Possible values include: "Normal", "High".
-    :type priority: str or ~azure.communication.chat.models.ChatMessagePriorityDto
+    :type priority: str or ~azure.communication.chat.models.ChatMessagePriority
     :ivar version: Version of the chat message.
     :vartype version: str
     :param content: Content of the chat message.
@@ -67,23 +68,23 @@ class ChatMessage(msrest.serialization.Model):
     :param sender_display_name: The display name of the chat message sender. This property is used
      to populate sender name for push notifications.
     :type sender_display_name: str
-    :ivar original_arrival_time: The timestamp when the chat message arrived at the server. The
-     timestamp is in ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
-    :vartype original_arrival_time: ~datetime.datetime
+    :ivar created_on: The timestamp when the chat message arrived at the server. The timestamp is
+     in ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
+    :vartype created_on: ~datetime.datetime
     :ivar from_property: The Id of the chat message sender.
     :vartype from_property: str
-    :param delete_time: The timestamp when the chat message was deleted in Unix time (epoch time)
-     in milliseconds.
-    :type delete_time: long
-    :param edit_time: The timestamp when the chat message was edited in Unix time (epoch time) in
-     milliseconds.
-    :type edit_time: long
+    :param deleted_on: The timestamp when the chat message was deleted. The timestamp is in ISO8601
+     format: ``yyyy-MM-ddTHH:mm:ssZ``.
+    :type deleted_on: ~datetime.datetime
+    :param edited_on: The timestamp when the chat message was edited. The timestamp is in ISO8601
+     format: ``yyyy-MM-ddTHH:mm:ssZ``.
+    :type edited_on: ~datetime.datetime
     """
 
     _validation = {
         'id': {'readonly': True},
         'version': {'readonly': True},
-        'original_arrival_time': {'readonly': True},
+        'created_on': {'readonly': True},
         'from_property': {'readonly': True},
     }
 
@@ -94,21 +95,21 @@ class ChatMessage(msrest.serialization.Model):
         'version': {'key': 'version', 'type': 'str'},
         'content': {'key': 'content', 'type': 'str'},
         'sender_display_name': {'key': 'senderDisplayName', 'type': 'str'},
-        'original_arrival_time': {'key': 'originalArrivalTime', 'type': 'iso-8601'},
+        'created_on': {'key': 'createdOn', 'type': 'iso-8601'},
         'from_property': {'key': 'from', 'type': 'str'},
-        'delete_time': {'key': 'deleteTime', 'type': 'long'},
-        'edit_time': {'key': 'editTime', 'type': 'long'},
+        'deleted_on': {'key': 'deletedOn', 'type': 'iso-8601'},
+        'edited_on': {'key': 'editedOn', 'type': 'iso-8601'},
     }
 
     def __init__(
         self,
         *,
         type: Optional[str] = None,
-        priority: Optional[Union[str, "ChatMessagePriorityDto"]] = None,
+        priority: Optional[Union[str, "ChatMessagePriority"]] = None,
         content: Optional[str] = None,
         sender_display_name: Optional[str] = None,
-        delete_time: Optional[int] = None,
-        edit_time: Optional[int] = None,
+        deleted_on: Optional[datetime.datetime] = None,
+        edited_on: Optional[datetime.datetime] = None,
         **kwargs
     ):
         super(ChatMessage, self).__init__(**kwargs)
@@ -118,10 +119,10 @@ class ChatMessage(msrest.serialization.Model):
         self.version = None
         self.content = content
         self.sender_display_name = sender_display_name
-        self.original_arrival_time = None
+        self.created_on = None
         self.from_property = None
-        self.delete_time = delete_time
-        self.edit_time = edit_time
+        self.deleted_on = deleted_on
+        self.edited_on = edited_on
 
 
 class ChatThread(msrest.serialization.Model):
@@ -133,8 +134,9 @@ class ChatThread(msrest.serialization.Model):
     :vartype id: str
     :param topic: Chat thread topic.
     :type topic: str
-    :ivar created_at: Chat thread creation time in Unix time (epoch time) in milliseconds.
-    :vartype created_at: str
+    :ivar created_on: The timestamp when the chat thread was created. The timestamp is in ISO8601
+     format: ``yyyy-MM-ddTHH:mm:ssZ``.
+    :vartype created_on: ~datetime.datetime
     :ivar created_by: Id of the chat thread owner.
     :vartype created_by: str
     :param members: Chat thread members.
@@ -143,14 +145,14 @@ class ChatThread(msrest.serialization.Model):
 
     _validation = {
         'id': {'readonly': True},
-        'created_at': {'readonly': True},
+        'created_on': {'readonly': True},
         'created_by': {'readonly': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'topic': {'key': 'topic', 'type': 'str'},
-        'created_at': {'key': 'createdAt', 'type': 'str'},
+        'created_on': {'key': 'createdOn', 'type': 'iso-8601'},
         'created_by': {'key': 'createdBy', 'type': 'str'},
         'members': {'key': 'members', 'type': '[ChatThreadMember]'},
     }
@@ -165,7 +167,7 @@ class ChatThread(msrest.serialization.Model):
         super(ChatThread, self).__init__(**kwargs)
         self.id = None
         self.topic = topic
-        self.created_at = None
+        self.created_on = None
         self.created_by = None
         self.members = members
 
@@ -181,21 +183,21 @@ class ChatThreadInfo(msrest.serialization.Model):
     :type topic: str
     :param is_deleted: Flag if a chat thread is soft deleted.
     :type is_deleted: bool
-    :ivar last_message_received_time: The timestamp when the last message arrived at the server.
-     The timestamp is in ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
-    :vartype last_message_received_time: ~datetime.datetime
+    :ivar last_message_received_on: The timestamp when the last message arrived at the server. The
+     timestamp is in ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
+    :vartype last_message_received_on: ~datetime.datetime
     """
 
     _validation = {
         'id': {'readonly': True},
-        'last_message_received_time': {'readonly': True},
+        'last_message_received_on': {'readonly': True},
     }
 
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'topic': {'key': 'topic', 'type': 'str'},
         'is_deleted': {'key': 'isDeleted', 'type': 'bool'},
-        'last_message_received_time': {'key': 'lastMessageReceivedTime', 'type': 'iso-8601'},
+        'last_message_received_on': {'key': 'lastMessageReceivedOn', 'type': 'iso-8601'},
     }
 
     def __init__(
@@ -209,7 +211,7 @@ class ChatThreadInfo(msrest.serialization.Model):
         self.id = None
         self.topic = topic
         self.is_deleted = is_deleted
-        self.last_message_received_time = None
+        self.last_message_received_on = None
 
 
 class ChatThreadMember(msrest.serialization.Model):
@@ -424,20 +426,21 @@ class ReadReceipt(msrest.serialization.Model):
     :vartype user_id: str
     :ivar chat_message_id: Id for the chat message that has been read. This id is server generated.
     :vartype chat_message_id: str
-    :ivar read_timestamp: Read receipt timestamp.
-    :vartype read_timestamp: long
+    :ivar read_on: Read receipt timestamp. The timestamp is in ISO8601 format: ``yyyy-MM-
+     ddTHH:mm:ssZ``.
+    :vartype read_on: ~datetime.datetime
     """
 
     _validation = {
         'user_id': {'readonly': True},
         'chat_message_id': {'readonly': True},
-        'read_timestamp': {'readonly': True},
+        'read_on': {'readonly': True},
     }
 
     _attribute_map = {
         'user_id': {'key': 'userId', 'type': 'str'},
         'chat_message_id': {'key': 'chatMessageId', 'type': 'str'},
-        'read_timestamp': {'key': 'readTimestamp', 'type': 'long'},
+        'read_on': {'key': 'readOn', 'type': 'iso-8601'},
     }
 
     def __init__(
@@ -447,7 +450,7 @@ class ReadReceipt(msrest.serialization.Model):
         super(ReadReceipt, self).__init__(**kwargs)
         self.user_id = None
         self.chat_message_id = None
-        self.read_timestamp = None
+        self.read_on = None
 
 
 class SendChatMessageRequest(msrest.serialization.Model):
@@ -456,7 +459,7 @@ class SendChatMessageRequest(msrest.serialization.Model):
     All required parameters must be populated in order to send to Azure.
 
     :param priority: The chat message priority. Possible values include: "Normal", "High".
-    :type priority: str or ~azure.communication.chat.models.ChatMessagePriorityDto
+    :type priority: str or ~azure.communication.chat.models.ChatMessagePriority
     :param content: Required. Chat message content.
     :type content: str
     :param sender_display_name: The display name of the chat message sender. This property is used
@@ -478,7 +481,7 @@ class SendChatMessageRequest(msrest.serialization.Model):
         self,
         *,
         content: str,
-        priority: Optional[Union[str, "ChatMessagePriorityDto"]] = None,
+        priority: Optional[Union[str, "ChatMessagePriority"]] = None,
         sender_display_name: Optional[str] = None,
         **kwargs
     ):
@@ -488,7 +491,7 @@ class SendChatMessageRequest(msrest.serialization.Model):
         self.sender_display_name = sender_display_name
 
 
-class SendMessageResult(msrest.serialization.Model):
+class SendChatMessageResult(msrest.serialization.Model):
     """Result of the send message operation.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -509,7 +512,7 @@ class SendMessageResult(msrest.serialization.Model):
         self,
         **kwargs
     ):
-        super(SendMessageResult, self).__init__(**kwargs)
+        super(SendChatMessageResult, self).__init__(**kwargs)
         self.id = None
 
 

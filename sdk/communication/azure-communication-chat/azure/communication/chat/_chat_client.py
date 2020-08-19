@@ -193,7 +193,6 @@ class ChatClient(object):
         """Gets the list of chat threads of a user.
 
         :keyword int page_size: The number of threads being requested.
-        :keyword ~datetime.datetime start_time: The start time(UTC) where the range query.
         :keyword str sync_state: The continuation token that previous request obtained. This is used for
          paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
@@ -211,12 +210,10 @@ class ChatClient(object):
                 :caption: listing chat threads.
         """
         page_size = kwargs.pop("page_size", None)
-        start_time = kwargs.pop("start_time", None)
         sync_state = kwargs.pop("sync_state", None)
 
         return self._client.list_chat_threads(
             page_size=page_size,
-            start_time=start_time,
             sync_state=sync_state,
             **kwargs)
 

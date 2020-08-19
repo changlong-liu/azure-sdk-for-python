@@ -128,7 +128,7 @@
           "201": {
             "description": "Message sent, the `Location` header contains the URL for the newly sent message.",
             "schema": {
-              "$ref": "#/definitions/SendMessageResult"
+              "$ref": "#/definitions/SendChatMessageResult"
             }
           }
         },
@@ -166,8 +166,8 @@
             "in": "query",
             "name": "startTime",
             "description": "The start time where the range query. This is represented by number of seconds since epoch time.",
-            "type": "integer",
-            "format": "int64"
+            "type": "string",
+            "format": "date-time"
           },
           {
             "in": "query",
@@ -539,13 +539,6 @@
           },
           {
             "in": "query",
-            "name": "startTime",
-            "description": "The start time where the range query. This is represented by number of seconds since epoch time.",
-            "type": "integer",
-            "format": "int64"
-          },
-          {
-            "in": "query",
             "name": "syncState",
             "description": "The continuation token that previous request obtained. This is used for paging.",
             "type": "string"
@@ -697,11 +690,12 @@
           "readOnly": true,
           "example": "1591137790240"
         },
-        "readTimestamp": {
-          "format": "int64",
-          "description": "Read receipt timestamp.",
-          "type": "integer",
-          "readOnly": true
+        "readOn": {
+          "format": "date-time",
+          "description": "Read receipt timestamp. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "readOnly": true,
+          "example": "2020-10-30T10:50:50Z"
         }
       }
     },
@@ -727,7 +721,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "ChatMessagePriorityDto",
+        "name": "ChatMessagePriority",
         "modelAsString": true
       }
     },
@@ -753,7 +747,7 @@
         }
       }
     },
-    "SendMessageResult": {
+    "SendChatMessageResult": {
       "description": "Result of the send message operation.",
       "type": "object",
       "properties": {
@@ -797,12 +791,12 @@
           "type": "string",
           "example": "Jane"
         },
-        "originalArrivalTime": {
+        "createdOn": {
           "format": "date-time",
           "description": "The timestamp when the chat message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
-          "example": "2020-06-06T05:55:41.6460000Z"
+          "example": "2020-10-30T10:50:50Z"
         },
         "from": {
           "description": "The Id of the chat message sender.",
@@ -810,17 +804,17 @@
           "readOnly": true,
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
         },
-        "deleteTime": {
-          "format": "int64",
-          "description": "The timestamp when the chat message was deleted in Unix time (epoch time) in milliseconds.",
-          "type": "integer",
-          "example": 1591142858100
+        "deletedOn": {
+          "format": "date-time",
+          "description": "The timestamp when the chat message was deleted. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "example": "2020-10-30T10:50:50Z"
         },
-        "editTime": {
-          "format": "int64",
-          "description": "The timestamp when the chat message was edited in Unix time (epoch time) in milliseconds.",
-          "type": "integer",
-          "example": 1591142858100
+        "editedOn": {
+          "format": "date-time",
+          "description": "The timestamp when the chat message was edited. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
+          "type": "string",
+          "example": "2020-10-30T10:50:50Z"
         }
       }
     },
@@ -951,12 +945,12 @@
           "type": "boolean",
           "example": false
         },
-        "lastMessageReceivedTime": {
+        "lastMessageReceivedOn": {
           "format": "date-time",
           "description": "The timestamp when the last message arrived at the server. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
-          "example": "2020-06-06T05:55:41.6460000Z"
+          "example": "2020-10-30T10:50:50Z"
         }
       }
     },
@@ -1007,11 +1001,12 @@
           "type": "string",
           "example": "Lunch Chat thread"
         },
-        "createdAt": {
-          "description": "Chat thread creation time in Unix time (epoch time) in milliseconds.",
+        "createdOn": {
+          "format": "date-time",
+          "description": "The timestamp when the chat thread was created. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "readOnly": true,
-          "example": "1591142858245"
+          "example": "2020-10-30T10:50:50Z"
         },
         "createdBy": {
           "description": "Id of the chat thread owner.",

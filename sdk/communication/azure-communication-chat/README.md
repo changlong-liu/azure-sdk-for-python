@@ -206,10 +206,10 @@ Use `send_message` method to sends a message to a thread identified by threadId.
 `SendMessageResult` is the response returned from sending a message, it contains an id, which is the unique ID of the message.
 
 ```Python
-from azure.communication.chat.models import ChatMessagePriorityDto
+from azure.communication.chat.models import ChatMessagePriority
 
 content='hello world'
-priority=ChatMessagePriorityDto.NORMAL
+priority=ChatMessagePriority.NORMAL
 sender_display_name='sender name'
 
 send_message_result = chat_thread_client.send_message(content, priority=priority, sender_display_name=sender_display_name)

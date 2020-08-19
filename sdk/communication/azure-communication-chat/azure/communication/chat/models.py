@@ -9,9 +9,9 @@ from ._generated.models import (
     ListChatMessagesResult,
     ListChatThreadsResult,
     ChatMessage,
-    ChatMessagePriorityDto,
+    ChatMessagePriority,
     ReadReceipt,
-    SendMessageResult,
+    SendChatMessageResult,
     ChatThread,
     ChatThreadMember,
 )
@@ -21,9 +21,9 @@ __all__ = [
     'ListChatMessagesResult',
     'ListChatThreadsResult',
     'ChatMessage',
-    'ChatMessagePriorityDto',
+    'ChatMessagePriority',
     'ReadReceipt',
-    'SendMessageResult',
+    'SendChatMessageResult',
     'ChatThread',
     'ChatThreadMember',
 ]

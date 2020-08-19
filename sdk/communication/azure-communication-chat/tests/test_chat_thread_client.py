@@ -43,7 +43,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         create_message_result = None
         try:
-            priority=ChatMessagePriorityDto.NORMAL
+            priority=ChatMessagePriority.NORMAL
             content='hello world'
             sender_display_name='sender name'
 
