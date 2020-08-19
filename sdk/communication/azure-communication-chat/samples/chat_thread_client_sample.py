@@ -70,9 +70,9 @@ class ChatThreadClientSamples(object):
         from azure.communication.chat import ChatThreadClient
         chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
         # [START send_message]
-        from azure.communication.chat.models import ChatMessagePriorityDto
+        from azure.communication.chat.models import ChatMessagePriority
 
-        priority = ChatMessagePriorityDto.NORMAL
+        priority = ChatMessagePriority.NORMAL
         content = 'hello world'
         sender_display_name = 'sender name'
 

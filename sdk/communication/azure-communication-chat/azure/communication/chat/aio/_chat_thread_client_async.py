@@ -298,7 +298,7 @@ class ChatThreadClient(object):
         """Gets a list of messages from a thread.
 
         :keyword int page_size: The number of messages being requested.
-        :keyword ~datetime.datetime start_time: The start time(UTC) where the range query.
+        :keyword ~datetime.datetime start_time: The start time where the range query.
         :keyword str sync_state: The continuation token that previous request obtained. This is
          used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
