@@ -45,13 +45,22 @@ class ChatThreadClient(object):
     :param str credential:
         The credentials with which to authenticate. The value is an User
         Access Token
+
+    .. admonition:: Example:
+
+        .. literalinclude:: ../samples/chat_thread_client_sample.py
+            :start-after: [START create_chat_thread_client]
+            :end-before: [END create_chat_thread_client]
+            :language: python
+            :dedent: 8
+            :caption: Creating the ChatThreadClient.
     """
     def __init__(
-            self,
-            thread_id,  # type: str
-            endpoint,  # type: str
-            credential,  # type: str
-            **kwargs  # type: Any
+        self,
+        thread_id,  # type: str
+        endpoint,  # type: str
+        credential,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         if not thread_id:
@@ -94,8 +103,8 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def update_thread(
-            self,
-            **kwargs  # type: Any
+        self,
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Updates a thread's properties.
@@ -105,6 +114,15 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START update_thread]
+                :end-before: [END update_thread]
+                :language: python
+                :dedent: 8
+                :caption: Updating chat thread.
         """
         topic = kwargs.pop("topic", None)
 
@@ -116,9 +134,9 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def send_read_receipt(
-            self,
-            message_id,  # type: str
-            **kwargs  # type: Any
+        self,
+        message_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Posts a read receipt event to a thread, on behalf of a user.
@@ -129,9 +147,18 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START send_read_receipt]
+                :end-before: [END send_read_receipt]
+                :language: python
+                :dedent: 8
+                :caption: Sending read receipt of a chat message.
         """
         if not message_id:
-            raise ValueError("post_read_receipt_request cannot be None.")
+            raise ValueError("message_id cannot be None.")
 
         post_read_receipt_request = PostReadReceiptRequest(chat_message_id=message_id)
         return self._client.send_chat_read_receipt(
@@ -141,8 +168,8 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def list_read_receipts(
-            self,
-            **kwargs  # type: Any
+        self,
+        **kwargs  # type: Any
     ):
         # type: (...) -> list[ReadReceipt]
         """Gets read receipts for a thread.
@@ -151,13 +178,22 @@ class ChatThreadClient(object):
         :return: list of ReadReceipt, or the result of cls(response)
         :rtype: list[~azure.communication.chat.models.ReadReceipt]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START list_read_receipts]
+                :end-before: [END list_read_receipts]
+                :language: python
+                :dedent: 8
+                :caption: Listing read receipts.
         """
         return self._client.list_chat_read_receipts(self._thread_id, **kwargs)
 
     @distributed_trace
     def send_typing_notification(
-            self,
-            **kwargs  # type: Any
+        self,
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Posts a typing event to a thread, on behalf of a user.
@@ -166,14 +202,23 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START send_typing_notification]
+                :end-before: [END send_typing_notification]
+                :language: python
+                :dedent: 8
+                :caption: Sending typing notification.
         """
         return self._client.send_typing_notification(self._thread_id, **kwargs)
 
     @distributed_trace
     def send_message(
-            self,
-            content,  # type: str
-            **kwargs  # type: Any
+        self,
+        content,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> SendMessageResult
         """Sends a message to a thread.
@@ -187,6 +232,15 @@ class ChatThreadClient(object):
         :return: SendMessageResult, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.SendMessageResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START send_message]
+                :end-before: [END send_message]
+                :language: python
+                :dedent: 8
+                :caption: Sending a message.
         """
         if not content:
             raise ValueError("content cannot be None.")
@@ -206,9 +260,9 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def get_message(
-            self,
-            message_id,  # type: str
-            **kwargs  # type: Any
+        self,
+        message_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> ChatMessage
         """Gets a message by id.
@@ -219,6 +273,15 @@ class ChatThreadClient(object):
         :return: ChatMessage, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ChatMessage
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START get_message]
+                :end-before: [END get_message]
+                :language: python
+                :dedent: 8
+                :caption: Getting a message by message id.
         """
         if not message_id:
             raise ValueError("message_id cannot be None.")
@@ -230,8 +293,8 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def list_messages(
-            self,
-            **kwargs  # type: Any
+        self,
+        **kwargs  # type: Any
     ):
         # type: (...) -> ListChatMessagesResult
         """Gets a list of messages from a thread.
@@ -244,6 +307,15 @@ class ChatThreadClient(object):
         :return: ListChatMessagesResult, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ListChatMessagesResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START list_messages]
+                :end-before: [END list_messages]
+                :language: python
+                :dedent: 8
+                :caption: Listing messages of a chat thread.
         """
         page_size = kwargs.pop("page_size", None)
         start_time = kwargs.pop("start_time", None)
@@ -258,9 +330,9 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def update_message(
-            self,
-            message_id,  # type: str
-            **kwargs  # type: Any
+        self,
+        message_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Updates a message.
@@ -272,6 +344,15 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START update_message]
+                :end-before: [END update_message]
+                :language: python
+                :dedent: 8
+                :caption: Updating a sent messages.
         """
         if not message_id:
             raise ValueError("message_id cannot be None.")
@@ -288,9 +369,9 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def delete_message(
-            self,
-            message_id,  # type: str
-            **kwargs  # type: Any
+        self,
+        message_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Deletes a message.
@@ -301,6 +382,15 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START delete_message]
+                :end-before: [END delete_message]
+                :language: python
+                :dedent: 8
+                :caption: Deleting a messages.
         """
         if not message_id:
             raise ValueError("message_id cannot be None.")
@@ -312,8 +402,8 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def list_members(
-            self,
-            **kwargs  # type: Any
+        self,
+        **kwargs  # type: Any
     ):
         # type: (...) -> list[ChatThreadMember]
         """Gets the members of a thread.
@@ -322,14 +412,23 @@ class ChatThreadClient(object):
         :return: list of ChatThreadMember, or the result of cls(response)
         :rtype: list[~azure.communication.chat.models.ChatThreadMember]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START list_members]
+                :end-before: [END list_members]
+                :language: python
+                :dedent: 8
+                :caption: Listing members of chat thread.
         """
         return self._client.list_chat_thread_members(self._thread_id, **kwargs)
 
     @distributed_trace
     def add_members(
-            self,
-            thread_members,  # type: list[ChatThreadMember]
-            **kwargs  # type: Any
+        self,
+        thread_members,  # type: list[ChatThreadMember]
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Adds thread members to a thread. If members already exist, no change occurs.
@@ -340,6 +439,15 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START add_members]
+                :end-before: [END add_members]
+                :language: python
+                :dedent: 8
+                :caption: Adding members to chat thread.
         """
         if not thread_members:
             raise ValueError("thread_members cannot be None.")
@@ -353,9 +461,9 @@ class ChatThreadClient(object):
 
     @distributed_trace
     def remove_member(
-            self,
-            member_id,  # type: str
-            **kwargs  # type: Any
+        self,
+        member_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Remove a member from a thread.
@@ -366,6 +474,15 @@ class ChatThreadClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_thread_client_sample.py
+                :start-after: [START remove_member]
+                :end-before: [END remove_member]
+                :language: python
+                :dedent: 8
+                :caption: Removing member from chat thread.
         """
         if not member_id:
             raise ValueError("member_id cannot be None.")

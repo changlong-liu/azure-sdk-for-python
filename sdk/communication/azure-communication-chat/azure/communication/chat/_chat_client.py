@@ -28,14 +28,23 @@ if TYPE_CHECKING:
 class ChatClient(object):
     """A client to interact with the AzureCommunicationService Chat gateway.
 
-    This client provides operations to create a chat thread, delete a chat thread,
-    get chat thread by id, list chat threads.
+    This client provides operations to create chat thread, delete chat thread,
+    get chat thread by id, list chat threads, create chat thread client.
 
     :param str endpoint:
         The endpoint of the Azure Communication resource.
     :param str credential:
         The credentials with which to authenticate. The value is an User
         Access Token
+
+    .. admonition:: Example:
+
+        .. literalinclude:: ../samples/chat_client_sample.py
+            :start-after: [START create_chat_client]
+            :end-before: [END create_chat_client]
+            :language: python
+            :dedent: 8
+            :caption: Creating the ChatClient from a URL and token.
     """
     def __init__(
             self,
@@ -63,7 +72,7 @@ class ChatClient(object):
         self._credential = credential
 
         self._client = AzureCommunicationChatService(
-            endpoint,
+            self._endpoint,
             authentication_policy=CommunicationUserCredentialPolicy(CommunicationUserCredential(credential)),
             **kwargs
         )
@@ -82,6 +91,15 @@ class ChatClient(object):
         :return: ChatThreadClient
         :rtype: ~azure.communication.chat.ChatThreadClient
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_client_sample.py
+                :start-after: [START get_chat_thread_client]
+                :end-before: [END get_chat_thread_client]
+                :language: python
+                :dedent: 8
+                :caption: Creating the ChatThreadClient from an existing chat thread id.
         """
         if not thread_id:
             raise ValueError("thread_id cannot be None.")
@@ -109,6 +127,15 @@ class ChatClient(object):
         :return: ChatThreadClient
         :rtype: ~azure.communication.chat.ChatThreadClient
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_client_sample.py
+                :start-after: [START create_thread]
+                :end-before: [END create_thread]
+                :language: python
+                :dedent: 8
+                :caption: Creating ChatThreadClient by creating a new chat thread.
         """
         if not topic:
             raise ValueError("topic cannot be None.")
@@ -142,6 +169,15 @@ class ChatClient(object):
         :return: ChatThread, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ChatThread
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_client_sample.py
+                :start-after: [START get_thread]
+                :end-before: [END get_thread]
+                :language: python
+                :dedent: 8
+                :caption: Getting a chat thread by thread id.
         """
         if not thread_id:
             raise ValueError("thread_id cannot be None.")
@@ -164,6 +200,15 @@ class ChatClient(object):
         :return: ListChatThreadsResult, or the result of cls(response)
         :rtype: ~azure.communication.chat.models.ListChatThreadsResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_client_sample.py
+                :start-after: [START list_threads]
+                :end-before: [END list_threads]
+                :language: python
+                :dedent: 8
+                :caption: listing chat threads.
         """
         page_size = kwargs.pop("page_size", None)
         start_time = kwargs.pop("start_time", None)
@@ -190,6 +235,15 @@ class ChatClient(object):
         :return: None, or the result of cls(response)
         :rtype: None
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
+
+        .. admonition:: Example:
+
+            .. literalinclude:: ../samples/chat_client_sample.py
+                :start-after: [START delete_thread]
+                :end-before: [END delete_thread]
+                :language: python
+                :dedent: 8
+                :caption: deleting chat thread.
         """
         if not thread_id:
             raise ValueError("thread_id cannot be None.")
@@ -198,7 +252,7 @@ class ChatClient(object):
 
     def close(self):
         # type: () -> None
-        return self._client.close()
+        self._client.close()
 
     def __enter__(self):
         # type: () -> ChatClient
