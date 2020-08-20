@@ -112,7 +112,8 @@ class ChatThreadClient(object):
         # type: (...) -> None
         """Updates a thread's properties.
 
-        :keyword str topic: Thread topic.
+        :keyword str topic: Thread topic. If topic is not specified, the update will succeeded but
+         chat thread properties will not be changed.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
