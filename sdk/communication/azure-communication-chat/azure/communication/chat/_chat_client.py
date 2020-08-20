@@ -123,7 +123,7 @@ class ChatClient(object):
         :param topic: Required. The thread topic.
         :type topic: str
         :param thread_members: Required. Members to be added to the thread.
-        :type thread_members: list[~azure.communication.chat.models.ChatThreadMember]
+        :type thread_members: list[~azure.communication.chat.ChatThreadMember]
         :return: ChatThreadClient
         :rtype: ~azure.communication.chat.ChatThreadClient
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
@@ -167,7 +167,7 @@ class ChatClient(object):
         :type thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ChatThread, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ChatThread
+        :rtype: ~azure.communication.chat.ChatThread
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -197,7 +197,7 @@ class ChatClient(object):
          paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListChatThreadsResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListChatThreadsResult
+        :rtype: ~azure.communication.chat.ListChatThreadsResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:

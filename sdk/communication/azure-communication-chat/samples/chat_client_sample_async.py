@@ -49,7 +49,7 @@ class ChatClientSamplesAsync(object):
 
     async def create_thread_async(self):
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import ChatThreadMember
+        from azure.communication.chat import ChatThreadMember
 
         chat_client = ChatClient(self.endpoint, self.token)
         async with chat_client:

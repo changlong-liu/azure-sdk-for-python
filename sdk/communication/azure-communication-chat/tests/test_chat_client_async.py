@@ -4,7 +4,7 @@
 # license information.
 # -------------------------------------------------------------------------
 from azure.communication.chat.aio import ChatClient
-from azure.communication.chat.models import ChatThreadMember
+from azure.communication.chat import ChatThreadMember
 from helpers import mock_response
 from azure.core.exceptions import HttpResponseError
 

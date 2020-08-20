@@ -8,7 +8,7 @@ import unittest
 from datetime import datetime
 from azure.core.exceptions import HttpResponseError
 from azure.communication.chat import ChatThreadClient
-from azure.communication.chat.models import *
+from azure.communication.chat import ChatMessagePriority, ChatThreadMember
 from helpers import mock_response
 
 try:

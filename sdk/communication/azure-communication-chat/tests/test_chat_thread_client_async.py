@@ -5,7 +5,7 @@
 # -------------------------------------------------------------------------
 from datetime import datetime
 from azure.communication.chat.aio import ChatThreadClient
-from azure.communication.chat.models import *
+from azure.communication.chat import ChatMessagePriority, ChatThreadMember
 from helpers import mock_response
 from azure.core.exceptions import HttpResponseError
 

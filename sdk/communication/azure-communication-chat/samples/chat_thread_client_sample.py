@@ -43,7 +43,7 @@ class ChatThreadClientSamples(object):
     def create_chat_thread_client(self):
         # [START create_chat_thread_client]
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import ChatThreadMember
+        from azure.communication.chat import ChatThreadMember
         chat_client = ChatClient(self.endpoint, self.token)
         topic="test topic"
         members = [ChatThreadMember(
@@ -70,7 +70,7 @@ class ChatThreadClientSamples(object):
         from azure.communication.chat import ChatThreadClient
         chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
         # [START send_message]
-        from azure.communication.chat.models import ChatMessagePriority
+        from azure.communication.chat import ChatMessagePriority
 
         priority = ChatMessagePriority.NORMAL
         content = 'hello world'
@@ -168,7 +168,7 @@ class ChatThreadClientSamples(object):
         self._new_member_id = new_member_id
 
         # [START add_members]
-        from azure.communication.chat.models import ChatThreadMember
+        from azure.communication.chat import ChatThreadMember
         new_member = ChatThreadMember(
                 id=new_member_id,
                 display_name='name',

@@ -44,7 +44,7 @@ class ChatThreadClientSamplesAsync(object):
     async def create_chat_thread_client_async(self):
         # [START create_chat_thread_client]
         from azure.communication.chat.aio import ChatClient
-        from azure.communication.chat.models import ChatThreadMember
+        from azure.communication.chat import ChatThreadMember
         chat_client = ChatClient(self.endpoint, self.token)
 
         async with chat_client:
@@ -78,7 +78,7 @@ class ChatThreadClientSamplesAsync(object):
 
         async with chat_thread_client:
             # [START send_message]
-            from azure.communication.chat.models import ChatMessagePriority
+            from azure.communication.chat import ChatMessagePriority
 
             priority=ChatMessagePriority.NORMAL
             content='hello world'
@@ -182,7 +182,7 @@ class ChatThreadClientSamplesAsync(object):
 
         async with chat_thread_client:
             # [START add_members]
-            from azure.communication.chat.models import ChatThreadMember
+            from azure.communication.chat import ChatThreadMember
             new_member = ChatThreadMember(
                     id=new_member_id,
                     display_name='name',

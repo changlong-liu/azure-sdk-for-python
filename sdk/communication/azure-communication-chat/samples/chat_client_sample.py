@@ -50,7 +50,7 @@ class ChatClientSamples(object):
     def create_thread(self):
         # [START create_thread]
         from azure.communication.chat import ChatClient
-        from azure.communication.chat.models import ChatThreadMember
+        from azure.communication.chat import ChatThreadMember
 
         chat_client = ChatClient(self.endpoint, self.token)
 

@@ -7,7 +7,7 @@ import unittest
 
 from azure.core.exceptions import HttpResponseError
 from azure.communication.chat import ChatClient
-from azure.communication.chat.models import ChatThreadMember
+from azure.communication.chat import ChatThreadMember
 from helpers import mock_response
 
 try:

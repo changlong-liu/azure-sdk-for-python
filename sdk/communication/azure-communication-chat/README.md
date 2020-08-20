@@ -29,7 +29,7 @@ pip install azure-communication-configuration
 ```
 
 ```python
-from azure.communication.configuration._user_management_client import UserManagementClient
+from azure.communication.configuration import UserManagementClient
 user_token_client = UserManagementClient.from_connection_string("<connection string of your Communication Resource>")
 token_response = user_token_client.user_management.issue_token(scopes=["chat"])
 token = token_response.token
@@ -150,7 +150,7 @@ Use the `create_thread` method to create a chat thread client object.
 `ChatThreadClient` is the result returned from creating a thread, you can use it to perform other chat operations to this chat thread
 
 ```Python
-from azure.communication.chat.models import ChatThreadMember
+from azure.communication.chat import ChatThreadMember
 topic="test topic",
 thread_members=[ChatThreadMember(
     id='<user identity>',
@@ -206,7 +206,7 @@ Use `send_message` method to sends a message to a thread identified by threadId.
 `SendMessageResult` is the response returned from sending a message, it contains an id, which is the unique ID of the message.
 
 ```Python
-from azure.communication.chat.models import ChatMessagePriority
+from azure.communication.chat import ChatMessagePriority
 
 content='hello world'
 priority=ChatMessagePriority.NORMAL
@@ -220,7 +220,7 @@ send_message_result = chat_thread_client.send_message(content, priority=priority
 The `get_message` method retrieves a message from the service.
 `message_id` is the unique ID of the message.
 
-`ChatMessage` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.models.Message
+`ChatMessage` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.Message
 
 ```python
 chat_message = chat_thread_client.get_message(message_id)
@@ -230,7 +230,7 @@ chat_message = chat_thread_client.get_message(message_id)
 
 The `list_messages` method retrieves messages from the service.
 
-`ListChatMessagesResult` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.models.ListMessagesResult
+`ListChatMessagesResult` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.ListMessagesResult
 
 ```Python
 list_chat_messages_result = chat_thread_client.list_messages()
@@ -284,7 +284,7 @@ Use `add_members` method to add thread members to the thread.
 '0' means share everything, '-1' means share nothing
 
 ```Python
-from azure.communication.chat.models import ChatThreadMember
+from azure.communication.chat import ChatThreadMember
 member = ChatThreadMember(
     id='<user id>',
     display_name='name',

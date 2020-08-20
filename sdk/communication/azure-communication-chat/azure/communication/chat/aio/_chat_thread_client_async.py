@@ -174,7 +174,7 @@ class ChatThreadClient(object):
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ReadReceipt]
+        :rtype: list[~azure.communication.chat.ReadReceipt]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -229,7 +229,7 @@ class ChatThreadClient(object):
           populate sender name for push notifications.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: SendMessageResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.SendMessageResult
+        :rtype: ~azure.communication.chat.SendMessageResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -270,7 +270,7 @@ class ChatThreadClient(object):
         :type message_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ChatMessage, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ChatMessage
+        :rtype: ~azure.communication.chat.ChatMessage
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -304,7 +304,7 @@ class ChatThreadClient(object):
          used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ListChatMessagesResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListChatMessagesResult
+        :rtype: ~azure.communication.chat.ListChatMessagesResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -409,7 +409,7 @@ class ChatThreadClient(object):
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ChatThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ChatThreadMember]
+        :rtype: list[~azure.communication.chat.ChatThreadMember]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -433,7 +433,7 @@ class ChatThreadClient(object):
         """Adds thread members to a thread. If members already exist, no change occurs.
 
         :param thread_members: Required. Thread members to be added to the thread.
-        :type thread_members: list[~azure.communication.chat.models.ChatThreadMember]
+        :type thread_members: list[~azure.communication.chat.ChatThreadMember]
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
