@@ -102,8 +102,10 @@ class ChatThreadClientSamples(object):
         list_chat_messages_result = chat_thread_client.list_messages()
         # [END list_messages]
 
-        print("list_chat_messages succeeded, messages count:",
-            len([elem for elem in list_chat_messages_result.messages if elem.type == 'Text']))
+        messages = [elem for elem in list_chat_messages_result.messages if elem.type == 'Text']
+        print("list_chat_messages succeeded, messages count:", len(messages))
+        for msg in messages:
+            print(msg)
 
     def update_message(self):
         from azure.communication.chat import ChatThreadClient

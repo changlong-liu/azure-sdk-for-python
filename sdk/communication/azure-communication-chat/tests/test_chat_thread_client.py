@@ -5,6 +5,7 @@
 # --------------------------------------------------------------------------
 import unittest
 
+from datetime import datetime
 from azure.core.exceptions import HttpResponseError
 from azure.communication.chat import ChatThreadClient
 from azure.communication.chat.models import *
@@ -93,6 +94,29 @@ class TestChatThreadClient(unittest.TestCase):
         self.assertFalse(raised, 'Expected is no excpetion raised')
         assert len(list_messages_response.messages) == 1
         assert list_messages_response.messages[0].id == message_id
+
+    def test_list_messages_with_start_time(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        raised = False
+
+        def mock_send(*_, **__):
+            return mock_response(status_code=200, json_payload={
+                "messages": [
+                    {"id": "message_id1", "createdOn": "2020-08-17T18:05:44Z"},
+                    {"id": "message_id2", "createdOn": "2020-08-17T23:13:33Z"}
+                    ]})
+        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+
+        list_messages_response = None
+        try:
+            list_messages_response = chat_thread_client.list_messages(
+                start_time=datetime(2020, 8, 17, 18, 0, 0)
+            )
+        except:
+            raised = True
+
+        self.assertFalse(raised, 'Expected is no excpetion raised')
+        assert len(list_messages_response.messages) == 2
 
     def test_update_message(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"

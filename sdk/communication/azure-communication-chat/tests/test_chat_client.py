@@ -105,5 +105,12 @@ class TestChatClient(unittest.TestCase):
         assert len(list_threads_result.threads) == 1
         assert list_threads_result.threads[0].id == thread_id
 
+    def test_get_thread_client(self):
+        thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
+        chat_client = ChatClient("some_token", "https://endpoint")
+        chat_thread_client = chat_client.get_chat_thread_client(thread_id)
+
+        assert chat_thread_client.thread_id == thread_id
+
 if __name__ == '__main__':
     unittest.main()
