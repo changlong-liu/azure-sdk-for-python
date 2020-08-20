@@ -180,7 +180,7 @@ class ChatThreadClient(object):
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.models.ReadReceipt]
+        :rtype: list[~azure.communication.chat.ReadReceipt]
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -224,7 +224,7 @@ class ChatThreadClient(object):
         content,  # type: str
         **kwargs  # type: Any
     ):
-        # type: (...) -> SendMessageResult
+        # type: (...) -> SendChatMessageResult
         """Sends a message to a thread.
 
         :param content: Required. Chat message content.
@@ -234,8 +234,8 @@ class ChatThreadClient(object):
         :keyword str sender_display_name: The display name of the message sender. This property is used to
           populate sender name for push notifications.
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: SendMessageResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.SendMessageResult
+        :return: SendChatMessageResult, or the result of cls(response)
+        :rtype: ~azure.communication.chat.SendChatMessageResult
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
