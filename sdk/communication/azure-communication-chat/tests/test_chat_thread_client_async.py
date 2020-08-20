@@ -23,7 +23,7 @@ async def test_update_thread():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     topic = "update topic"
     try:
@@ -41,7 +41,7 @@ async def test_send_message():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=201, json_payload={"id": message_id})
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     create_message_result = None
     try:
@@ -67,7 +67,7 @@ async def test_get_message():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200, json_payload={"id": message_id})
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     message = None
     try:
@@ -86,7 +86,7 @@ async def test_list_messages():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200, json_payload={"messages": [{"id": message_id}]})
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     list_messages_response = None
     try:
@@ -109,7 +109,7 @@ async def test_list_messages_with_start_time():
                 {"id": "message_id1", "createdOn": "2020-08-17T18:05:44Z"},
                 {"id": "message_id2", "createdOn": "2020-08-17T23:13:33Z"}
                 ]})
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     list_messages_response = None
     try:
@@ -130,7 +130,7 @@ async def test_update_message():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     try:
         content = "updated message content"
@@ -148,7 +148,7 @@ async def test_delete_message():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     try:
         await chat_thread_client.delete_message(message_id)
@@ -165,7 +165,7 @@ async def test_list_members():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200, json_payload=[{"id": member_id}])
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     try:
         members = await chat_thread_client.list_members()
@@ -184,7 +184,7 @@ async def test_add_members():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=201)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     new_member = ChatThreadMember(
             id=new_member_id,
@@ -207,7 +207,7 @@ async def test_remove_member():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     try:
         await chat_thread_client.remove_member(member_id)
@@ -223,7 +223,7 @@ async def test_send_typing_notification():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     try:
         await chat_thread_client.send_typing_notification()
@@ -240,7 +240,7 @@ async def test_send_read_receipt():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=201)
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     try:
         await chat_thread_client.send_read_receipt(message_id)
@@ -257,7 +257,7 @@ async def test_list_read_receipts():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200, json_payload=[{"message_id": message_id}])
-    chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+    chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
     read_receipts = []
     try:

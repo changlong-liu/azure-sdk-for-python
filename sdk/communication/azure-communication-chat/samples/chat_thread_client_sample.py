@@ -58,7 +58,7 @@ class ChatThreadClientSamples(object):
 
     def update_thread(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START update_thread]
         topic = "updated thread topic"
         chat_thread_client.update_thread(topic=topic)
@@ -68,7 +68,7 @@ class ChatThreadClientSamples(object):
 
     def send_message(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START send_message]
         from azure.communication.chat import ChatMessagePriority
 
@@ -87,7 +87,7 @@ class ChatThreadClientSamples(object):
 
     def get_message(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START get_message]
         chat_message = chat_thread_client.get_message(self._message_id)
         # [END get_message]
@@ -97,7 +97,7 @@ class ChatThreadClientSamples(object):
 
     def list_messages(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START list_messages]
         list_chat_messages_result = chat_thread_client.list_messages()
         # [END list_messages]
@@ -109,7 +109,7 @@ class ChatThreadClientSamples(object):
 
     def update_message(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START update_message]
         content = "updated content"
         chat_thread_client.update_message(self._message_id, content=content)
@@ -119,7 +119,7 @@ class ChatThreadClientSamples(object):
 
     def send_read_receipt(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START send_read_receipt]
         chat_thread_client.send_read_receipt(self._message_id)
         # [END send_read_receipt]
@@ -128,7 +128,7 @@ class ChatThreadClientSamples(object):
 
     def list_read_receipts(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START list_read_receipts]
         read_receipts = chat_thread_client.list_read_receipts()
         # [END list_read_receipts]
@@ -139,7 +139,7 @@ class ChatThreadClientSamples(object):
 
     def delete_message(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START delete_message]
         chat_thread_client.delete_message(self._message_id)
         # [END delete_message]
@@ -148,7 +148,7 @@ class ChatThreadClientSamples(object):
 
     def list_members(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START list_members]
         chat_thread_members = chat_thread_client.list_members()
         # [END list_members]
@@ -159,7 +159,7 @@ class ChatThreadClientSamples(object):
 
     def add_members(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
 
         # the new member must has the same resource id as the thread creator
         new_member_id = \
@@ -180,7 +180,7 @@ class ChatThreadClientSamples(object):
 
     def remove_member(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
 
         # this member was added when calling add_members()
         member_id = self._new_member_id
@@ -193,7 +193,7 @@ class ChatThreadClientSamples(object):
 
     def send_typing_notification(self):
         from azure.communication.chat import ChatThreadClient
-        chat_thread_client = ChatThreadClient(self._thread_id, self.endpoint, self.token)
+        chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START send_typing_notification]
         chat_thread_client.send_typing_notification()
         # [END send_typing_notification]

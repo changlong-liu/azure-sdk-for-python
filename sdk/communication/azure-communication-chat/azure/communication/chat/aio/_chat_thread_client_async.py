@@ -37,13 +37,13 @@ class ChatThreadClient(object):
     chat thread, send message, delete message, update message, send typing notifications,
     send and list read receipt
 
-    :param str thread_id:
-        The unique thread id.
     :param str endpoint:
         The endpoint of the Azure Communication resource.
     :param str credential:
         The credentials with which to authenticate. The value is an User
         Access Token
+    :param str thread_id:
+        The unique thread id.
 
     .. admonition:: Example:
 
@@ -56,9 +56,9 @@ class ChatThreadClient(object):
     """
     def __init__(
             self,
-            thread_id,  # type: str
             endpoint,  # type: str
             credential,  # type: str
+            thread_id,  # type: str
             **kwargs  # type: Any
     ):
         # type: (...) -> None

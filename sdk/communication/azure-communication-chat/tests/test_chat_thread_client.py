@@ -23,7 +23,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         topic = "update topic"
         try:
@@ -40,7 +40,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=201, json_payload={"id": message_id})
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         create_message_result = None
         try:
@@ -65,7 +65,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200, json_payload={"id": message_id})
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         message = None
         try:
@@ -83,7 +83,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200, json_payload={"messages": [{"id": message_id}]})
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         list_messages_response = None
         try:
@@ -105,7 +105,7 @@ class TestChatThreadClient(unittest.TestCase):
                     {"id": "message_id1", "createdOn": "2020-08-17T18:05:44Z"},
                     {"id": "message_id2", "createdOn": "2020-08-17T23:13:33Z"}
                     ]})
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         list_messages_response = None
         try:
@@ -125,7 +125,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         try:
             content = "updated message content"
@@ -142,7 +142,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         try:
             chat_thread_client.delete_message(message_id)
@@ -158,7 +158,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200, json_payload=[{"id": member_id}])
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         try:
             members = chat_thread_client.list_members()
@@ -176,7 +176,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=201)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         new_member = ChatThreadMember(
                 id=new_member_id,
@@ -198,7 +198,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         try:
             chat_thread_client.remove_member(member_id)
@@ -213,7 +213,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         try:
             chat_thread_client.send_typing_notification()
@@ -229,7 +229,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=201)
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         try:
             chat_thread_client.send_read_receipt(message_id)
@@ -245,7 +245,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         def mock_send(*_, **__):
             return mock_response(status_code=200, json_payload=[{"message_id": message_id}])
-        chat_thread_client = ChatThreadClient(thread_id, "some_token", "https://endpoint", transport=Mock(send=mock_send))
+        chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
         read_receipts = []
         try:

@@ -104,9 +104,9 @@ class ChatClient(object):
             raise ValueError("thread_id cannot be None.")
 
         return ChatThreadClient(
-            thread_id=thread_id,
             endpoint=self._endpoint,
             credential=self._credential,
+            thread_id=thread_id,
             **kwargs
         )
 
@@ -148,9 +148,9 @@ class ChatClient(object):
         thread_id = create_thread_result.id
 
         return ChatThreadClient(
-            thread_id=thread_id,
             endpoint=self._endpoint,
             credential=self._credential,
+            thread_id=thread_id,
             **kwargs
         )
 
