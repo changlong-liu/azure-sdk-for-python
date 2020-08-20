@@ -38,6 +38,9 @@ class ChatThreadClient(object):
     chat thread, send message, delete message, update message, send typing notifications,
     send and list read receipt
 
+    :ivar thread_id: Chat thread id.
+    :vartype thread_id: str
+
     :param str endpoint:
         The endpoint of the Azure Communication resource.
     :param str credential:
