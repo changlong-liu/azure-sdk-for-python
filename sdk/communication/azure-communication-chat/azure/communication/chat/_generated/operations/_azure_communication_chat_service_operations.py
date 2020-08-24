@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING
 import warnings
 
 from azure.core.exceptions import HttpResponseError, ResourceExistsError, ResourceNotFoundError, map_error
+from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
 from azure.core.pipeline.transport import HttpRequest, HttpResponse
 
@@ -17,7 +18,7 @@ from .. import models
 
 if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
-    from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar
+    from typing import Any, Callable, Dict, Generic, Iterable, Optional, TypeVar
 
     T = TypeVar('T')
     ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
@@ -29,7 +30,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         chat_thread_id,  # type: str
         **kwargs  # type: Any
     ):
-        # type: (...) -> List["models.ReadReceipt"]
+        # type: (...) -> Iterable["models.ReadReceiptsCollection"]
         """Gets read receipts for a thread.
 
         Gets read receipts for a thread.
@@ -37,62 +38,83 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :param chat_thread_id: Thread id to get the read receipts for.
         :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ReadReceipt]
+        :return: An iterator like instance of either ReadReceiptsCollection or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.communication.chat.models.ReadReceiptsCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[List["models.ReadReceipt"]]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ReadReceiptsCollection"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
-        # Construct URL
-        url = self.list_chat_read_receipts.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        def prepare_request(next_link=None):
+            # Construct headers
+            header_parameters = {}  # type: Dict[str, Any]
+            header_parameters['Accept'] = 'application/json'
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+            if not next_link:
+                # Construct URL
+                url = self.list_chat_read_receipts.metadata['url']  # type: ignore
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                    'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                # Construct parameters
+                query_parameters = {}  # type: Dict[str, Any]
+                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
 
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = 'application/json'
+                request = self._client.get(url, query_parameters, header_parameters)
+            else:
+                url = next_link
+                query_parameters = {}  # type: Dict[str, Any]
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                    'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                request = self._client.get(url, query_parameters, header_parameters)
+            return request
 
-        request = self._client.get(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
-        response = pipeline_response.http_response
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize('ReadReceiptsCollection', pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
 
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
 
-        deserialized = self._deserialize('[ReadReceipt]', pipeline_response)
+            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            response = pipeline_response.http_response
 
-        if cls:
-            return cls(pipeline_response, deserialized, {})
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
 
-        return deserialized
+            return pipeline_response
+
+        return ItemPaged(
+            get_next, extract_data
+        )
     list_chat_read_receipts.metadata = {'url': '/chat/threads/{chatThreadId}/readreceipts'}  # type: ignore
 
     def send_chat_read_receipt(
         self,
         chat_thread_id,  # type: str
-        body,  # type: "models.PostReadReceiptRequest"
+        body,  # type: "models.SendReadReceiptRequest"
         **kwargs  # type: Any
     ):
         # type: (...) -> None
-        """Posts a read receipt event to a thread, on behalf of a user.
+        """Sends a read receipt event to a thread, on behalf of a user.
 
-        Posts a read receipt event to a thread, on behalf of a user.
+        Sends a read receipt event to a thread, on behalf of a user.
 
-        :param chat_thread_id: Id of the thread.
+        :param chat_thread_id: Thread id to send the read receipt event to.
         :type chat_thread_id: str
-        :param body: Request payload for sending a read receipt.
-        :type body: ~azure.communication.chat.models.PostReadReceiptRequest
+        :param body: Read receipt details.
+        :type body: ~azure.communication.chat.models.SendReadReceiptRequest
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -121,7 +143,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         header_parameters['Content-Type'] = self._serialize.header("content_type", content_type, 'str')
 
         body_content_kwargs = {}  # type: Dict[str, Any]
-        body_content = self._serialize.body(body, 'PostReadReceiptRequest')
+        body_content = self._serialize.body(body, 'SendReadReceiptRequest')
         body_content_kwargs['content'] = body_content
         request = self._client.post(url, query_parameters, header_parameters, **body_content_kwargs)
 
@@ -203,72 +225,87 @@ class AzureCommunicationChatServiceOperationsMixin(object):
     def list_chat_messages(
         self,
         chat_thread_id,  # type: str
-        page_size=None,  # type: Optional[int]
+        max_page_size=None,  # type: Optional[int]
         start_time=None,  # type: Optional[datetime.datetime]
-        sync_state=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
-        # type: (...) -> "models.ListChatMessagesResult"
+        # type: (...) -> Iterable["models.ChatMessagesCollection"]
         """Gets a list of messages from a thread.
 
         Gets a list of messages from a thread.
 
         :param chat_thread_id: The thread id of the message.
         :type chat_thread_id: str
-        :param page_size: The number of messages being requested.
-        :type page_size: int
-        :param start_time: The start time where the range query. This is represented by number of
-         seconds since epoch time.
+        :param max_page_size: The maximum number of messages to be returned per page.
+        :type max_page_size: int
+        :param start_time: The earliest point in time to get messages up to. The timestamp should be in
+         ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
         :type start_time: ~datetime.datetime
-        :param sync_state: The continuation token that previous request obtained. This is used for
-         paging.
-        :type sync_state: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListChatMessagesResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListChatMessagesResult
+        :return: An iterator like instance of either ChatMessagesCollection or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.communication.chat.models.ChatMessagesCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListChatMessagesResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ChatMessagesCollection"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
-        # Construct URL
-        url = self.list_chat_messages.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        def prepare_request(next_link=None):
+            # Construct headers
+            header_parameters = {}  # type: Dict[str, Any]
+            header_parameters['Accept'] = 'application/json'
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        if page_size is not None:
-            query_parameters['pageSize'] = self._serialize.query("page_size", page_size, 'int')
-        if start_time is not None:
-            query_parameters['startTime'] = self._serialize.query("start_time", start_time, 'iso-8601')
-        if sync_state is not None:
-            query_parameters['syncState'] = self._serialize.query("sync_state", sync_state, 'str')
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+            if not next_link:
+                # Construct URL
+                url = self.list_chat_messages.metadata['url']  # type: ignore
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                    'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                # Construct parameters
+                query_parameters = {}  # type: Dict[str, Any]
+                if max_page_size is not None:
+                    query_parameters['maxPageSize'] = self._serialize.query("max_page_size", max_page_size, 'int')
+                if start_time is not None:
+                    query_parameters['startTime'] = self._serialize.query("start_time", start_time, 'iso-8601')
+                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
 
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = 'application/json'
+                request = self._client.get(url, query_parameters, header_parameters)
+            else:
+                url = next_link
+                query_parameters = {}  # type: Dict[str, Any]
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                    'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                request = self._client.get(url, query_parameters, header_parameters)
+            return request
 
-        request = self._client.get(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
-        response = pipeline_response.http_response
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize('ChatMessagesCollection', pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
 
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
 
-        deserialized = self._deserialize('ListChatMessagesResult', pipeline_response)
+            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            response = pipeline_response.http_response
 
-        if cls:
-            return cls(pipeline_response, deserialized, {})
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
 
-        return deserialized
+            return pipeline_response
+
+        return ItemPaged(
+            get_next, extract_data
+        )
     list_chat_messages.metadata = {'url': '/chat/threads/{chatThreadId}/messages'}  # type: ignore
 
     def get_chat_message(
@@ -501,7 +538,7 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         chat_thread_id,  # type: str
         **kwargs  # type: Any
     ):
-        # type: (...) -> List["models.ChatThreadMember"]
+        # type: (...) -> Iterable["models.ChatThreadMembersCollection"]
         """Gets the members of a thread.
 
         Gets the members of a thread.
@@ -509,45 +546,66 @@ class AzureCommunicationChatServiceOperationsMixin(object):
         :param chat_thread_id: Thread id to get members for.
         :type chat_thread_id: str
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ChatThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.models.ChatThreadMember]
+        :return: An iterator like instance of either ChatThreadMembersCollection or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.communication.chat.models.ChatThreadMembersCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType[List["models.ChatThreadMember"]]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ChatThreadMembersCollection"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
-        # Construct URL
-        url = self.list_chat_thread_members.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-            'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        def prepare_request(next_link=None):
+            # Construct headers
+            header_parameters = {}  # type: Dict[str, Any]
+            header_parameters['Accept'] = 'application/json'
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+            if not next_link:
+                # Construct URL
+                url = self.list_chat_thread_members.metadata['url']  # type: ignore
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                    'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                # Construct parameters
+                query_parameters = {}  # type: Dict[str, Any]
+                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
 
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = 'application/json'
+                request = self._client.get(url, query_parameters, header_parameters)
+            else:
+                url = next_link
+                query_parameters = {}  # type: Dict[str, Any]
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                    'chatThreadId': self._serialize.url("chat_thread_id", chat_thread_id, 'str'),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                request = self._client.get(url, query_parameters, header_parameters)
+            return request
 
-        request = self._client.get(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
-        response = pipeline_response.http_response
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize('ChatThreadMembersCollection', pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
 
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
 
-        deserialized = self._deserialize('[ChatThreadMember]', pipeline_response)
+            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            response = pipeline_response.http_response
 
-        if cls:
-            return cls(pipeline_response, deserialized, {})
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
 
-        return deserialized
+            return pipeline_response
+
+        return ItemPaged(
+            get_next, extract_data
+        )
     list_chat_thread_members.metadata = {'url': '/chat/threads/{chatThreadId}/members'}  # type: ignore
 
     def add_chat_thread_members(
@@ -724,63 +782,77 @@ class AzureCommunicationChatServiceOperationsMixin(object):
 
     def list_chat_threads(
         self,
-        page_size=None,  # type: Optional[int]
-        sync_state=None,  # type: Optional[str]
+        max_page_size=None,  # type: Optional[int]
         **kwargs  # type: Any
     ):
-        # type: (...) -> "models.ListChatThreadsResult"
+        # type: (...) -> Iterable["models.ChatThreadsInfoCollection"]
         """Gets the list of chat threads of a user.
 
         Gets the list of chat threads of a user.
 
-        :param page_size: The number of threads being requested.
-        :type page_size: int
-        :param sync_state: The continuation token that previous request obtained. This is used for
-         paging.
-        :type sync_state: str
+        :param max_page_size: The maximum number of chat threads returned per page.
+        :type max_page_size: int
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListChatThreadsResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.models.ListChatThreadsResult
+        :return: An iterator like instance of either ChatThreadsInfoCollection or the result of cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.communication.chat.models.ChatThreadsInfoCollection]
         :raises: ~azure.core.exceptions.HttpResponseError
         """
-        cls = kwargs.pop('cls', None)  # type: ClsType["models.ListChatThreadsResult"]
+        cls = kwargs.pop('cls', None)  # type: ClsType["models.ChatThreadsInfoCollection"]
         error_map = {404: ResourceNotFoundError, 409: ResourceExistsError}
         error_map.update(kwargs.pop('error_map', {}))
         api_version = "2020-09-21-preview2"
 
-        # Construct URL
-        url = self.list_chat_threads.metadata['url']  # type: ignore
-        path_format_arguments = {
-            'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
-        }
-        url = self._client.format_url(url, **path_format_arguments)
+        def prepare_request(next_link=None):
+            # Construct headers
+            header_parameters = {}  # type: Dict[str, Any]
+            header_parameters['Accept'] = 'application/json'
 
-        # Construct parameters
-        query_parameters = {}  # type: Dict[str, Any]
-        if page_size is not None:
-            query_parameters['pageSize'] = self._serialize.query("page_size", page_size, 'int')
-        if sync_state is not None:
-            query_parameters['syncState'] = self._serialize.query("sync_state", sync_state, 'str')
-        query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
+            if not next_link:
+                # Construct URL
+                url = self.list_chat_threads.metadata['url']  # type: ignore
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                # Construct parameters
+                query_parameters = {}  # type: Dict[str, Any]
+                if max_page_size is not None:
+                    query_parameters['maxPageSize'] = self._serialize.query("max_page_size", max_page_size, 'int')
+                query_parameters['api-version'] = self._serialize.query("api_version", api_version, 'str')
 
-        # Construct headers
-        header_parameters = {}  # type: Dict[str, Any]
-        header_parameters['Accept'] = 'application/json'
+                request = self._client.get(url, query_parameters, header_parameters)
+            else:
+                url = next_link
+                query_parameters = {}  # type: Dict[str, Any]
+                path_format_arguments = {
+                    'endpoint': self._serialize.url("self._config.endpoint", self._config.endpoint, 'str', skip_quote=True),
+                }
+                url = self._client.format_url(url, **path_format_arguments)
+                request = self._client.get(url, query_parameters, header_parameters)
+            return request
 
-        request = self._client.get(url, query_parameters, header_parameters)
-        pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
-        response = pipeline_response.http_response
+        def extract_data(pipeline_response):
+            deserialized = self._deserialize('ChatThreadsInfoCollection', pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
 
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response)
+        def get_next(next_link=None):
+            request = prepare_request(next_link)
 
-        deserialized = self._deserialize('ListChatThreadsResult', pipeline_response)
+            pipeline_response = self._client._pipeline.run(request, stream=False, **kwargs)
+            response = pipeline_response.http_response
 
-        if cls:
-            return cls(pipeline_response, deserialized, {})
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response)
 
-        return deserialized
+            return pipeline_response
+
+        return ItemPaged(
+            get_next, extract_data
+        )
     list_chat_threads.metadata = {'url': '/chat/threads'}  # type: ignore
 
     def update_chat_thread(

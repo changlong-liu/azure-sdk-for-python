@@ -183,20 +183,18 @@ class ChatClient(object):
 
         return await self._client.get_chat_thread(thread_id, **kwargs)
 
-    @distributed_trace_async
-    async def list_threads(
+    @distributed_trace
+    def list_threads(
         self,
         **kwargs
     ):
-        # type: (...) -> ListChatThreadsResult
+        # type: (...) -> AsyncItemPaged[ChatThreadInfo]
         """Gets the list of chat threads of a user.
 
         :keyword int page_size: The number of threads being requested.
-        :keyword str sync_state: The continuation token that previous request obtained. This is used for
-         paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListChatThreadsResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.ListChatThreadsResult
+        :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatThreadInfo`]
+        :rtype: ~azure.core.async_paging.AsyncItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -209,11 +207,10 @@ class ChatClient(object):
                 :caption: listing chat threads.
         """
         page_size = kwargs.pop("page_size", None)
-        sync_state = kwargs.pop("sync_state", None)
 
-        return await self._client.list_chat_threads(
-            page_size=page_size,
-            sync_state=sync_state,
+        return self._client.list_chat_threads(
+            cls=kwargs.pop("cls", lambda objs: [x for x in objs]),
+            max_page_size=page_size,
             **kwargs)
 
     @distributed_trace_async

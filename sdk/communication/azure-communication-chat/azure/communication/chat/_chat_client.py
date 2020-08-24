@@ -189,15 +189,14 @@ class ChatClient(object):
         self,
         **kwargs
     ):
-        # type: (...) -> ListChatThreadsResult
+        # type: (...) -> ItemPaged[ChatThreadInfo]
         """Gets the list of chat threads of a user.
 
         :keyword int page_size: The number of threads being requested.
-        :keyword str sync_state: The continuation token that previous request obtained. This is used for
-         paging.
+
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListChatThreadsResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.ListChatThreadsResult
+        :return: ItemPaged[:class:`~azure.communication.chat.ChatThreadInfo`]
+        :rtype: ~azure.core.paging.ItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -210,11 +209,10 @@ class ChatClient(object):
                 :caption: listing chat threads.
         """
         page_size = kwargs.pop("page_size", None)
-        sync_state = kwargs.pop("sync_state", None)
 
         return self._client.list_chat_threads(
-            page_size=page_size,
-            sync_state=sync_state,
+            cls=kwargs.pop("cls", lambda objs: [x for x in objs]),
+            max_page_size=page_size,
             **kwargs)
 
     @distributed_trace

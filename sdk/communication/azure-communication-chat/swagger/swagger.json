@@ -35,10 +35,7 @@
           "200": {
             "description": "Request successful. The action returns the requested `ReadReceipt` resources.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ReadReceipt"
-              }
+              "$ref": "#/definitions/ReadReceiptsCollection"
             }
           }
         },
@@ -46,13 +43,17 @@
           "Get thread read receipts": {
             "$ref": "./examples/Conversations_ListChatReadReceipts.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink",
+          "itemName": "value"
         }
       },
       "post": {
         "tags": [
           "Threads"
         ],
-        "summary": "Posts a read receipt event to a thread, on behalf of a user.",
+        "summary": "Sends a read receipt event to a thread, on behalf of a user.",
         "operationId": "SendChatReadReceipt",
         "consumes": [
           "application/json"
@@ -61,7 +62,7 @@
           {
             "in": "path",
             "name": "chatThreadId",
-            "description": "Id of the thread.",
+            "description": "Thread id to send the read receipt event to.",
             "required": true,
             "type": "string"
           },
@@ -71,10 +72,10 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Request payload for sending a read receipt.",
+            "description": "Read receipt details.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PostReadReceiptRequest"
+              "$ref": "#/definitions/SendReadReceiptRequest"
             }
           }
         ],
@@ -84,7 +85,7 @@
           }
         },
         "x-ms-examples": {
-          "Post read receipt": {
+          "Send read receipt": {
             "$ref": "./examples/Conversations_SendChatReadReceipt.json"
           }
         }
@@ -157,23 +158,17 @@
           },
           {
             "in": "query",
-            "name": "pageSize",
-            "description": "The number of messages being requested.",
+            "name": "maxPageSize",
+            "description": "The maximum number of messages to be returned per page.",
             "type": "integer",
             "format": "int32"
           },
           {
             "in": "query",
             "name": "startTime",
-            "description": "The start time where the range query. This is represented by number of seconds since epoch time.",
+            "description": "The earliest point in time to get messages up to. The timestamp should be in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
             "type": "string",
             "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "syncState",
-            "description": "The continuation token that previous request obtained. This is used for paging.",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -183,17 +178,21 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/ListChatMessagesResult"
+              "$ref": "#/definitions/ChatMessagesCollection"
             }
           }
         },
         "x-ms-examples": {
-          "Get messages with pagination (Page Size)": {
-            "$ref": "./examples/Messages_ListChatMessagesWithPageSize.json"
+          "Get messages": {
+            "$ref": "./examples/Messages_ListChatMessagesWithDeltaLink.json"
           },
-          "Get messages with pagination (Sync State Token)": {
-            "$ref": "./examples/Messages_ListChatMessagesWithSyncState.json"
+          "Get messages with pagination (max page size)": {
+            "$ref": "./examples/Messages_ListChatMessagesWithPageSize.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -382,10 +381,7 @@
           "200": {
             "description": "Request successful. The action returns the members of a thread.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/ChatThreadMember"
-              }
+              "$ref": "#/definitions/ChatThreadMembersCollection"
             }
           }
         },
@@ -393,6 +389,10 @@
           "Get thread members": {
             "$ref": "./examples/ThreadMembers_ListChatThreadMembers.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink",
+          "itemName": "value"
         }
       },
       "post": {
@@ -532,16 +532,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "pageSize",
-            "description": "The number of threads being requested.",
+            "name": "maxPageSize",
+            "description": "The maximum number of chat threads returned per page.",
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "in": "query",
-            "name": "syncState",
-            "description": "The continuation token that previous request obtained. This is used for paging.",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -551,17 +545,21 @@
           "200": {
             "description": "Request successful. The action returns a `GetThreadsResponse` resource.",
             "schema": {
-              "$ref": "#/definitions/ListChatThreadsResult"
+              "$ref": "#/definitions/ChatThreadsInfoCollection"
             }
           }
         },
         "x-ms-examples": {
-          "Get chat threads with pagination (Page Size)": {
-            "$ref": "./examples/Threads_ListChatThreadsWithPageSize.json"
+          "Get threads": {
+            "$ref": "./examples/Threads_ListChatThreadsWithDeltaLink.json"
           },
-          "Get chat threads with pagination (Sync State Token)": {
-            "$ref": "./examples/Threads_ListChatThreadsWithSyncState.json"
+          "Get threads with pagination (Max Page Size)": {
+            "$ref": "./examples/Threads_ListChatThreadsWithPageSize.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "@nextLink",
+          "itemName": "value"
         }
       }
     },
@@ -685,7 +683,7 @@
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
         },
         "chatMessageId": {
-          "description": "Id for the chat message that has been read. This id is server generated.",
+          "description": "Id for the chat message that has been read. This id is generated by the server.",
           "type": "string",
           "readOnly": true,
           "example": "1591137790240"
@@ -699,7 +697,25 @@
         }
       }
     },
-    "PostReadReceiptRequest": {
+    "ReadReceiptsCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of read receipts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReadReceipt"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "description": "If there are more read receipts that can be retrieved, the next link will be populated.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SendReadReceiptRequest": {
       "description": "Request payload for sending a read receipt.",
       "required": [
         "chatMessageId"
@@ -752,7 +768,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The Id of the message. This Id is server generated.",
+          "description": "A server-generated message id.",
           "type": "string",
           "readOnly": true,
           "example": "123456789"
@@ -798,8 +814,8 @@
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
         },
-        "from": {
-          "description": "The Id of the chat message sender.",
+        "senderId": {
+          "description": "The id of the chat message sender.",
           "type": "string",
           "readOnly": true,
           "example": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_aabbcc-0011223344"
@@ -818,25 +834,25 @@
         }
       }
     },
-    "ListChatMessagesResult": {
-      "description": "List of chat messages for a particular chat thread.",
+    "ChatMessagesCollection": {
+      "description": "Collection of chat messages for a particular chat thread.",
       "type": "object",
       "properties": {
-        "messages": {
-          "description": "List of chat messages.",
+        "value": {
+          "description": "Collection of chat messages.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChatMessage"
           },
           "readOnly": true
         },
-        "syncState": {
-          "description": "Continuation link to get new and modified chat messages.",
+        "@deltaLink": {
+          "description": "Delta link to be used to get updates to the result set in the future, if there is currently no more messages to get.",
           "type": "string",
           "readOnly": true
         },
-        "backwardLink": {
-          "description": "If there are more chat messages that can be retrieved, the backward link will be populated.",
+        "@nextLink": {
+          "description": "If there are more chat messages that can be retrieved, the next link will be populated.",
           "type": "string",
           "readOnly": true
         }
@@ -873,6 +889,24 @@
           "description": "Time from which the chat history is shared with the member in EPOCH time (milliseconds).\r\n            \r\nPossible values:\r\n - `0` which means share everything\r\n - `-1` which means share nothing\r\n - `1594691284031` which is epoch time equivalent to 7/14/2020 1:48:04 AM +00:00",
           "type": "string",
           "example": "0"
+        }
+      }
+    },
+    "ChatThreadMembersCollection": {
+      "description": "Collection of thread members belong to a particular thread.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Chat thread members.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatThreadMember"
+          }
+        },
+        "@nextLink": {
+          "description": "If there are more chat threads that can be retrieved, the next link will be populated.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -954,24 +988,25 @@
         }
       }
     },
-    "ListChatThreadsResult": {
+    "ChatThreadsInfoCollection": {
+      "description": "Collection of chat threads.",
       "type": "object",
       "properties": {
-        "threads": {
-          "description": "List of chat threads.",
+        "value": {
+          "description": "Collection of chat threads.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChatThreadInfo"
           },
           "readOnly": true
         },
-        "syncState": {
-          "description": "Continuation link to get new and modified chat threads.",
+        "@deltaLink": {
+          "description": "Delta link to be used to get updates to the result set in the future, if there is currently no more threads to get.",
           "type": "string",
           "readOnly": true
         },
-        "backwardLink": {
-          "description": "If there are more chat threads that can be retrieved, the backward link will be populated.",
+        "@nextLink": {
+          "description": "If there are more chat threads that can be retrieved, the next link will be populated.",
           "type": "string",
           "readOnly": true
         }

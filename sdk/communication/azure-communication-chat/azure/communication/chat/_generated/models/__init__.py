@@ -9,33 +9,37 @@
 try:
     from ._models_py3 import AddChatThreadMembersRequest
     from ._models_py3 import ChatMessage
+    from ._models_py3 import ChatMessagesCollection
     from ._models_py3 import ChatThread
     from ._models_py3 import ChatThreadInfo
     from ._models_py3 import ChatThreadMember
+    from ._models_py3 import ChatThreadMembersCollection
+    from ._models_py3 import ChatThreadsInfoCollection
     from ._models_py3 import CreateChatThreadRequest
     from ._models_py3 import CreateChatThreadResult
-    from ._models_py3 import ListChatMessagesResult
-    from ._models_py3 import ListChatThreadsResult
-    from ._models_py3 import PostReadReceiptRequest
     from ._models_py3 import ReadReceipt
+    from ._models_py3 import ReadReceiptsCollection
     from ._models_py3 import SendChatMessageRequest
     from ._models_py3 import SendChatMessageResult
+    from ._models_py3 import SendReadReceiptRequest
     from ._models_py3 import UpdateChatMessageRequest
     from ._models_py3 import UpdateChatThreadRequest
 except (SyntaxError, ImportError):
     from ._models import AddChatThreadMembersRequest  # type: ignore
     from ._models import ChatMessage  # type: ignore
+    from ._models import ChatMessagesCollection  # type: ignore
     from ._models import ChatThread  # type: ignore
     from ._models import ChatThreadInfo  # type: ignore
     from ._models import ChatThreadMember  # type: ignore
+    from ._models import ChatThreadMembersCollection  # type: ignore
+    from ._models import ChatThreadsInfoCollection  # type: ignore
     from ._models import CreateChatThreadRequest  # type: ignore
     from ._models import CreateChatThreadResult  # type: ignore
-    from ._models import ListChatMessagesResult  # type: ignore
-    from ._models import ListChatThreadsResult  # type: ignore
-    from ._models import PostReadReceiptRequest  # type: ignore
     from ._models import ReadReceipt  # type: ignore
+    from ._models import ReadReceiptsCollection  # type: ignore
     from ._models import SendChatMessageRequest  # type: ignore
     from ._models import SendChatMessageResult  # type: ignore
+    from ._models import SendReadReceiptRequest  # type: ignore
     from ._models import UpdateChatMessageRequest  # type: ignore
     from ._models import UpdateChatThreadRequest  # type: ignore
 
@@ -46,17 +50,19 @@ from ._azure_communication_chat_service_enums import (
 __all__ = [
     'AddChatThreadMembersRequest',
     'ChatMessage',
+    'ChatMessagesCollection',
     'ChatThread',
     'ChatThreadInfo',
     'ChatThreadMember',
+    'ChatThreadMembersCollection',
+    'ChatThreadsInfoCollection',
     'CreateChatThreadRequest',
     'CreateChatThreadResult',
-    'ListChatMessagesResult',
-    'ListChatThreadsResult',
-    'PostReadReceiptRequest',
     'ReadReceipt',
+    'ReadReceiptsCollection',
     'SendChatMessageRequest',
     'SendChatMessageResult',
+    'SendReadReceiptRequest',
     'UpdateChatMessageRequest',
     'UpdateChatThreadRequest',
     'ChatMessagePriority',

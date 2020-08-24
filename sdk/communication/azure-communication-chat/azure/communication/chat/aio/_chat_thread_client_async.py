@@ -17,7 +17,7 @@ from .._common import CommunicationUserCredential, CommunicationUserCredentialPo
 from .._generated.aio import AzureCommunicationChatService
 from .._generated.models import (
     AddChatThreadMembersRequest,
-    PostReadReceiptRequest,
+    SendReadReceiptRequest,
     SendChatMessageRequest,
     UpdateChatMessageRequest,
     UpdateChatThreadRequest
@@ -162,7 +162,7 @@ class ChatThreadClient(object):
         if not message_id:
             raise ValueError("message_id cannot be None.")
 
-        post_read_receipt_request = PostReadReceiptRequest(chat_message_id=message_id)
+        post_read_receipt_request = SendReadReceiptRequest(chat_message_id=message_id)
         return await self._client.send_chat_read_receipt(
             self._thread_id,
             body=post_read_receipt_request,

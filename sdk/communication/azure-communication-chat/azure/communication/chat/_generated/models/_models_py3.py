@@ -71,8 +71,8 @@ class ChatMessage(msrest.serialization.Model):
     :ivar created_on: The timestamp when the chat message arrived at the server. The timestamp is
      in ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
     :vartype created_on: ~datetime.datetime
-    :ivar from_property: The Id of the chat message sender.
-    :vartype from_property: str
+    :ivar sender_id: The id of the chat message sender.
+    :vartype sender_id: str
     :param deleted_on: The timestamp when the chat message was deleted. The timestamp is in ISO8601
      format: ``yyyy-MM-ddTHH:mm:ssZ``.
     :type deleted_on: ~datetime.datetime
@@ -85,7 +85,7 @@ class ChatMessage(msrest.serialization.Model):
         'id': {'readonly': True},
         'version': {'readonly': True},
         'created_on': {'readonly': True},
-        'from_property': {'readonly': True},
+        'sender_id': {'readonly': True},
     }
 
     _attribute_map = {
@@ -96,7 +96,7 @@ class ChatMessage(msrest.serialization.Model):
         'content': {'key': 'content', 'type': 'str'},
         'sender_display_name': {'key': 'senderDisplayName', 'type': 'str'},
         'created_on': {'key': 'createdOn', 'type': 'iso-8601'},
-        'from_property': {'key': 'from', 'type': 'str'},
+        'sender_id': {'key': 'senderId', 'type': 'str'},
         'deleted_on': {'key': 'deletedOn', 'type': 'iso-8601'},
         'edited_on': {'key': 'editedOn', 'type': 'iso-8601'},
     }
@@ -120,9 +120,46 @@ class ChatMessage(msrest.serialization.Model):
         self.content = content
         self.sender_display_name = sender_display_name
         self.created_on = None
-        self.from_property = None
+        self.sender_id = None
         self.deleted_on = deleted_on
         self.edited_on = edited_on
+
+
+class ChatMessagesCollection(msrest.serialization.Model):
+    """Collection of chat messages for a particular chat thread.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Collection of chat messages.
+    :vartype value: list[~azure.communication.chat.models.ChatMessage]
+    :ivar delta_link: Delta link to be used to get updates to the result set in the future, if
+     there is currently no more messages to get.
+    :vartype delta_link: str
+    :ivar next_link: If there are more chat messages that can be retrieved, the next link will be
+     populated.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'delta_link': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ChatMessage]'},
+        'delta_link': {'key': '@deltaLink', 'type': 'str'},
+        'next_link': {'key': '@nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        super(ChatMessagesCollection, self).__init__(**kwargs)
+        self.value = None
+        self.delta_link = None
+        self.next_link = None
 
 
 class ChatThread(msrest.serialization.Model):
@@ -260,6 +297,75 @@ class ChatThreadMember(msrest.serialization.Model):
         self.share_history_time = share_history_time
 
 
+class ChatThreadMembersCollection(msrest.serialization.Model):
+    """Collection of thread members belong to a particular thread.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :param value: Chat thread members.
+    :type value: list[~azure.communication.chat.models.ChatThreadMember]
+    :ivar next_link: If there are more chat threads that can be retrieved, the next link will be
+     populated.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ChatThreadMember]'},
+        'next_link': {'key': '@nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        value: Optional[List["ChatThreadMember"]] = None,
+        **kwargs
+    ):
+        super(ChatThreadMembersCollection, self).__init__(**kwargs)
+        self.value = value
+        self.next_link = None
+
+
+class ChatThreadsInfoCollection(msrest.serialization.Model):
+    """Collection of chat threads.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Collection of chat threads.
+    :vartype value: list[~azure.communication.chat.models.ChatThreadInfo]
+    :ivar delta_link: Delta link to be used to get updates to the result set in the future, if
+     there is currently no more threads to get.
+    :vartype delta_link: str
+    :ivar next_link: If there are more chat threads that can be retrieved, the next link will be
+     populated.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'delta_link': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ChatThreadInfo]'},
+        'delta_link': {'key': '@deltaLink', 'type': 'str'},
+        'next_link': {'key': '@nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        super(ChatThreadsInfoCollection, self).__init__(**kwargs)
+        self.value = None
+        self.delta_link = None
+        self.next_link = None
+
+
 class CreateChatThreadRequest(msrest.serialization.Model):
     """Request payload for creating a chat thread.
 
@@ -318,105 +424,6 @@ class CreateChatThreadResult(msrest.serialization.Model):
         self.id = None
 
 
-class ListChatMessagesResult(msrest.serialization.Model):
-    """List of chat messages for a particular chat thread.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar messages: List of chat messages.
-    :vartype messages: list[~azure.communication.chat.models.ChatMessage]
-    :ivar sync_state: Continuation link to get new and modified chat messages.
-    :vartype sync_state: str
-    :ivar backward_link: If there are more chat messages that can be retrieved, the backward link
-     will be populated.
-    :vartype backward_link: str
-    """
-
-    _validation = {
-        'messages': {'readonly': True},
-        'sync_state': {'readonly': True},
-        'backward_link': {'readonly': True},
-    }
-
-    _attribute_map = {
-        'messages': {'key': 'messages', 'type': '[ChatMessage]'},
-        'sync_state': {'key': 'syncState', 'type': 'str'},
-        'backward_link': {'key': 'backwardLink', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        super(ListChatMessagesResult, self).__init__(**kwargs)
-        self.messages = None
-        self.sync_state = None
-        self.backward_link = None
-
-
-class ListChatThreadsResult(msrest.serialization.Model):
-    """ListChatThreadsResult.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar threads: List of chat threads.
-    :vartype threads: list[~azure.communication.chat.models.ChatThreadInfo]
-    :ivar sync_state: Continuation link to get new and modified chat threads.
-    :vartype sync_state: str
-    :ivar backward_link: If there are more chat threads that can be retrieved, the backward link
-     will be populated.
-    :vartype backward_link: str
-    """
-
-    _validation = {
-        'threads': {'readonly': True},
-        'sync_state': {'readonly': True},
-        'backward_link': {'readonly': True},
-    }
-
-    _attribute_map = {
-        'threads': {'key': 'threads', 'type': '[ChatThreadInfo]'},
-        'sync_state': {'key': 'syncState', 'type': 'str'},
-        'backward_link': {'key': 'backwardLink', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        **kwargs
-    ):
-        super(ListChatThreadsResult, self).__init__(**kwargs)
-        self.threads = None
-        self.sync_state = None
-        self.backward_link = None
-
-
-class PostReadReceiptRequest(msrest.serialization.Model):
-    """Request payload for sending a read receipt.
-
-    All required parameters must be populated in order to send to Azure.
-
-    :param chat_message_id: Required. Id of the latest chat message read by the user.
-    :type chat_message_id: str
-    """
-
-    _validation = {
-        'chat_message_id': {'required': True},
-    }
-
-    _attribute_map = {
-        'chat_message_id': {'key': 'chatMessageId', 'type': 'str'},
-    }
-
-    def __init__(
-        self,
-        *,
-        chat_message_id: str,
-        **kwargs
-    ):
-        super(PostReadReceiptRequest, self).__init__(**kwargs)
-        self.chat_message_id = chat_message_id
-
-
 class ReadReceipt(msrest.serialization.Model):
     """A read receipt indicates the time a chat message was read by a recipient.
 
@@ -424,7 +431,8 @@ class ReadReceipt(msrest.serialization.Model):
 
     :ivar user_id: Read receipt sender id.
     :vartype user_id: str
-    :ivar chat_message_id: Id for the chat message that has been read. This id is server generated.
+    :ivar chat_message_id: Id for the chat message that has been read. This id is generated by the
+     server.
     :vartype chat_message_id: str
     :ivar read_on: Read receipt timestamp. The timestamp is in ISO8601 format: ``yyyy-MM-
      ddTHH:mm:ssZ``.
@@ -451,6 +459,37 @@ class ReadReceipt(msrest.serialization.Model):
         self.user_id = None
         self.chat_message_id = None
         self.read_on = None
+
+
+class ReadReceiptsCollection(msrest.serialization.Model):
+    """ReadReceiptsCollection.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar value: Collection of read receipts.
+    :vartype value: list[~azure.communication.chat.models.ReadReceipt]
+    :ivar next_link: If there are more read receipts that can be retrieved, the next link will be
+     populated.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        'value': {'readonly': True},
+        'next_link': {'readonly': True},
+    }
+
+    _attribute_map = {
+        'value': {'key': 'value', 'type': '[ReadReceipt]'},
+        'next_link': {'key': '@nextLink', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        **kwargs
+    ):
+        super(ReadReceiptsCollection, self).__init__(**kwargs)
+        self.value = None
+        self.next_link = None
 
 
 class SendChatMessageRequest(msrest.serialization.Model):
@@ -496,7 +535,7 @@ class SendChatMessageResult(msrest.serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar id: The Id of the message. This Id is server generated.
+    :ivar id: A server-generated message id.
     :vartype id: str
     """
 
@@ -514,6 +553,33 @@ class SendChatMessageResult(msrest.serialization.Model):
     ):
         super(SendChatMessageResult, self).__init__(**kwargs)
         self.id = None
+
+
+class SendReadReceiptRequest(msrest.serialization.Model):
+    """Request payload for sending a read receipt.
+
+    All required parameters must be populated in order to send to Azure.
+
+    :param chat_message_id: Required. Id of the latest chat message read by the user.
+    :type chat_message_id: str
+    """
+
+    _validation = {
+        'chat_message_id': {'required': True},
+    }
+
+    _attribute_map = {
+        'chat_message_id': {'key': 'chatMessageId', 'type': 'str'},
+    }
+
+    def __init__(
+        self,
+        *,
+        chat_message_id: str,
+        **kwargs
+    ):
+        super(SendReadReceiptRequest, self).__init__(**kwargs)
+        self.chat_message_id = chat_message_id
 
 
 class UpdateChatMessageRequest(msrest.serialization.Model):

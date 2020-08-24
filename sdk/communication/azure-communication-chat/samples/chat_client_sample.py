@@ -92,10 +92,12 @@ class ChatClientSamples(object):
         from azure.communication.chat import ChatClient
 
         chat_client = ChatClient(self.endpoint, self.token)
-        list_chat_threads_result = chat_client.list_threads()
+        chat_thread_infos = chat_client.list_threads(page_size=5)
         # [END list_threads]
 
-        print("list_threads succeeded, count of chat threads: ", len(list_chat_threads_result.threads))
+        print("list_threads succeeded with page_size is 5")
+        for chat_thread_info in chat_thread_infos:
+            print(chat_thread_info)
 
     def delete_thread(self):
         # [START delete_thread]

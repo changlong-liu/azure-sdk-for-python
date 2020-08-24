@@ -93,9 +93,11 @@ class ChatClientSamplesAsync(object):
         chat_client = ChatClient(self.endpoint, self.token)
         async with chat_client:
             # [START list_threads]
-            list_chat_threads_result = await chat_client.list_threads()
+            chat_thread_infos = chat_client.list_threads(page_size=5)
+            print("list_threads succeeded with page_size is 5")
+            async for chat_thread_info in chat_thread_infos:
+                print(chat_thread_info)
             # [END list_threads]
-            print("list_threads succeeded, count of chat threads: ", len(list_chat_threads_result.threads))
 
     async def delete_thread_async(self):
         from azure.communication.chat.aio import ChatClient
