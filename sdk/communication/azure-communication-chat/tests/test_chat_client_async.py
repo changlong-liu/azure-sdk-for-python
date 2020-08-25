@@ -95,15 +95,20 @@ async def test_list_threads():
     raised = False
 
     async def mock_send(*_, **__):
-        return mock_response(status_code=200, json_payload={"threads": [{"id": thread_id}]})
+        return mock_response(status_code=200, json_payload={"value": [{"id": thread_id}]})
     chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
+    chat_thread_infos = None
     try:
-        chat_client.list_threads()
+        chat_thread_infos = chat_client.list_threads()
     except:
         raised = True
 
     assert raised == False
+    async for chat_thread_page in chat_thread_infos.by_page():
+        l = [ i async for i in chat_thread_page]
+        assert len(l) == 1
+        assert l[0].id == thread_id
 
 def test_get_thread_client():
     thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"

@@ -45,7 +45,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink",
+          "nextLinkName": "nextLink",
           "itemName": "value"
         }
       },
@@ -191,7 +191,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink",
+          "nextLinkName": "nextLink",
           "itemName": "value"
         }
       }
@@ -391,7 +391,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink",
+          "nextLinkName": "nextLink",
           "itemName": "value"
         }
       },
@@ -558,7 +558,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "@nextLink",
+          "nextLinkName": "nextLink",
           "itemName": "value"
         }
       }
@@ -676,7 +676,7 @@
       "description": "A read receipt indicates the time a chat message was read by a recipient.",
       "type": "object",
       "properties": {
-        "userId": {
+        "senderId": {
           "description": "Read receipt sender id.",
           "type": "string",
           "readOnly": true,
@@ -708,7 +708,7 @@
           },
           "readOnly": true
         },
-        "@nextLink": {
+        "nextLink": {
           "description": "If there are more read receipts that can be retrieved, the next link will be populated.",
           "type": "string",
           "readOnly": true
@@ -846,12 +846,12 @@
           },
           "readOnly": true
         },
-        "@deltaLink": {
+        "deltaLink": {
           "description": "Delta link to be used to get updates to the result set in the future, if there is currently no more messages to get.",
           "type": "string",
           "readOnly": true
         },
-        "@nextLink": {
+        "nextLink": {
           "description": "If there are more chat messages that can be retrieved, the next link will be populated.",
           "type": "string",
           "readOnly": true
@@ -903,7 +903,7 @@
             "$ref": "#/definitions/ChatThreadMember"
           }
         },
-        "@nextLink": {
+        "nextLink": {
           "description": "If there are more chat threads that can be retrieved, the next link will be populated.",
           "type": "string",
           "readOnly": true
@@ -1000,12 +1000,12 @@
           },
           "readOnly": true
         },
-        "@deltaLink": {
+        "deltaLink": {
           "description": "Delta link to be used to get updates to the result set in the future, if there is currently no more threads to get.",
           "type": "string",
           "readOnly": true
         },
-        "@nextLink": {
+        "nextLink": {
           "description": "If there are more chat threads that can be retrieved, the next link will be populated.",
           "type": "string",
           "readOnly": true

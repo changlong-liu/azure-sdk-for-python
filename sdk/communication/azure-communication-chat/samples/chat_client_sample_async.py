@@ -95,8 +95,9 @@ class ChatClientSamplesAsync(object):
             # [START list_threads]
             chat_thread_infos = chat_client.list_threads(page_size=5)
             print("list_threads succeeded with page_size is 5")
-            async for chat_thread_info in chat_thread_infos:
-                print(chat_thread_info)
+            async for chat_thread_page in chat_thread_infos.by_page():
+                l = [ i async for i in chat_thread_page]
+                print("page size: ", len(l))
             # [END list_threads]
 
     async def delete_thread_async(self):

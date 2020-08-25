@@ -93,11 +93,12 @@ class ChatClientSamples(object):
 
         chat_client = ChatClient(self.endpoint, self.token)
         chat_thread_infos = chat_client.list_threads(max_page_size=5)
-        # [END list_threads]
 
         print("list_threads succeeded with max_page_size is 5")
-        for chat_thread_info in chat_thread_infos:
-            print(chat_thread_info)
+        for chat_thread_page in chat_thread_infos.by_page():
+            l = list(chat_thread_page)
+            print("page size: ", len(l))
+        # [END list_threads]
 
     def delete_thread(self):
         # [START delete_thread]
