@@ -92,10 +92,10 @@ class ChatClientSamples(object):
         from azure.communication.chat import ChatClient
 
         chat_client = ChatClient(self.endpoint, self.token)
-        chat_thread_infos = chat_client.list_threads(page_size=5)
+        chat_thread_infos = chat_client.list_threads(max_page_size=5)
         # [END list_threads]
 
-        print("list_threads succeeded with page_size is 5")
+        print("list_threads succeeded with max_page_size is 5")
         for chat_thread_info in chat_thread_infos:
             print(chat_thread_info)
 
@@ -111,9 +111,9 @@ class ChatClientSamples(object):
 
 if __name__ == '__main__':
     sample = ChatClientSamples()
-    sample.create_chat_client()
-    sample.create_thread()
-    sample.get_chat_thread_client()
-    sample.get_thread()
+    #sample.create_chat_client()
+    #sample.create_thread()
+    #sample.get_chat_thread_client()
+    #sample.get_thread()
     sample.list_threads()
-    sample.delete_thread()
+    #sample.delete_thread()

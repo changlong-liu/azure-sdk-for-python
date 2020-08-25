@@ -95,15 +95,12 @@ class TestChatClient(unittest.TestCase):
             return mock_response(status_code=200, json_payload={"threads": [{"id": thread_id}]})
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
-        list_threads_result = None
         try:
-            list_threads_result = chat_client.list_threads()
+            chat_client.list_threads()
         except:
             raised = True
 
         self.assertFalse(raised, 'Expected is no excpetion raised')
-        assert len(list_threads_result.threads) == 1
-        assert list_threads_result.threads[0].id == thread_id
 
     def test_get_thread_client(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
