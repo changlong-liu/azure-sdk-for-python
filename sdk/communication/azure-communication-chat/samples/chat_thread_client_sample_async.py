@@ -109,10 +109,14 @@ class ChatThreadClientSamplesAsync(object):
 
         async with chat_thread_client:
             # [START list_messages]
-            list_chat_messages_result = await chat_thread_client.list_messages()
+            from datetime import datetime, timedelta
+            start_time = datetime.utcnow() - timedelta(days=1)
+            chat_messages = chat_thread_client.list_messages(max_page_size=1, start_time=start_time)
+            print("list_messages succeeded with max_page_size is 1, and start time is yesterday UTC")
+            async for chat_message_page in chat_messages.by_page():
+                l = [ i async for i in chat_message_page]
+                print("page size: ", len(l))
             # [END list_messages]
-            print("list_messages succeeded, messages count:",
-                len([elem for elem in list_chat_messages_result.messages if elem.type == 'Text']))
 
     async def update_message_async(self):
         from azure.communication.chat.aio import ChatThreadClient

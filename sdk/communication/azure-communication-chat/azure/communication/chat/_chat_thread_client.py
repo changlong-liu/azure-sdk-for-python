@@ -28,6 +28,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
     from datetime import datetime
+    from azure.core.paging import ItemPaged
 
 
 class ChatThreadClient(object):
@@ -301,16 +302,14 @@ class ChatThreadClient(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> ListChatMessagesResult
+        # type: (...) -> ItemPaged[ChatMessage]
         """Gets a list of messages from a thread.
 
-        :keyword int page_size: The number of messages being requested.
+        :keyword int max_page_size: The maximum number of messages to be returned per page.
         :keyword ~datetime.datetime start_time: The start time where the range query.
-        :keyword str sync_state: The continuation token that previous request obtained. This is
-         used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListChatMessagesResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.ListChatMessagesResult
+        :return: ItemPaged[:class:`~azure.communication.chat.ChatMessage`]
+        :rtype: ~azure.core.paging.ItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -322,15 +321,13 @@ class ChatThreadClient(object):
                 :dedent: 8
                 :caption: Listing messages of a chat thread.
         """
-        page_size = kwargs.pop("page_size", None)
+        max_page_size = kwargs.pop("max_page_size", None)
         start_time = kwargs.pop("start_time", None)
-        sync_state = kwargs.pop("sync_state", None)
 
         return self._client.list_chat_messages(
             self._thread_id,
-            page_size=page_size,
+            max_page_size=max_page_size,
             start_time=start_time,
-            sync_state=sync_state,
             **kwargs)
 
     @distributed_trace

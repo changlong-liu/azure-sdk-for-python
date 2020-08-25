@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
     from datetime import datetime
+    from azure.core.async_paging import AsyncItemPaged
 
 
 class ChatClient(object):

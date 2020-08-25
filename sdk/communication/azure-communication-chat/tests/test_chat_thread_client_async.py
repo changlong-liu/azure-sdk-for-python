@@ -85,15 +85,20 @@ async def test_list_messages():
     raised = False
 
     async def mock_send(*_, **__):
-        return mock_response(status_code=200, json_payload={"messages": [{"id": message_id}]})
+        return mock_response(status_code=200, json_payload={"value": [{"id": message_id}]})
     chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
+    chat_messages = None
     try:
-        chat_thread_client.list_messages()
+        chat_messages = chat_thread_client.list_messages(max_page_size=1)
     except:
         raised = True
 
     assert raised == False
+    async for chat_message_page in chat_messages.by_page():
+            l = [ i async for i in chat_message_page]
+            assert len(l) == 1
+            assert l[0].id == message_id
 
 
 @pytest.mark.asyncio
@@ -103,20 +108,24 @@ async def test_list_messages_with_start_time():
 
     async def mock_send(*_, **__):
         return mock_response(status_code=200, json_payload={
-            "messages": [
+            "value": [
                 {"id": "message_id1", "createdOn": "2020-08-17T18:05:44Z"},
                 {"id": "message_id2", "createdOn": "2020-08-17T23:13:33Z"}
                 ]})
     chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
+    chat_messages = None
     try:
-        chat_thread_client.list_messages(
+        chat_messages = chat_thread_client.list_messages(
             start_time=datetime(2020, 8, 17, 18, 0, 0)
         )
     except:
         raised = True
 
     assert raised == False
+    async for chat_message_page in chat_messages.by_page():
+            l = [ i async for i in chat_message_page]
+            assert len(l) == 2
 
 @pytest.mark.asyncio
 async def test_update_message():

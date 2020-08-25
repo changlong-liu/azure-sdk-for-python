@@ -11,6 +11,7 @@ except ImportError:
     from urlparse import urlparse # type: ignore
 
 import six
+from azure.core.tracing.decorator import distributed_trace
 from azure.core.tracing.decorator_async import distributed_trace_async
 
 from .._common import CommunicationUserCredential, CommunicationUserCredentialPolicy
@@ -28,6 +29,7 @@ if TYPE_CHECKING:
     # pylint: disable=unused-import,ungrouped-imports
     from typing import Any, Callable, Dict, Generic, List, Optional, TypeVar, Union
     from datetime import datetime
+    from azure.core.async_paging import AsyncItemPaged
 
 class ChatThreadClient(object):
     """A client to interact with the AzureCommunicationService Chat gateway.
@@ -294,21 +296,19 @@ class ChatThreadClient(object):
             message_id,
             **kwargs)
 
-    @distributed_trace_async
-    async def list_messages(
+    @distributed_trace
+    def list_messages(
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> ListChatMessagesResult
+        # type: (...) -> AsyncItemPaged[ChatMessage]
         """Gets a list of messages from a thread.
 
-        :keyword int page_size: The number of messages being requested.
+        :keyword int max_page_size: The maximum number of messages to be returned per page.
         :keyword ~datetime.datetime start_time: The start time where the range query.
-        :keyword str sync_state: The continuation token that previous request obtained. This is
-         used for paging.
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: ListChatMessagesResult, or the result of cls(response)
-        :rtype: ~azure.communication.chat.ListChatMessagesResult
+        :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatMessage`]
+        :rtype: ~azure.core.paging.AsyncItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -320,15 +320,13 @@ class ChatThreadClient(object):
                 :dedent: 12
                 :caption: Listing messages of a chat thread.
         """
-        page_size = kwargs.pop("page_size", None)
+        max_page_size = kwargs.pop("max_page_size", None)
         start_time = kwargs.pop("start_time", None)
-        sync_state = kwargs.pop("sync_state", None)
 
-        return await self._client.list_chat_messages(
+        return self._client.list_chat_messages(
             self._thread_id,
-            page_size=page_size,
+            max_page_size=max_page_size,
             start_time=start_time,
-            sync_state=sync_state,
             **kwargs)
 
     @distributed_trace_async

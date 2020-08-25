@@ -99,13 +99,15 @@ class ChatThreadClientSamples(object):
         from azure.communication.chat import ChatThreadClient
         chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START list_messages]
-        list_chat_messages_result = chat_thread_client.list_messages()
-        # [END list_messages]
+        from datetime import datetime, timedelta
+        start_time = datetime.utcnow() - timedelta(days=1)
+        chat_messages = chat_thread_client.list_messages(max_page_size=1, start_time=start_time)
 
-        messages = [elem for elem in list_chat_messages_result.messages if elem.type == 'Text']
-        print("list_chat_messages succeeded, messages count:", len(messages))
-        for msg in messages:
-            print(msg)
+        print("list_messages succeeded with max_page_size is 1, and start time is yesterday UTC")
+        for chat_message_page in chat_messages.by_page():
+            l = list(chat_message_page)
+            print("page size: ", len(l))
+        # [END list_messages]
 
     def update_message(self):
         from azure.communication.chat import ChatThreadClient
