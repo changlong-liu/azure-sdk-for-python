@@ -168,11 +168,11 @@ class ChatThreadClientSamplesAsync(object):
 
         async with chat_thread_client:
             # [START list_members]
-            chat_thread_members = await chat_thread_client.list_members()
-            # [END list_members]
+            chat_thread_members = chat_thread_client.list_members()
             print("list_members succeeded, members:")
-            for member in chat_thread_members:
-                print(member)
+            async for chat_thread_member in chat_thread_members:
+                print(chat_thread_member)
+            # [END list_members]
 
     async def add_members_async(self):
         from azure.communication.chat.aio import ChatThreadClient

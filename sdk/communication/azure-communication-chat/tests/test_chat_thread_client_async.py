@@ -96,9 +96,9 @@ async def test_list_messages():
 
     assert raised == False
     async for chat_message_page in chat_messages.by_page():
-            l = [ i async for i in chat_message_page]
-            assert len(l) == 1
-            assert l[0].id == message_id
+        l = [ i async for i in chat_message_page]
+        assert len(l) == 1
+        assert l[0].id == message_id
 
 
 @pytest.mark.asyncio
@@ -124,8 +124,8 @@ async def test_list_messages_with_start_time():
 
     assert raised == False
     async for chat_message_page in chat_messages.by_page():
-            l = [ i async for i in chat_message_page]
-            assert len(l) == 2
+        l = [ i async for i in chat_message_page]
+        assert len(l) == 2
 
 @pytest.mark.asyncio
 async def test_update_message():
@@ -169,15 +169,19 @@ async def test_list_members():
     raised = False
 
     async def mock_send(*_, **__):
-        return mock_response(status_code=200, json_payload=[{"id": member_id}])
+        return mock_response(status_code=200, json_payload={"value": [{"id": member_id}]})
     chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
+    chat_thread_members = None
     try:
-        chat_thread_client.list_members()
+        chat_thread_members = chat_thread_client.list_members()
     except:
         raised = True
 
     assert raised == False
+    async for chat_thread_page in chat_thread_members.by_page():
+        l = [ i async for i in chat_thread_page]
+        assert len(l) == 1
 
 @pytest.mark.asyncio
 async def test_add_members():

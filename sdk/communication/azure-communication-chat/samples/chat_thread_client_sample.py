@@ -153,11 +153,10 @@ class ChatThreadClientSamples(object):
         chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START list_members]
         chat_thread_members = chat_thread_client.list_members()
-        # [END list_members]
-
         print("list_chat_members succeeded, members: ")
-        for member in chat_thread_members:
-            print(member)
+        for chat_thread_member in chat_thread_members:
+            print(chat_thread_member)
+        # [END list_members]
 
     def add_members(self):
         from azure.communication.chat import ChatThreadClient

@@ -407,12 +407,12 @@ class ChatThreadClient(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> list[ChatThreadMember]
+        # type: (...) -> ItemPaged[ChatThreadMember]
         """Gets the members of a thread.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ChatThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.ChatThreadMember]
+        :return: ItemPaged[:class:`~azure.communication.chat.ChatThreadMember`]
+        :rtype: ~azure.core.paging.ItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:

@@ -401,17 +401,17 @@ class ChatThreadClient(object):
             chat_message_id=message_id,
             **kwargs)
 
-    @distributed_trace_async
-    async def list_members(
+    @distributed_trace
+    def list_members(
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> list[ChatThreadMember]
+        # type: (...) -> AsyncItemPaged[ChatThreadMember]
         """Gets the members of a thread.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ChatThreadMember, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.ChatThreadMember]
+        :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatThreadMember`]
+        :rtype: ~azure.core.paging.AsyncItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -423,7 +423,7 @@ class ChatThreadClient(object):
                 :dedent: 12
                 :caption: Listing members of chat thread.
         """
-        return await self._client.list_chat_thread_members(self._thread_id, **kwargs)
+        return self._client.list_chat_thread_members(self._thread_id, **kwargs)
 
     @distributed_trace_async
     async def add_members(
