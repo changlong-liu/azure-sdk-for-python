@@ -4,11 +4,15 @@
 # license information.
 # -------------------------------------------------------------------------
 
+import base64
+import json
+import datetime
 from typing import (  # pylint: disable=unused-import
     cast,
     Tuple,
 )
 from datetime import datetime
+from azure.core.credentials import AccessToken
 
 def parse_connection_str(conn_str):
     # type: (str) -> Tuple[str, str, str, str]
@@ -35,4 +39,24 @@ def parse_connection_str(conn_str):
 
 
 def get_current_utc_time():
+    # type: () -> str
     return str(datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S ")) + "GMT"
+
+def create_access_token(token):
+    # type: (str) -> azure.core.credentials.AccessToken
+
+    token_parse_err_msg = "Token is not formatted correctly"
+    parts = token.split(".")
+
+    if len(parts) < 3:
+        raise ValueError(token_parse_err_msg)
+
+    try:
+        payload_str = base64.b64decode(parts[1].
+            replace('-', '+').
+            replace('_', '-') + "="*(4-len(parts[1])%4))
+
+        payload = json.loads(payload_str)
+        return AccessToken(token, datetime.fromtimestamp(payload['exp']))
+    except ValueError:
+        raise ValueError(token_parse_err_msg)
