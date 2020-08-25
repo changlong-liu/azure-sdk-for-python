@@ -2,7 +2,6 @@ from ._version import VERSION
 from ._chat_client import ChatClient
 from ._chat_thread_client import ChatThreadClient
 from ._generated.models import (
-    CreateChatThreadResult,
     ChatMessage,
     ChatMessagePriority,
     ReadReceipt,
@@ -15,7 +14,6 @@ from ._generated.models import (
 __all__ = [
     'ChatClient',
     'ChatThreadClient',
-    'CreateChatThreadResult',
     'ChatMessage',
     'ChatMessagePriority',
     'ReadReceipt',

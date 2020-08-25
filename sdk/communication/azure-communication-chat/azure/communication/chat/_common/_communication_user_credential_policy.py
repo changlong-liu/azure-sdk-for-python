@@ -21,4 +21,4 @@ class CommunicationUserCredentialPolicy(SansIOHTTPPolicy):
         self._credential = credential
 
     def on_request(self, request):
-        request.http_request.headers[HEADER_NAME] = self._credential.token
+        request.http_request.headers[HEADER_NAME] = "Bearer " + self._credential.token
