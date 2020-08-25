@@ -111,9 +111,9 @@ class ChatClientSamples(object):
 
 if __name__ == '__main__':
     sample = ChatClientSamples()
-    #sample.create_chat_client()
-    #sample.create_thread()
-    #sample.get_chat_thread_client()
-    #sample.get_thread()
+    sample.create_chat_client()
+    sample.create_thread()
+    sample.get_chat_thread_client()
+    sample.get_thread()
     sample.list_threads()
-    #sample.delete_thread()
+    sample.delete_thread()

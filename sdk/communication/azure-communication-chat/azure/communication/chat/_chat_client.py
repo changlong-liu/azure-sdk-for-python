@@ -211,7 +211,7 @@ class ChatClient(object):
         max_page_size = kwargs.pop("max_page_size", None)
 
         return self._client.list_chat_threads(
-            cls=kwargs.pop("cls", lambda objs: [x for x in objs]),
+            cls=kwargs.pop("cls", lambda objs: list(objs)),
             max_page_size=max_page_size,
             **kwargs)
 
