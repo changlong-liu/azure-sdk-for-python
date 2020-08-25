@@ -9,34 +9,6 @@ from typing import (  # pylint: disable=unused-import
     Tuple,
 )
 from datetime import datetime
-from azure.core import MatchConditions
-
-def quote_etag(etag):
-    if not etag or etag == "*":
-        return etag
-    if etag.startswith('"') and etag.endswith('"'):
-        return etag
-    if etag.startswith("'") and etag.endswith("'"):
-        return etag
-    return '"' + etag + '"'
-
-def prep_if_match(etag, match_condition):
-    # type: (str, MatchConditions) -> str
-    if match_condition == MatchConditions.IfNotModified:
-        if_match = quote_etag(etag) if etag else None
-        return if_match
-    if match_condition == MatchConditions.IfPresent:
-        return "*"
-    return None
-
-def prep_if_none_match(etag, match_condition):
-    # type: (str, MatchConditions) -> str
-    if match_condition == MatchConditions.IfModified:
-        if_none_match = quote_etag(etag) if etag else None
-        return if_none_match
-    if match_condition == MatchConditions.IfMissing:
-        return "*"
-    return None
 
 def parse_connection_str(conn_str):
     # type: (str) -> Tuple[str, str, str, str]
