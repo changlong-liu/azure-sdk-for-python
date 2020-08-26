@@ -49,7 +49,7 @@ class ChatThreadClientSamples(object):
         members = [ChatThreadMember(
             id=self.user_id
         )]
-        chat_thread_client = chat_client.create_thread(topic, members)
+        chat_thread_client = chat_client.create_chat_thread(topic, members)
         # [END create_chat_thread_client]
         self._thread_id = chat_thread_client.thread_id
         print("chat_thread_client created")

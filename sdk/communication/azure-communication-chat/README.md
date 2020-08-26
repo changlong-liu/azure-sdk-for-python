@@ -80,10 +80,10 @@ Once you initialized a `ChatClient` class, you can do the following chat operati
 ## Create, get, update, and delete threads
 
 ```Python
-create_thread(topic, thread_members, **kwargs)
-get_thread(thread_id, **kwargs)
-list_threads(**kwargs)
-delete_thread(thread_id, **kwargs)
+create_chat_thread(topic, thread_members, **kwargs)
+get_chat_thread(thread_id, **kwargs)
+list_chat_threads(**kwargs)
+delete_chat_thread(thread_id, **kwargs)
 ```
 
 Once you initialized a `ChatThreadClient` class, you can do the following chat operations:
@@ -138,7 +138,7 @@ The following sections provide several code snippets covering some of the most c
 
 ### Create a thread
 
-Use the `create_thread` method to create a chat thread client object.
+Use the `create_chat_thread` method to create a chat thread client object.
 
 - Use `topic` to give a thread topic;
 - Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
@@ -157,22 +157,22 @@ thread_members=[ChatThreadMember(
     share_history_time=datetime.utcnow()
 )],
 
-chat_thread_client = chat_client.create_thread(topic, thread_members)
+chat_thread_client = chat_client.create_chat_thread(topic, thread_members)
 thread_id = chat_thread_client.thread_id
 ```
 
 ### Get a thread
 
-The `get_thread` method retrieves a thread from the service.
+The `get_chat_thread` method retrieves a thread from the service.
 `thread_id` is the unique ID of the thread.
 
 ```Python
-thread = chat_client.get_thread(thread_id)
+thread = chat_client.get_chat_thread(thread_id)
 ```
 
 ### Update a thread
 
-Use `update_thread` method to update a thread's properties
+Use `update_chat_thread` method to update a thread's properties
 `thread_id` is the unique ID of the thread.
 `topic` is used to describe the change of the thread topic
 
@@ -180,16 +180,16 @@ Use `update_thread` method to update a thread's properties
 
 ```python
 topic="new topic"
-chat_thread_client.update_thread(topic=topic)
+chat_thread_client.update_chat_thread(topic=topic)
 ```
 
 ### Delete a thread
 
-Use `delete_thread` method to delete a thread
+Use `delete_chat_thread` method to delete a thread
 `thread_id` is the unique ID of the thread.
 
 ```Python
-chat_client.delete_thread(thread_id)
+chat_client.delete_chat_thread(thread_id)
 ```
 
 ## Message Operations
@@ -202,7 +202,7 @@ Use `send_message` method to sends a message to a thread identified by threadId.
 - Use `priority` to specify the message priority level, such as 'Normal' or 'High', if not speficied, 'Normal' will be set
 - Use `sender_display_name` to specify the display name of the sender, if not specified, empty name will be set
 
-`SendMessageResult` is the response returned from sending a message, it contains an id, which is the unique ID of the message.
+`SendChatMessageResult` is the response returned from sending a message, it contains an id, which is the unique ID of the message.
 
 ```Python
 from azure.communication.chat import ChatMessagePriority
@@ -219,7 +219,7 @@ send_message_result = chat_thread_client.send_message(content, priority=priority
 The `get_message` method retrieves a message from the service.
 `message_id` is the unique ID of the message.
 
-`ChatMessage` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.Message
+`ChatMessage` is the response returned from getting a message, it contains an id, which is the unique ID of the message, and other fields please refer to azure.communication.chat.ChatMessage
 
 ```python
 chat_message = chat_thread_client.get_message(message_id)

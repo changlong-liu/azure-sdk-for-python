@@ -35,7 +35,7 @@ class TestChatClient(unittest.TestCase):
             share_history_time=datetime.utcnow()
         )]
         try:
-            chat_thread_client = chat_client.create_thread(topic, members)
+            chat_thread_client = chat_client.create_chat_thread(topic, members)
         except:
             raised = True
 
@@ -54,7 +54,7 @@ class TestChatClient(unittest.TestCase):
             share_history_time=datetime.utcnow()
         )]
 
-        self.assertRaises(HttpResponseError, chat_client.create_thread, topic=topic, thread_members=thread_members)
+        self.assertRaises(HttpResponseError, chat_client.create_chat_thread, topic=topic, thread_members=thread_members)
 
     def test_delete_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
@@ -65,7 +65,7 @@ class TestChatClient(unittest.TestCase):
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
 
         try:
-            chat_client.delete_thread(thread_id)
+            chat_client.delete_chat_thread(thread_id)
         except:
             raised = True
 
@@ -81,7 +81,7 @@ class TestChatClient(unittest.TestCase):
 
         get_thread_result = None
         try:
-            get_thread_result = chat_client.get_thread(thread_id)
+            get_thread_result = chat_client.get_chat_thread(thread_id)
         except:
             raised = True
 
@@ -98,7 +98,7 @@ class TestChatClient(unittest.TestCase):
 
         chat_thread_infos = None
         try:
-            chat_thread_infos = chat_client.list_threads()
+            chat_thread_infos = chat_client.list_chat_threads()
         except:
             raised = True
 

@@ -58,7 +58,7 @@ class ChatClientSamplesAsync(object):
             members = [ChatThreadMember(
                 id=self.user_id
             )]
-            chat_thread_client = await chat_client.create_thread(topic, members)
+            chat_thread_client = await chat_client.create_chat_thread(topic, members)
             # [END create_thread]
 
             self._thread_id = chat_thread_client.thread_id
@@ -81,7 +81,7 @@ class ChatClientSamplesAsync(object):
         chat_client = ChatClient(self.endpoint, self.token)
         async with chat_client:
             # [START get_thread]
-            chat_thread = await chat_client.get_thread(self._thread_id)
+            chat_thread = await chat_client.get_chat_thread(self._thread_id)
             # [END get_thread]
             print("get_thread succeeded, thread id: " + chat_thread.id + ", thread topic: " + chat_thread.topic)
 
@@ -91,7 +91,7 @@ class ChatClientSamplesAsync(object):
         chat_client = ChatClient(self.endpoint, self.token)
         async with chat_client:
             # [START list_threads]
-            chat_thread_infos = chat_client.list_threads(page_size=5)
+            chat_thread_infos = chat_client.list_chat_threads(max_page_size=5)
             print("list_threads succeeded with page_size is 5")
             async for chat_thread_page in chat_thread_infos.by_page():
                 l = [ i async for i in chat_thread_page]
@@ -104,7 +104,7 @@ class ChatClientSamplesAsync(object):
         chat_client = ChatClient(self.endpoint, self.token)
         async with chat_client:
             # [START delete_thread]
-            await chat_client.delete_thread(self._thread_id)
+            await chat_client.delete_chat_thread(self._thread_id)
             # [END delete_thread]
             print("delete_thread succeeded")
 

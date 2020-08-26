@@ -106,14 +106,17 @@ class ChatThreadClient(object):
 
     @distributed_trace_async
     async def update_thread(
-            self,
-            **kwargs  # type: Any
+        self,
+        *,
+        topic=None,  # type: Optional[str]
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Updates a thread's properties.
 
-        :keyword str topic: Thread topic. If topic is not specified, the update will succeeded but
+        :param topic: Thread topic. If topic is not specified, the update will succeeded but
          chat thread properties will not be changed.
+        :type topic: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -128,7 +131,6 @@ class ChatThreadClient(object):
                 :dedent: 12
                 :caption: Updating chat thread.
         """
-        topic = kwargs.pop("topic", None)
 
         update_thread_request = UpdateChatThreadRequest(topic=topic)
         return await self._client.update_chat_thread(

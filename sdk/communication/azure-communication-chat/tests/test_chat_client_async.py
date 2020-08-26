@@ -31,7 +31,7 @@ async def test_create_thread():
         display_name='name',
         share_history_time=datetime.utcnow()
     )]
-    chat_thread_client = await chat_client.create_thread(topic, members)
+    chat_thread_client = await chat_client.create_chat_thread(topic, members)
     assert chat_thread_client.thread_id == thread_id
 
 @pytest.mark.asyncio
@@ -49,7 +49,7 @@ async def test_create_thread_raises_error():
 
     raised = False
     try:
-        await chat_client.create_thread(topic=topic, thread_members=thread_members)
+        await chat_client.create_chat_thread(topic=topic, thread_members=thread_members)
     except:
         raised = True
 
@@ -66,7 +66,7 @@ async def test_delete_thread():
 
     raised = False
     try:
-        await chat_client.delete_thread(thread_id)
+        await chat_client.delete_chat_thread(thread_id)
     except:
         raised = True
 
@@ -83,7 +83,7 @@ async def test_get_thread():
 
     get_thread_result = None
     try:
-        get_thread_result = await chat_client.get_thread(thread_id)
+        get_thread_result = await chat_client.get_chat_thread(thread_id)
     except:
         raised = True
 
@@ -101,7 +101,7 @@ async def test_list_threads():
 
     chat_thread_infos = None
     try:
-        chat_thread_infos = chat_client.list_threads()
+        chat_thread_infos = chat_client.list_chat_threads()
     except:
         raised = True
 

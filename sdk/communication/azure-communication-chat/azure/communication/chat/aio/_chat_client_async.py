@@ -112,7 +112,7 @@ class ChatClient(object):
         )
 
     @distributed_trace_async
-    async def create_thread(
+    async def create_chat_thread(
         self, topic,  # type: str
         thread_members,  # type: list[ChatThreadMember]
         **kwargs  # type: Any
@@ -156,7 +156,7 @@ class ChatClient(object):
         )
 
     @distributed_trace_async
-    async def get_thread(
+    async def get_chat_thread(
         self, thread_id,  # type: str
         **kwargs  # type: Any
     ):
@@ -185,14 +185,14 @@ class ChatClient(object):
         return await self._client.get_chat_thread(thread_id, **kwargs)
 
     @distributed_trace
-    def list_threads(
+    def list_chat_threads(
         self,
         **kwargs
     ):
         # type: (...) -> AsyncItemPaged[ChatThreadInfo]
         """Gets the list of chat threads of a user.
 
-        :keyword int page_size: The number of threads being requested.
+        :keyword int max_page_size: The maximum number of chat threads to be returned per page.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatThreadInfo`]
         :rtype: ~azure.core.async_paging.AsyncItemPaged
@@ -207,14 +207,14 @@ class ChatClient(object):
                 :dedent: 12
                 :caption: listing chat threads.
         """
-        page_size = kwargs.pop("page_size", None)
+        max_page_size = kwargs.pop("max_page_size", None)
 
         return self._client.list_chat_threads(
-            max_page_size=page_size,
+            max_page_size=max_page_size,
             **kwargs)
 
     @distributed_trace_async
-    async def delete_thread(
+    async def delete_chat_thread(
         self,
         thread_id,  # type: str
         **kwargs  # type: Any

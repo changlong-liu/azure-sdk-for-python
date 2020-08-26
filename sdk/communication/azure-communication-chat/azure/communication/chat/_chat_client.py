@@ -113,10 +113,10 @@ class ChatClient(object):
         )
 
     @distributed_trace
-    def create_thread(
-            self, topic,  # type: str
-            thread_members,  # type: list[ChatThreadMember]
-            **kwargs  # type: Any
+    def create_chat_thread(
+        self, topic,  # type: str
+        thread_members,  # type: list[ChatThreadMember]
+        **kwargs  # type: Any
     ):
         # type: (...) -> ChatThreadClient
         """Creates a chat thread.
@@ -157,9 +157,9 @@ class ChatClient(object):
         )
 
     @distributed_trace
-    def get_thread(
-            self, thread_id,  # type: str
-            **kwargs  # type: Any
+    def get_chat_thread(
+        self, thread_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> ChatThread
         """Gets a chat thread.
@@ -186,7 +186,7 @@ class ChatClient(object):
         return self._client.get_chat_thread(thread_id, **kwargs)
 
     @distributed_trace
-    def list_threads(
+    def list_chat_threads(
         self,
         **kwargs
     ):
@@ -216,10 +216,10 @@ class ChatClient(object):
             **kwargs)
 
     @distributed_trace
-    def delete_thread(
-            self,
-            thread_id,  # type: str
-            **kwargs  # type: Any
+    def delete_chat_thread(
+        self,
+        thread_id,  # type: str
+        **kwargs  # type: Any
     ):
         # type: (...) -> None
         """Deletes a thread.

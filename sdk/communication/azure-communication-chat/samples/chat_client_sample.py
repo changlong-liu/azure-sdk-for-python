@@ -58,7 +58,7 @@ class ChatClientSamples(object):
         members = [ChatThreadMember(
             id=self.user_id
         )]
-        chat_thread_client = chat_client.create_thread(topic, members)
+        chat_thread_client = chat_client.create_chat_thread(topic, members)
         # [END create_thread]
 
         self._chat_thread_client = chat_thread_client
@@ -80,7 +80,7 @@ class ChatClientSamples(object):
         from azure.communication.chat import ChatClient
 
         chat_client = ChatClient(self.endpoint, self.token)
-        chat_thread = chat_client.get_thread(self._thread_id)
+        chat_thread = chat_client.get_chat_thread(self._thread_id)
         # [END get_thread]
 
         print("get_thread succeeded, thread id: " + chat_thread.id + ", thread topic: " + chat_thread.topic)
@@ -90,7 +90,7 @@ class ChatClientSamples(object):
         from azure.communication.chat import ChatClient
 
         chat_client = ChatClient(self.endpoint, self.token)
-        chat_thread_infos = chat_client.list_threads(max_page_size=5)
+        chat_thread_infos = chat_client.list_chat_threads(max_page_size=5)
 
         print("list_threads succeeded with max_page_size is 5")
         for chat_thread_page in chat_thread_infos.by_page():
@@ -103,7 +103,7 @@ class ChatClientSamples(object):
         from azure.communication.chat import ChatClient
 
         chat_client = ChatClient(self.endpoint, self.token)
-        chat_client.delete_thread(self._thread_id)
+        chat_client.delete_chat_thread(self._thread_id)
         # [END delete_thread]
 
         print("delete_thread succeeded")
