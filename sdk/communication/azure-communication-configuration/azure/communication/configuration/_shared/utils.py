@@ -46,7 +46,7 @@ def create_access_token(token):
     # type: (str) -> azure.core.credentials.AccessToken
     """Creates an instance of azure.core.credentials.AccessToken from a
     string token.
-    
+
     :param token: User token
     :type token: str
     :return: Instance of azure.core.credentials.AccessToken - token and expiry date of it
