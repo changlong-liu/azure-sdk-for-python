@@ -108,7 +108,6 @@ class ChatThreadClient(object):
     @distributed_trace
     def update_thread(
         self,
-        *,
         topic=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
