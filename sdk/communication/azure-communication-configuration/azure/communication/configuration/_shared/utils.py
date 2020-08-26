@@ -44,6 +44,14 @@ def get_current_utc_time():
 
 def create_access_token(token):
     # type: (str) -> azure.core.credentials.AccessToken
+    """Creates an instance of azure.core.credentials.AccessToken from a
+    string token.
+    
+    :param token: User token
+    :type token: str
+    :return: Instance of azure.core.credentials.AccessToken - token and expiry date of it
+    :rtype: ~azure.core.credentials.AccessToken
+    """
 
     token_parse_err_msg = "Token is not formatted correctly"
     parts = token.split(".")
