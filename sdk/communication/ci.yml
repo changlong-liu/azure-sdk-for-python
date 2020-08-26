@@ -33,3 +33,5 @@ extends:
       safeName: azurecommunicationconfiguration
     - name: azure-communication-chat
       safeName: azurecommunicationchat
+    - name: azure_mgmt_communication
+      safeName: azuremgmtcommunication
