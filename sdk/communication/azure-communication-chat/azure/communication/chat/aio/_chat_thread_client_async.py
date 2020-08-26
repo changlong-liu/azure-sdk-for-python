@@ -170,17 +170,17 @@ class ChatThreadClient(object):
             body=post_read_receipt_request,
             **kwargs)
 
-    @distributed_trace_async
-    async def list_read_receipts(
+    @distributed_trace
+    def list_read_receipts(
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> list[ReadReceipt]
+        # type: (...) -> AsyncItemPaged[ReadReceipt]
         """Gets read receipts for a thread.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.ReadReceipt]
+        :return: AsyncItemPaged[:class:`~azure.communication.chat.ReadReceipt`]
+        :rtype: ~azure.core.async_paging.AsyncItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -192,7 +192,7 @@ class ChatThreadClient(object):
                 :dedent: 12
                 :caption: Listing read receipts.
         """
-        return await self._client.list_chat_read_receipts(self._thread_id, **kwargs)
+        return self._client.list_chat_read_receipts(self._thread_id, **kwargs)
 
     @distributed_trace_async
     async def send_typing_notification(
@@ -308,7 +308,7 @@ class ChatThreadClient(object):
         :keyword ~datetime.datetime start_time: The start time where the range query.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatMessage`]
-        :rtype: ~azure.core.paging.AsyncItemPaged
+        :rtype: ~azure.core.async_paging.AsyncItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:
@@ -411,7 +411,7 @@ class ChatThreadClient(object):
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatThreadMember`]
-        :rtype: ~azure.core.paging.AsyncItemPaged
+        :rtype: ~azure.core.async_paging.AsyncItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:

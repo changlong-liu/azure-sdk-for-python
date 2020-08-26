@@ -241,16 +241,9 @@ class ChatThreadMember(msrest.serialization.Model):
     :type id: str
     :param display_name: Display name for the chat thread member.
     :type display_name: str
-    :param share_history_time: Time from which the chat history is shared with the member in EPOCH
-     time (milliseconds).
-    
-     Possible values:
-    
-    
-     * ``0`` which means share everything
-     * ``-1`` which means share nothing
-     * ``1594691284031`` which is epoch time equivalent to 7/14/2020 1:48:04 AM +00:00.
-    :type share_history_time: str
+    :param share_history_time: Time from which the chat history is shared with the member. The
+     timestamp is in ISO8601 format: ``yyyy-MM-ddTHH:mm:ssZ``.
+    :type share_history_time: ~datetime.datetime
     """
 
     _validation = {
@@ -260,7 +253,7 @@ class ChatThreadMember(msrest.serialization.Model):
     _attribute_map = {
         'id': {'key': 'id', 'type': 'str'},
         'display_name': {'key': 'displayName', 'type': 'str'},
-        'share_history_time': {'key': 'shareHistoryTime', 'type': 'str'},
+        'share_history_time': {'key': 'shareHistoryTime', 'type': 'iso-8601'},
     }
 
     def __init__(

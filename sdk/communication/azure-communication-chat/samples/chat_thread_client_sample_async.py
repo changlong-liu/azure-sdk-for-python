@@ -50,9 +50,7 @@ class ChatThreadClientSamplesAsync(object):
         async with chat_client:
             topic="test topic"
             members = [ChatThreadMember(
-                id=self.user_id,
-                display_name='name',
-                share_history_time='0'
+                id=self.user_id
             )]
             chat_thread_client = await chat_client.create_thread(topic, members)
         # [END create_chat_thread_client]
@@ -146,10 +144,10 @@ class ChatThreadClientSamplesAsync(object):
 
         async with chat_thread_client:
             # [START list_read_receipts]
-            read_receipts = await chat_thread_client.list_read_receipts()
+            read_receipts = chat_thread_client.list_read_receipts()
             # [END list_read_receipts]
             print("list_read_receipts succeeded, receipts:")
-            for read_receipt in read_receipts:
+            async for read_receipt in read_receipts:
                 print(read_receipt)
 
     async def delete_message_async(self):
@@ -187,10 +185,11 @@ class ChatThreadClientSamplesAsync(object):
         async with chat_thread_client:
             # [START add_members]
             from azure.communication.chat import ChatThreadMember
+            from datetime import datetime
             new_member = ChatThreadMember(
                     id=new_member_id,
                     display_name='name',
-                    share_history_time='0')
+                    share_history_time=datetime.utcnow())
             members = [new_member]
             await chat_thread_client.add_members(members)
             # [END add_members]

@@ -188,7 +188,7 @@ class TestChatThreadClient(unittest.TestCase):
         new_member = ChatThreadMember(
                 id=new_member_id,
                 display_name='name',
-                share_history_time='0')
+                share_history_time=datetime.utcnow())
         members = [new_member]
 
         try:
@@ -251,15 +251,19 @@ class TestChatThreadClient(unittest.TestCase):
         raised = False
 
         def mock_send(*_, **__):
-            return mock_response(status_code=200, json_payload=[{"message_id": message_id}])
+            return mock_response(status_code=200, json_payload={"value": [{"chatMessageId": message_id}]})
         chat_thread_client = ChatThreadClient("some_token", "https://endpoint", thread_id, transport=Mock(send=mock_send))
 
+        read_receipts = None
         try:
-            chat_thread_client.list_read_receipts()
+            read_receipts = chat_thread_client.list_read_receipts()
         except:
             raised = True
 
         self.assertFalse(raised, 'Expected is no excpetion raised')
+        for read_receipt_page in read_receipts.by_page():
+            l = list(read_receipt_page)
+            assert len(l) == 1
 
 
 if __name__ == '__main__':

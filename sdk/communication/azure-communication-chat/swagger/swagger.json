@@ -886,9 +886,10 @@
           "example": "Bob"
         },
         "shareHistoryTime": {
-          "description": "Time from which the chat history is shared with the member in EPOCH time (milliseconds).\r\n            \r\nPossible values:\r\n - `0` which means share everything\r\n - `-1` which means share nothing\r\n - `1594691284031` which is epoch time equivalent to 7/14/2020 1:48:04 AM +00:00",
+          "format": "date-time",
+          "description": "Time from which the chat history is shared with the member. The timestamp is in ISO8601 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
-          "example": "0"
+          "example": "2020-10-30T10:50:50Z"
         }
       }
     },

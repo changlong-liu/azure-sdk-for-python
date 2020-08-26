@@ -91,7 +91,7 @@ Once you initialized a `ChatThreadClient` class, you can do the following chat o
 ## Update thread
 
 ```python
-update_thread(topic, **kwargs)
+update_thread(**kwargs)
 ```
 
 ## Send, get, update, and delete messages
@@ -100,7 +100,7 @@ update_thread(topic, **kwargs)
 send_message(content, **kwargs)
 get_message(message_id, **kwargs)
 list_messages(**kwargs)
-update_message(message_id, content, **kwargs)
+update_message(message_id, **kwargs)
 delete_message(message_id, **kwargs)
 ```
 
@@ -144,8 +144,7 @@ Use the `create_thread` method to create a chat thread client object.
 - Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
 - `id`, required, it is the id of the thread member in the format ``8:acs:ResourceId_AcsUserId``. You must at least include the user with id is token_response.identity when you get User Access token by token_response.token, because the initiator of the create chat thread request must be in the chat thread member list.
 - `display_name`, optional, is the display name for the thread member.
-- `share_history_time`, optional, time from which the group chat history is shared with the member in EPOCH time (milliseconds).
-'0' means share everything, '-1' means share nothing
+- `share_history_time`, optional, time from which the chat history is shared with the member.
 
 `ChatThreadClient` is the result returned from creating a thread, you can use it to perform other chat operations to this chat thread
 
@@ -155,7 +154,7 @@ topic="test topic",
 thread_members=[ChatThreadMember(
     id='<user identity>',
     display_name='name',
-    share_history_time='0'
+    share_history_time=datetime.utcnow()
 )],
 
 chat_thread_client = chat_client.create_thread(topic, thread_members)
@@ -229,12 +228,18 @@ chat_message = chat_thread_client.get_message(message_id)
 ### Get messages
 
 The `list_messages` method retrieves messages from the service.
+- `max_page_size`, optional, The maximum number of messages to be returned per page.
+- `start_time`, optional, The start time where the range query.
 
-`ListChatMessagesResult` is the response returned from listing messages, it contains messages field, which is a list of Message, and other fields please refer to azure.communication.chat.ListMessagesResult
+`ItemPaged[ChatMessage]` is the response returned from listing messages
 
 ```Python
-list_chat_messages_result = chat_thread_client.list_messages()
-print(list_chat_messages_result.messages)
+from datetime import datetime, timedelta
+start_time = datetime.utcnow() - timedelta(days=1)
+chat_messages = chat_thread_client.list_messages(max_page_size=1, start_time=start_time)
+for chat_message_page in chat_messages.by_page():
+    l = list(chat_message_page)
+    print("page size: ", len(l))
 ```
 
 ### Update a message
@@ -265,12 +270,12 @@ chat_thread_client.delete_message(message_id)
 
 Use `list_members` to retrieve the members of the thread.
 
-`[ChatThreadMember]` is the response returned from listing members
+`ItemPaged[ChatThreadMember]` is the response returned from listing members
 
 ```python
-members = chat_thread_client.list_members()
-for member in members:
-    print(member)
+chat_thread_members = chat_thread_client.list_members()
+for chat_thread_member in chat_thread_members:
+    print(chat_thread_member)
 ```
 
 ### Add thread members
@@ -280,15 +285,15 @@ Use `add_members` method to add thread members to the thread.
 - Use `thread_members` to list the `ChatThreadMember` to be added to the thread;
 - `id`, required, it is the id of the thread member in the format ``8:acs:ResourceId_AcsUserId``.
 - `display_name`, optional, is the display name for the thread member.
-- `share_history_time`, optional, time from which the group chat history is shared with the member in EPOCH time (milliseconds).
-'0' means share everything, '-1' means share nothing
+- `share_history_time`, optional, time from which the chat history is shared with the member.
 
 ```Python
 from azure.communication.chat import ChatThreadMember
+from datetime import datetime
 member = ChatThreadMember(
     id='<user id>',
     display_name='name',
-    share_history_time='0')
+    share_history_time=datetime.utcnow())
 thread_members = [member]
 chat_thread_client.add_members(thread_members)
 ```
@@ -324,10 +329,12 @@ chat_thread_client.send_read_receipt(message_id)
 
 `list_read_receipts` method retrieves read receipts for a thread.
 
-`[ReadReceipt]` is the response returned from listing read receipts
+`ItemPaged[ReadReceipt]` is the response returned from listing read receipts
 
 ```python
 read_receipts = chat_thread_client.list_read_receipts()
+for read_receipt in read_receipts:
+    print(read_receipt)
 ```
 
 ## Sample Code

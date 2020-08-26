@@ -176,12 +176,12 @@ class ChatThreadClient(object):
         self,
         **kwargs  # type: Any
     ):
-        # type: (...) -> list[ReadReceipt]
+        # type: (...) -> ItemPaged[ReadReceipt]
         """Gets read receipts for a thread.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
-        :return: list of ReadReceipt, or the result of cls(response)
-        :rtype: list[~azure.communication.chat.ReadReceipt]
+        :return: ItemPaged[:class:`~azure.communication.chat.ReadReceipt`]
+        :rtype: ~azure.core.paging.ItemPaged
         :raises: ~azure.core.exceptions.HttpResponseError, ValueError
 
         .. admonition:: Example:

@@ -56,9 +56,7 @@ class ChatClientSamples(object):
 
         topic="test topic"
         members = [ChatThreadMember(
-            id=self.user_id,
-            display_name='name',
-            share_history_time='0'
+            id=self.user_id
         )]
         chat_thread_client = chat_client.create_thread(topic, members)
         # [END create_thread]

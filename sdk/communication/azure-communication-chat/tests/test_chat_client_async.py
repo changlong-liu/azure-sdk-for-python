@@ -7,6 +7,7 @@ from azure.communication.chat.aio import ChatClient
 from azure.communication.chat import ChatThreadMember
 from helpers import mock_response
 from azure.core.exceptions import HttpResponseError
+from datetime import datetime
 
 try:
     from unittest.mock import Mock, patch
@@ -28,7 +29,7 @@ async def test_create_thread():
     members=[ChatThreadMember(
         id='8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
         display_name='name',
-        share_history_time='0'
+        share_history_time=datetime.utcnow()
     )]
     chat_thread_client = await chat_client.create_thread(topic, members)
     assert chat_thread_client.thread_id == thread_id
@@ -43,7 +44,7 @@ async def test_create_thread_raises_error():
     thread_members=[ChatThreadMember(
         id='8:acs:57b9bac9-df6c-4d39-a73b-26e944adf6ea_9b0110-08007f1041',
         display_name='name',
-        share_history_time='0'
+        share_history_time=datetime.utcnow()
     )]
 
     raised = False

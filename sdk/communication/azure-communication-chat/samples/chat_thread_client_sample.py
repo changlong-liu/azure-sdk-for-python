@@ -47,9 +47,7 @@ class ChatThreadClientSamples(object):
         chat_client = ChatClient(self.endpoint, self.token)
         topic="test topic"
         members = [ChatThreadMember(
-            id=self.user_id,
-            display_name='name',
-            share_history_time='0'
+            id=self.user_id
         )]
         chat_thread_client = chat_client.create_thread(topic, members)
         # [END create_chat_thread_client]
@@ -133,11 +131,10 @@ class ChatThreadClientSamples(object):
         chat_thread_client = ChatThreadClient(self.endpoint, self.token, self._thread_id)
         # [START list_read_receipts]
         read_receipts = chat_thread_client.list_read_receipts()
-        # [END list_read_receipts]
-
         print("list_read_receipts succeeded, receipts:")
         for read_receipt in read_receipts:
             print(read_receipt)
+        # [END list_read_receipts]
 
     def delete_message(self):
         from azure.communication.chat import ChatThreadClient
@@ -145,7 +142,6 @@ class ChatThreadClientSamples(object):
         # [START delete_message]
         chat_thread_client.delete_message(self._message_id)
         # [END delete_message]
-
         print("delete_chat_message succeeded")
 
     def list_members(self):
@@ -170,10 +166,11 @@ class ChatThreadClientSamples(object):
 
         # [START add_members]
         from azure.communication.chat import ChatThreadMember
+        from datetime import datetime
         new_member = ChatThreadMember(
                 id=new_member_id,
                 display_name='name',
-                share_history_time='0')
+                share_history_time=datetime.utcnow())
         thread_members = [new_member]
         chat_thread_client.add_members(thread_members)
         # [END add_members]
