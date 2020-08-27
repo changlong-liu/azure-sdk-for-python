@@ -62,7 +62,7 @@ the chat thread topic, send message, add members to chat thread, etc.
 You can get it by creating a new chat thread using ChatClient
 
 ```python
-chat_thread_client = chat_client.create_thread(topic, thread_members)
+chat_thread_client = chat_client.create_chat_thread(topic, thread_members)
 ```
 
 Alternatively, if you have created a chat thread before and you have its thread_id, you can create it by:

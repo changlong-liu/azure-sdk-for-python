@@ -17,7 +17,7 @@ except ImportError:  # python < 3.3
 import pytest
 
 @pytest.mark.asyncio
-async def test_create_thread():
+async def test_create_chat_thread():
     thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
 
     async def mock_send(*_, **__):
@@ -35,7 +35,7 @@ async def test_create_thread():
     assert chat_thread_client.thread_id == thread_id
 
 @pytest.mark.asyncio
-async def test_create_thread_raises_error():
+async def test_create_chat_thread_raises_error():
     async def mock_send(*_, **__):
         return mock_response(status_code=400, json_payload={"msg": "some error"})
     chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
@@ -56,7 +56,7 @@ async def test_create_thread_raises_error():
     assert raised == True
 
 @pytest.mark.asyncio
-async def test_delete_thread():
+async def test_delete_chat_thread():
     thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
     raised = False
 
@@ -73,7 +73,7 @@ async def test_delete_thread():
     assert raised == False
 
 @pytest.mark.asyncio
-async def test_get_thread():
+async def test_get_chat_thread():
     thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
     raised = False
 
@@ -91,7 +91,7 @@ async def test_get_thread():
     assert get_thread_result.id == thread_id
 
 @pytest.mark.asyncio
-async def test_list_threads():
+async def test_list_chat_threads():
     thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
     raised = False
 

@@ -19,7 +19,7 @@ except ImportError:  # python < 3.3
 
 class TestChatClient(unittest.TestCase):
 
-    def test_create_thread(self):
+    def test_create_chat_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
         chat_thread_client = None
         raised = False
@@ -42,7 +42,7 @@ class TestChatClient(unittest.TestCase):
         self.assertFalse(raised, 'Expected is no excpetion raised')
         assert chat_thread_client.thread_id == thread_id
 
-    def test_create_thread_raises_error(self):
+    def test_create_chat_thread_raises_error(self):
         def mock_send(*_, **__):
             return mock_response(status_code=400, json_payload={"msg": "some error"})
         chat_client = ChatClient("some_token", "https://endpoint", transport=Mock(send=mock_send))
@@ -56,7 +56,7 @@ class TestChatClient(unittest.TestCase):
 
         self.assertRaises(HttpResponseError, chat_client.create_chat_thread, topic=topic, thread_members=thread_members)
 
-    def test_delete_thread(self):
+    def test_delete_chat_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
         raised = False
 
@@ -71,7 +71,7 @@ class TestChatClient(unittest.TestCase):
 
         self.assertFalse(raised, 'Expected is no excpetion raised')
 
-    def test_get_thread(self):
+    def test_get_chat_thread(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
         raised = False
 
@@ -88,7 +88,7 @@ class TestChatClient(unittest.TestCase):
         self.assertFalse(raised, 'Expected is no excpetion raised')
         assert get_thread_result.id == thread_id
 
-    def test_list_threads(self):
+    def test_list_chat_threads(self):
         thread_id = "19:bcaebfba0d314c2aa3e920d38fa3df08@thread.v2"
         raised = False
 
