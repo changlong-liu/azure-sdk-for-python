@@ -335,6 +335,7 @@ class ChatThreadClient(object):
     def update_message(
         self,
         message_id,  # type: str
+        content=None,  # type: Optional[str]
         **kwargs  # type: Any
     ):
         # type: (...) -> None
@@ -342,7 +343,8 @@ class ChatThreadClient(object):
 
         :param message_id: Required. The message id.
         :type message_id: str
-        :keyword str content: Chat message content.
+        :param content: Chat message content.
+        :type content: str
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: None, or the result of cls(response)
         :rtype: None
@@ -359,8 +361,6 @@ class ChatThreadClient(object):
         """
         if not message_id:
             raise ValueError("message_id cannot be None.")
-
-        content = kwargs.pop("content", None)
 
         update_message_request = UpdateChatMessageRequest(content=content)
 
