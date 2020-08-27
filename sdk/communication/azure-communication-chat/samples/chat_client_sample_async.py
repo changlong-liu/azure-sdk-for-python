@@ -91,7 +91,7 @@ class ChatClientSamplesAsync(object):
         chat_client = ChatClient(self.endpoint, self.token)
         async with chat_client:
             # [START list_threads]
-            chat_thread_infos = chat_client.list_chat_threads(max_page_size=5)
+            chat_thread_infos = chat_client.list_chat_threads(results_per_page=5)
             print("list_threads succeeded with page_size is 5")
             async for chat_thread_page in chat_thread_infos.by_page():
                 l = [ i async for i in chat_thread_page]

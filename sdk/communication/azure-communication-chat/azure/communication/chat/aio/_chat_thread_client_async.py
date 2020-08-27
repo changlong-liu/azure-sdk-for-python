@@ -306,7 +306,7 @@ class ChatThreadClient(object):
         # type: (...) -> AsyncItemPaged[ChatMessage]
         """Gets a list of messages from a thread.
 
-        :keyword int max_page_size: The maximum number of messages to be returned per page.
+        :keyword int results_per_page: The maximum number of messages to be returned per page.
         :keyword ~datetime.datetime start_time: The start time where the range query.
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: AsyncItemPaged[:class:`~azure.communication.chat.ChatMessage`]
@@ -322,12 +322,12 @@ class ChatThreadClient(object):
                 :dedent: 12
                 :caption: Listing messages of a chat thread.
         """
-        max_page_size = kwargs.pop("max_page_size", None)
+        results_per_page = kwargs.pop("results_per_page", None)
         start_time = kwargs.pop("start_time", None)
 
         return self._client.list_chat_messages(
             self._thread_id,
-            max_page_size=max_page_size,
+            max_page_size=results_per_page,
             start_time=start_time,
             **kwargs)
 

@@ -90,9 +90,9 @@ class ChatClientSamples(object):
         from azure.communication.chat import ChatClient
 
         chat_client = ChatClient(self.endpoint, self.token)
-        chat_thread_infos = chat_client.list_chat_threads(max_page_size=5)
+        chat_thread_infos = chat_client.list_chat_threads(results_per_page=5)
 
-        print("list_threads succeeded with max_page_size is 5")
+        print("list_threads succeeded with results_per_page is 5")
         for chat_thread_page in chat_thread_infos.by_page():
             l = list(chat_thread_page)
             print("page size: ", len(l))

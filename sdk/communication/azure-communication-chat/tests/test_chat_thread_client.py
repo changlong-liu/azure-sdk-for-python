@@ -87,7 +87,7 @@ class TestChatThreadClient(unittest.TestCase):
 
         chat_messages = None
         try:
-            chat_messages = chat_thread_client.list_messages(max_page_size=1)
+            chat_messages = chat_thread_client.list_messages(results_per_page=1)
         except:
             raised = True
 

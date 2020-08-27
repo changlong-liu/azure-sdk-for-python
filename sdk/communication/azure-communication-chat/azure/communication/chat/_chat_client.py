@@ -193,7 +193,7 @@ class ChatClient(object):
         # type: (...) -> ItemPaged[ChatThreadInfo]
         """Gets the list of chat threads of a user.
 
-        :keyword int max_page_size: The maximum number of chat threads returned per page.
+        :keyword int results_per_page: The maximum number of chat threads returned per page.
 
         :keyword callable cls: A custom type or function that will be passed the direct response
         :return: ItemPaged[:class:`~azure.communication.chat.ChatThreadInfo`]
@@ -209,10 +209,10 @@ class ChatClient(object):
                 :dedent: 8
                 :caption: listing chat threads.
         """
-        max_page_size = kwargs.pop("max_page_size", None)
+        results_per_page = kwargs.pop("results_per_page", None)
 
         return self._client.list_chat_threads(
-            max_page_size=max_page_size,
+            max_page_size=results_per_page,
             **kwargs)
 
     @distributed_trace

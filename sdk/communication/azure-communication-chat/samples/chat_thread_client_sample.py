@@ -99,9 +99,9 @@ class ChatThreadClientSamples(object):
         # [START list_messages]
         from datetime import datetime, timedelta
         start_time = datetime.utcnow() - timedelta(days=1)
-        chat_messages = chat_thread_client.list_messages(max_page_size=1, start_time=start_time)
+        chat_messages = chat_thread_client.list_messages(results_per_page=1, start_time=start_time)
 
-        print("list_messages succeeded with max_page_size is 1, and start time is yesterday UTC")
+        print("list_messages succeeded with results_per_page is 1, and start time is yesterday UTC")
         for chat_message_page in chat_messages.by_page():
             l = list(chat_message_page)
             print("page size: ", len(l))

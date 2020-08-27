@@ -228,7 +228,7 @@ chat_message = chat_thread_client.get_message(message_id)
 ### Get messages
 
 The `list_messages` method retrieves messages from the service.
-- `max_page_size`, optional, The maximum number of messages to be returned per page.
+- `results_per_page`, optional, The maximum number of messages to be returned per page.
 - `start_time`, optional, The start time where the range query.
 
 `ItemPaged[ChatMessage]` is the response returned from listing messages
@@ -236,7 +236,7 @@ The `list_messages` method retrieves messages from the service.
 ```Python
 from datetime import datetime, timedelta
 start_time = datetime.utcnow() - timedelta(days=1)
-chat_messages = chat_thread_client.list_messages(max_page_size=1, start_time=start_time)
+chat_messages = chat_thread_client.list_messages(results_per_page=1, start_time=start_time)
 for chat_message_page in chat_messages.by_page():
     l = list(chat_message_page)
     print("page size: ", len(l))
