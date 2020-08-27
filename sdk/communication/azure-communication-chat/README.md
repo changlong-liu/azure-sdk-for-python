@@ -91,7 +91,7 @@ Once you initialized a `ChatThreadClient` class, you can do the following chat o
 ## Update thread
 
 ```python
-update_thread(**kwargs)
+update_thread(topic, **kwargs)
 ```
 
 ## Send, get, update, and delete messages
@@ -100,7 +100,7 @@ update_thread(**kwargs)
 send_message(content, **kwargs)
 get_message(message_id, **kwargs)
 list_messages(**kwargs)
-update_message(message_id, **kwargs)
+update_message(message_id, content, **kwargs)
 delete_message(message_id, **kwargs)
 ```
 
