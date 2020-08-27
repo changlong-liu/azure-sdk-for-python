@@ -45,7 +45,11 @@ def get_current_utc_time():
 def create_access_token(token):
     # type: (str) -> azure.core.credentials.AccessToken
     """Creates an instance of azure.core.credentials.AccessToken from a
-    string token.
+    string token. The input string is jwt token in the following form:
+    <token_header>.<token_payload>.<token_signature>
+    This method looks into the token_payload which is a json and extracts the expiry time
+    for that token and creates a tuple of type azure.core.credentials.AccessToken
+    (<string_token>, <expiry>)
 
     :param token: User token
     :type token: str
@@ -60,11 +64,7 @@ def create_access_token(token):
         raise ValueError(token_parse_err_msg)
 
     try:
-        payload_str = base64.b64decode(parts[1].
-            replace('-', '+').
-            replace('_', '-') + "="*(4-len(parts[1])%4))
-
-        payload = json.loads(payload_str)
+        payload = json.loads(base64.b64decode(parts[1]))
         return AccessToken(token, datetime.fromtimestamp(payload['exp']))
     except ValueError:
         raise ValueError(token_parse_err_msg)
