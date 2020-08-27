@@ -4,39 +4,15 @@
 # license information.
 # -------------------------------------------------------------------------
 
+import base64
+import json
+import datetime
 from typing import (  # pylint: disable=unused-import
     cast,
     Tuple,
 )
 from datetime import datetime
-from azure.core import MatchConditions
-
-def quote_etag(etag):
-    if not etag or etag == "*":
-        return etag
-    if etag.startswith('"') and etag.endswith('"'):
-        return etag
-    if etag.startswith("'") and etag.endswith("'"):
-        return etag
-    return '"' + etag + '"'
-
-def prep_if_match(etag, match_condition):
-    # type: (str, MatchConditions) -> str
-    if match_condition == MatchConditions.IfNotModified:
-        if_match = quote_etag(etag) if etag else None
-        return if_match
-    if match_condition == MatchConditions.IfPresent:
-        return "*"
-    return None
-
-def prep_if_none_match(etag, match_condition):
-    # type: (str, MatchConditions) -> str
-    if match_condition == MatchConditions.IfModified:
-        if_none_match = quote_etag(etag) if etag else None
-        return if_none_match
-    if match_condition == MatchConditions.IfMissing:
-        return "*"
-    return None
+from azure.core.credentials import AccessToken
 
 def parse_connection_str(conn_str):
     # type: (str) -> Tuple[str, str, str, str]
@@ -63,4 +39,32 @@ def parse_connection_str(conn_str):
 
 
 def get_current_utc_time():
+    # type: () -> str
     return str(datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S ")) + "GMT"
+
+def create_access_token(token):
+    # type: (str) -> azure.core.credentials.AccessToken
+    """Creates an instance of azure.core.credentials.AccessToken from a
+    string token. The input string is jwt token in the following form:
+    <token_header>.<token_payload>.<token_signature>
+    This method looks into the token_payload which is a json and extracts the expiry time
+    for that token and creates a tuple of type azure.core.credentials.AccessToken
+    (<string_token>, <expiry>)
+
+    :param token: User token
+    :type token: str
+    :return: Instance of azure.core.credentials.AccessToken - token and expiry date of it
+    :rtype: ~azure.core.credentials.AccessToken
+    """
+
+    token_parse_err_msg = "Token is not formatted correctly"
+    parts = token.split(".")
+
+    if len(parts) < 3:
+        raise ValueError(token_parse_err_msg)
+
+    try:
+        payload = json.loads(base64.b64decode(parts[1]))
+        return AccessToken(token, datetime.fromtimestamp(payload['exp']))
+    except ValueError:
+        raise ValueError(token_parse_err_msg)
