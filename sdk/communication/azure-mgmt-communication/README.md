@@ -19,7 +19,7 @@ to configure your dev environment and set the needed environment variables.
 
 The Python package is included in the `/generated` directory together with this README.
 
-The first step is to include this package as a reference in your C# project.
+The first step is to include this package as a reference in your Python project.
 
 ## Examples
 
