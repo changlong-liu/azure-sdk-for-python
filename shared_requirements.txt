@@ -29,6 +29,7 @@ azure-mgmt-cdn~=3.0
 azure-mgmt-cognitiveservices~=3.0
 azure-mgmt-commerce~=1.0
 azure-mgmt-compute~=4.0
+azure-mgmt-communication~=0.1.0
 azure-mgmt-consumption~=2.0
 azure-mgmt-containerinstance~=1.0
 azure-mgmt-containerregistry~=2.1
