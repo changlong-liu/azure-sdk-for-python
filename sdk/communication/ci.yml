@@ -31,3 +31,5 @@ extends:
     Artifacts:
     - name: azure_communication_configuration
       safeName: azurecommunicationconfiguration
+    - name: azure-communication-chat
+      safeName: azurecommunicationchat
