@@ -314,7 +314,7 @@ chat_thread_client.remove_member(member_id)
 Use `send_typing_notification` method to post a typing notification event to a thread, on behalf of a user.
 
 ```Python
-chat_chat_client.send_typing_notification()
+chat_thread_client.send_typing_notification()
 ```
 
 ### Send read receipt
